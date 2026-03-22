@@ -5,21 +5,15 @@ import {
   Heart,
   Home,
   Activity,
-  Clock,
   Users,
   CheckCircle,
-  Stethoscope,
   Pill,
-  Syringe,
-  Droplet,
   Utensils,
   Bath,
   Shield,
-  Calendar,
   Sparkles,
   Car,
   ShoppingCart,
-  Phone,
 } from "lucide-react";
 
 export default function Services() {
