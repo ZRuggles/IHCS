@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Heart, Activity, Droplet, Ambulance, PillBottle, Stethoscope, Pill, RefreshCw } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 interface CourseCardProps {
   id: string;
@@ -12,7 +13,7 @@ interface CourseCardProps {
   icon?: string;
 }
 
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, LucideIcon> = {
   heart: Heart,
   medical: Activity,
   droplet: Droplet,

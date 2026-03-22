@@ -3,8 +3,9 @@ import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { courses } from "../data/courses";
 import { Clock, Calendar, DollarSign, Award, CheckCircle, ArrowLeft, Heart, Activity, Droplet, Ambulance, PillBottle, Stethoscope, Pill, RefreshCw } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, LucideIcon> = {
   heart: Heart,
   medical: Activity,
   droplet: Droplet,
@@ -185,10 +186,10 @@ export default function CourseDetail() {
                   <div className="mt-6 pt-6 border-t border-gray-200">
                     <h4 className="font-medium text-[#101828] mb-3">Need More Info?</h4>
                     <ul className="space-y-2 text-sm text-[#6a7282]">
-                      <li>• Payment plans available</li>
-                      <li>• Financial aid options</li>
-                      <li>• Flexible scheduling</li>
-                      <li>• Job placement assistance</li>
+                      <li>- Payment plans available</li>
+                      <li>- Financial aid options</li>
+                      <li>- Flexible scheduling</li>
+                      <li>- Job placement assistance</li>
                     </ul>
                   </div>
                 </div>
@@ -224,10 +225,10 @@ export default function CourseDetail() {
                       {relatedCourse.title}
                     </h3>
                     <p className="text-[#6a7282] text-sm mb-4">
-                      {relatedCourse.duration} • {relatedCourse.nextStart}
+                      {relatedCourse.duration} | {relatedCourse.nextStart}
                     </p>
                     <div className="text-[#561D7E] text-sm font-medium">
-                      Learn More →
+                      Learn More {"->"}
                     </div>
                   </Link>
                 ))}

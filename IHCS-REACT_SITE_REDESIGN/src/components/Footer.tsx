@@ -62,28 +62,23 @@ export function Footer() {
             <h3 className="font-semibold text-lg mb-4">Programs</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/courses/certified-nursing-assistant" className="text-gray-300 hover:text-white transition-colors">
+                <Link to="/courses/hybrid-nurse-aide" className="text-gray-300 hover:text-white transition-colors">
                   CNA Training
                 </Link>
               </li>
               <li>
-                <Link to="/courses/medical-assistant" className="text-gray-300 hover:text-white transition-colors">
-                  Medical Assistant
-                </Link>
-              </li>
-              <li>
-                <Link to="/courses/phlebotomy-technician" className="text-gray-300 hover:text-white transition-colors">
+                <Link to="/courses/hybrid-phlebotomy-technician" className="text-gray-300 hover:text-white transition-colors">
                   Phlebotomy
                 </Link>
               </li>
               <li>
-                <Link to="/courses/emt-basic" className="text-gray-300 hover:text-white transition-colors">
-                  EMT Basic
+                <Link to="/courses/hybrid-medication-aide" className="text-gray-300 hover:text-white transition-colors">
+                  Medication Aide
                 </Link>
               </li>
               <li>
-                <Link to="/courses/dental-assistant" className="text-gray-300 hover:text-white transition-colors">
-                  Dental Assistant
+                <Link to="/courses/hybrid-refresher-course" className="text-gray-300 hover:text-white transition-colors">
+                  Refresher Course
                 </Link>
               </li>
             </ul>

@@ -123,7 +123,6 @@ export default function Home() {
                   nextStart={course.nextStart}
                   image={course.image}
                   badge={course.badge}
-                  icon={course.icon}
                 />
               ))}
             </div>
@@ -317,7 +316,17 @@ export default function Home() {
   );
 }
 
-function CourseCard({ id, title, description, duration, nextStart, image, badge, icon: _icon }: any) {
+interface HomeCourseCardProps {
+  id: string;
+  title: string;
+  description: string;
+  duration: string;
+  nextStart: string;
+  image: string;
+  badge?: string;
+}
+
+function CourseCard({ id, title, description, duration, nextStart, image, badge }: HomeCourseCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
