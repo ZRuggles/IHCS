@@ -92,7 +92,7 @@ export default function Employment() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative bg-white py-20 border-b border-gray-200 overflow-hidden">
+        <section className="relative bg-white py-12 sm:py-16 lg:py-20 border-b border-gray-200 overflow-hidden">
           {/* Background Image */}
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -114,22 +114,22 @@ export default function Employment() {
                 <div className="inline-block bg-[#f3e8ff] text-[#561D7E] px-4 py-2 rounded-full text-sm mb-6">
                   Join Our Team
                 </div>
-                <h1 className="text-5xl font-medium mb-6 leading-tight text-[#101828]">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium mb-6 leading-tight text-[#101828]">
                   Build Your Career in Healthcare
                 </h1>
-                <p className="text-xl text-[#4a5565] leading-relaxed mb-8">
+                <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] leading-relaxed mb-8">
                   Join Innovation Healthcare as a skilled nursing professional. We're seeking compassionate, dedicated individuals to provide exceptional in-home care and education throughout Winston-Salem, North Carolina.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <a
                     href="#positions"
-                    className="bg-[#561D7E] text-white px-8 py-4 rounded-full hover:bg-[#461464] transition-all hover:scale-105 text-lg"
+                    className="bg-[#561D7E] text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#461464] transition-all hover:scale-105 text-base sm:text-lg"
                   >
                     View Open Positions
                   </a>
                   <a
                     href="#benefits"
-                    className="bg-white border-2 border-[#561D7E] text-[#561D7E] px-8 py-4 rounded-full hover:bg-[#f3e8ff] transition-all hover:scale-105 text-lg"
+                    className="bg-white border-2 border-[#561D7E] text-[#561D7E] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#f3e8ff] transition-all hover:scale-105 text-base sm:text-lg"
                   >
                     See Benefits
                   </a>
@@ -155,7 +155,7 @@ export default function Employment() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.4 + (index * 0.1) }}
                       >
-                        <div className="text-4xl font-bold text-[#59168b] mb-2">{stat.value}</div>
+                        <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#59168b] mb-2">{stat.value}</div>
                         <div className="text-[#59168b]/80">{stat.label}</div>
                       </motion.div>
                     ))}
@@ -167,7 +167,7 @@ export default function Employment() {
         </section>
 
         {/* Why Work With Us */}
-        <section className="py-20 bg-white">
+        <section className="py-12 sm:py-16 lg:py-20 bg-white">
           <div className="max-w-[1600px] mx-auto px-4">
             <motion.div 
               className="text-center mb-12"
@@ -176,15 +176,15 @@ export default function Employment() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-4xl font-medium text-[#101828] mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-4">
                 Why Choose Innovation Healthcare
               </h2>
-              <p className="text-xl text-[#4a5565] max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] max-w-2xl mx-auto">
                 We invest in our team members with competitive benefits, ongoing training, and a supportive work environment
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               <motion.div 
                 className="bg-gradient-to-br from-[#f3e8ff] to-white p-8 rounded-2xl border border-[#f3e8ff] group"
                 initial={{ opacity: 0, y: 30 }}
@@ -258,7 +258,7 @@ export default function Employment() {
         </section>
 
         {/* Benefits Section */}
-        <section id="benefits" className="py-20 bg-gradient-to-b from-white to-[#faf5ff]">
+        <section id="benefits" className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-[#faf5ff]">
           <div className="max-w-[1600px] mx-auto px-4">
             <motion.div 
               className="text-center mb-12"
@@ -267,10 +267,10 @@ export default function Employment() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-4xl font-medium text-[#101828] mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-4">
                 Comprehensive Benefits Package
               </h2>
-              <p className="text-xl text-[#4a5565] max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] max-w-2xl mx-auto">
                 We take care of our team members with competitive benefits and ongoing support
               </p>
             </motion.div>
@@ -389,7 +389,7 @@ export default function Employment() {
         </section>
 
         {/* Team Image Break */}
-        <section className="relative h-[500px] overflow-hidden">
+        <section className="relative h-[300px] sm:h-[420px] lg:h-[500px] overflow-hidden">
           <motion.div
             className="absolute inset-0 bg-cover bg-center"
             style={{
@@ -409,7 +409,7 @@ export default function Employment() {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              <h2 className="text-5xl font-medium text-[#59168b] mb-6">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-[#59168b] mb-6">
                 Join a Team That Values You
               </h2>
               <p className="text-2xl text-[#59168b]/90 max-w-3xl mx-auto">
@@ -420,7 +420,7 @@ export default function Employment() {
         </section>
 
         {/* Open Positions */}
-        <section id="positions" className="py-20 bg-white">
+        <section id="positions" className="py-12 sm:py-16 lg:py-20 bg-white">
           <div className="max-w-[1600px] mx-auto px-4">
             <motion.div 
               className="text-center mb-12"
@@ -429,10 +429,10 @@ export default function Employment() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-4xl font-medium text-[#101828] mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-4">
                 Current Openings
               </h2>
-              <p className="text-xl text-[#4a5565] max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] max-w-2xl mx-auto">
                 Explore our available positions and find the perfect role for your skills and experience
               </p>
             </motion.div>
@@ -472,7 +472,7 @@ export default function Employment() {
                       </p>
                       <div>
                         <h4 className="font-medium text-[#101828] mb-2">Requirements:</h4>
-                        <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                           {position.requirements.map((req, idx) => (
                             <li key={idx} className="flex gap-2 items-start text-[#6a7282]">
                               <div className="bg-[#9810fa] rounded-full size-2 mt-2 shrink-0" />
@@ -498,7 +498,7 @@ export default function Employment() {
         </section>
 
         {/* Application Process */}
-        <section className="py-20 bg-gradient-to-b from-white to-[#faf5ff]">
+        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-[#faf5ff]">
           <div className="max-w-[1600px] mx-auto px-4">
             <motion.div 
               className="text-center mb-12"
@@ -507,15 +507,15 @@ export default function Employment() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-4xl font-medium text-[#101828] mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-4">
                 How to Apply
               </h2>
-              <p className="text-xl text-[#4a5565]">
+              <p className="text-base sm:text-lg lg:text-xl text-[#4a5565]">
                 Join our team in four simple steps
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 { num: 1, title: "Submit Application", desc: "Complete our online application form with your information and experience" },
                 { num: 2, title: "Phone Screening", desc: "Brief phone conversation to discuss your background and the position" },
@@ -548,24 +548,24 @@ export default function Employment() {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-gradient-to-br from-[#9810fa] to-[#7c0cc8] py-20">
+        <section className="bg-gradient-to-br from-[#9810fa] to-[#7c0cc8] py-12 sm:py-16 lg:py-20">
           <div className="max-w-[1600px] mx-auto px-4 text-center">
-            <h2 className="text-4xl font-medium text-white mb-6">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-white mb-6">
               Ready to Make a Difference?
             </h2>
-            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-white/90 mb-8 max-w-2xl mx-auto">
               Join our team of dedicated healthcare professionals. Apply today or contact us to learn more about career opportunities.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
                 href="/contact"
-                className="bg-white text-[#9810fa] px-8 py-4 rounded-full hover:bg-gray-100 transition-colors text-lg"
+                className="bg-white text-[#9810fa] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-gray-100 transition-colors text-base sm:text-lg"
               >
                 Apply Now
               </a>
               <a
                 href="tel:555-123-4567"
-                className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full hover:bg-white/10 transition-colors text-lg"
+                className="bg-transparent border-2 border-white text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-white/10 transition-colors text-base sm:text-lg"
               >
                 Call (555) 123-4567
               </a>
@@ -578,3 +578,8 @@ export default function Employment() {
     </div>
   );
 }
+
+
+
+
+

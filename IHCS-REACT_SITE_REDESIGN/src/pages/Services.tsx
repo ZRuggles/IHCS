@@ -64,7 +64,7 @@ export default function Services() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-white py-20">
+        <section className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-white py-12 sm:py-16 lg:py-20">
           {/* Background Image */}
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -98,15 +98,15 @@ export default function Services() {
                 <div className="inline-block bg-[#f3e8ff] text-[#561D7E] px-4 py-2 rounded-full text-sm mb-6">
                   Home Care Services
                 </div>
-                <h1 className="text-5xl font-medium mb-6 leading-tight text-[#101828]">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium mb-6 leading-tight text-[#101828]">
                   Compassionate Care in the Comfort of Home
                 </h1>
-                <p className="text-xl text-[#4a5565] leading-relaxed mb-8">
+                <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] leading-relaxed mb-8">
                   Innovation Home Care Agency provides comprehensive in-home care services throughout Winston-Salem, North Carolina. We're dedicated to helping patients maintain independence and quality of life with one point of contact for all your care needs.
                 </p>
                 <a
                   href="#services"
-                  className="inline-block bg-[#561D7E] text-white px-8 py-4 rounded-full hover:bg-[#461464] transition-all hover:scale-105"
+                  className="inline-block bg-[#561D7E] text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#461464] transition-all hover:scale-105"
                 >
                   Explore Our Services
                 </a>
@@ -116,9 +116,9 @@ export default function Services() {
         </section>
 
         {/* Our Promise */}
-        <section className="py-16 bg-white">
+        <section className="py-10 sm:py-14 lg:py-16 bg-white">
           <div className="max-w-[1600px] mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 { icon: Heart, title: "Continuity of Care", description: "One point of contact for all your home care needs" },
                 { icon: Users, title: "Experienced Team", description: "Highly trained and compassionate healthcare professionals" },
@@ -151,7 +151,7 @@ export default function Services() {
         </section>
 
         {/* Home Assistance Services */}
-        <section className="py-20 bg-white" id="services">
+        <section className="py-12 sm:py-16 lg:py-20 bg-white" id="services">
           <div className="max-w-[1600px] mx-auto px-4">
             <motion.div 
               className="text-center mb-12"
@@ -160,10 +160,10 @@ export default function Services() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-4xl font-medium text-[#101828] mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-4">
                 Home Assistance Services
               </h2>
-              <p className="text-xl text-[#4a5565] max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] max-w-2xl mx-auto">
                 Daily living support to help you maintain your independence and quality of life
               </p>
             </motion.div>
@@ -214,7 +214,7 @@ export default function Services() {
         </section>
 
         {/* Personal Care Services */}
-        <section className="py-20 bg-white">
+        <section className="py-12 sm:py-16 lg:py-20 bg-white">
           <div className="max-w-[1600px] mx-auto px-4">
             <motion.div 
               className="text-center mb-12"
@@ -223,15 +223,15 @@ export default function Services() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-4xl font-medium text-[#101828] mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-4">
                 Personal Care Services
               </h2>
-              <p className="text-xl text-[#4a5565] max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] max-w-2xl mx-auto">
                 Dignified personal care assistance provided with compassion and respect
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {personalCareServices.map((service, index) => {
                 const Icon = service.icon;
                 return (
@@ -265,7 +265,7 @@ export default function Services() {
         </section>
 
         {/* Image Break Section */}
-        <section className="relative h-[500px] overflow-hidden">
+        <section className="relative h-[300px] sm:h-[420px] lg:h-[500px] overflow-hidden">
           <motion.div
             className="absolute inset-0 bg-cover bg-center"
             style={{
@@ -285,7 +285,7 @@ export default function Services() {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              <h2 className="text-5xl font-medium text-white mb-6">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-white mb-6">
                 Dedicated to Excellence in Care
               </h2>
               <p className="text-2xl text-white/90 max-w-3xl mx-auto">
@@ -296,7 +296,7 @@ export default function Services() {
         </section>
 
         {/* Specialty Services */}
-        <section className="py-20 bg-gradient-to-b from-white to-[#faf5ff]">
+        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-[#faf5ff]">
           <div className="max-w-[1600px] mx-auto px-4">
             <motion.div 
               className="text-center mb-12"
@@ -305,10 +305,10 @@ export default function Services() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-4xl font-medium text-[#101828] mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-4">
                 Specialty Healthcare Services
               </h2>
-              <p className="text-xl text-[#4a5565] max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] max-w-2xl mx-auto">
                 Advanced care services for complex medical needs
               </p>
             </motion.div>
@@ -362,7 +362,7 @@ export default function Services() {
         </section>
 
         {/* How It Works */}
-        <section className="py-20 bg-white">
+        <section className="py-12 sm:py-16 lg:py-20 bg-white">
           <div className="max-w-[1600px] mx-auto px-4">
             <motion.div 
               className="text-center mb-12"
@@ -371,15 +371,15 @@ export default function Services() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-4xl font-medium text-[#101828] mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-4">
                 How Our Services Work
               </h2>
-              <p className="text-xl text-[#4a5565]">
+              <p className="text-base sm:text-lg lg:text-xl text-[#4a5565]">
                 Getting started is simple
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 { num: 1, title: "Contact Us", desc: "Call or email to discuss your care needs" },
                 { num: 2, title: "Care Assessment", desc: "We'll evaluate your needs and create a personalized care plan" },
@@ -412,24 +412,24 @@ export default function Services() {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-gradient-to-br from-[#561D7E] to-[#461464] py-20">
+        <section className="bg-gradient-to-br from-[#561D7E] to-[#461464] py-12 sm:py-16 lg:py-20">
           <div className="max-w-[1600px] mx-auto px-4 text-center">
-            <h2 className="text-4xl font-medium text-white mb-6">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-white mb-6">
               Ready to Learn More About Our Services?
             </h2>
-            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-white/90 mb-8 max-w-2xl mx-auto">
               Contact us today to discuss your home care needs. Our compassionate team is ready to help you or your loved one stay independent at home.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
                 href="/contact"
-                className="bg-white text-[#561D7E] px-8 py-4 rounded-full hover:bg-gray-100 transition-colors text-lg"
+                className="bg-white text-[#561D7E] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-gray-100 transition-colors text-base sm:text-lg"
               >
                 Request Information
               </a>
               <a
                 href="tel:555-123-4567"
-                className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full hover:bg-white/10 transition-colors text-lg"
+                className="bg-transparent border-2 border-white text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-white/10 transition-colors text-base sm:text-lg"
               >
                 Call (555) 123-4567)
               </a>
@@ -442,3 +442,8 @@ export default function Services() {
     </div>
   );
 }
+
+
+
+
+

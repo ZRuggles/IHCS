@@ -12,7 +12,7 @@ export default function Courses() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative bg-white py-20 border-b border-gray-200 overflow-hidden">
+        <section className="relative bg-white py-12 sm:py-16 lg:py-20 border-b border-gray-200 overflow-hidden">
           {/* Background Image */}
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -33,10 +33,10 @@ export default function Courses() {
                 <div className="inline-block bg-[#f3e8ff] text-[#8200db] px-4 py-2 rounded-full text-sm mb-6">
                   Healthcare Training Programs
                 </div>
-                <h1 className="text-5xl font-medium mb-6 leading-tight text-[#101828]">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium mb-6 leading-tight text-[#101828]">
                   Explore Our Healthcare Training Programs
                 </h1>
-                <p className="text-xl text-[#4a5565] leading-relaxed">
+                <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] leading-relaxed">
                   State-approved certifications designed to launch your healthcare career. Flexible schedules, expert instruction, and hands-on training to help you succeed.
                 </p>
               </motion.div>
@@ -84,13 +84,13 @@ export default function Courses() {
         </section>
 
         {/* Course Schedules */}
-        <section className="py-16 bg-gradient-to-b from-white to-[#faf5ff] border-y border-[#f3e8ff]">
+        <section className="py-10 sm:py-14 lg:py-16 bg-gradient-to-b from-white to-[#faf5ff] border-y border-[#f3e8ff]">
           <div className="max-w-[1600px] mx-auto px-4">
             <div className="text-center mb-10">
-              <h2 className="text-4xl font-medium text-[#101828] mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-4">
                 Course Schedules
               </h2>
-              <p className="text-xl text-[#4a5565] max-w-3xl mx-auto">
+              <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] max-w-3xl mx-auto">
                 Published schedules for 2026 and early 2027 cohorts.
               </p>
             </div>
@@ -140,7 +140,7 @@ export default function Courses() {
         </section>
 
         {/* Why Choose Us Section */}
-        <section className="py-16 bg-white">
+        <section className="py-10 sm:py-14 lg:py-16 bg-white">
           <div className="max-w-[1600px] mx-auto px-4">
             <div className="flex flex-wrap justify-center gap-8">
               <div className="flex items-center gap-4 bg-white border-2 border-[#9810fa] rounded-full px-6 py-4 shadow-sm hover:shadow-md transition-shadow">
@@ -187,18 +187,18 @@ export default function Courses() {
         </section>
 
         {/* Courses Grid */}
-        <section className="py-20 bg-gradient-to-b from-white to-[#faf5ff]">
+        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-[#faf5ff]">
           <div className="max-w-[1600px] mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-medium text-[#101828] mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-4">
                 Available Programs
               </h2>
-              <p className="text-xl text-[#4a5565] max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] max-w-2xl mx-auto">
                 Choose the program that fits your career goals and schedule. All courses include hands-on training and certification preparation.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {courses.map((course, index) => (
                 <motion.div
                   key={course.id}
@@ -227,7 +227,7 @@ export default function Courses() {
                       )}
                     </div>
                     <div className="p-6">
-                      <h3 className="text-xl font-medium text-[#101828] mb-2 group-hover:text-[#9810fa] transition-colors">
+                      <h3 className="text-base sm:text-lg lg:text-xl font-medium text-[#101828] mb-2 group-hover:text-[#9810fa] transition-colors">
                         {course.title}
                       </h3>
                       <p className="text-[#6a7282] mb-4 line-clamp-2">
@@ -256,18 +256,18 @@ export default function Courses() {
         </section>
 
         {/* Enrollment Process */}
-        <section className="py-20 bg-white">
+        <section className="py-12 sm:py-16 lg:py-20 bg-white">
           <div className="max-w-[1600px] mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-medium text-[#101828] mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-4">
                 Simple Enrollment Process
               </h2>
-              <p className="text-xl text-[#4a5565]">
+              <p className="text-base sm:text-lg lg:text-xl text-[#4a5565]">
                 Get started in just four easy steps
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="text-center">
                 <div className="bg-[#9810fa] text-white size-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
                   1
@@ -309,7 +309,7 @@ export default function Courses() {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-gradient-to-br from-[#f3e8ff] to-[#faf5ff] py-16">
+        <section className="bg-gradient-to-br from-[#f3e8ff] to-[#faf5ff] py-10 sm:py-14 lg:py-16">
           <div className="max-w-[1600px] mx-auto px-4 text-center">
             <h2 className="text-3xl font-medium text-[#101828] mb-4">
               Ready to Get Started?
@@ -320,13 +320,13 @@ export default function Courses() {
             <div className="flex flex-wrap justify-center gap-4">
               <a
                 href="/contact"
-                className="bg-[#9810fa] text-white px-8 py-4 rounded-full hover:bg-[#7c0cc8] transition-colors"
+                className="bg-[#9810fa] text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#7c0cc8] transition-colors"
               >
                 Contact Admissions
               </a>
               <a
                 href="tel:555-123-4567"
-                className="bg-white border-2 border-[#9810fa] text-[#9810fa] px-8 py-4 rounded-full hover:bg-[#f3e8ff] transition-colors"
+                className="bg-white border-2 border-[#9810fa] text-[#9810fa] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#f3e8ff] transition-colors"
               >
                 Call (555) 123-4567
               </a>
@@ -339,3 +339,8 @@ export default function Courses() {
     </div>
   );
 }
+
+
+
+
+

@@ -47,7 +47,7 @@ export default function Contact() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-[#f3e8ff] via-white to-[#faf5ff] py-16 border-b border-gray-200 overflow-hidden">
+        <section className="relative bg-gradient-to-br from-[#f3e8ff] via-white to-[#faf5ff] py-10 sm:py-14 lg:py-16 border-b border-gray-200 overflow-hidden">
           {/* Floating background elements */}
           <motion.div 
             className="absolute top-0 right-0 w-64 h-64 bg-[#9810fa] rounded-full blur-3xl opacity-20"
@@ -90,10 +90,10 @@ export default function Contact() {
               >
                 Get In Touch
               </motion.div>
-              <h1 className="text-5xl font-medium mb-6 leading-tight text-[#101828]">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium mb-6 leading-tight text-[#101828]">
                 Contact Us
               </h1>
-              <p className="text-xl text-[#4a5565] leading-relaxed">
+              <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] leading-relaxed">
                 Have questions about our programs or services? We're here to help! Reach out to us and our team will get back to you as soon as possible.
               </p>
             </motion.div>
@@ -101,9 +101,9 @@ export default function Contact() {
         </section>
 
         {/* Contact Info Cards */}
-        <section className="py-16 bg-white">
+        <section className="py-10 sm:py-14 lg:py-16 bg-white">
           <div className="max-w-[1600px] mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 { icon: MapPin, title: "Location", content: <p className="text-[#6a7282] text-sm">Winston-Salem<br />North Carolina</p> },
                 { icon: Phone, title: "Phone", content: <a href="tel:555-123-4567" className="text-[#9810fa] hover:underline">(555) 123-4567</a> },
@@ -138,7 +138,7 @@ export default function Contact() {
         </section>
 
         {/* Contact Form & Image */}
-        <section className="py-20 bg-gradient-to-b from-white to-[#faf5ff]">
+        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-[#faf5ff]">
           <div className="max-w-[1600px] mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Contact Form */}
@@ -168,7 +168,7 @@ export default function Contact() {
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="firstName" className="block text-sm font-medium text-[#101828] mb-2">
                         First Name *
@@ -201,7 +201,7 @@ export default function Contact() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-[#101828] mb-2">
                         Email Address *
@@ -274,7 +274,7 @@ export default function Contact() {
 
                   <motion.button
                     type="submit"
-                    className="w-full bg-[#9810fa] text-white py-4 rounded-full hover:bg-[#7c0cc8] transition-colors text-lg font-medium flex items-center justify-center gap-2"
+                    className="w-full bg-[#9810fa] text-white py-4 rounded-full hover:bg-[#7c0cc8] transition-colors text-base sm:text-lg font-medium flex items-center justify-center gap-2"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -293,7 +293,7 @@ export default function Contact() {
                 transition={{ duration: 0.6 }}
               >
                 <motion.div 
-                  className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl"
+                  className="relative h-[260px] sm:h-[340px] lg:h-[400px] rounded-2xl overflow-hidden shadow-xl"
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
@@ -379,7 +379,7 @@ export default function Contact() {
         </section>
 
         {/* Map Section (Placeholder) */}
-        <section className="py-20 bg-white">
+        <section className="py-12 sm:py-16 lg:py-20 bg-white">
           <div className="max-w-[1600px] mx-auto px-4">
             <motion.div 
               className="text-center mb-8"
@@ -396,7 +396,7 @@ export default function Contact() {
               </p>
             </motion.div>
             <motion.div 
-              className="bg-gradient-to-br from-[#f3e8ff] to-[#faf5ff] rounded-2xl h-[400px] flex items-center justify-center border border-[#f3e8ff]"
+              className="bg-gradient-to-br from-[#f3e8ff] to-[#faf5ff] rounded-2xl h-[260px] sm:h-[340px] lg:h-[400px] flex items-center justify-center border border-[#f3e8ff]"
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -416,7 +416,7 @@ export default function Contact() {
                 >
                   <MapPin className="size-16 text-[#9810fa] mx-auto mb-4" />
                 </motion.div>
-                <p className="text-xl text-[#4a5565] font-medium">Winston-Salem, NC</p>
+                <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] font-medium">Winston-Salem, NC</p>
                 <p className="text-[#6a7282]">Map integration coming soon</p>
               </motion.div>
             </motion.div>
@@ -428,3 +428,8 @@ export default function Contact() {
     </div>
   );
 }
+
+
+
+
+

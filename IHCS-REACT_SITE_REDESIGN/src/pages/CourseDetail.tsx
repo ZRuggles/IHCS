@@ -32,7 +32,7 @@ export default function CourseDetail() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-white py-16 border-b-2 border-[#f3e8ff]">
+        <section className="bg-white py-10 sm:py-14 lg:py-16 border-b-2 border-[#f3e8ff]">
           <div className="max-w-[1600px] mx-auto px-4">
             <Link
               to="/courses"
@@ -48,13 +48,13 @@ export default function CourseDetail() {
                     {course.badge}
                   </div>
                 )}
-                <h1 className="text-5xl font-medium mb-6 leading-tight text-[#101828]">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium mb-6 leading-tight text-[#101828]">
                   {course.title}
                 </h1>
-                <p className="text-xl text-[#4a5565] leading-relaxed mb-8">
+                <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] leading-relaxed mb-8">
                   {course.description}
                 </p>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="bg-gradient-to-br from-[#f3e8ff] to-white border border-[#f3e8ff] p-4 rounded-xl">
                     <Clock className="size-6 text-[#561D7E] mb-2" />
                     <div className="text-sm text-[#6a7282]">Duration</div>
@@ -95,7 +95,7 @@ export default function CourseDetail() {
         </section>
 
         {/* Program Overview */}
-        <section className="py-20 bg-white">
+        <section className="py-12 sm:py-16 lg:py-20 bg-white">
           <div className="max-w-[1600px] mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
               {/* Main Content */}
@@ -164,7 +164,7 @@ export default function CourseDetail() {
 
               {/* Sidebar */}
               <div className="lg:col-span-1">
-                <div className="bg-white border border-gray-200 rounded-2xl p-8 sticky top-24">
+                <div className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 lg:sticky lg:top-24">
                   <h3 className="text-2xl font-medium text-[#101828] mb-6">
                     Enroll Now
                   </h3>
@@ -233,12 +233,12 @@ export default function CourseDetail() {
         </section>
 
         {/* Related Courses */}
-        <section className="py-20 bg-gradient-to-b from-white to-[#faf5ff]">
+        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-[#faf5ff]">
           <div className="max-w-[1600px] mx-auto px-4">
             <h2 className="text-3xl font-medium text-[#101828] mb-8">
               Other Programs You Might Like
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {courses
                 .filter((c) => c.id !== courseId)
                 .slice(0, 3)
@@ -275,3 +275,8 @@ export default function CourseDetail() {
     </div>
   );
 }
+
+
+
+
+

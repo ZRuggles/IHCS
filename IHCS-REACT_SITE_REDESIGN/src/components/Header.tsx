@@ -36,15 +36,11 @@ export function Header() {
     visibleLogoMode === "course"
       ? {
           src: "/courselogo.png",
-          alt: "Healthcare Training logo",
-          title: "Healthcare Training",
-          subtitle: "Institute"
+          alt: "Healthcare Training logo"
         }
       : {
           src: "/LOGO.png",
-          alt: "Innovation Healthcare Solutions logo",
-          title: "Innovation Healthcare",
-          subtitle: "Solutions"
+          alt: "Innovation Healthcare Solutions logo"
         };
 
   const navLinks = [
@@ -59,20 +55,20 @@ export function Header() {
     <>
       {/* Top Bar */}
       <div className="bg-[#561D7E] text-white py-2">
-        <div className="max-w-[1600px] mx-auto px-4 flex items-center justify-between">
-          <div className="flex items-center gap-6">
-            <a href="tel:555-123-4567" className="flex items-center gap-2 text-sm hover:opacity-80 transition-opacity">
+        <div className="max-w-[1600px] mx-auto px-4 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3 sm:gap-6">
+            <a href="tel:555-123-4567" className="flex items-center gap-2 text-xs sm:text-sm hover:opacity-80 transition-opacity">
               <Phone className="size-4" />
               <span>(555) 123-4567</span>
             </a>
-            <a href="mailto:info@healthcare.edu" className="flex items-center gap-2 text-sm hover:opacity-80 transition-opacity">
+            <a href="mailto:info@healthcare.edu" className="hidden md:flex items-center gap-2 text-sm hover:opacity-80 transition-opacity">
               <Mail className="size-4" />
               <span>info@healthcare.edu</span>
             </a>
           </div>
           <Link
             to="/contact"
-            className="bg-[#ffb71b] text-[#461464] px-6 py-2 rounded-full hover:opacity-90 transition-opacity"
+            className="bg-[#ffb71b] text-[#461464] px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm hover:opacity-90 transition-opacity whitespace-nowrap"
           >
             Request Info
           </Link>
@@ -82,11 +78,11 @@ export function Header() {
       {/* Main Navigation */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-[1600px] mx-auto px-4">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-16 sm:h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3">
+            <Link to="/" className="flex items-center">
               <motion.div
-                className="size-12 rounded-lg overflow-hidden border border-[#e5d4f5] shadow-sm shrink-0 bg-white"
+                className="h-12 sm:h-14 w-[170px] sm:w-[220px] md:w-[280px] overflow-hidden shrink-0 bg-white"
                 initial={{ rotateY: 0 }}
                 animate={{ rotateY: [0, 180, 360] }}
                 transition={{ duration: 0.9, ease: "easeInOut" }}
@@ -96,16 +92,12 @@ export function Header() {
                   key={visibleLogoMode}
                   src={logoConfig.src}
                   alt={logoConfig.alt}
-                  className="size-full object-contain p-1"
+                  className="size-full object-contain"
                   initial={{ opacity: 0.7, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.2 }}
                 />
               </motion.div>
-              <div>
-                <div className="font-bold text-xl text-[#101828] leading-tight">{logoConfig.title}</div>
-                <div className="text-xs text-[#6a7282]">{logoConfig.subtitle}</div>
-              </div>
             </Link>
 
             {/* Desktop Navigation */}
