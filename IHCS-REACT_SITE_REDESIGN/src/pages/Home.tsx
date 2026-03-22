@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
-import { ArrowRight, GraduationCap, Heart, Users, Clock, CheckCircle, Award, Star } from "lucide-react";
+import { ArrowRight, GraduationCap, Users, Clock, CheckCircle, Award, Star } from "lucide-react";
 import { courses } from "../data/courses";
 
 export default function Home() {
@@ -138,7 +138,7 @@ export default function Home() {
                 We're Invested in Your Success
               </h2>
               <p className="text-xl text-[#4a5565] max-w-2xl mx-auto">
-                Our commitment goes beyond education – we provide the resources and support you need to thrive in your healthcare career.
+                Our commitment goes beyond education - we provide the resources and support you need to thrive in your healthcare career.
               </p>
             </div>
 
@@ -317,7 +317,7 @@ export default function Home() {
   );
 }
 
-function CourseCard({ id, title, description, duration, nextStart, image, badge }: any) {
+function CourseCard({ id, title, description, duration, nextStart, image, badge, icon: _icon }: any) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
