@@ -1,14 +1,51 @@
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone, Mail } from "lucide-react";
-import { useState } from "react";
+import { motion } from "motion/react";
+import { useEffect, useState } from "react";
+
+type LogoMode = "company" | "course";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const [visibleLogoMode, setVisibleLogoMode] = useState<LogoMode>("company");
+
+  const isCoursePage =
+    location.pathname === "/courses" || location.pathname.startsWith("/courses/");
+  const targetLogoMode: LogoMode = isCoursePage ? "course" : "company";
+
+  useEffect(() => {
+    const showCourseLogo = window.setTimeout(() => {
+      setVisibleLogoMode("course");
+    }, 400);
+    const settleOnTarget = window.setTimeout(() => {
+      setVisibleLogoMode(targetLogoMode);
+    }, 900);
+
+    return () => {
+      window.clearTimeout(showCourseLogo);
+      window.clearTimeout(settleOnTarget);
+    };
+  }, [targetLogoMode]);
 
   const isActive = (path: string) => {
     return location.pathname === path;
   };
+
+  const logoConfig =
+    visibleLogoMode === "course"
+      ? {
+          src: "/courselogo.png",
+          alt: "Healthcare Training logo",
+          title: "Healthcare Training",
+          subtitle: "Institute"
+        }
+      : {
+          src: "/LOGO.png",
+          alt: "Innovation Healthcare Solutions logo",
+          title: "Innovation Healthcare",
+          subtitle: "Solutions"
+        };
 
   const navLinks = [
     { path: "/", label: "Home" },
@@ -48,12 +85,26 @@ export function Header() {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3">
-              <div className="bg-[#561D7E] text-white size-12 rounded-lg flex items-center justify-center">
-                <span className="text-xl font-bold">HT</span>
-              </div>
+              <motion.div
+                className="size-12 rounded-lg overflow-hidden border border-[#e5d4f5] shadow-sm shrink-0 bg-white"
+                initial={{ rotateY: 0 }}
+                animate={{ rotateY: [0, 180, 360] }}
+                transition={{ duration: 0.9, ease: "easeInOut" }}
+                style={{ transformStyle: "preserve-3d" }}
+              >
+                <motion.img
+                  key={visibleLogoMode}
+                  src={logoConfig.src}
+                  alt={logoConfig.alt}
+                  className="size-full object-contain p-1"
+                  initial={{ opacity: 0.7, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.2 }}
+                />
+              </motion.div>
               <div>
-                <div className="font-bold text-xl text-[#101828]">Healthcare Training</div>
-                <div className="text-xs text-[#6a7282]">Institute</div>
+                <div className="font-bold text-xl text-[#101828] leading-tight">{logoConfig.title}</div>
+                <div className="text-xs text-[#6a7282]">{logoConfig.subtitle}</div>
               </div>
             </Link>
 

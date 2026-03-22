@@ -119,6 +119,24 @@ export default function CourseDetail() {
                   ))}
                 </div>
 
+                {course.scheduleDates && course.scheduleDates.length > 0 ? (
+                  <>
+                    <h3 className="text-2xl font-medium text-[#101828] mb-4 mt-12">
+                      Upcoming Schedule
+                    </h3>
+                    <div className="bg-[#faf5ff] border border-[#f3e8ff] rounded-xl p-6">
+                      <ul className="space-y-3">
+                        {course.scheduleDates.map((date) => (
+                          <li key={date} className="flex gap-3 items-start">
+                            <div className="bg-[#561D7E] rounded-full size-2 mt-2 shrink-0" />
+                            <span className="text-[#4a5565]">{date}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </>
+                ) : null}
+
                 <h3 className="text-2xl font-medium text-[#101828] mb-4 mt-12">
                   Requirements
                 </h3>
@@ -158,7 +176,7 @@ export default function CourseDetail() {
                     </div>
                     <div className="flex justify-between items-center pb-4 border-b border-gray-200">
                       <span className="text-[#6a7282]">Schedule</span>
-                      <span className="font-medium text-[#101828]">{course.details.schedule.split('-')[0].trim()}</span>
+                      <span className="font-medium text-[#101828] text-right max-w-[65%]">{course.details.schedule}</span>
                     </div>
                     <div className="flex justify-between items-center pb-4 border-b border-gray-200">
                       <span className="text-[#6a7282]">Next Start</span>
@@ -170,12 +188,29 @@ export default function CourseDetail() {
                     </div>
                   </div>
 
-                  <Link
-                    to="/contact"
+                  <a
+                    href={course.payments.fullPaymentUrl}
+                    target="_blank"
+                    rel="noreferrer"
                     className="block w-full bg-[#561D7E] text-white text-center py-4 rounded-full hover:bg-[#461464] transition-colors mb-3"
                   >
-                    Apply Now
-                  </Link>
+                    Pay In Full
+                  </a>
+                  {course.payments.paymentPlans && course.payments.paymentPlans.length > 0 ? (
+                    <div className="space-y-2 mb-3">
+                      {course.payments.paymentPlans.map((plan) => (
+                        <a
+                          key={plan.url}
+                          href={plan.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="block w-full bg-[#f3e8ff] text-[#561D7E] text-center py-3 rounded-full hover:bg-[#ead5ff] transition-colors"
+                        >
+                          {plan.label}
+                        </a>
+                      ))}
+                    </div>
+                  ) : null}
                   <a
                     href="tel:555-123-4567"
                     className="block w-full bg-white border-2 border-[#561D7E] text-[#561D7E] text-center py-4 rounded-full hover:bg-[#f3e8ff] transition-colors"
@@ -184,12 +219,11 @@ export default function CourseDetail() {
                   </a>
 
                   <div className="mt-6 pt-6 border-t border-gray-200">
-                    <h4 className="font-medium text-[#101828] mb-3">Need More Info?</h4>
+                    <h4 className="font-medium text-[#101828] mb-3">Payment Notes</h4>
                     <ul className="space-y-2 text-sm text-[#6a7282]">
-                      <li>- Payment plans available</li>
-                      <li>- Financial aid options</li>
-                      <li>- Flexible scheduling</li>
-                      <li>- Job placement assistance</li>
+                      <li>- Payments are processed securely through Stripe</li>
+                      <li>- Choose full payment or a payment plan option above</li>
+                      <li>- Contact us if you need enrollment or billing support</li>
                     </ul>
                   </div>
                 </div>

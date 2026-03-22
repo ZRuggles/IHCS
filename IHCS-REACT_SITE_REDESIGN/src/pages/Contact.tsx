@@ -246,12 +246,10 @@ export default function Contact() {
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9810fa] focus:border-transparent transition-all"
                     >
                       <option value="">Select an option</option>
-                      <option value="cna">CNA Program</option>
-                      <option value="medical-assistant">Medical Assistant Program</option>
-                      <option value="phlebotomy">Phlebotomy Program</option>
-                      <option value="emt">EMT Basic Program</option>
-                      <option value="dental">Dental Assistant Program</option>
-                      <option value="patient-care">Patient Care Technician Program</option>
+                      <option value="hybrid-nurse-aide">Hybrid Nurse Aide (CNA) Course</option>
+                      <option value="hybrid-phlebotomy">Hybrid Phlebotomy Technician Course</option>
+                      <option value="hybrid-medication-aide">Hybrid Medication Aide Course</option>
+                      <option value="hybrid-refresher">Hybrid Refresher Course (CNA)</option>
                       <option value="home-care">Home Care Services</option>
                       <option value="employment">Employment Opportunities</option>
                       <option value="other">Other</option>

@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { GraduationCap, Clock, DollarSign, Calendar, ArrowRight } from "lucide-react";
-import { courses } from "../data/courses";
+import { courses, cnaAndRefresherSchedule, phlebotomySchedule } from "../data/courses";
 
 export default function Courses() {
   return (
@@ -54,7 +54,7 @@ export default function Courses() {
                         <GraduationCap className="size-6 text-[#59168b]" />
                       </div>
                       <div>
-                        <div className="font-medium text-[#101828]">6 Programs Available</div>
+                        <div className="font-medium text-[#101828]">4 Programs Available</div>
                         <div className="text-sm text-[#6a7282]">State-approved certifications</div>
                       </div>
                     </div>
@@ -64,7 +64,7 @@ export default function Courses() {
                       </div>
                       <div>
                         <div className="font-medium text-[#101828]">Classes Starting Soon</div>
-                        <div className="text-sm text-[#6a7282]">March 2026 enrollment open</div>
+                        <div className="text-sm text-[#6a7282]">2026 schedule is now posted</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
@@ -78,6 +78,62 @@ export default function Courses() {
                     </div>
                   </div>
                 </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Course Schedules */}
+        <section className="py-16 bg-gradient-to-b from-white to-[#faf5ff] border-y border-[#f3e8ff]">
+          <div className="max-w-[1600px] mx-auto px-4">
+            <div className="text-center mb-10">
+              <h2 className="text-4xl font-medium text-[#101828] mb-4">
+                Course Schedules
+              </h2>
+              <p className="text-xl text-[#4a5565] max-w-3xl mx-auto">
+                Published schedules for 2026 and early 2027 cohorts.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <motion.div
+                className="bg-white border border-[#e9d5ff] rounded-2xl p-8 shadow-sm"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                <h3 className="text-2xl font-medium text-[#101828] mb-4">
+                  CNA and CNA Refresher Schedule
+                </h3>
+                <ul className="space-y-3 text-[#4a5565]">
+                  {cnaAndRefresherSchedule.map((date) => (
+                    <li key={date} className="flex items-start gap-3">
+                      <div className="bg-[#9810fa] rounded-full size-2 mt-2 shrink-0" />
+                      <span>{date}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              <motion.div
+                className="bg-white border border-[#e9d5ff] rounded-2xl p-8 shadow-sm"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                <h3 className="text-2xl font-medium text-[#101828] mb-4">
+                  Phlebotomy Schedule
+                </h3>
+                <ul className="space-y-3 text-[#4a5565]">
+                  {phlebotomySchedule.map((date) => (
+                    <li key={date} className="flex items-start gap-3">
+                      <div className="bg-[#9810fa] rounded-full size-2 mt-2 shrink-0" />
+                      <span>{date}</span>
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             </div>
           </div>
