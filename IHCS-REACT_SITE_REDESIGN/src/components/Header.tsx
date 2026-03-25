@@ -126,12 +126,12 @@ export function Header() {
       {/* Main Navigation */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-[1600px] mx-auto px-4">
-          <div className="flex items-center justify-between h-16 sm:h-20">
+          <div className="flex items-center justify-between h-24 sm:h-28 md:h-32">
             {/* Logo */}
             <Link to="/" className="flex items-center">
               <motion.div
                 key={activeLogoMode}
-                className="h-14 sm:h-16 w-[200px] sm:w-[260px] md:w-[320px] overflow-hidden shrink-0 bg-white"
+                className="h-[88px] sm:h-[100px] w-[200px] sm:w-[240px] md:w-[280px] overflow-hidden shrink-0 bg-white"
                 initial={shouldAnimateLogo ? { rotateY: -95, opacity: 0.35 } : false}
                 animate={{ rotateY: 0, opacity: 1 }}
                 transition={{ duration: 0.55, ease: "easeInOut" }}
