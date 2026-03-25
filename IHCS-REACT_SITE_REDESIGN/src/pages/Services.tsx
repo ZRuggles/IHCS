@@ -1,6 +1,7 @@
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { motion } from "motion/react";
+import { useState } from "react";
 import {
   Heart,
   Home,
@@ -42,21 +43,26 @@ export default function Services() {
       icon: Activity,
       title: "Home Infusion",
       description: "Comprehensive in-home infusion therapy services including nursing care, medication administration, and supplies for patients requiring IV treatments.",
-      features: ["24/7 nursing support", "Medication management", "Administrative supplies", "Patient education"]
+      features: ["24/7 nursing support", "Medication management", "Administrative supplies", "Patient education"],
+      backgroundImage: "/Home Infusion.jpeg"
     },
     {
       icon: Home,
       title: "Supplemental Staffing",
       description: "Professional healthcare staffing solutions for medical offices, facilities, and hospitals with qualified RNs, LPNs, CNAs, and patient sitters.",
-      features: ["Registered Nurses (RN)", "Licensed Practical Nurses (LPN)", "Certified Nursing Assistants (CNA)", "Patient sitters"]
+      features: ["Registered Nurses (RN)", "Licensed Practical Nurses (LPN)", "Certified Nursing Assistants (CNA)", "Patient sitters"],
+      backgroundImage: "/Supplemental Staffing.jpeg"
     },
     {
       icon: Activity,
       title: "Foot Care Nurse",
       description: "Specialized skilled nursing foot care services providing comprehensive treatment for nail care, calluses, corns, circulation support, and pain management.",
-      features: ["Professional nail care", "Callus and corn treatment", "Circulation assessment", "Pain reduction therapy"]
+      features: ["Professional nail care", "Callus and corn treatment", "Circulation assessment", "Pain reduction therapy"],
+      backgroundImage: "/FootCareNurse.jpeg"
     }
   ];
+  const defaultSpecialtyImage = specialtyServices[0].backgroundImage;
+  const [activeSpecialtyImage, setActiveSpecialtyImage] = useState(defaultSpecialtyImage);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -69,7 +75,7 @@ export default function Services() {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: `url('https://images.unsplash.com/photo-1708461859488-2a0c081ff826?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxudXJzZSUyMGNhcmluZyUyMGVsZGVybHklMjBwYXRpZW50JTIwaG9tZXxlbnwxfHx8fDE3NzQxMjYwMDV8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')`
+              backgroundImage: `url('/Home Care Services.jpeg')`
             }}
           />
           {/* Overlay for readability */}
@@ -84,7 +90,7 @@ export default function Services() {
                 transition={{ duration: 0.6 }}
               >
                 <img
-                  src="https://images.unsplash.com/photo-1765896387377-e293914d1e69?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxob21lJTIwY2FyZSUyMG51cnNlJTIwcGF0aWVudCUyMGVsZGVybHl8ZW58MXx8fHwxNzc0MTE3NzcwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                  src="/PRN Home Visit.jpg"
                   alt="Home Care Services"
                   className="rounded-3xl shadow-2xl w-full"
                 />
@@ -95,7 +101,7 @@ export default function Services() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <div className="inline-block bg-[#f3e8ff] text-[#561D7E] px-4 py-2 rounded-full text-sm mb-6">
+                <div className="inline-block bg-[#eee5f5] text-[#561D7E] px-4 py-2 rounded-full text-sm mb-6">
                   Home Care Services
                 </div>
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium mb-6 leading-tight text-[#101828]">
@@ -135,7 +141,7 @@ export default function Services() {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                   >
                     <motion.div 
-                      className="bg-[#f3e8ff] p-4 rounded-2xl w-fit mx-auto mb-4"
+                      className="bg-[#eee5f5] p-4 rounded-2xl w-fit mx-auto mb-4"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       transition={{ type: "spring", stiffness: 300 }}
                     >
@@ -189,7 +195,7 @@ export default function Services() {
                   >
                     <motion.div 
                       className={`shrink-0 p-3 rounded-xl ${
-                        isHighlighted ? 'bg-white/20' : 'bg-[#f3e8ff]'
+                        isHighlighted ? 'bg-white/20' : 'bg-[#eee5f5]'
                       }`}
                       whileHover={{ rotate: 360, scale: 1.1 }}
                       transition={{ duration: 0.6 }}
@@ -237,7 +243,7 @@ export default function Services() {
                 return (
                   <motion.div 
                     key={index} 
-                    className="bg-gradient-to-br from-[#f3e8ff] to-white border border-[#f3e8ff] p-6 rounded-xl group"
+                    className="bg-gradient-to-br from-[#eee5f5] to-white border border-[#eee5f5] p-6 rounded-xl group"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
@@ -269,7 +275,8 @@ export default function Services() {
           <motion.div
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: `url('https://images.unsplash.com/photo-1614880397238-e69b733e95fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwd29ya2VyJTIwcGF0aWVudCUyMGNvbXBhc3Npb258ZW58MXx8fHwxNzc0MTI2MDA2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')`
+              backgroundImage: `url('/LPN and RN.jpg')`,
+              backgroundPosition: "center 20%"
             }}
             initial={{ scale: 1.1 }}
             whileInView={{ scale: 1 }}
@@ -296,8 +303,18 @@ export default function Services() {
         </section>
 
         {/* Specialty Services */}
-        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-[#faf5ff]">
-          <div className="max-w-[1600px] mx-auto px-4">
+        <section className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
+          <motion.div
+            key={activeSpecialtyImage}
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url('${activeSpecialtyImage}')` }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.35 }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/90 to-[#f7f2fb]/95" />
+
+          <div className="max-w-[1600px] mx-auto px-4 relative z-10">
             <motion.div 
               className="text-center mb-12"
               initial={{ opacity: 0, y: 20 }}
@@ -313,13 +330,17 @@ export default function Services() {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div
+              className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+              onMouseLeave={() => setActiveSpecialtyImage(defaultSpecialtyImage)}
+            >
               {specialtyServices.map((service, index) => {
                 const Icon = service.icon;
                 return (
                   <motion.div 
                     key={index} 
                     className="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-shadow group"
+                    onMouseEnter={() => setActiveSpecialtyImage(service.backgroundImage)}
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -428,10 +449,10 @@ export default function Services() {
                 Request Information
               </a>
               <a
-                href="tel:555-123-4567"
+                href="tel:+13369997123"
                 className="bg-transparent border-2 border-white text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-white/10 transition-colors text-base sm:text-lg"
               >
-                Call (555) 123-4567)
+                Call (336) 999-7123
               </a>
             </div>
           </div>

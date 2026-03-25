@@ -48,20 +48,36 @@ export const courses: Course[] = [
   {
     id: "hybrid-nurse-aide",
     title: "Hybrid Nurse Aide (CNA) Course (North Carolina)",
-    description: "Jumpstart your healthcare career with our state-approved Hybrid Nurse Aide I course. This 128-hour, 5-week program includes online learning, hands-on clinical experience, and a uniform.",
+    description:
+      "Jumpstart your healthcare career with our state-approved Hybrid Nurse Aide I course. This 128-hour program combines flexible online learning with hands-on clinical experience, all completed in just 5 weeks.",
     duration: "128 Hours (5 Weeks)",
     nextStart: "March 16, 2026",
-    image: "https://images.unsplash.com/photo-1731514836024-614e2bab04c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxDTkElMjBudXJzaW5nJTIwYXNzaXN0YW50JTIwcGF0aWVudCUyMGNhcmUlMjB0cmFpbmluZ3xlbnwxfHx8fDE3NzQxMjc0NDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: "/Nurse-Aide.jpg",
     badge: "Most Popular",
     icon: "heart",
     payments: {
       fullPaymentUrl: "https://buy.stripe.com/14A5kCdpI1H55tFcbd0oM01",
       paymentPlans: [
-        { label: "Payment Plan 1", url: "https://buy.stripe.com/5kQaEW4Tc2L909l6QT0oM09" },
-        { label: "Payment Plan 2", url: "https://buy.stripe.com/00w14mgBUbhFg8jcbd0oM0a" },
-        { label: "Payment Plan 3", url: "https://buy.stripe.com/dRmcN44Tc99x5tF1wz0oM0b" },
-        { label: "Payment Plan 4", url: "https://buy.stripe.com/4gM9ASfxQdpN5tF5MP0oM0c" },
-        { label: "Payment Plan 5", url: "https://buy.stripe.com/14AbJ03P8bhFcW72AD0oM0d" }
+        {
+          label: "Hybrid Nurse Payment Link 1",
+          url: "https://buy.stripe.com/5kQaEW4Tc2L909l6QT0oM09"
+        },
+        {
+          label: "Hybrid Nurse Payment Link 2",
+          url: "https://buy.stripe.com/00w14mgBUbhFg8jcbd0oM0a"
+        },
+        {
+          label: "Hybrid Nurse Payment Link 3",
+          url: "https://buy.stripe.com/dRmcN44Tc99x5tF1wz0oM0b"
+        },
+        {
+          label: "Hybrid Nurse Payment Link 4",
+          url: "https://buy.stripe.com/4gM9ASfxQdpN5tF5MP0oM0c"
+        },
+        {
+          label: "Hybrid Nurse Payment Link 5",
+          url: "https://buy.stripe.com/14AbJ03P8bhFcW72AD0oM0d"
+        }
       ]
     },
     scheduleDates: cnaAndRefresherSchedule,
@@ -70,10 +86,9 @@ export const courses: Course[] = [
       curriculum: [
         "Course Duration: 5 weeks per session",
         "Weekly Assignments: Online assignments with deadlines each week",
-        "Online learning with weekly assignments",
         "Lab Days: Saturdays and Sundays, 9:00 AM to 5:00 PM (Weeks 1-3)",
         "Clinical Days: Saturdays and Sundays, 7:00 AM to 3:00 PM (Weeks 4-5)",
-        "Online and in-person format",
+        "Online & in-person format",
         "Clinicals included",
         "Uniform included in tuition"
       ],
@@ -95,16 +110,28 @@ export const courses: Course[] = [
     description: "Master the essential skills of phlebotomy in just 4 weeks with our Hybrid Phlebotomy Technician course. This program blends online instruction with in-person lab sessions.",
     duration: "4 Weeks",
     nextStart: "April 7, 2026",
-    image: "https://images.unsplash.com/photo-1569287808794-a0c3f32d4388?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwaGxlYm90b215JTIwYmxvb2QlMjBkcmF3JTIwdGVjaG5pY2lhbiUyMHRyYWluaW5nfGVufDF8fHx8MTc3NDEyNzQ0OHww&ixlib=rb-4.1.0&q=80&w=1080",
+    image: "/Phlebotomy.jpg",
     badge: "Fast Track",
     icon: "droplet",
     payments: {
       fullPaymentUrl: "https://buy.stripe.com/7sY28qadwbhFf4f7UX0oM02",
       paymentPlans: [
-        { label: "Payment Plan 1", url: "https://buy.stripe.com/4gMeVcbhA99x3lx8Z10oM05" },
-        { label: "Payment Plan 2", url: "https://buy.stripe.com/4gM3cudpI5Xl5tF4IL0oM06" },
-        { label: "Payment Plan 3", url: "https://buy.stripe.com/9B67sKadw99x4pB7UX0oM07" },
-        { label: "Payment Plan 4", url: "https://buy.stripe.com/8x29ASclE3Pd8FRgrt0oM08" }
+        {
+          label: "Hybrid Phlebotomy Payment Link 1",
+          url: "https://buy.stripe.com/4gMeVcbhA99x3lx8Z10oM05"
+        },
+        {
+          label: "Hybrid Phlebotomy Payment Link 2",
+          url: "https://buy.stripe.com/4gM3cudpI5Xl5tF4IL0oM06"
+        },
+        {
+          label: "Hybrid Phlebotomy Payment Link 3",
+          url: "https://buy.stripe.com/9B67sKadw99x4pB7UX0oM07"
+        },
+        {
+          label: "Hybrid Phlebotomy Payment Link 4",
+          url: "https://buy.stripe.com/8x29ASclE3Pd8FRgrt0oM08"
+        }
       ]
     },
     scheduleDates: phlebotomySchedule,
@@ -133,7 +160,7 @@ export const courses: Course[] = [
     description: "Ideal for nurse aides looking to expand their skills. Complete online lessons at your own pace, then attend a one-day in-person competency check-off.",
     duration: "Self-Paced + 1-Day Skills Check-Off",
     nextStart: "Rolling Enrollment",
-    image: "https://images.unsplash.com/photo-1676552055618-22ec8cde399a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2F0aW9uJTIwbnVyc2UlMjBhZG1pbmlzdGVyaW5nJTIwbWVkaWNpbmUlMjBoZWFsdGhjYXJlfGVufDF8fHx8MTc3NDEyODYzN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+    image: "/Medication.jpg",
     icon: "pill",
     payments: {
       fullPaymentUrl: "https://buy.stripe.com/28EaEW2L45Xl8FR5MP0oM04"
@@ -162,13 +189,19 @@ export const courses: Course[] = [
     description: "Have your Nurse Aide certification lapsed or need to refresh your skills? Our Hybrid Refresher Course offers 1-week and 2-week options.",
     duration: "1 or 2 Weeks",
     nextStart: "March 16, 2026",
-    image: "https://images.unsplash.com/photo-1676046261150-063cf0de59dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxudXJzZSUyMGFpZGUlMjB0cmFpbmluZyUyMHNraWxscyUyMHJlZnJlc2hlciUyMGNvdXJzZXxlbnwxfHx8fDE3NzQxMjg2Mzd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: "/Refresher.jpg",
     icon: "refresh-cw",
     payments: {
       fullPaymentUrl: "https://buy.stripe.com/dRm28qbhAetRaNZ0sv0oM03",
       paymentPlans: [
-        { label: "Payment Plan 1", url: "https://buy.stripe.com/28E7sK99setR3lxcbd0oM0e" },
-        { label: "Payment Plan 2", url: "https://buy.stripe.com/8x2eVcgBU4Thg8j6QT0oM0f" }
+        {
+          label: "Hybrid Nurse Refresher Payment Link 1",
+          url: "https://buy.stripe.com/28E7sK99setR3lxcbd0oM0e"
+        },
+        {
+          label: "Hybrid Nurse Refresher Payment Link 2",
+          url: "https://buy.stripe.com/8x2eVcgBU4Thg8j6QT0oM0f"
+        }
       ]
     },
     scheduleDates: cnaAndRefresherSchedule,

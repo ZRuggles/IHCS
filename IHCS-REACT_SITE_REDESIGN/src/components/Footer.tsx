@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Facebook, Twitter, Instagram, Linkedin, Phone, Mail, MapPin } from "lucide-react";
+import { Facebook, Linkedin, Phone, MapPin, Clock, Mail, Shield, Headphones } from "lucide-react";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -15,16 +15,22 @@ export function Footer() {
               Leading healthcare training institute providing state-approved certifications and quality education for aspiring healthcare professionals.
             </p>
             <div className="flex gap-3">
-              <a href="#" className="bg-white/10 p-2 rounded-lg hover:bg-white/20 transition-colors" aria-label="Facebook">
+              <a
+                href="https://www.facebook.com/InnovationHealthcareSolutions"
+                target="_blank"
+                rel="noreferrer"
+                className="bg-white/10 p-2 rounded-lg hover:bg-white/20 transition-colors"
+                aria-label="Facebook"
+              >
                 <Facebook className="size-5" />
               </a>
-              <a href="#" className="bg-white/10 p-2 rounded-lg hover:bg-white/20 transition-colors" aria-label="Twitter">
-                <Twitter className="size-5" />
-              </a>
-              <a href="#" className="bg-white/10 p-2 rounded-lg hover:bg-white/20 transition-colors" aria-label="Instagram">
-                <Instagram className="size-5" />
-              </a>
-              <a href="#" className="bg-white/10 p-2 rounded-lg hover:bg-white/20 transition-colors" aria-label="LinkedIn">
+              <a
+                href="https://www.linkedin.com/company/innovation-healthcare-solutions-enterprise-inc/?viewAsMember=true"
+                target="_blank"
+                rel="noreferrer"
+                className="bg-white/10 p-2 rounded-lg hover:bg-white/20 transition-colors"
+                aria-label="LinkedIn"
+              >
                 <Linkedin className="size-5" />
               </a>
             </div>
@@ -90,18 +96,69 @@ export function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex gap-3 text-gray-300">
                 <MapPin className="size-5 shrink-0 mt-0.5" />
-                <span>Winston-Salem, North Carolina</span>
+                <a
+                  href="https://maps.google.com/?q=609+Peters+Creek+Parkway+Winston+Salem+NC+27103"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  609 Peters Creek Parkway
+                  <br />
+                  Winston Salem, North Carolina 27103
+                </a>
               </li>
               <li className="flex gap-3 text-gray-300">
                 <Phone className="size-5 shrink-0" />
-                <a href="tel:555-123-4567" className="hover:text-white transition-colors">
-                  (555) 123-4567
+                <a href="tel:+13369997123" className="hover:text-white transition-colors">
+                  Main: (336) 999-7123
+                </a>
+              </li>
+              <li className="flex gap-3 text-gray-300">
+                <Shield className="size-5 shrink-0" />
+                <a href="tel:+13369345354" className="hover:text-white transition-colors">
+                  After Hours Emergency: (336) 934-5354
+                </a>
+              </li>
+              <li className="flex gap-3 text-gray-300">
+                <Headphones className="size-5 shrink-0" />
+                <a href="tel:+18774455698" className="hover:text-white transition-colors">
+                  Help Desk / Fax: (877) 445-5698
                 </a>
               </li>
               <li className="flex gap-3 text-gray-300">
                 <Mail className="size-5 shrink-0" />
-                <a href="mailto:info@healthcare.edu" className="hover:text-white transition-colors">
-                  info@healthcare.edu
+                <a href="mailto:contact@innovationhealthcaresolutions.com" className="hover:text-white transition-colors break-all">
+                  contact@innovationhealthcaresolutions.com
+                </a>
+              </li>
+              <li className="flex gap-3 text-gray-300">
+                <Clock className="size-5 shrink-0 mt-0.5" />
+                <span>
+                  Mon - Thu: 9:00 AM - 2:00 PM
+                  <br />
+                  Fri - Sun: Closed
+                </span>
+              </li>
+              <li className="flex gap-3 text-gray-300">
+                <Facebook className="size-5 shrink-0 mt-0.5" />
+                <a
+                  href="https://www.facebook.com/InnovationHealthcareSolutions"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  Facebook
+                </a>
+              </li>
+              <li className="flex gap-3 text-gray-300">
+                <Linkedin className="size-5 shrink-0 mt-0.5" />
+                <a
+                  href="https://www.linkedin.com/company/innovation-healthcare-solutions-enterprise-inc/?viewAsMember=true"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  LinkedIn
                 </a>
               </li>
             </ul>

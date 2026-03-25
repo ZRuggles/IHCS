@@ -4,17 +4,27 @@ import { motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 type LogoMode = "company" | "course";
+const LOGO_INTRO_KEY = "ihcs-logo-intro-played";
+const LOGO_LAST_MODE_KEY = "ihcs-logo-last-mode";
+const LOGO_FLIP_DELAY_MS = 140;
+const LOGO_FLIP_RETURN_MS = 1140;
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const [activeLogoMode, setActiveLogoMode] = useState<LogoMode>("company");
-  const startupTimersRef = useRef<number[]>([]);
-
   const isCoursePage =
     location.pathname === "/courses" || location.pathname.startsWith("/courses/");
   const targetLogoMode: LogoMode = isCoursePage ? "course" : "company";
-  const hoverLogoMode: LogoMode = targetLogoMode === "company" ? "course" : "company";
+  const [activeLogoMode, setActiveLogoMode] = useState<LogoMode>(() => {
+    const storedMode = window.sessionStorage.getItem(LOGO_LAST_MODE_KEY);
+    if (storedMode === "company" || storedMode === "course") {
+      return storedMode;
+    }
+    return targetLogoMode;
+  });
+  const [shouldAnimateLogo, setShouldAnimateLogo] = useState(false);
+  const activeLogoModeRef = useRef<LogoMode>(activeLogoMode);
+  const startupTimersRef = useRef<number[]>([]);
 
   const clearStartupTimers = useCallback(() => {
     startupTimersRef.current.forEach((timerId) => window.clearTimeout(timerId));
@@ -22,14 +32,40 @@ export function Header() {
   }, []);
 
   useEffect(() => {
+    activeLogoModeRef.current = activeLogoMode;
+    window.sessionStorage.setItem(LOGO_LAST_MODE_KEY, activeLogoMode);
+  }, [activeLogoMode]);
+
+  useEffect(() => {
     clearStartupTimers();
-    const showOtherLogo = window.setTimeout(() => {
-      setActiveLogoMode("course");
-    }, 320);
-    const settleOnTarget = window.setTimeout(() => {
-      setActiveLogoMode(targetLogoMode);
-    }, 760);
-    startupTimersRef.current = [showOtherLogo, settleOnTarget];
+    const hasPlayedIntro = window.sessionStorage.getItem(LOGO_INTRO_KEY) === "true";
+
+    if (!hasPlayedIntro) {
+      window.sessionStorage.setItem(LOGO_INTRO_KEY, "true");
+      setShouldAnimateLogo(true);
+      const alternateLogoMode: LogoMode =
+        targetLogoMode === "company" ? "course" : "company";
+      const showOtherLogo = window.setTimeout(() => {
+        setActiveLogoMode(alternateLogoMode);
+      }, LOGO_FLIP_DELAY_MS);
+      const settleOnTarget = window.setTimeout(() => {
+        setActiveLogoMode(targetLogoMode);
+      }, LOGO_FLIP_RETURN_MS);
+      startupTimersRef.current = [showOtherLogo, settleOnTarget];
+      return () => {
+        clearStartupTimers();
+      };
+    }
+
+    if (activeLogoModeRef.current !== targetLogoMode) {
+      setShouldAnimateLogo(true);
+      const switchToTarget = window.setTimeout(() => {
+        setActiveLogoMode(targetLogoMode);
+      }, LOGO_FLIP_DELAY_MS);
+      startupTimersRef.current = [switchToTarget];
+    } else {
+      setShouldAnimateLogo(false);
+    }
 
     return () => {
       clearStartupTimers();
@@ -65,18 +101,22 @@ export function Header() {
       <div className="bg-[#561D7E] text-white py-2">
         <div className="max-w-[1600px] mx-auto px-4 flex items-center justify-between gap-3">
           <div className="flex items-center gap-3 sm:gap-6">
-            <a href="tel:555-123-4567" className="flex items-center gap-2 text-xs sm:text-sm hover:opacity-80 transition-opacity">
+            <a href="tel:+13369997123" className="flex items-center gap-2 text-xs sm:text-sm hover:opacity-80 transition-opacity">
               <Phone className="size-4" />
-              <span>(555) 123-4567</span>
+              <span>(336) 999-7123</span>
             </a>
-            <a href="mailto:info@healthcare.edu" className="hidden md:flex items-center gap-2 text-sm hover:opacity-80 transition-opacity">
+            <a href="tel:+13369345354" className="hidden md:flex items-center gap-2 text-sm hover:opacity-80 transition-opacity">
+              <Phone className="size-4" />
+              <span>After Hours: (336) 934-5354</span>
+            </a>
+            <a href="mailto:contact@innovationhealthcaresolutions.com" className="hidden lg:flex items-center gap-2 text-sm hover:opacity-80 transition-opacity">
               <Mail className="size-4" />
-              <span>info@healthcare.edu</span>
+              <span>contact@innovationhealthcaresolutions.com</span>
             </a>
           </div>
           <Link
             to="/contact"
-            className="bg-[#ffb71b] text-[#461464] px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm hover:opacity-90 transition-opacity whitespace-nowrap"
+            className="bg-[#ffcc00] text-[#461464] px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm hover:opacity-90 transition-opacity whitespace-nowrap"
           >
             Request Info
           </Link>
@@ -91,28 +131,20 @@ export function Header() {
             <Link to="/" className="flex items-center">
               <motion.div
                 key={activeLogoMode}
-                className="h-12 sm:h-14 w-[170px] sm:w-[220px] md:w-[280px] overflow-hidden shrink-0 bg-white"
-                initial={{ rotateY: -180 }}
-                animate={{ rotateY: 0 }}
-                transition={{ duration: 0.45, ease: "easeInOut" }}
+                className="h-14 sm:h-16 w-[200px] sm:w-[260px] md:w-[320px] overflow-hidden shrink-0 bg-white"
+                initial={shouldAnimateLogo ? { rotateY: -95, opacity: 0.35 } : false}
+                animate={{ rotateY: 0, opacity: 1 }}
+                transition={{ duration: 0.55, ease: "easeInOut" }}
                 style={{ transformStyle: "preserve-3d" }}
-                onHoverStart={() => {
-                  clearStartupTimers();
-                  setActiveLogoMode(hoverLogoMode);
-                }}
-                onHoverEnd={() => {
-                  clearStartupTimers();
-                  setActiveLogoMode(targetLogoMode);
-                }}
               >
                 <motion.img
                   key={activeLogoMode}
                   src={logoConfig.src}
                   alt={logoConfig.alt}
                   className="size-full object-contain"
-                  initial={{ opacity: 0.7, scale: 0.9 }}
+                  initial={shouldAnimateLogo ? { opacity: 0, scale: 0.96 } : false}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.2 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
                 />
               </motion.div>
             </Link>
@@ -154,7 +186,7 @@ export function Header() {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`block py-3 px-4 transition-colors ${
                     isActive(link.path)
-                      ? "text-[#561D7E] font-medium bg-[#f3e8ff]"
+                      ? "text-[#561D7E] font-medium bg-[#eee5f5]"
                       : "text-[#4a5565] hover:bg-gray-50"
                   }`}
                 >

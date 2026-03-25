@@ -5,6 +5,8 @@ import { Footer } from "../components/Footer";
 import { ArrowRight, GraduationCap, Users, Clock, CheckCircle, Award, Star } from "lucide-react";
 import { courses } from "../data/courses";
 
+const COURSE_APPLICATION_URL = "https://www.hovn.app/innovation-healthcare-solutions";
+
 export default function Home() {
   const featuredCourses = courses.slice(0, 6);
 
@@ -14,7 +16,7 @@ export default function Home() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-[#f3e8ff] via-white to-[#faf5ff] py-12 sm:py-16 lg:py-20">
+        <section className="bg-gradient-to-br from-[#eee5f5] via-white to-[#f7f2fb] py-12 sm:py-16 lg:py-20">
           <div className="max-w-[1600px] mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <motion.div
@@ -22,7 +24,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <div className="inline-block bg-[#f3e8ff] text-[#561D7E] px-4 py-2 rounded-full text-sm mb-4">
+                <div className="inline-block bg-[#eee5f5] text-[#561D7E] px-4 py-2 rounded-full text-sm mb-4">
                   Healthcare Programs
                 </div>
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-[#101828] leading-tight mb-6">
@@ -40,7 +42,7 @@ export default function Home() {
                   </Link>
                   <Link
                     to="/contact"
-                    className="bg-white border-2 border-[#561D7E] text-[#561D7E] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#f3e8ff] transition-all hover:scale-105 text-base sm:text-lg"
+                    className="bg-white border-2 border-[#561D7E] text-[#561D7E] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#eee5f5] transition-all hover:scale-105 text-base sm:text-lg"
                   >
                     Schedule A Tour
                   </Link>
@@ -72,7 +74,7 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
                 <img
-                  src="https://images.unsplash.com/photo-1589104759909-e355f8999f7e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwdHJhaW5pbmclMjBjbGFzc3Jvb20lMjBzdHVkZW50c3xlbnwxfHx8fDE3NzQxMTc3NzF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                  src="/NursesHoldingDiplomas.jpg"
                   alt="Healthcare Training"
                   className="rounded-2xl shadow-2xl w-full"
                 />
@@ -83,12 +85,12 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: 0.5 }}
                 >
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="bg-[#ffb71b] p-2 rounded-lg">
+                    <div className="bg-[#ffcc00] p-2 rounded-lg">
                       <CheckCircle className="size-5 text-[#461464]" />
                     </div>
                     <div>
                       <div className="font-semibold text-[#101828]">Next Class</div>
-                      <div className="text-sm text-[#6a7282]">Starts March 15, 2026</div>
+                      <div className="text-sm text-[#6a7282]">Starts March 16, 2026</div>
                     </div>
                   </div>
                 </motion.div>
@@ -101,7 +103,7 @@ export default function Home() {
         <section className="py-12 sm:py-16 lg:py-20 bg-white">
           <div className="max-w-[1600px] mx-auto px-4">
             <div className="text-center mb-12">
-              <div className="inline-block bg-[#f3e8ff] text-[#561D7E] px-4 py-2 rounded-full text-sm mb-4">
+              <div className="inline-block bg-[#eee5f5] text-[#561D7E] px-4 py-2 rounded-full text-sm mb-4">
                 Healthcare Programs
               </div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-4">
@@ -130,7 +132,7 @@ export default function Home() {
         </section>
 
         {/* Investment Section */}
-        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-[#faf5ff] to-[#f3e8ff]">
+        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-[#f7f2fb] to-[#eee5f5]">
           <div className="max-w-[1600px] mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-4">
@@ -184,7 +186,7 @@ export default function Home() {
               </motion.div>
 
               <motion.div 
-                className="bg-[#ffb71b] rounded-2xl p-8 flex flex-col justify-center shadow-lg group hover:shadow-2xl transition-all"
+                className="bg-[#ffcc00] rounded-2xl p-8 flex flex-col justify-center shadow-lg group hover:shadow-2xl transition-all"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -210,7 +212,7 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 whileHover={{ y: -5 }}
               >
-                <div className="h-48 bg-gradient-to-br from-[#f3e8ff] via-[#faf5ff] to-white flex items-center justify-center border-b border-gray-200">
+                <div className="h-48 bg-gradient-to-br from-[#eee5f5] via-[#f7f2fb] to-white flex items-center justify-center border-b border-gray-200">
                   <Award className="size-20 text-[#561D7E] group-hover:scale-110 transition-transform" />
                 </div>
                 <div className="p-6">
@@ -239,7 +241,7 @@ export default function Home() {
               <div className="bg-white border border-gray-200 p-8 rounded-2xl shadow-sm">
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="size-5 fill-[#ffb71b] text-[#ffb71b]" />
+                    <Star key={i} className="size-5 fill-[#ffcc00] text-[#ffcc00]" />
                   ))}
                 </div>
                 <p className="text-[#4a5565] mb-6 leading-relaxed">
@@ -254,7 +256,7 @@ export default function Home() {
               <div className="bg-white border border-gray-200 p-8 rounded-2xl shadow-sm">
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="size-5 fill-[#ffb71b] text-[#ffb71b]" />
+                    <Star key={i} className="size-5 fill-[#ffcc00] text-[#ffcc00]" />
                   ))}
                 </div>
                 <p className="text-[#4a5565] mb-6 leading-relaxed">
@@ -269,7 +271,7 @@ export default function Home() {
               <div className="bg-white border border-gray-200 p-8 rounded-2xl shadow-sm">
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="size-5 fill-[#ffb71b] text-[#ffb71b]" />
+                    <Star key={i} className="size-5 fill-[#ffcc00] text-[#ffcc00]" />
                   ))}
                 </div>
                 <p className="text-[#4a5565] mb-6 leading-relaxed">
@@ -294,12 +296,14 @@ export default function Home() {
               Take the first step towards a fulfilling career in healthcare. Our admissions team is here to guide you through the enrollment process.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                to="/contact"
+              <a
+                href={COURSE_APPLICATION_URL}
+                target="_blank"
+                rel="noreferrer"
                 className="bg-white text-[#561D7E] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-gray-100 transition-colors text-base sm:text-lg"
               >
                 Enroll Now
-              </Link>
+              </a>
               <Link
                 to="/courses"
                 className="bg-transparent border-2 border-white text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-white/10 transition-colors text-base sm:text-lg"
@@ -349,7 +353,7 @@ function CourseCard({ id, title, description, duration, nextStart, image, badge 
             transition={{ duration: 0.4 }}
           />
           {badge && (
-            <div className="absolute top-4 left-4 bg-[#ffb71b] text-[#461464] px-3 py-1 rounded-full text-sm font-medium">
+            <div className="absolute top-4 left-4 bg-[#ffcc00] text-[#461464] px-3 py-1 rounded-full text-sm font-medium">
               {badge}
             </div>
           )}

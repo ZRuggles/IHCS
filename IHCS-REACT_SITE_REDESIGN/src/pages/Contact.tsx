@@ -1,7 +1,7 @@
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { motion } from "motion/react";
-import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
+import { MapPin, Phone, Clock, Send, Facebook, Linkedin, Mail, Shield, Headphones } from "lucide-react";
 import { useState } from "react";
 
 export default function Contact() {
@@ -47,10 +47,10 @@ export default function Contact() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-[#f3e8ff] via-white to-[#faf5ff] py-10 sm:py-14 lg:py-16 border-b border-gray-200 overflow-hidden">
+        <section className="relative bg-gradient-to-br from-[#eee5f5] via-white to-[#f7f2fb] py-10 sm:py-14 lg:py-16 border-b border-gray-200 overflow-hidden">
           {/* Floating background elements */}
           <motion.div 
-            className="absolute top-0 right-0 w-64 h-64 bg-[#9810fa] rounded-full blur-3xl opacity-20"
+            className="absolute top-0 right-0 w-64 h-64 bg-[#6b2d94] rounded-full blur-3xl opacity-20"
             animate={{
               scale: [1, 1.2, 1],
               x: [0, 30, 0],
@@ -63,7 +63,7 @@ export default function Contact() {
             }}
           />
           <motion.div 
-            className="absolute bottom-0 left-0 w-64 h-64 bg-[#fdc700] rounded-full blur-3xl opacity-20"
+            className="absolute bottom-0 left-0 w-64 h-64 bg-[#ffcc00] rounded-full blur-3xl opacity-20"
             animate={{
               scale: [1, 1.3, 1],
               x: [0, -20, 0],
@@ -83,7 +83,7 @@ export default function Contact() {
               transition={{ duration: 0.6 }}
             >
               <motion.div 
-                className="inline-block bg-white border-2 border-[#9810fa] text-[#8200db] px-4 py-2 rounded-full text-sm mb-6"
+                className="inline-block bg-white border-2 border-[#6b2d94] text-[#6b2d94] px-4 py-2 rounded-full text-sm mb-6"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
@@ -103,18 +103,77 @@ export default function Contact() {
         {/* Contact Info Cards */}
         <section className="py-10 sm:py-14 lg:py-16 bg-white">
           <div className="max-w-[1600px] mx-auto px-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6">
               {[
-                { icon: MapPin, title: "Location", content: <p className="text-[#6a7282] text-sm">Winston-Salem<br />North Carolina</p> },
-                { icon: Phone, title: "Phone", content: <a href="tel:555-123-4567" className="text-[#9810fa] hover:underline">(555) 123-4567</a> },
-                { icon: Mail, title: "Email", content: <a href="mailto:info@healthcare.edu" className="text-[#9810fa] hover:underline text-sm">info@healthcare.edu</a> },
-                { icon: Clock, title: "Hours", content: <p className="text-[#6a7282] text-sm">Mon-Fri: 8am-6pm<br />Sat: 9am-2pm</p> }
+                {
+                  icon: MapPin,
+                  title: "Location",
+                  content: (
+                    <a
+                      href="https://maps.google.com/?q=609+Peters+Creek+Parkway+Winston+Salem+NC+27103"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-[#6b2d94] hover:underline text-sm"
+                    >
+                      609 Peters Creek Parkway
+                      <br />
+                      Winston Salem, NC 27103
+                    </a>
+                  )
+                },
+                {
+                  icon: Phone,
+                  title: "Main Line",
+                  content: (
+                    <a href="tel:+13369997123" className="text-[#6b2d94] hover:underline">
+                      (336) 999-7123
+                    </a>
+                  )
+                },
+                {
+                  icon: Shield,
+                  title: "After Hours Emergency",
+                  content: (
+                    <a href="tel:+13369345354" className="text-[#6b2d94] hover:underline">
+                      (336) 934-5354
+                    </a>
+                  )
+                },
+                {
+                  icon: Headphones,
+                  title: "Help Desk / Fax",
+                  content: (
+                    <a href="tel:+18774455698" className="text-[#6b2d94] hover:underline">
+                      (877) 445-5698
+                    </a>
+                  )
+                },
+                {
+                  icon: Mail,
+                  title: "Email",
+                  content: (
+                    <a href="mailto:contact@innovationhealthcaresolutions.com" className="text-[#6b2d94] hover:underline break-all">
+                      contact@innovationhealthcaresolutions.com
+                    </a>
+                  )
+                },
+                {
+                  icon: Clock,
+                  title: "Hours",
+                  content: (
+                    <p className="text-[#6a7282] text-sm">
+                      Mon - Thu: 9:00 AM - 2:00 PM
+                      <br />
+                      Fri - Sun: Closed
+                    </p>
+                  )
+                }
               ].map((card, index) => {
                 const Icon = card.icon;
                 return (
                   <motion.div 
                     key={index}
-                    className="bg-gradient-to-br from-[#f3e8ff] to-white border border-[#f3e8ff] p-6 rounded-xl text-center group"
+                    className="bg-gradient-to-br from-[#eee5f5] to-white border border-[#eee5f5] p-6 rounded-xl text-center group"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -122,7 +181,7 @@ export default function Contact() {
                     whileHover={{ y: -8, boxShadow: "0 10px 30px rgba(152, 16, 250, 0.15)" }}
                   >
                     <motion.div 
-                      className="bg-[#9810fa] p-3 rounded-xl w-fit mx-auto mb-4"
+                      className="bg-[#6b2d94] p-3 rounded-xl w-fit mx-auto mb-4"
                       whileHover={{ scale: 1.1, rotate: [0, -10, 10, -10, 0] }}
                       transition={{ duration: 0.5 }}
                     >
@@ -138,7 +197,7 @@ export default function Contact() {
         </section>
 
         {/* Contact Form & Image */}
-        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-[#faf5ff]">
+        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-[#f7f2fb]">
           <div className="max-w-[1600px] mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Contact Form */}
@@ -180,7 +239,7 @@ export default function Contact() {
                         required
                         value={formData.firstName}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9810fa] focus:border-transparent transition-all"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6b2d94] focus:border-transparent transition-all"
                         placeholder="John"
                       />
                     </div>
@@ -195,7 +254,7 @@ export default function Contact() {
                         required
                         value={formData.lastName}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9810fa] focus:border-transparent transition-all"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6b2d94] focus:border-transparent transition-all"
                         placeholder="Doe"
                       />
                     </div>
@@ -213,7 +272,7 @@ export default function Contact() {
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9810fa] focus:border-transparent transition-all"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6b2d94] focus:border-transparent transition-all"
                         placeholder="john@example.com"
                       />
                     </div>
@@ -227,8 +286,8 @@ export default function Contact() {
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9810fa] focus:border-transparent transition-all"
-                        placeholder="(555) 123-4567"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6b2d94] focus:border-transparent transition-all"
+                        placeholder="(336) 999-7123"
                       />
                     </div>
                   </div>
@@ -243,7 +302,7 @@ export default function Contact() {
                       required
                       value={formData.interest}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9810fa] focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6b2d94] focus:border-transparent transition-all"
                     >
                       <option value="">Select an option</option>
                       <option value="hybrid-nurse-aide">Hybrid Nurse Aide (CNA) Course</option>
@@ -267,14 +326,14 @@ export default function Contact() {
                       value={formData.message}
                       onChange={handleChange}
                       rows={6}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9810fa] focus:border-transparent resize-none transition-all"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6b2d94] focus:border-transparent resize-none transition-all"
                       placeholder="Tell us how we can help you..."
                     />
                   </div>
 
                   <motion.button
                     type="submit"
-                    className="w-full bg-[#9810fa] text-white py-4 rounded-full hover:bg-[#7c0cc8] transition-colors text-base sm:text-lg font-medium flex items-center justify-center gap-2"
+                    className="w-full bg-[#6b2d94] text-white py-4 rounded-full hover:bg-[#4a1a6d] transition-colors text-base sm:text-lg font-medium flex items-center justify-center gap-2"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -301,7 +360,7 @@ export default function Contact() {
                   whileHover={{ scale: 1.02 }}
                 >
                   <img
-                    src="https://images.unsplash.com/photo-1703669020978-9f12d83a895e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb250YWN0JTIwY3VzdG9tZXIlMjBzZXJ2aWNlJTIwcGhvbmV8ZW58MXx8fHwxNzc0MTE3NzcxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                    src="/Supplemental Staffing.jpeg"
                     alt="Contact Us"
                     className="w-full h-full object-cover"
                   />
@@ -341,7 +400,7 @@ export default function Contact() {
                 </motion.div>
 
                 <motion.div 
-                  className="bg-gradient-to-br from-[#9810fa] to-[#7c0cc8] text-white rounded-2xl p-8"
+                  className="bg-gradient-to-br from-[#6b2d94] to-[#4a1a6d] text-white rounded-2xl p-8"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -352,25 +411,61 @@ export default function Contact() {
                     Prefer to Talk?
                   </h3>
                   <p className="mb-6 text-white/90">
-                    Our admissions team is available during business hours to answer your questions.
+                    Call the right line for your needs, or connect on social media.
                   </p>
                   <div className="flex flex-col gap-3">
                     <motion.a
-                      href="tel:555-123-4567"
-                      className="bg-white text-[#9810fa] px-6 py-3 rounded-full hover:bg-gray-100 transition-colors text-center font-medium"
+                      href="tel:+13369997123"
+                      className="bg-white text-[#6b2d94] px-6 py-3 rounded-full hover:bg-gray-100 transition-colors text-center font-medium"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      Call (555) 123-4567
+                      Main: (336) 999-7123
                     </motion.a>
                     <motion.a
-                      href="mailto:info@healthcare.edu"
+                      href="tel:+13369345354"
                       className="bg-white/10 backdrop-blur-sm border-2 border-white text-white px-6 py-3 rounded-full hover:bg-white/20 transition-colors text-center font-medium"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      Email Us
+                      After Hours Emergency: (336) 934-5354
                     </motion.a>
+                    <motion.a
+                      href="tel:+18774455698"
+                      className="bg-white/10 backdrop-blur-sm border-2 border-white text-white px-6 py-3 rounded-full hover:bg-white/20 transition-colors text-center font-medium"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Help Desk / Fax: (877) 445-5698
+                    </motion.a>
+                    <motion.a
+                      href="mailto:contact@innovationhealthcaresolutions.com"
+                      className="bg-white/10 backdrop-blur-sm border-2 border-white text-white px-6 py-3 rounded-full hover:bg-white/20 transition-colors text-center font-medium break-all"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      contact@innovationhealthcaresolutions.com
+                    </motion.a>
+                  </div>
+                  <div className="mt-6 flex gap-3">
+                    <a
+                      href="https://www.facebook.com/InnovationHealthcareSolutions"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="bg-white/20 p-3 rounded-lg hover:bg-white/30 transition-colors"
+                      aria-label="Facebook"
+                    >
+                      <Facebook className="size-5 text-white" />
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/company/innovation-healthcare-solutions-enterprise-inc/?viewAsMember=true"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="bg-white/20 p-3 rounded-lg hover:bg-white/30 transition-colors"
+                      aria-label="LinkedIn"
+                    >
+                      <Linkedin className="size-5 text-white" />
+                    </a>
                   </div>
                 </motion.div>
               </motion.div>
@@ -378,7 +473,7 @@ export default function Contact() {
           </div>
         </section>
 
-        {/* Map Section (Placeholder) */}
+        {/* Map Section */}
         <section className="py-12 sm:py-16 lg:py-20 bg-white">
           <div className="max-w-[1600px] mx-auto px-4">
             <motion.div 
@@ -392,33 +487,24 @@ export default function Contact() {
                 Visit Our Campus
               </h2>
               <p className="text-lg text-[#4a5565]">
-                Located in Winston-Salem, North Carolina
+                609 Peters Creek Parkway, Winston Salem, North Carolina 27103
               </p>
             </motion.div>
             <motion.div 
-              className="bg-gradient-to-br from-[#f3e8ff] to-[#faf5ff] rounded-2xl h-[260px] sm:h-[340px] lg:h-[400px] flex items-center justify-center border border-[#f3e8ff]"
+              className="rounded-2xl h-[260px] sm:h-[340px] lg:h-[400px] overflow-hidden border border-[#eee5f5] shadow-lg"
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
               whileHover={{ boxShadow: "0 10px 30px rgba(152, 16, 250, 0.1)" }}
             >
-              <motion.div 
-                className="text-center"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-              >
-                <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <MapPin className="size-16 text-[#9810fa] mx-auto mb-4" />
-                </motion.div>
-                <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] font-medium">Winston-Salem, NC</p>
-                <p className="text-[#6a7282]">Map integration coming soon</p>
-              </motion.div>
+              <iframe
+                title="Innovation Healthcare Solutions Location"
+                src="https://www.google.com/maps?q=609+Peters+Creek+Parkway,+Winston+Salem,+North+Carolina+27103&output=embed"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full h-full border-0"
+              />
             </motion.div>
           </div>
         </section>

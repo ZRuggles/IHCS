@@ -5,6 +5,8 @@ import { Footer } from "../components/Footer";
 import { GraduationCap, Clock, DollarSign, Calendar, ArrowRight } from "lucide-react";
 import { courses, cnaAndRefresherSchedule, phlebotomySchedule } from "../data/courses";
 
+const COURSE_APPLICATION_URL = "https://www.hovn.app/innovation-healthcare-solutions";
+
 export default function Courses() {
   return (
     <div className="min-h-screen flex flex-col">
@@ -17,7 +19,7 @@ export default function Courses() {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: `url('https://images.unsplash.com/photo-1589104759909-e355f8999f7e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwdHJhaW5pbmclMjBjbGFzc3Jvb20lMjBzdHVkZW50c3xlbnwxfHx8fDE3NzQxMTc3NzF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')`
+              backgroundImage: `url('/NursesHoldingDiplomas.jpg')`
             }}
           />
           {/* Overlay for readability */}
@@ -30,7 +32,7 @@ export default function Courses() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <div className="inline-block bg-[#f3e8ff] text-[#8200db] px-4 py-2 rounded-full text-sm mb-6">
+                <div className="inline-block bg-[#eee5f5] text-[#6b2d94] px-4 py-2 rounded-full text-sm mb-6">
                   Healthcare Training Programs
                 </div>
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium mb-6 leading-tight text-[#101828]">
@@ -46,12 +48,12 @@ export default function Courses() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#9810fa] to-[#7c0cc8] rounded-3xl rotate-3"></div>
-                <div className="relative bg-white rounded-3xl p-8 shadow-xl border-2 border-[#9810fa]">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#6b2d94] to-[#4a1a6d] rounded-3xl rotate-3"></div>
+                <div className="relative bg-white rounded-3xl p-8 shadow-xl border-2 border-[#6b2d94]">
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
-                      <div className="bg-[#fdc700] p-2 rounded-lg">
-                        <GraduationCap className="size-6 text-[#59168b]" />
+                      <div className="bg-[#ffcc00] p-2 rounded-lg">
+                        <GraduationCap className="size-6 text-[#5b2484]" />
                       </div>
                       <div>
                         <div className="font-medium text-[#101828]">4 Programs Available</div>
@@ -59,8 +61,8 @@ export default function Courses() {
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <div className="bg-[#f3e8ff] p-2 rounded-lg">
-                        <Calendar className="size-6 text-[#9810fa]" />
+                      <div className="bg-[#eee5f5] p-2 rounded-lg">
+                        <Calendar className="size-6 text-[#6b2d94]" />
                       </div>
                       <div>
                         <div className="font-medium text-[#101828]">Classes Starting Soon</div>
@@ -68,8 +70,8 @@ export default function Courses() {
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <div className="bg-[#f3e8ff] p-2 rounded-lg">
-                        <Clock className="size-6 text-[#9810fa]" />
+                      <div className="bg-[#eee5f5] p-2 rounded-lg">
+                        <Clock className="size-6 text-[#6b2d94]" />
                       </div>
                       <div>
                         <div className="font-medium text-[#101828]">Flexible Options</div>
@@ -84,7 +86,7 @@ export default function Courses() {
         </section>
 
         {/* Course Schedules */}
-        <section className="py-10 sm:py-14 lg:py-16 bg-gradient-to-b from-white to-[#faf5ff] border-y border-[#f3e8ff]">
+        <section className="py-10 sm:py-14 lg:py-16 bg-gradient-to-b from-white to-[#f7f2fb] border-y border-[#eee5f5]">
           <div className="max-w-[1600px] mx-auto px-4">
             <div className="text-center mb-10">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-4">
@@ -97,7 +99,7 @@ export default function Courses() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <motion.div
-                className="bg-white border border-[#e9d5ff] rounded-2xl p-8 shadow-sm"
+                className="bg-white border border-[#dfd1eb] rounded-2xl p-8 shadow-sm"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -109,7 +111,7 @@ export default function Courses() {
                 <ul className="space-y-3 text-[#4a5565]">
                   {cnaAndRefresherSchedule.map((date) => (
                     <li key={date} className="flex items-start gap-3">
-                      <div className="bg-[#9810fa] rounded-full size-2 mt-2 shrink-0" />
+                      <div className="bg-[#6b2d94] rounded-full size-2 mt-2 shrink-0" />
                       <span>{date}</span>
                     </li>
                   ))}
@@ -117,19 +119,19 @@ export default function Courses() {
               </motion.div>
 
               <motion.div
-                className="bg-white border border-[#e9d5ff] rounded-2xl p-8 shadow-sm"
+                className="bg-white border border-[#dfd1eb] rounded-2xl p-8 shadow-sm"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
                 <h3 className="text-2xl font-medium text-[#101828] mb-4">
-                  Phlebotomy Schedule
+                  Phlebotomy Dates
                 </h3>
                 <ul className="space-y-3 text-[#4a5565]">
                   {phlebotomySchedule.map((date) => (
                     <li key={date} className="flex items-start gap-3">
-                      <div className="bg-[#9810fa] rounded-full size-2 mt-2 shrink-0" />
+                      <div className="bg-[#6b2d94] rounded-full size-2 mt-2 shrink-0" />
                       <span>{date}</span>
                     </li>
                   ))}
@@ -143,8 +145,8 @@ export default function Courses() {
         <section className="py-10 sm:py-14 lg:py-16 bg-white">
           <div className="max-w-[1600px] mx-auto px-4">
             <div className="flex flex-wrap justify-center gap-8">
-              <div className="flex items-center gap-4 bg-white border-2 border-[#9810fa] rounded-full px-6 py-4 shadow-sm hover:shadow-md transition-shadow">
-                <div className="bg-[#9810fa] p-3 rounded-full shrink-0">
+              <div className="flex items-center gap-4 bg-white border-2 border-[#6b2d94] rounded-full px-6 py-4 shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-[#6b2d94] p-3 rounded-full shrink-0">
                   <GraduationCap className="size-6 text-white" />
                 </div>
                 <div>
@@ -153,7 +155,7 @@ export default function Courses() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 bg-gradient-to-r from-[#9810fa] to-[#7c0cc8] rounded-full px-6 py-4 shadow-lg text-white">
+              <div className="flex items-center gap-4 bg-gradient-to-r from-[#6b2d94] to-[#4a1a6d] rounded-full px-6 py-4 shadow-lg text-white">
                 <div className="bg-white/20 p-3 rounded-full shrink-0">
                   <Clock className="size-6 text-white" />
                 </div>
@@ -163,19 +165,19 @@ export default function Courses() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 bg-[#fdc700] rounded-full px-6 py-4 shadow-lg">
-                <div className="bg-[#59168b]/10 p-3 rounded-full shrink-0">
-                  <DollarSign className="size-6 text-[#59168b]" />
+              <div className="flex items-center gap-4 bg-[#ffcc00] rounded-full px-6 py-4 shadow-lg">
+                <div className="bg-[#5b2484]/10 p-3 rounded-full shrink-0">
+                  <DollarSign className="size-6 text-[#5b2484]" />
                 </div>
                 <div>
-                  <h3 className="font-medium text-base text-[#59168b]">Affordable Tuition</h3>
-                  <p className="text-[#59168b]/80 text-sm">Payment plans available</p>
+                  <h3 className="font-medium text-base text-[#5b2484]">Affordable Tuition</h3>
+                  <p className="text-[#5b2484]/80 text-sm">Payment plans available</p>
                 </div>
               </div>
 
               <div className="flex items-center gap-4 bg-white border-2 border-gray-200 rounded-full px-6 py-4 shadow-sm hover:shadow-md transition-shadow">
-                <div className="bg-[#f3e8ff] p-3 rounded-full shrink-0">
-                  <Calendar className="size-6 text-[#9810fa]" />
+                <div className="bg-[#eee5f5] p-3 rounded-full shrink-0">
+                  <Calendar className="size-6 text-[#6b2d94]" />
                 </div>
                 <div>
                   <h3 className="font-medium text-base text-[#101828]">Starting Soon</h3>
@@ -187,7 +189,7 @@ export default function Courses() {
         </section>
 
         {/* Courses Grid */}
-        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-[#faf5ff]">
+        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-[#f7f2fb]">
           <div className="max-w-[1600px] mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-4">
@@ -212,22 +214,22 @@ export default function Courses() {
                     to={`/courses/${course.id}`}
                     className="block bg-white rounded-2xl shadow-md overflow-hidden group hover:shadow-2xl transition-all"
                   >
-                    <div className="relative h-48 overflow-hidden">
+                    <div className="relative h-48 lg:h-52 xl:h-56 overflow-hidden">
                       <motion.img
                         src={course.image}
                         alt={course.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-center xl:object-[center_56%]"
                         whileHover={{ scale: 1.05 }}
                         transition={{ duration: 0.4 }}
                       />
                       {course.badge && (
-                        <div className="absolute top-4 left-4 bg-[#fdc700] text-[#59168b] px-3 py-1 rounded-full text-sm font-medium">
+                        <div className="absolute top-4 left-4 bg-[#ffcc00] text-[#5b2484] px-3 py-1 rounded-full text-sm font-medium">
                           {course.badge}
                         </div>
                       )}
                     </div>
                     <div className="p-6">
-                      <h3 className="text-base sm:text-lg lg:text-xl font-medium text-[#101828] mb-2 group-hover:text-[#9810fa] transition-colors">
+                      <h3 className="text-base sm:text-lg lg:text-xl font-medium text-[#101828] mb-2 group-hover:text-[#6b2d94] transition-colors">
                         {course.title}
                       </h3>
                       <p className="text-[#6a7282] mb-4 line-clamp-2">
@@ -243,7 +245,7 @@ export default function Courses() {
                           <span>{course.nextStart}</span>
                         </div>
                       </div>
-                      <div className="inline-flex items-center gap-2 text-[#9810fa] font-medium group-hover:gap-3 transition-all">
+                      <div className="inline-flex items-center gap-2 text-[#6b2d94] font-medium group-hover:gap-3 transition-all">
                         Learn More
                         <ArrowRight className="size-4" />
                       </div>
@@ -269,7 +271,7 @@ export default function Courses() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="bg-[#9810fa] text-white size-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                <div className="bg-[#6b2d94] text-white size-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
                   1
                 </div>
                 <h3 className="font-medium text-lg text-[#101828] mb-2">Choose Program</h3>
@@ -278,7 +280,7 @@ export default function Courses() {
                 </p>
               </div>
               <div className="text-center">
-                <div className="bg-[#9810fa] text-white size-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                <div className="bg-[#6b2d94] text-white size-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
                   2
                 </div>
                 <h3 className="font-medium text-lg text-[#101828] mb-2">Submit Application</h3>
@@ -287,7 +289,7 @@ export default function Courses() {
                 </p>
               </div>
               <div className="text-center">
-                <div className="bg-[#9810fa] text-white size-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                <div className="bg-[#6b2d94] text-white size-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
                   3
                 </div>
                 <h3 className="font-medium text-lg text-[#101828] mb-2">Meet Advisor</h3>
@@ -296,7 +298,7 @@ export default function Courses() {
                 </p>
               </div>
               <div className="text-center">
-                <div className="bg-[#9810fa] text-white size-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                <div className="bg-[#6b2d94] text-white size-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
                   4
                 </div>
                 <h3 className="font-medium text-lg text-[#101828] mb-2">Start Learning</h3>
@@ -309,7 +311,7 @@ export default function Courses() {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-gradient-to-br from-[#f3e8ff] to-[#faf5ff] py-10 sm:py-14 lg:py-16">
+        <section className="bg-gradient-to-br from-[#eee5f5] to-[#f7f2fb] py-10 sm:py-14 lg:py-16">
           <div className="max-w-[1600px] mx-auto px-4 text-center">
             <h2 className="text-3xl font-medium text-[#101828] mb-4">
               Ready to Get Started?
@@ -319,16 +321,18 @@ export default function Courses() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
-                href="/contact"
-                className="bg-[#9810fa] text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#7c0cc8] transition-colors"
+                href={COURSE_APPLICATION_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="bg-[#6b2d94] text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#4a1a6d] transition-colors"
               >
-                Contact Admissions
+                Apply for Courses
               </a>
               <a
-                href="tel:555-123-4567"
-                className="bg-white border-2 border-[#9810fa] text-[#9810fa] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#f3e8ff] transition-colors"
+                href="tel:+13369997123"
+                className="bg-white border-2 border-[#6b2d94] text-[#6b2d94] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#eee5f5] transition-colors"
               >
-                Call (555) 123-4567
+                Call (336) 999-7123
               </a>
             </div>
           </div>

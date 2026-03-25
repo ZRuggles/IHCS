@@ -2,12 +2,35 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/ThumbnailLogo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ihcs-react-site-redesign</title>
   </head>
   <body>
     <div id="root"></div>
+    <!-- AxisAI Chat Widget -->
+    <div id="axis-chat-widget"></div>
+    <script>
+      (function () {
+        // Widget configuration
+        window.AxisAIConfig = {
+          apiKey: "axis_1766584765_fyNdrypUPhzUGsWQ_oYFHg",
+          apiUrl: "https://axisai-backend.onrender.com/api",
+          theme: "light", // 'light' or 'dark'
+          position: "bottom-right", // 'bottom-right', 'bottom-left', 'custom'
+          width: "400px",
+          height: "600px",
+          // AI persona info will be fetched automatically
+          loadPersonaInfo: true
+        };
+
+        // Load the widget script from the API server
+        const script = document.createElement("script");
+        script.src = "https://axisai-backend.onrender.com/widget.js";
+        script.async = true;
+        document.head.appendChild(script);
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

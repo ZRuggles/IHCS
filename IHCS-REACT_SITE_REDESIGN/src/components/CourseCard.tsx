@@ -39,7 +39,7 @@ export function CourseCard({
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
       {/* Image Section */}
-      <div className="relative h-52 overflow-hidden bg-gradient-to-br from-[#f3e8ff] to-[#faf5ff]">
+      <div className="relative h-52 overflow-hidden bg-gradient-to-br from-[#eee5f5] to-[#f7f2fb]">
         <img
           src={image}
           alt={title}
@@ -54,7 +54,7 @@ export function CourseCard({
 
         {/* Badge */}
         {badge && (
-          <div className="absolute top-4 left-4 bg-[#ffb71b] text-[#461464] px-3 py-1 rounded-full text-sm shadow-lg">
+          <div className="absolute top-4 left-4 bg-[#ffcc00] text-[#461464] px-3 py-1 rounded-full text-sm shadow-lg">
             {badge}
           </div>
         )}

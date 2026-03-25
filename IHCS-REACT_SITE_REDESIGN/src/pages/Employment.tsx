@@ -3,7 +3,24 @@ import { Footer } from "../components/Footer";
 import { motion } from "motion/react";
 import { Briefcase, DollarSign, GraduationCap, Heart, Users, TrendingUp, Award, Clock, Shield, Headphones } from "lucide-react";
 
+const JOB_APPLICATION_URL = "https://innjobs.sembra1.com/";
+const NURSING_APPLICATION_PDF_URL =
+  "https://innovationhealthcaresolutions.com/wp-content/uploads/2024/08/Innovation-Healthcare-Solutions-Nursing-Applic.pdf";
+const EMPLOYMENT_HERO_IMAGE = "/Supplemental Staffing.jpeg";
+const TEAM_BREAK_IMAGE = "/Home Care Services.jpeg";
+const HEALTHCARE_INSTRUCTOR_IMAGE =
+  "https://images.unsplash.com/photo-1589104759909-e355f8999f7e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwdHJhaW5pbmclMjBjbGFzc3Jvb20lMjBzdHVkZW50c3xlbnwxfHx8fDE3NzQxMTc3NzF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral";
+
 export default function Employment() {
+  const positionBackgroundImageByTitle: Record<string, string> = {
+    "Registered Nurse (RN)": "/LPN and RN.jpg",
+    "Licensed Practical Nurse (LPN)": "/PRN Home Visit.jpg",
+    "Certified Nursing Assistant (CNA)": "/NurseAide.jpg",
+    "Medical Assistant": "/Home Care Services.jpeg",
+    "Phlebotomy Technician": "/Infusion.jpeg",
+    "Healthcare Instructor": HEALTHCARE_INSTRUCTOR_IMAGE
+  };
+
   const positions = [
     {
       title: "Registered Nurse (RN)",
@@ -97,7 +114,7 @@ export default function Employment() {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: `url('https://images.unsplash.com/photo-1704453961898-38a07a700128?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwdGVhbSUyMG51cnNlcyUyMHdvcmtpbmclMjB0b2dldGhlcnxlbnwxfHx8fDE3NzQxMjYwMDV8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')`
+              backgroundImage: `url('${EMPLOYMENT_HERO_IMAGE}')`
             }}
           />
           {/* Overlay for readability */}
@@ -111,7 +128,7 @@ export default function Employment() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <div className="inline-block bg-[#f3e8ff] text-[#561D7E] px-4 py-2 rounded-full text-sm mb-6">
+                <div className="inline-block bg-[#eee5f5] text-[#561D7E] px-4 py-2 rounded-full text-sm mb-6">
                   Join Our Team
                 </div>
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium mb-6 leading-tight text-[#101828]">
@@ -129,7 +146,7 @@ export default function Employment() {
                   </a>
                   <a
                     href="#benefits"
-                    className="bg-white border-2 border-[#561D7E] text-[#561D7E] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#f3e8ff] transition-all hover:scale-105 text-base sm:text-lg"
+                    className="bg-white border-2 border-[#561D7E] text-[#561D7E] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#eee5f5] transition-all hover:scale-105 text-base sm:text-lg"
                   >
                     See Benefits
                   </a>
@@ -141,7 +158,7 @@ export default function Employment() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <div className="bg-gradient-to-br from-[#fdc700] to-[#fde047] rounded-3xl p-8 shadow-xl">
+                <div className="bg-gradient-to-br from-[#ffcc00] to-[#ffcc00] rounded-3xl p-8 shadow-xl">
                   <div className="space-y-6">
                     {[
                       { value: "$30-40", label: "Per Hour PRN Rate" },
@@ -150,13 +167,13 @@ export default function Employment() {
                     ].map((stat, index) => (
                       <motion.div
                         key={index}
-                        className={index > 0 ? "border-t border-[#59168b]/20 pt-4" : ""}
+                        className={index > 0 ? "border-t border-[#5b2484]/20 pt-4" : ""}
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.4 + (index * 0.1) }}
                       >
-                        <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#59168b] mb-2">{stat.value}</div>
-                        <div className="text-[#59168b]/80">{stat.label}</div>
+                        <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#5b2484] mb-2">{stat.value}</div>
+                        <div className="text-[#5b2484]/80">{stat.label}</div>
                       </motion.div>
                     ))}
                   </div>
@@ -186,7 +203,7 @@ export default function Employment() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               <motion.div 
-                className="bg-gradient-to-br from-[#f3e8ff] to-white p-8 rounded-2xl border border-[#f3e8ff] group"
+                className="bg-gradient-to-br from-[#eee5f5] to-white p-8 rounded-2xl border border-[#eee5f5] group"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -209,7 +226,7 @@ export default function Employment() {
               </motion.div>
 
               <motion.div 
-                className="bg-gradient-to-br from-[#9810fa] to-[#7c0cc8] p-8 rounded-2xl text-white group"
+                className="bg-gradient-to-br from-[#6b2d94] to-[#4a1a6d] p-8 rounded-2xl text-white group"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -232,7 +249,7 @@ export default function Employment() {
               </motion.div>
 
               <motion.div 
-                className="bg-gradient-to-br from-[#fdc700] to-[#fde047] p-8 rounded-2xl group"
+                className="bg-gradient-to-br from-[#ffcc00] to-[#ffcc00] p-8 rounded-2xl group"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -240,16 +257,16 @@ export default function Employment() {
                 whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(253, 199, 0, 0.3)" }}
               >
                 <motion.div 
-                  className="bg-[#59168b]/10 p-3 rounded-xl w-fit mb-4"
+                  className="bg-[#5b2484]/10 p-3 rounded-xl w-fit mb-4"
                   whileHover={{ y: -5, scale: 1.1 }}
                   transition={{ type: "spring", stiffness: 400 }}
                 >
-                  <TrendingUp className="size-8 text-[#59168b]" />
+                  <TrendingUp className="size-8 text-[#5b2484]" />
                 </motion.div>
-                <h3 className="text-2xl font-medium text-[#59168b] mb-3">
+                <h3 className="text-2xl font-medium text-[#5b2484] mb-3">
                   Career Growth
                 </h3>
-                <p className="text-[#59168b]/80 leading-relaxed">
+                <p className="text-[#5b2484]/80 leading-relaxed">
                   Advance your career with continuing education opportunities, mentorship programs, and promotion pathways.
                 </p>
               </motion.div>
@@ -258,7 +275,7 @@ export default function Employment() {
         </section>
 
         {/* Benefits Section */}
-        <section id="benefits" className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-[#faf5ff]">
+        <section id="benefits" className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-[#f7f2fb]">
           <div className="max-w-[1600px] mx-auto px-4">
             <motion.div 
               className="text-center mb-12"
@@ -279,7 +296,7 @@ export default function Employment() {
             <div className="grid grid-cols-1 md:grid-cols-6 gap-6">
               {/* Large feature card */}
               <motion.div 
-                className="md:col-span-3 bg-gradient-to-br from-[#9810fa] to-[#7c0cc8] text-white p-8 rounded-2xl shadow-lg group"
+                className="md:col-span-3 bg-gradient-to-br from-[#6b2d94] to-[#4a1a6d] text-white p-8 rounded-2xl shadow-lg group"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -303,7 +320,7 @@ export default function Employment() {
 
               {/* Medium card */}
               <motion.div 
-                className="md:col-span-3 bg-[#fdc700] p-8 rounded-2xl shadow-lg group"
+                className="md:col-span-3 bg-[#ffcc00] p-8 rounded-2xl shadow-lg group"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -311,16 +328,16 @@ export default function Employment() {
                 whileHover={{ scale: 1.02, boxShadow: "0 30px 60px rgba(253, 199, 0, 0.4)" }}
               >
                 <motion.div 
-                  className="bg-[#59168b]/10 p-3 rounded-xl w-fit mb-4"
+                  className="bg-[#5b2484]/10 p-3 rounded-xl w-fit mb-4"
                   whileHover={{ y: -8, rotate: [0, 5, -5, 0] }}
                   transition={{ duration: 0.5 }}
                 >
-                  <Shield className="size-10 text-[#59168b]" />
+                  <Shield className="size-10 text-[#5b2484]" />
                 </motion.div>
-                <h3 className="text-2xl font-medium text-[#59168b] mb-3">
+                <h3 className="text-2xl font-medium text-[#5b2484] mb-3">
                   {benefits[1].title}
                 </h3>
-                <p className="text-[#59168b]/80 text-lg">
+                <p className="text-[#5b2484]/80 text-lg">
                   {benefits[1].description}
                 </p>
               </motion.div>
@@ -339,11 +356,11 @@ export default function Employment() {
                     whileHover={{ y: -5, borderColor: "rgba(152, 16, 250, 0.3)" }}
                   >
                     <motion.div 
-                      className="bg-[#f3e8ff] p-3 rounded-xl w-fit mb-3"
+                      className="bg-[#eee5f5] p-3 rounded-xl w-fit mb-3"
                       whileHover={{ scale: 1.15 }}
                       transition={{ type: "spring", stiffness: 400 }}
                     >
-                      <Icon className="size-6 text-[#9810fa]" />
+                      <Icon className="size-6 text-[#6b2d94]" />
                     </motion.div>
                     <h3 className="font-medium text-base text-[#101828] mb-2">
                       {benefit.title}
@@ -369,11 +386,11 @@ export default function Employment() {
                     whileHover={{ y: -5, boxShadow: "0 10px 25px rgba(0, 0, 0, 0.08)" }}
                   >
                     <motion.div 
-                      className="bg-[#f3e8ff] p-3 rounded-xl w-fit mb-3"
+                      className="bg-[#eee5f5] p-3 rounded-xl w-fit mb-3"
                       whileHover={{ rotate: 360 }}
                       transition={{ duration: 0.6 }}
                     >
-                      <Icon className="size-6 text-[#9810fa]" />
+                      <Icon className="size-6 text-[#6b2d94]" />
                     </motion.div>
                     <h3 className="font-medium text-base text-[#101828] mb-2">
                       {benefit.title}
@@ -393,14 +410,14 @@ export default function Employment() {
           <motion.div
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: `url('https://images.unsplash.com/photo-1759813641406-980519f58b1c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwcHJvZmVzc2lvbmFscyUyMGhvc3BpdGFsJTIwdGVhbXdvcmt8ZW58MXx8fHwxNzc0MTI2MDA1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')`
+              backgroundImage: `url('${TEAM_BREAK_IMAGE}')`
             }}
             initial={{ scale: 1.1 }}
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.5 }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#ffb71b]/85 to-[#ffb71b]/65" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#ffcc00]/85 to-[#ffcc00]/65" />
           <div className="absolute inset-0 flex items-center justify-center">
             <motion.div 
               className="max-w-[1600px] mx-auto px-4 text-center"
@@ -409,10 +426,10 @@ export default function Employment() {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-[#59168b] mb-6">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-[#5b2484] mb-6">
                 Join a Team That Values You
               </h2>
-              <p className="text-2xl text-[#59168b]/90 max-w-3xl mx-auto">
+              <p className="text-2xl text-[#5b2484]/90 max-w-3xl mx-auto">
                 Be part of a healthcare organization that invests in your growth, supports your career, and celebrates your success
               </p>
             </motion.div>
@@ -436,33 +453,55 @@ export default function Employment() {
                 Explore our available positions and find the perfect role for your skills and experience
               </p>
             </motion.div>
+            <div className="flex justify-center mb-8">
+              <a
+                href={NURSING_APPLICATION_PDF_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="bg-white border-2 border-[#6b2d94] text-[#6b2d94] px-6 py-3 rounded-full hover:bg-[#eee5f5] transition-colors text-sm sm:text-base"
+              >
+                Nursing Application (PDF)
+              </a>
+            </div>
 
             <div className="space-y-6">
-              {positions.map((position, index) => (
+              {positions.map((position, index) => {
+                const cardBackgroundImage =
+                  positionBackgroundImageByTitle[position.title] ?? "/NurseAide.jpg";
+
+                return (
                 <motion.div 
                   key={index} 
-                  className="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-shadow group"
+                  className="relative overflow-hidden bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-xl transition-shadow group"
                   initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   whileHover={{ y: -5 }}
                 >
-                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                  <div className="pointer-events-none absolute inset-y-0 right-0 hidden lg:block w-[44%]">
+                    <div
+                      className="absolute inset-0 bg-cover bg-center"
+                      style={{ backgroundImage: `url('${cardBackgroundImage}')` }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-white via-white/75 to-transparent" />
+                  </div>
+
+                  <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
                     <div className="flex-1">
                       <div className="flex items-start gap-4 mb-4">
                         <motion.div 
-                          className="bg-[#f3e8ff] p-3 rounded-xl shrink-0"
+                          className="bg-[#eee5f5] p-3 rounded-xl shrink-0"
                           whileHover={{ rotate: [0, -15, 15, 0], scale: 1.1 }}
                           transition={{ duration: 0.5 }}
                         >
-                          <Briefcase className="size-6 text-[#9810fa]" />
+                          <Briefcase className="size-6 text-[#6b2d94]" />
                         </motion.div>
                         <div>
-                          <h3 className="text-2xl font-medium text-[#101828] mb-2 group-hover:text-[#9810fa] transition-colors">
+                          <h3 className="text-2xl font-medium text-[#101828] mb-2 group-hover:text-[#6b2d94] transition-colors">
                             {position.title}
                           </h3>
-                          <div className="inline-block bg-[#f3e8ff] text-[#9810fa] px-3 py-1 rounded-full text-sm">
+                          <div className="inline-block bg-[#eee5f5] text-[#6b2d94] px-3 py-1 rounded-full text-sm">
                             {position.type}
                           </div>
                         </div>
@@ -475,30 +514,43 @@ export default function Employment() {
                         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                           {position.requirements.map((req, idx) => (
                             <li key={idx} className="flex gap-2 items-start text-[#6a7282]">
-                              <div className="bg-[#9810fa] rounded-full size-2 mt-2 shrink-0" />
+                              <div className="bg-[#6b2d94] rounded-full size-2 mt-2 shrink-0" />
                               <span>{req}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
                     </div>
-                    <div className="shrink-0">
+                    <div className="shrink-0 space-y-2">
                       <a
-                        href="/contact"
-                        className="block bg-[#9810fa] text-white px-8 py-3 rounded-full hover:bg-[#7c0cc8] transition-all hover:scale-105 text-center whitespace-nowrap"
+                        href={JOB_APPLICATION_URL}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="block bg-[#6b2d94] text-white px-8 py-3 rounded-full hover:bg-[#4a1a6d] transition-all hover:scale-105 text-center whitespace-nowrap"
                       >
                         Apply Now
                       </a>
+                      {position.title === "Registered Nurse (RN)" ? (
+                        <a
+                          href={NURSING_APPLICATION_PDF_URL}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="block bg-white border border-[#6b2d94] text-[#6b2d94] px-8 py-3 rounded-full hover:bg-[#eee5f5] transition-colors text-center whitespace-nowrap text-sm"
+                        >
+                          Nursing PDF
+                        </a>
+                      ) : null}
                     </div>
                   </div>
                 </motion.div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
 
         {/* Application Process */}
-        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-[#faf5ff]">
+        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white to-[#f7f2fb]">
           <div className="max-w-[1600px] mx-auto px-4">
             <motion.div 
               className="text-center mb-12"
@@ -531,7 +583,7 @@ export default function Employment() {
                   transition={{ duration: 0.5, delay: index * 0.15 }}
                 >
                   <motion.div 
-                    className="bg-[#9810fa] text-white size-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4"
+                    className="bg-[#6b2d94] text-white size-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4"
                     whileHover={{ scale: 1.2, rotate: 360 }}
                     transition={{ duration: 0.6 }}
                   >
@@ -548,7 +600,7 @@ export default function Employment() {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-gradient-to-br from-[#9810fa] to-[#7c0cc8] py-12 sm:py-16 lg:py-20">
+        <section className="bg-gradient-to-br from-[#6b2d94] to-[#4a1a6d] py-12 sm:py-16 lg:py-20">
           <div className="max-w-[1600px] mx-auto px-4 text-center">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-white mb-6">
               Ready to Make a Difference?
@@ -558,16 +610,18 @@ export default function Employment() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
-                href="/contact"
-                className="bg-white text-[#9810fa] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-gray-100 transition-colors text-base sm:text-lg"
+                href={JOB_APPLICATION_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="bg-white text-[#6b2d94] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-gray-100 transition-colors text-base sm:text-lg"
               >
                 Apply Now
               </a>
               <a
-                href="tel:555-123-4567"
+                href="tel:+13369997123"
                 className="bg-transparent border-2 border-white text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-white/10 transition-colors text-base sm:text-lg"
               >
-                Call (555) 123-4567
+                Call (336) 999-7123
               </a>
             </div>
           </div>
