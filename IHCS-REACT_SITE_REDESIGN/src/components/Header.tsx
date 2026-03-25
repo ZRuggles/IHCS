@@ -1,39 +1,47 @@
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone, Mail } from "lucide-react";
 import { motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 type LogoMode = "company" | "course";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const [visibleLogoMode, setVisibleLogoMode] = useState<LogoMode>("company");
+  const [activeLogoMode, setActiveLogoMode] = useState<LogoMode>("company");
+  const startupTimersRef = useRef<number[]>([]);
 
   const isCoursePage =
     location.pathname === "/courses" || location.pathname.startsWith("/courses/");
   const targetLogoMode: LogoMode = isCoursePage ? "course" : "company";
+  const hoverLogoMode: LogoMode = targetLogoMode === "company" ? "course" : "company";
+
+  const clearStartupTimers = useCallback(() => {
+    startupTimersRef.current.forEach((timerId) => window.clearTimeout(timerId));
+    startupTimersRef.current = [];
+  }, []);
 
   useEffect(() => {
-    const showCourseLogo = window.setTimeout(() => {
-      setVisibleLogoMode("course");
-    }, 400);
+    clearStartupTimers();
+    const showOtherLogo = window.setTimeout(() => {
+      setActiveLogoMode("course");
+    }, 320);
     const settleOnTarget = window.setTimeout(() => {
-      setVisibleLogoMode(targetLogoMode);
-    }, 900);
+      setActiveLogoMode(targetLogoMode);
+    }, 760);
+    startupTimersRef.current = [showOtherLogo, settleOnTarget];
 
     return () => {
-      window.clearTimeout(showCourseLogo);
-      window.clearTimeout(settleOnTarget);
+      clearStartupTimers();
     };
-  }, [targetLogoMode]);
+  }, [targetLogoMode, clearStartupTimers]);
 
   const isActive = (path: string) => {
     return location.pathname === path;
   };
 
   const logoConfig =
-    visibleLogoMode === "course"
+    activeLogoMode === "course"
       ? {
           src: "/courselogo.png",
           alt: "Healthcare Training logo"
@@ -82,14 +90,23 @@ export function Header() {
             {/* Logo */}
             <Link to="/" className="flex items-center">
               <motion.div
+                key={activeLogoMode}
                 className="h-12 sm:h-14 w-[170px] sm:w-[220px] md:w-[280px] overflow-hidden shrink-0 bg-white"
-                initial={{ rotateY: 0 }}
-                animate={{ rotateY: [0, 180, 360] }}
-                transition={{ duration: 0.9, ease: "easeInOut" }}
+                initial={{ rotateY: -180 }}
+                animate={{ rotateY: 0 }}
+                transition={{ duration: 0.45, ease: "easeInOut" }}
                 style={{ transformStyle: "preserve-3d" }}
+                onHoverStart={() => {
+                  clearStartupTimers();
+                  setActiveLogoMode(hoverLogoMode);
+                }}
+                onHoverEnd={() => {
+                  clearStartupTimers();
+                  setActiveLogoMode(targetLogoMode);
+                }}
               >
                 <motion.img
-                  key={visibleLogoMode}
+                  key={activeLogoMode}
                   src={logoConfig.src}
                   alt={logoConfig.alt}
                   className="size-full object-contain"
