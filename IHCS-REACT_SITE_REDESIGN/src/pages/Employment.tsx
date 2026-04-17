@@ -479,15 +479,15 @@ export default function Employment() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   whileHover={{ y: -5 }}
                 >
-                  <div className="pointer-events-none absolute inset-y-0 right-0 hidden lg:block w-[44%]">
+                  <div className="pointer-events-none absolute inset-y-0 right-0 hidden lg:block w-[42%]">
                     <div
                       className="absolute inset-0 bg-cover bg-center"
                       style={{ backgroundImage: `url('${cardBackgroundImage}')` }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-white via-white/75 to-transparent" />
+                    <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white via-white/90 to-transparent" />
                   </div>
 
-                  <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                  <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 lg:pr-[40%]">
                     <div className="flex-1">
                       <div className="flex items-start gap-4 mb-4">
                         <motion.div 

@@ -210,6 +210,38 @@ export default function Services() {
           </div>
         </section>
 
+        {/* Image Break Section */}
+        <section className="relative h-[300px] sm:h-[420px] lg:h-[500px] overflow-hidden">
+          <motion.div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: `url('/LPN and RN.jpg')`,
+              backgroundPosition: "center 20%"
+            }}
+            initial={{ scale: 1.1 }}
+            whileInView={{ scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.5 }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#561D7E]/90 to-[#561D7E]/70" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <motion.div 
+              className="max-w-[1600px] mx-auto px-4 text-center"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-white mb-6">
+                Dedicated to Excellence in Care
+              </h2>
+              <p className="text-2xl text-white/90 max-w-3xl mx-auto">
+                Our compassionate team is committed to providing the highest quality of care for you and your loved ones
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
         {/* Personal Care Services */}
         <section className="py-12 sm:py-16 lg:py-20 bg-white">
           <div className="max-w-[1600px] mx-auto px-4">
@@ -258,38 +290,6 @@ export default function Services() {
                 );
               })}
             </div>
-          </div>
-        </section>
-
-        {/* Image Break Section */}
-        <section className="relative h-[300px] sm:h-[420px] lg:h-[500px] overflow-hidden">
-          <motion.div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: `url('/LPN and RN.jpg')`,
-              backgroundPosition: "center 20%"
-            }}
-            initial={{ scale: 1.1 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.5 }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#561D7E]/90 to-[#561D7E]/70" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <motion.div 
-              className="max-w-[1600px] mx-auto px-4 text-center"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-            >
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-white mb-6">
-                Dedicated to Excellence in Care
-              </h2>
-              <p className="text-2xl text-white/90 max-w-3xl mx-auto">
-                Our compassionate team is committed to providing the highest quality of care for you and your loved ones
-              </p>
-            </motion.div>
           </div>
         </section>
 
