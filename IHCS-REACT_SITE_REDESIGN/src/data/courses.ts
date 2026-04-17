@@ -36,12 +36,14 @@ export const cnaAndRefresherSchedule = [
 ];
 
 export const phlebotomySchedule = [
-  "April 7 - May 29, 2026",
-  "May 19 - July 10, 2026",
-  "July 7 - August 28, 2026",
-  "August 18 - October 9, 2026",
-  "September 29 - November 20, 2026",
-  "November 10 - December 31, 2026"
+  "Cohort 1 (Mon/Wed, 9:00 AM - 1:00 PM): May 11 - July 8, 2026",
+  "Cohort 1 (Mon/Wed, 9:00 AM - 1:00 PM): July 13 - September 2, 2026",
+  "Cohort 1 (Mon/Wed, 9:00 AM - 1:00 PM): September 7 - October 28, 2026",
+  "Cohort 1 (Mon/Wed, 9:00 AM - 1:00 PM): November 2 - December 23, 2026",
+  "Cohort 2 (Tue/Thu, Face-to-Face): May 12 - July 9, 2026",
+  "Cohort 2 (Tue/Thu, Face-to-Face): July 14 - September 10, 2026",
+  "Cohort 2 (Tue/Thu, Face-to-Face): September 15 - November 19, 2026",
+  "Cohort 2 (Tue/Thu, Face-to-Face): November 24, 2026 - January 26, 2027 (Thanksgiving break observed)"
 ];
 
 export const courses: Course[] = [
@@ -107,9 +109,9 @@ export const courses: Course[] = [
   {
     id: "hybrid-phlebotomy-technician",
     title: "Hybrid Phlebotomy Technician Course",
-    description: "Master the essential skills of phlebotomy in just 4 weeks with our Hybrid Phlebotomy Technician course. This program blends online instruction with in-person lab sessions.",
-    duration: "4 Weeks",
-    nextStart: "April 7, 2026",
+    description: "Build core phlebotomy skills in our 8-week Hybrid Phlebotomy Technician course with weekly online assignments, in-person instruction, and clinical practice.",
+    duration: "8 Weeks",
+    nextStart: "May 11, 2026",
     image: "/Phlebotomy.jpg",
     badge: "Fast Track",
     icon: "droplet",
@@ -136,11 +138,14 @@ export const courses: Course[] = [
     },
     scheduleDates: phlebotomySchedule,
     details: {
-      overview: "Master the essential skills of phlebotomy in just 4 weeks with our Hybrid Phlebotomy Technician course. This program blends online instruction with in-person lab sessions, preparing students for work in hospitals, labs, and clinics.",
+      overview: "Students complete online assignments each week, with all coursework due by Sunday and weekly exams every Thursday. This 8-week phlebotomy program includes in-person instruction and begins clinical placement in Week 4. During clinicals, students work to complete ASPT certification requirements, including 75 successful venipunctures of various types. Completion requirements may be met at different times based on student progress, but graduation occurs at the official course end date.",
       curriculum: [
-        "Online learning + hands-on lab",
-        "Fast-track your healthcare career",
-        "National certification eligible"
+        "8-week course format with two cohorts",
+        "Cohort 1: Mondays and Wednesdays, 9:00 AM - 1:00 PM",
+        "Cohort 2: Tuesdays and Thursdays, face-to-face instruction",
+        "Weekly online assignments due Sundays and weekly Thursday exams",
+        "Clinical placement begins in Week 4",
+        "ASPT requirement: 75 successful venipunctures"
       ],
       requirements: [
         "High school diploma or GED",
@@ -149,9 +154,9 @@ export const courses: Course[] = [
         "Good manual dexterity",
         "Must be 18 years or older"
       ],
-      certification: "Certificate of Completion - National certification eligible",
+      certification: "Certificate of Completion with ASPT certification preparation",
       cost: "$1,205",
-      schedule: "4 weeks - Hybrid format with online learning and hands-on lab sessions"
+      schedule: "8 weeks - Cohort 1 (Mon/Wed 9:00 AM - 1:00 PM) or Cohort 2 (Tue/Thu face-to-face), with clinicals starting Week 4"
     }
   },
   {

@@ -167,20 +167,20 @@ export default function Home() {
               </motion.div>
 
               <motion.div 
-                className="bg-gradient-to-br from-[#561D7E] to-[#461464] rounded-2xl p-8 text-white shadow-lg flex flex-col justify-center group hover:shadow-2xl transition-all"
+                className="bg-white border border-[#dfd1eb] rounded-2xl p-8 shadow-lg flex flex-col justify-center group hover:shadow-2xl transition-all"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 whileHover={{ scale: 1.02 }}
               >
-                <div className="bg-white/20 p-4 rounded-xl w-fit mb-4 group-hover:bg-white/30 transition-colors">
-                  <CheckCircle className="size-12 text-white" />
+                <div className="bg-[#eee5f5] p-4 rounded-xl w-fit mb-4 group-hover:bg-[#dfd1eb] transition-colors">
+                  <CheckCircle className="size-12 text-[#561D7E]" />
                 </div>
-                <h3 className="text-2xl font-medium mb-3">
+                <h3 className="text-2xl font-medium text-[#101828] mb-3">
                   95% Job Placement
                 </h3>
-                <p className="text-white/90 text-lg leading-relaxed">
+                <p className="text-[#4a5565] text-lg leading-relaxed">
                   Our graduates find employment within 3 months of certification. We provide job placement assistance and career support.
                 </p>
               </motion.div>

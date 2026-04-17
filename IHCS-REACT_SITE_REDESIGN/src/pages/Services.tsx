@@ -178,15 +178,10 @@ export default function Services() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {homeAssistanceServices.map((service, index) => {
                 const Icon = service.icon;
-                const isHighlighted = index % 3 === 0;
                 return (
                   <motion.div 
                     key={index} 
-                    className={`flex gap-4 p-6 rounded-2xl transition-all hover:scale-[1.02] ${
-                      isHighlighted 
-                        ? 'bg-gradient-to-r from-[#561D7E] to-[#461464] text-white shadow-lg' 
-                        : 'bg-gradient-to-br from-gray-50 to-white border border-gray-200'
-                    }`}
+                    className="flex gap-4 p-6 rounded-2xl bg-gradient-to-br from-white to-[#f9f6fc] border border-[#e6dff0] shadow-sm transition-all hover:shadow-md hover:scale-[1.02]"
                     initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
@@ -194,21 +189,17 @@ export default function Services() {
                     whileHover={{ y: -5 }}
                   >
                     <motion.div 
-                      className={`shrink-0 p-3 rounded-xl ${
-                        isHighlighted ? 'bg-white/20' : 'bg-[#eee5f5]'
-                      }`}
+                      className="shrink-0 p-3 rounded-xl bg-[#eee5f5]"
                       whileHover={{ rotate: 360, scale: 1.1 }}
                       transition={{ duration: 0.6 }}
                     >
-                      <Icon className={`size-6 ${isHighlighted ? 'text-white' : 'text-[#561D7E]'}`} />
+                      <Icon className="size-6 text-[#561D7E]" />
                     </motion.div>
                     <div>
-                      <h3 className={`font-medium text-lg mb-2 ${
-                        isHighlighted ? 'text-white' : 'text-[#101828]'
-                      }`}>
+                      <h3 className="font-medium text-lg text-[#101828] mb-2">
                         {service.title}
                       </h3>
-                      <p className={isHighlighted ? 'text-white/90' : 'text-[#6a7282]'}>
+                      <p className="text-[#6a7282]">
                         {service.description}
                       </p>
                     </div>
@@ -306,13 +297,13 @@ export default function Services() {
         <section className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
           <motion.div
             key={activeSpecialtyImage}
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105 blur-sm brightness-[0.55]"
             style={{ backgroundImage: `url('${activeSpecialtyImage}')` }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.35 }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/90 to-[#f7f2fb]/95" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/92 via-white/90 to-[#f7f2fb]/92" />
 
           <div className="max-w-[1600px] mx-auto px-4 relative z-10">
             <motion.div 
@@ -433,24 +424,24 @@ export default function Services() {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-gradient-to-br from-[#561D7E] to-[#461464] py-12 sm:py-16 lg:py-20">
+        <section className="bg-gradient-to-br from-white to-[#f7f2fb] border-t border-[#eee5f5] py-12 sm:py-16 lg:py-20">
           <div className="max-w-[1600px] mx-auto px-4 text-center">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-white mb-6">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-6">
               Ready to Learn More About Our Services?
             </h2>
-            <p className="text-base sm:text-lg lg:text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] mb-8 max-w-2xl mx-auto">
               Contact us today to discuss your home care needs. Our compassionate team is ready to help you or your loved one stay independent at home.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
                 href="/contact"
-                className="bg-white text-[#561D7E] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-gray-100 transition-colors text-base sm:text-lg"
+                className="bg-[#561D7E] text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#461464] transition-colors text-base sm:text-lg"
               >
                 Request Information
               </a>
               <a
                 href="tel:+13369997123"
-                className="bg-transparent border-2 border-white text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-white/10 transition-colors text-base sm:text-lg"
+                className="bg-white border-2 border-[#561D7E] text-[#561D7E] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#eee5f5] transition-colors text-base sm:text-lg"
               >
                 Call (336) 999-7123
               </a>

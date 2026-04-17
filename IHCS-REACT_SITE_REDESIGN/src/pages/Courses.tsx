@@ -155,13 +155,13 @@ export default function Courses() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 bg-gradient-to-r from-[#6b2d94] to-[#4a1a6d] rounded-full px-6 py-4 shadow-lg text-white">
-                <div className="bg-white/20 p-3 rounded-full shrink-0">
-                  <Clock className="size-6 text-white" />
+              <div className="flex items-center gap-4 bg-white border-2 border-[#dfd1eb] rounded-full px-6 py-4 shadow-sm hover:shadow-md transition-shadow">
+                <div className="bg-[#eee5f5] p-3 rounded-full shrink-0">
+                  <Clock className="size-6 text-[#6b2d94]" />
                 </div>
                 <div>
-                  <h3 className="font-medium text-base">Flexible Schedules</h3>
-                  <p className="text-white/90 text-sm">Day, evening & weekend</p>
+                  <h3 className="font-medium text-base text-[#101828]">Flexible Schedules</h3>
+                  <p className="text-[#6a7282] text-sm">Day, evening & weekend</p>
                 </div>
               </div>
 
