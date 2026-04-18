@@ -58,7 +58,7 @@ export default function Home() {
                     <div className="text-sm text-[#6a7282]">Programs</div>
                   </div>
                   <div>
-                    <div className="text-3xl font-bold text-[#561D7E]">128-Hour</div>
+                    <div className="text-3xl font-bold text-[#561D7E]">120-Hour</div>
                     <div className="text-sm text-[#6a7282]">CNA Training</div>
                   </div>
                   <div>
@@ -178,10 +178,10 @@ export default function Home() {
                   <CheckCircle className="size-12 text-[#561D7E]" />
                 </div>
                 <h3 className="text-2xl font-medium text-[#101828] mb-3">
-                  95% Job Placement
+                  Career Support
                 </h3>
                 <p className="text-[#4a5565] text-lg leading-relaxed">
-                  Our graduates find employment within 3 months of certification. We provide job placement assistance and career support.
+                  We provide job placement assistance and career support to help every graduate take the next step in their career.
                 </p>
               </motion.div>
 

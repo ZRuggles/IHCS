@@ -51,8 +51,8 @@ export const courses: Course[] = [
     id: "hybrid-nurse-aide",
     title: "Hybrid Nurse Aide (CNA) Course (North Carolina)",
     description:
-      "Jumpstart your healthcare career with our state-approved Hybrid Nurse Aide I course. This 128-hour program combines flexible online learning with hands-on clinical experience, all completed in just 5 weeks.",
-    duration: "128 Hours (5 Weeks)",
+      "Jumpstart your healthcare career with our state-approved Hybrid Nurse Aide I course. This 120-hour program combines flexible online learning with hands-on clinical experience, all completed in just 5½ weeks.",
+    duration: "120 Hours (5½ Weeks)",
     nextStart: "March 16, 2026",
     image: "/Nurse-Aide.jpg",
     badge: "Most Popular",
@@ -84,9 +84,9 @@ export const courses: Course[] = [
     },
     scheduleDates: cnaAndRefresherSchedule,
     details: {
-      overview: "Jumpstart your healthcare career with our state-approved Hybrid Nurse Aide I course. This 128-hour program combines flexible online learning with hands-on clinical experience, all completed in just 5 weeks. Perfect for individuals looking to enter the nursing field quickly and confidently with weekly assignments.",
+      overview: "Jumpstart your healthcare career with our state-approved Hybrid Nurse Aide I course. This 120-hour program combines flexible online learning with hands-on clinical experience, all completed in just 5½ weeks. Perfect for individuals looking to enter the nursing field quickly and confidently with weekly assignments.",
       curriculum: [
-        "Course Duration: 5 weeks per session",
+        "Course Duration: 5½ weeks per session",
         "Weekly Assignments: Online assignments with deadlines each week",
         "Lab Days: Saturdays and Sundays, 9:00 AM to 5:00 PM (Weeks 1-3)",
         "Clinical Days: Saturdays and Sundays, 7:00 AM to 3:00 PM (Weeks 4-5)",
@@ -103,7 +103,7 @@ export const courses: Course[] = [
       ],
       certification: "State-approved Nurse Aide I certification upon successful completion and passing the state exam",
       cost: "$1,205",
-      schedule: "128 hours / 5 weeks, online and in-person format with included clinicals and uniform"
+      schedule: "120 hours / 5½ weeks, online and in-person format with included clinicals and uniform"
     }
   },
   {
