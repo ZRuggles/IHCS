@@ -8,6 +8,14 @@ import Employment from "./pages/Employment";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
+const pageTitles: Record<string, string> = {
+  "/": "Innovation",
+  "/courses": "Innovation - Courses",
+  "/services": "Innovation - Services",
+  "/employment": "Innovation - Employment",
+  "/contact": "Innovation - Contact",
+};
+
 function ScrollToTop() {
   const { pathname } = useLocation();
 
@@ -18,10 +26,22 @@ function ScrollToTop() {
   return null;
 }
 
+function PageTitle() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const base = pathname.startsWith("/courses/") ? "Innovation - Courses" : pageTitles[pathname];
+    document.title = base ?? "Innovation";
+  }, [pathname]);
+
+  return null;
+}
+
 function App() {
   return (
     <>
       <ScrollToTop />
+      <PageTitle />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/courses" element={<Courses />} />

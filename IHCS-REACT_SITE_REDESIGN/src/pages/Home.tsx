@@ -217,10 +217,10 @@ export default function Home() {
                 </div>
                 <div className="p-6">
                   <h3 className="text-base sm:text-lg lg:text-xl font-medium text-[#101828] mb-2">
-                    Career Support
+                    Hands-On Training
                   </h3>
                   <p className="text-[#4a5565] leading-relaxed">
-                    Ongoing career guidance, networking opportunities, and professional development resources.
+                    Practical, real-world training with clinical experience built into every program.
                   </p>
                 </div>
               </motion.div>
