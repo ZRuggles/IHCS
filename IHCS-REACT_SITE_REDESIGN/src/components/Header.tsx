@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone, Mail } from "lucide-react";
 import { motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { APPLICATION_LINKS } from "../data/siteInfo";
 
 type LogoMode = "company" | "course";
 const LOGO_INTRO_KEY = "ihcs-logo-intro-played";
@@ -114,12 +115,14 @@ export function Header() {
               <span>contact@innovationhealthcaresolutions.com</span>
             </a>
           </div>
-          <Link
-            to="/contact"
+          <a
+            href={APPLICATION_LINKS.schoolInformation}
+            target="_blank"
+            rel="noreferrer"
             className="bg-[#ffcc00] text-[#461464] px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm hover:opacity-90 transition-opacity whitespace-nowrap"
           >
-            Request Info
-          </Link>
+            Apply Online
+          </a>
         </div>
       </div>
 

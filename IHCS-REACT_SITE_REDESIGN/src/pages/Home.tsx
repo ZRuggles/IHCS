@@ -4,8 +4,7 @@ import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { ArrowRight, GraduationCap, Users, Clock, CheckCircle, Award, Star } from "lucide-react";
 import { courses } from "../data/courses";
-
-const COURSE_APPLICATION_URL = "https://www.hovn.app/innovation-healthcare-solutions";
+import { APPLICATION_LINKS } from "../data/siteInfo";
 
 export default function Home() {
   const featuredCourses = courses.slice(0, 6);
@@ -34,15 +33,23 @@ export default function Home() {
                   Transform your future with state-approved healthcare training programs. Get the skills, certification, and confidence to excel in your new career.
                 </p>
                 <div className="flex flex-wrap gap-4 mb-8">
+                  <a
+                    href={APPLICATION_LINKS.schoolInformation}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="bg-[#561D7E] text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#461464] transition-all hover:scale-105 text-base sm:text-lg"
+                  >
+                    Apply Online
+                  </a>
                   <Link
                     to="/courses"
-                    className="bg-[#561D7E] text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#461464] transition-all hover:scale-105 text-base sm:text-lg"
+                    className="bg-white border-2 border-[#561D7E] text-[#561D7E] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#eee5f5] transition-all hover:scale-105 text-base sm:text-lg"
                   >
                     Explore Programs
                   </Link>
                   <Link
                     to="/contact"
-                    className="bg-white border-2 border-[#561D7E] text-[#561D7E] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#eee5f5] transition-all hover:scale-105 text-base sm:text-lg"
+                    className="bg-white border-2 border-gray-300 text-[#4a5565] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-gray-50 transition-all hover:scale-105 text-base sm:text-lg"
                   >
                     Schedule A Tour
                   </Link>
@@ -297,18 +304,26 @@ export default function Home() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
-                href={COURSE_APPLICATION_URL}
+                href={APPLICATION_LINKS.schoolInformation}
                 target="_blank"
                 rel="noreferrer"
                 className="bg-white text-[#561D7E] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-gray-100 transition-colors text-base sm:text-lg"
               >
-                Enroll Now
+                Apply Online
+              </a>
+              <a
+                href={APPLICATION_LINKS.enrollmentForms}
+                target="_blank"
+                rel="noreferrer"
+                className="bg-transparent border-2 border-white text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-white/10 transition-colors text-base sm:text-lg"
+              >
+                Enrollment Forms
               </a>
               <Link
                 to="/courses"
-                className="bg-transparent border-2 border-white text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-white/10 transition-colors text-base sm:text-lg"
+                className="bg-white/10 border-2 border-white/70 text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-white/15 transition-colors text-base sm:text-lg"
               >
-                Schedule A Tour
+                View Programs
               </Link>
             </div>
           </div>

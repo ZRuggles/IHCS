@@ -5,6 +5,7 @@ import { Footer } from "../components/Footer";
 import { courses } from "../data/courses";
 import { Clock, Calendar, DollarSign, Award, CheckCircle, ArrowLeft, Heart, Activity, Droplet, Ambulance, PillBottle, Stethoscope, Pill, RefreshCw } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { APPLICATION_LINKS } from "../data/siteInfo";
 
 const currencyFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -16,8 +17,6 @@ const parseCurrencyAmount = (value: string) => {
   const numericValue = Number.parseFloat(value.replace(/[^0-9.]/g, ""));
   return Number.isFinite(numericValue) ? numericValue : null;
 };
-const COURSE_APPLICATION_URL = "https://www.hovn.app/innovation-healthcare-solutions";
-
 const iconMap: Record<string, LucideIcon> = {
   heart: Heart,
   medical: Activity,
@@ -294,12 +293,20 @@ export default function CourseDetail() {
                   </div>
 
                   <a
-                    href={COURSE_APPLICATION_URL}
+                    href={APPLICATION_LINKS.schoolInformation}
                     target="_blank"
                     rel="noreferrer"
                     className="block w-full bg-[#6b2d94] text-white text-center py-4 rounded-full hover:bg-[#4a1a6d] transition-colors mb-3"
                   >
                     Apply for This Course
+                  </a>
+                  <a
+                    href={APPLICATION_LINKS.enrollmentForms}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block w-full bg-white border-2 border-[#6b2d94] text-[#6b2d94] text-center py-3 rounded-full hover:bg-[#eee5f5] transition-colors mb-3"
+                  >
+                    Enrollment Forms
                   </a>
                   <a
                     href={course.payments.fullPaymentUrl}

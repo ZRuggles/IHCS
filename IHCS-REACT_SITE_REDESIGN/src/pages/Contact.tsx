@@ -1,8 +1,9 @@
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { motion } from "motion/react";
-import { MapPin, Phone, Clock, Send, Facebook, Linkedin, Mail, Shield, Headphones } from "lucide-react";
+import { MapPin, Phone, Clock, Send, Facebook, Linkedin, Mail, Shield, Headphones, FileText } from "lucide-react";
 import { useState } from "react";
+import { APPLICATION_LINKS, CONTACT_INFO } from "../data/siteInfo";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -143,8 +144,8 @@ export default function Contact() {
                   icon: Headphones,
                   title: "Help Desk / Fax",
                   content: (
-                    <a href="tel:+18774455698" className="text-[#6b2d94] hover:underline">
-                      (877) 445-5698
+                    <a href={CONTACT_INFO.faxHref} className="text-[#6b2d94] hover:underline">
+                      {CONTACT_INFO.faxNumber}
                     </a>
                   )
                 },
@@ -366,6 +367,43 @@ export default function Contact() {
                   />
                 </motion.div>
 
+                <motion.div
+                  className="bg-white border border-gray-200 rounded-2xl p-8"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.25 }}
+                  whileHover={{ boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)" }}
+                >
+                  <div className="bg-[#eee5f5] p-3 rounded-xl w-fit mb-4">
+                    <FileText className="size-6 text-[#6b2d94]" />
+                  </div>
+                  <h3 className="text-2xl font-medium text-[#101828] mb-3">
+                    Apply Online
+                  </h3>
+                  <p className="text-[#4a5565] mb-6">
+                    Complete the School Information application first, then submit enrollment forms and required documents for admissions review.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <a
+                      href={APPLICATION_LINKS.schoolInformation}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="bg-[#6b2d94] text-white px-6 py-3 rounded-full hover:bg-[#4a1a6d] transition-colors text-center font-medium"
+                    >
+                      School Information Application
+                    </a>
+                    <a
+                      href={APPLICATION_LINKS.enrollmentForms}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="bg-white border-2 border-[#6b2d94] text-[#6b2d94] px-6 py-3 rounded-full hover:bg-[#eee5f5] transition-colors text-center font-medium"
+                    >
+                      Enrollment Forms
+                    </a>
+                  </div>
+                </motion.div>
+
                 <motion.div 
                   className="bg-white border border-gray-200 rounded-2xl p-8"
                   initial={{ opacity: 0, y: 20 }}
@@ -431,12 +469,12 @@ export default function Contact() {
                       After Hours Emergency: (336) 934-5354
                     </motion.a>
                     <motion.a
-                      href="tel:+18774455698"
+                      href={CONTACT_INFO.faxHref}
                       className="bg-white/10 backdrop-blur-sm border-2 border-white text-white px-6 py-3 rounded-full hover:bg-white/20 transition-colors text-center font-medium"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      Help Desk / Fax: (877) 445-5698
+                      Help Desk / Fax: {CONTACT_INFO.faxNumber}
                     </motion.a>
                     <motion.a
                       href="mailto:contact@innovationhealthcaresolutions.com"

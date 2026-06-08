@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Facebook, Linkedin, Phone, MapPin, Clock, Mail, Shield, Headphones } from "lucide-react";
+import { APPLICATION_LINKS, CONTACT_INFO } from "../data/siteInfo";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -59,6 +60,16 @@ export function Footer() {
                 <Link to="/contact" className="text-gray-300 hover:text-white transition-colors">
                   Contact Us
                 </Link>
+              </li>
+              <li>
+                <a
+                  href={APPLICATION_LINKS.schoolInformation}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
+                  Apply Online
+                </a>
               </li>
             </ul>
           </div>
@@ -121,8 +132,8 @@ export function Footer() {
               </li>
               <li className="flex gap-3 text-gray-300">
                 <Headphones className="size-5 shrink-0" />
-                <a href="tel:+18774455698" className="hover:text-white transition-colors">
-                  Help Desk / Fax: (877) 445-5698
+                <a href={CONTACT_INFO.faxHref} className="hover:text-white transition-colors">
+                  Help Desk / Fax: {CONTACT_INFO.faxNumber}
                 </a>
               </li>
               <li className="flex gap-3 text-gray-300">

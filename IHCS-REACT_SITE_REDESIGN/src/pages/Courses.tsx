@@ -4,8 +4,7 @@ import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { GraduationCap, Clock, DollarSign, Calendar, ArrowRight } from "lucide-react";
 import { courses, cnaAndRefresherSchedule, phlebotomySchedule } from "../data/courses";
-
-const COURSE_APPLICATION_URL = "https://www.hovn.app/innovation-healthcare-solutions";
+import { APPLICATION_LINKS } from "../data/siteInfo";
 
 export default function Courses() {
   return (
@@ -307,6 +306,33 @@ export default function Courses() {
                 </p>
               </div>
             </div>
+
+            <div className="mt-12 bg-[#f7f2fb] border border-[#dfd1eb] rounded-2xl p-6 sm:p-8 text-center">
+              <h3 className="text-2xl font-medium text-[#101828] mb-3">
+                Apply Online
+              </h3>
+              <p className="text-[#4a5565] max-w-2xl mx-auto mb-6">
+                Start with the School Information application, then complete the enrollment forms for admissions review.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <a
+                  href={APPLICATION_LINKS.schoolInformation}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="bg-[#6b2d94] text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#4a1a6d] transition-colors"
+                >
+                  School Information Application
+                </a>
+                <a
+                  href={APPLICATION_LINKS.enrollmentForms}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="bg-white border-2 border-[#6b2d94] text-[#6b2d94] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#eee5f5] transition-colors"
+                >
+                  Enrollment Forms
+                </a>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -321,12 +347,20 @@ export default function Courses() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
-                href={COURSE_APPLICATION_URL}
+                href={APPLICATION_LINKS.schoolInformation}
                 target="_blank"
                 rel="noreferrer"
                 className="bg-[#6b2d94] text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#4a1a6d] transition-colors"
               >
-                Apply for Courses
+                Apply Online
+              </a>
+              <a
+                href={APPLICATION_LINKS.enrollmentForms}
+                target="_blank"
+                rel="noreferrer"
+                className="bg-white border-2 border-[#6b2d94] text-[#6b2d94] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#eee5f5] transition-colors"
+              >
+                Enrollment Forms
               </a>
               <a
                 href="tel:+13369997123"
