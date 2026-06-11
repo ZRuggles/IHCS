@@ -7,6 +7,7 @@ import Services from "./pages/Services";
 import Employment from "./pages/Employment";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import AxisChatWidget from "./components/AxisChatWidget";
 
 const pageTitles: Record<string, string> = {
   "/": "Innovation",
@@ -42,6 +43,7 @@ function App() {
     <>
       <ScrollToTop />
       <PageTitle />
+      <AxisChatWidget />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/courses" element={<Courses />} />

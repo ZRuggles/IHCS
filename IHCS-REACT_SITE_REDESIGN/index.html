@@ -8,29 +8,6 @@
   </head>
   <body>
     <div id="root"></div>
-    <!-- AxisAI Chat Widget -->
-    <div id="axis-chat-widget"></div>
-    <script>
-      (function () {
-        // Widget configuration
-        window.AxisAIConfig = {
-          apiKey: "axis_1766584765_fyNdrypUPhzUGsWQ_oYFHg",
-          apiUrl: "https://axisai-backend.onrender.com/api",
-          theme: "light", // 'light' or 'dark'
-          position: "bottom-right", // 'bottom-right', 'bottom-left', 'custom'
-          width: "400px",
-          height: "600px",
-          // AI persona info will be fetched automatically
-          loadPersonaInfo: true
-        };
-
-        // Load the widget script from the API server
-        const script = document.createElement("script");
-        script.src = "https://axisai-backend.onrender.com/widget.js";
-        script.async = true;
-        document.head.appendChild(script);
-      })();
-    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
