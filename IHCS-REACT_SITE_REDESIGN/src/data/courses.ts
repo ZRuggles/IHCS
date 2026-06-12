@@ -8,7 +8,9 @@ export interface Course {
   badge?: string;
   icon: string;
   payments: {
-    fullPaymentUrl: string;
+    // Optional: some programs (e.g. Med Tech, AHA CPR Instructor) enroll via
+    // the application form + admission email and have no Stripe link yet.
+    fullPaymentUrl?: string;
     paymentPlans?: {
       label: string;
       url: string;
@@ -19,6 +21,10 @@ export interface Course {
     overview: string;
     curriculum: string[];
     requirements: string[];
+    // Optional extra notes shown below requirements (uniforms, optional
+    // items, what tuition includes, etc.).
+    tuitionIncludes?: string[];
+    additionalNotes?: string[];
     certification: string;
     cost: string;
     schedule: string;
@@ -49,7 +55,7 @@ export const phlebotomySchedule = [
 export const courses: Course[] = [
   {
     id: "hybrid-nurse-aide",
-    title: "Hybrid Nurse Aide (CNA) Course (North Carolina)",
+    title: "Nurse Aide / Nursing Assistant Program",
     description:
       "Jumpstart your healthcare career with our state-approved Hybrid Nurse Aide I course. This 120-hour program combines flexible online learning with hands-on clinical experience, all completed in just 5½ weeks.",
     duration: "120 Hours (5½ Weeks)",
@@ -91,24 +97,29 @@ export const courses: Course[] = [
         "Lab Days: Saturdays and Sundays, 9:00 AM to 5:00 PM (Weeks 1-3)",
         "Clinical Days: Saturdays and Sundays, 7:00 AM to 3:00 PM (Weeks 4-5)",
         "Online & in-person format",
-        "Clinicals included",
-        "Uniform included in tuition"
+        "Clinicals included"
       ],
       requirements: [
-        "High school diploma or GED",
-        "Pass background check",
-        "Physical examination",
-        "TB test",
-        "Must be 18 years or older"
+        "Valid ID",
+        "Social Security Card",
+        "Official High School Diploma or GED — OR pass our Placement Test",
+        "Immunizations Required"
+      ],
+      tuitionIncludes: [
+        "Criminal Background Check",
+        "Drug Screening"
+      ],
+      additionalNotes: [
+        "Students are responsible for purchasing uniforms at the school's selected uniform location."
       ],
       certification: "State-approved Nurse Aide I certification upon successful completion and passing the state exam",
       cost: "$1,205",
-      schedule: "120 hours / 5½ weeks, online and in-person format with included clinicals and uniform"
+      schedule: "120 hours / 5½ weeks, online and in-person format with included clinicals"
     }
   },
   {
     id: "hybrid-phlebotomy-technician",
-    title: "Hybrid Phlebotomy Technician Course",
+    title: "Phlebotomy Course",
     description: "Build core phlebotomy skills in our 8-week Hybrid Phlebotomy Technician course with weekly online assignments, in-person instruction, and clinical practice.",
     duration: "8 Weeks",
     nextStart: "May 11, 2026",
@@ -148,11 +159,20 @@ export const courses: Course[] = [
         "ASPT requirement: 75 successful venipunctures"
       ],
       requirements: [
-        "High school diploma or GED",
-        "Pass background check",
-        "Physical examination and immunizations",
-        "Good manual dexterity",
-        "Must be 18 years or older"
+        "Valid ID",
+        "Social Security Card",
+        "Immunizations",
+        "TB Skin Test or Quantiferon Test",
+        "Must be willing to perform and receive venipuncture from classmates"
+      ],
+      tuitionIncludes: [
+        "Criminal Background Check",
+        "Drug Screening"
+      ],
+      additionalNotes: [
+        "Optional: Textbook (Book online in Google Classroom)",
+        "Optional: Practice Arm",
+        "Students are responsible for purchasing uniforms at the school's selected uniform location."
       ],
       certification: "Certificate of Completion with ASPT certification preparation",
       cost: "$1,205",
@@ -160,9 +180,9 @@ export const courses: Course[] = [
     }
   },
   {
-    id: "hybrid-medication-aide",
-    title: "Hybrid Medication Aide Course",
-    description: "Ideal for nurse aides looking to expand their skills. Complete online lessons at your own pace, then attend a one-day in-person competency check-off.",
+    id: "medication-aide",
+    title: "Medication Aide Class",
+    description: "This course is designed for individuals who are currently listed as Nursing Assistants. Course materials are included in tuition.",
     duration: "Self-Paced + 1-Day Skills Check-Off",
     nextStart: "Rolling Enrollment",
     image: "/Medication.jpg",
@@ -171,27 +191,54 @@ export const courses: Course[] = [
       fullPaymentUrl: "https://buy.stripe.com/28EaEW2L45Xl8FR5MP0oM04"
     },
     details: {
-      overview: "This Hybrid Medication Aide course is ideal for nurse aides looking to expand their skills. Complete the lessons online at your own pace, then attend a one-day in-person competency check-off. Approved for North Carolina state requirements.",
+      overview: "This Medication Aide Class is designed for individuals who are currently listed as Nursing Assistants. Complete the lessons online at your own pace, then attend a one-day in-person competency check-off. Approved for North Carolina state requirements. Course materials are included in tuition.",
       curriculum: [
         "Self-paced online instruction",
         "1-day in-person skills validation",
-        "State-approved curriculum"
+        "State-approved curriculum",
+        "Course materials included in tuition"
       ],
       requirements: [
-        "Active Nurse Aide certification",
-        "Good standing with state registry",
-        "Basic computer skills for online learning",
-        "Reliable internet access"
+        "Valid ID",
+        "Social Security Card",
+        "Official High School Diploma or GED"
       ],
       certification: "State-approved Medication Aide certification",
-      cost: "$295",
+      cost: "$360",
       schedule: "Self-paced online + 1-day in-person skills check-off"
     }
   },
   {
+    id: "med-tech",
+    title: "Med Tech Course",
+    description: "Perfect for individuals interested in medication technician training. Course materials are included in tuition.",
+    duration: "Self-Paced + 1-Day Skills Check-Off",
+    nextStart: "Rolling Enrollment",
+    image: "/Medication.jpg",
+    icon: "pill",
+    payments: {
+      fullPaymentUrl: "https://buy.stripe.com/6oUcN45Xg0D1f4f1wz0oM0j"
+    },
+    details: {
+      overview: "The Med Tech Course is perfect for individuals interested in medication technician training. Course materials are included in tuition.",
+      curriculum: [
+        "Medication technician training",
+        "Course materials included in tuition"
+      ],
+      requirements: [
+        "Official High School Diploma or GED",
+        "Valid ID",
+        "Social Security Card"
+      ],
+      certification: "Medication Technician training certificate of completion",
+      cost: "$360",
+      schedule: "Contact admissions for the current schedule"
+    }
+  },
+  {
     id: "hybrid-refresher-course",
-    title: "Hybrid Refresher Course (CNA)",
-    description: "Have your Nurse Aide certification lapsed or need to refresh your skills? Our Hybrid Refresher Course offers 1-week and 2-week options.",
+    title: "Nurse Aide Refresher / CNA Refresher Course",
+    description: "Designed for individuals who want to return to the healthcare field and prepare to challenge or retake the state exam. Refresh your hands-on clinical skills and build confidence.",
     duration: "1 or 2 Weeks",
     nextStart: "March 16, 2026",
     image: "/Refresher.jpg",
@@ -211,20 +258,55 @@ export const courses: Course[] = [
     },
     scheduleDates: cnaAndRefresherSchedule,
     details: {
-      overview: "Have your Nurse Aide certification lapsed or need to refresh your skills? Our Hybrid Refresher Course offers 1-week and 2-week options with online content and skills review. Open to students who have graduated from a state-approved nurse aide program or have an expired listing on the Nurse Aide Registry.",
+      overview: "Our Nurse Aide Refresher Course is designed for individuals who want to return to the healthcare field and prepare to challenge or retake the state exam. This course is designed to refresh hands-on clinical skills, build confidence, and help students transition back into healthcare opportunities.",
       curriculum: [
         "Online review + optional skills support",
         "1-week or 2-week formats available",
-        "Registry renewal support"
+        "Hands-on clinical skills refresh",
+        "Registry renewal / state exam preparation support"
       ],
       requirements: [
-        "Previous graduation from state-approved nurse aide program OR expired listing on Nurse Aide Registry",
-        "Valid government-issued ID",
-        "Completion of background check (if applicable)"
+        "Valid ID",
+        "Social Security Card",
+        "Proof of previous healthcare training or certification"
       ],
-      certification: "Refresher course completion certificate for registry renewal",
+      additionalNotes: [
+        "This course is available to: Expired Nursing Assistants; individuals who completed an approved Nurse Aide training program but did not take the state exam (proof of course completion required); Paramedics; Respiratory Therapists; and other healthcare professionals with hands-on clinical certifications or training."
+      ],
+      certification: "Refresher course completion certificate to challenge or retake the state exam",
       cost: "$570",
       schedule: "1-week or 2-week formats with online review and optional skills support"
+    }
+  },
+  {
+    id: "aha-cpr-instructor",
+    title: "American Heart Association CPR Instructor Course",
+    description: "Take the next step in your healthcare career by becoming an American Heart Association (AHA) CPR Instructor. Designed for individuals passionate about teaching life-saving skills to healthcare professionals, workplaces, community organizations, schools, churches, and the public.",
+    duration: "Instructor Certification (valid 2 years)",
+    nextStart: "Contact Admissions",
+    image: "/Nurse-Aide.jpg",
+    badge: "New",
+    icon: "heart",
+    payments: {
+      fullPaymentUrl: "https://buy.stripe.com/00wcN4etMetR7BNejl0oM0k"
+    },
+    details: {
+      overview: "Take the next step in your healthcare career by becoming an American Heart Association (AHA) CPR Instructor through Innovation Healthcare Solutions. This course is designed for individuals who are passionate about teaching life-saving skills to healthcare professionals, workplaces, community organizations, schools, churches, and the public. Once all requirements are successfully completed, students will receive their official American Heart Association CPR Instructor Card, valid for two years.",
+      curriculum: [
+        "AHA Instructor Manual",
+        "Instructor Essentials Kit",
+        "Instructor Training Guidance",
+        "Monitoring Support Information"
+      ],
+      requirements: [
+        "Must hold a current American Heart Association Provider CPR Card",
+        "Must successfully complete the AHA Instructor Essentials Course",
+        "Must align with an authorized AHA Training Center or Training Site",
+        "Must complete instructor monitoring by teaching a CPR class under supervision"
+      ],
+      certification: "Official American Heart Association CPR Instructor Card, valid for two years",
+      cost: "$700",
+      schedule: "Contact admissions for the current schedule"
     }
   }
 ];

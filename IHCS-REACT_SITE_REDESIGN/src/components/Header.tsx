@@ -116,7 +116,7 @@ export function Header() {
             </a>
           </div>
           <a
-            href={APPLICATION_LINKS.schoolInformation}
+            href={APPLICATION_LINKS.schoolApplication}
             target="_blank"
             rel="noreferrer"
             className="bg-[#ffcc00] text-[#461464] px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm hover:opacity-90 transition-opacity whitespace-nowrap"

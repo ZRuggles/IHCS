@@ -17,7 +17,7 @@ export function Footer() {
             </p>
             <div className="flex gap-3">
               <a
-                href="https://www.facebook.com/InnovationHealthcareSolutions"
+                href="https://www.facebook.com/share/1JZceNDsCH/"
                 target="_blank"
                 rel="noreferrer"
                 className="bg-white/10 p-2 rounded-lg hover:bg-white/20 transition-colors"
@@ -63,7 +63,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href={APPLICATION_LINKS.schoolInformation}
+                  href={APPLICATION_LINKS.schoolApplication}
                   target="_blank"
                   rel="noreferrer"
                   className="text-gray-300 hover:text-white transition-colors"
@@ -153,7 +153,7 @@ export function Footer() {
               <li className="flex gap-3 text-gray-300">
                 <Facebook className="size-5 shrink-0 mt-0.5" />
                 <a
-                  href="https://www.facebook.com/InnovationHealthcareSolutions"
+                  href="https://www.facebook.com/share/1JZceNDsCH/"
                   target="_blank"
                   rel="noreferrer"
                   className="hover:text-white transition-colors"

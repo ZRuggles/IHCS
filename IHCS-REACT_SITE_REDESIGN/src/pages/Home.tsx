@@ -34,7 +34,7 @@ export default function Home() {
                 </p>
                 <div className="flex flex-wrap gap-4 mb-8">
                   <a
-                    href={APPLICATION_LINKS.schoolInformation}
+                    href={APPLICATION_LINKS.schoolApplication}
                     target="_blank"
                     rel="noreferrer"
                     className="bg-[#561D7E] text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#461464] transition-all hover:scale-105 text-base sm:text-lg"
@@ -61,7 +61,7 @@ export default function Home() {
                   transition={{ delay: 0.3, duration: 0.6 }}
                 >
                   <div>
-                    <div className="text-3xl font-bold text-[#561D7E]">4</div>
+                    <div className="text-3xl font-bold text-[#561D7E]">{courses.length}</div>
                     <div className="text-sm text-[#6a7282]">Programs</div>
                   </div>
                   <div>
@@ -267,11 +267,11 @@ export default function Home() {
                   ))}
                 </div>
                 <p className="text-[#4a5565] mb-6 leading-relaxed">
-                  "I completed the Medical Assistant program and loved every moment. The hands-on training gave me confidence, and I'm now working at a great clinic."
+                  "The Medication Aide class fit perfectly around my work schedule. The online lessons were easy to follow and the in-person skills check-off gave me real confidence. Highly recommend!"
                 </p>
                 <div>
                   <div className="font-medium text-[#101828]">James Chen</div>
-                  <div className="text-sm text-[#6a7282]">Medical Assistant</div>
+                  <div className="text-sm text-[#6a7282]">Medication Aide Graduate</div>
                 </div>
               </div>
 
@@ -304,7 +304,7 @@ export default function Home() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
-                href={APPLICATION_LINKS.schoolInformation}
+                href={APPLICATION_LINKS.schoolApplication}
                 target="_blank"
                 rel="noreferrer"
                 className="bg-white text-[#561D7E] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-gray-100 transition-colors text-base sm:text-lg"
@@ -312,7 +312,7 @@ export default function Home() {
                 Apply Online
               </a>
               <a
-                href={APPLICATION_LINKS.enrollmentForms}
+                href={APPLICATION_LINKS.enrollmentAgreement}
                 target="_blank"
                 rel="noreferrer"
                 className="bg-transparent border-2 border-white text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-white/10 transition-colors text-base sm:text-lg"

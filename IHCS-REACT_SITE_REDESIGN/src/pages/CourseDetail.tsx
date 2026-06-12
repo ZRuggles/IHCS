@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { courses } from "../data/courses";
-import { Clock, Calendar, DollarSign, Award, CheckCircle, ArrowLeft, Heart, Activity, Droplet, Ambulance, PillBottle, Stethoscope, Pill, RefreshCw } from "lucide-react";
+import { Clock, Calendar, DollarSign, Award, CheckCircle, ArrowLeft, Heart, Activity, Droplet, Ambulance, PillBottle, Stethoscope, Pill, RefreshCw, Mail } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { APPLICATION_LINKS } from "../data/siteInfo";
+import { APPLICATION_LINKS, ADMISSION_EMAIL, buildDocumentEmailHref } from "../data/siteInfo";
 
 const currencyFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -39,6 +39,8 @@ export default function CourseDetail() {
   const IconComponent = iconMap[course.icon] || Heart;
   const paymentPlans = course.payments.paymentPlans ?? [];
   const hasPaymentPlans = paymentPlans.length > 0;
+  const hasFullPayment = Boolean(course.payments.fullPaymentUrl);
+  const documentEmailHref = buildDocumentEmailHref(course.title);
   const installmentCount = paymentPlans.length;
   const totalCostAmount = parseCurrencyAmount(course.details.cost);
   const installmentAmount =
@@ -255,6 +257,42 @@ export default function CourseDetail() {
                   </ul>
                 </div>
 
+                {course.details.tuitionIncludes && course.details.tuitionIncludes.length > 0 ? (
+                  <>
+                    <h3 className="text-2xl font-medium text-[#101828] mb-4 mt-12">
+                      Tuition Includes
+                    </h3>
+                    <div className="bg-[#f7f2fb] border border-[#eee5f5] rounded-xl p-6">
+                      <ul className="space-y-3">
+                        {course.details.tuitionIncludes.map((item, index) => (
+                          <li key={index} className="flex gap-3 items-start">
+                            <CheckCircle className="size-5 text-[#561D7E] shrink-0 mt-0.5" />
+                            <span className="text-[#4a5565]">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </>
+                ) : null}
+
+                {course.details.additionalNotes && course.details.additionalNotes.length > 0 ? (
+                  <>
+                    <h3 className="text-2xl font-medium text-[#101828] mb-4 mt-12">
+                      Additional Information
+                    </h3>
+                    <div className="bg-[#fffaf0] border border-[#f5e6b8] rounded-xl p-6">
+                      <ul className="space-y-3">
+                        {course.details.additionalNotes.map((note, index) => (
+                          <li key={index} className="flex gap-3 items-start">
+                            <div className="bg-[#ffcc00] rounded-full size-2 mt-2 shrink-0" />
+                            <span className="text-[#4a5565]">{note}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </>
+                ) : null}
+
                 <h3 className="text-2xl font-medium text-[#101828] mb-4 mt-12">
                   Certification
                 </h3>
@@ -293,7 +331,7 @@ export default function CourseDetail() {
                   </div>
 
                   <a
-                    href={APPLICATION_LINKS.schoolInformation}
+                    href={APPLICATION_LINKS.schoolApplication}
                     target="_blank"
                     rel="noreferrer"
                     className="block w-full bg-[#6b2d94] text-white text-center py-4 rounded-full hover:bg-[#4a1a6d] transition-colors mb-3"
@@ -301,21 +339,23 @@ export default function CourseDetail() {
                     Apply for This Course
                   </a>
                   <a
-                    href={APPLICATION_LINKS.enrollmentForms}
+                    href={APPLICATION_LINKS.enrollmentAgreement}
                     target="_blank"
                     rel="noreferrer"
                     className="block w-full bg-white border-2 border-[#6b2d94] text-[#6b2d94] text-center py-3 rounded-full hover:bg-[#eee5f5] transition-colors mb-3"
                   >
-                    Enrollment Forms
+                    Enrollment Agreement Forms
                   </a>
-                  <a
-                    href={course.payments.fullPaymentUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="block w-full bg-[#561D7E] text-white text-center py-4 rounded-full hover:bg-[#461464] transition-colors mb-3"
-                  >
-                    Pay In Full
-                  </a>
+                  {hasFullPayment ? (
+                    <a
+                      href={course.payments.fullPaymentUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block w-full bg-[#561D7E] text-white text-center py-4 rounded-full hover:bg-[#461464] transition-colors mb-3"
+                    >
+                      Pay In Full
+                    </a>
+                  ) : null}
                   {hasPaymentPlans ? (
                     <button
                       type="button"
@@ -331,6 +371,13 @@ export default function CourseDetail() {
                     </p>
                   ) : null}
                   <a
+                    href={documentEmailHref}
+                    className="flex w-full items-center justify-center gap-2 bg-white border-2 border-[#561D7E] text-[#561D7E] text-center py-3 rounded-full hover:bg-[#eee5f5] transition-colors mb-3"
+                  >
+                    <Mail className="size-5" />
+                    Send Documents by Email
+                  </a>
+                  <a
                     href="tel:+13369997123"
                     className="block w-full bg-white border-2 border-[#561D7E] text-[#561D7E] text-center py-4 rounded-full hover:bg-[#eee5f5] transition-colors"
                   >
@@ -338,11 +385,23 @@ export default function CourseDetail() {
                   </a>
 
                   <div className="mt-6 pt-6 border-t border-gray-200">
-                    <h4 className="font-medium text-[#101828] mb-3">Payment Notes</h4>
+                    <h4 className="font-medium text-[#101828] mb-3">How to Enroll</h4>
                     <ul className="space-y-2 text-sm text-[#6a7282]">
-                      <li>- Payments are processed securely through Stripe</li>
-                      <li>- Choose full payment or select a plan in the payment modal</li>
-                      <li>- Contact us if you need enrollment or billing support</li>
+                      <li>- Complete the School Application Form (required for all programs)</li>
+                      {hasFullPayment ? (
+                        <li>- Pay in full or choose a plan — processed securely through Stripe</li>
+                      ) : (
+                        <li>- Contact admissions to arrange tuition payment</li>
+                      )}
+                      <li>
+                        - Send any other requested documents to{" "}
+                        <a
+                          href={documentEmailHref}
+                          className="text-[#561D7E] underline break-all"
+                        >
+                          {ADMISSION_EMAIL}
+                        </a>
+                      </li>
                     </ul>
                   </div>
                 </div>

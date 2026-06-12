@@ -55,8 +55,8 @@ export default function Courses() {
                         <GraduationCap className="size-6 text-[#5b2484]" />
                       </div>
                       <div>
-                        <div className="font-medium text-[#101828]">4 Programs Available</div>
-                        <div className="text-sm text-[#6a7282]">State-approved certifications</div>
+                        <div className="font-medium text-[#101828]">{courses.length} Programs Available</div>
+                        <div className="text-sm text-[#6a7282]">Healthcare training programs</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
@@ -312,19 +312,19 @@ export default function Courses() {
                 Apply Online
               </h3>
               <p className="text-[#4a5565] max-w-2xl mx-auto mb-6">
-                Start with the School Information application, then complete the enrollment forms for admissions review.
+                Start with the School Application Form, then complete the Enrollment Agreement Forms for admissions review.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <a
-                  href={APPLICATION_LINKS.schoolInformation}
+                  href={APPLICATION_LINKS.schoolApplication}
                   target="_blank"
                   rel="noreferrer"
                   className="bg-[#6b2d94] text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#4a1a6d] transition-colors"
                 >
-                  School Information Application
+                  School Application Form
                 </a>
                 <a
-                  href={APPLICATION_LINKS.enrollmentForms}
+                  href={APPLICATION_LINKS.enrollmentAgreement}
                   target="_blank"
                   rel="noreferrer"
                   className="bg-white border-2 border-[#6b2d94] text-[#6b2d94] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#eee5f5] transition-colors"
@@ -347,7 +347,7 @@ export default function Courses() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
-                href={APPLICATION_LINKS.schoolInformation}
+                href={APPLICATION_LINKS.schoolApplication}
                 target="_blank"
                 rel="noreferrer"
                 className="bg-[#6b2d94] text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#4a1a6d] transition-colors"
@@ -355,7 +355,7 @@ export default function Courses() {
                 Apply Online
               </a>
               <a
-                href={APPLICATION_LINKS.enrollmentForms}
+                href={APPLICATION_LINKS.enrollmentAgreement}
                 target="_blank"
                 rel="noreferrer"
                 className="bg-white border-2 border-[#6b2d94] text-[#6b2d94] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#eee5f5] transition-colors"

@@ -3,7 +3,7 @@ import { Footer } from "../components/Footer";
 import { motion } from "motion/react";
 import { MapPin, Phone, Clock, Send, Facebook, Linkedin, Mail, Shield, Headphones, FileText } from "lucide-react";
 import { useState } from "react";
-import { APPLICATION_LINKS, CONTACT_INFO } from "../data/siteInfo";
+import { APPLICATION_LINKS, CONTACT_INFO, ADMISSION_EMAIL, buildDocumentEmailHref } from "../data/siteInfo";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -306,10 +306,12 @@ export default function Contact() {
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6b2d94] focus:border-transparent transition-all"
                     >
                       <option value="">Select an option</option>
-                      <option value="hybrid-nurse-aide">Hybrid Nurse Aide (CNA) Course</option>
-                      <option value="hybrid-phlebotomy">Hybrid Phlebotomy Technician Course</option>
-                      <option value="hybrid-medication-aide">Hybrid Medication Aide Course</option>
-                      <option value="hybrid-refresher">Hybrid Refresher Course (CNA)</option>
+                      <option value="hybrid-nurse-aide">Nurse Aide / Nursing Assistant Program</option>
+                      <option value="hybrid-phlebotomy-technician">Phlebotomy Course</option>
+                      <option value="medication-aide">Medication Aide Class</option>
+                      <option value="med-tech">Med Tech Course</option>
+                      <option value="hybrid-refresher-course">Nurse Aide Refresher / CNA Refresher Course</option>
+                      <option value="aha-cpr-instructor">American Heart Association CPR Instructor Course</option>
                       <option value="home-care">Home Care Services</option>
                       <option value="employment">Employment Opportunities</option>
                       <option value="other">Other</option>
@@ -382,26 +384,59 @@ export default function Contact() {
                     Apply Online
                   </h3>
                   <p className="text-[#4a5565] mb-6">
-                    Complete the School Information application first, then submit enrollment forms and required documents for admissions review.
+                    Complete the School Application Form first, then submit the Enrollment Agreement Forms and required documents for admissions review.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <a
-                      href={APPLICATION_LINKS.schoolInformation}
+                      href={APPLICATION_LINKS.schoolApplication}
                       target="_blank"
                       rel="noreferrer"
                       className="bg-[#6b2d94] text-white px-6 py-3 rounded-full hover:bg-[#4a1a6d] transition-colors text-center font-medium"
                     >
-                      School Information Application
+                      School Application Form
                     </a>
                     <a
-                      href={APPLICATION_LINKS.enrollmentForms}
+                      href={APPLICATION_LINKS.enrollmentAgreement}
                       target="_blank"
                       rel="noreferrer"
                       className="bg-white border-2 border-[#6b2d94] text-[#6b2d94] px-6 py-3 rounded-full hover:bg-[#eee5f5] transition-colors text-center font-medium"
                     >
-                      Enrollment Forms
+                      Enrollment Agreement Forms
                     </a>
                   </div>
+                </motion.div>
+
+                {/* Send Documents by Email */}
+                <motion.div
+                  className="bg-white border border-gray-200 rounded-2xl p-8"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.28 }}
+                  whileHover={{ boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)" }}
+                >
+                  <div className="bg-[#eee5f5] p-3 rounded-xl w-fit mb-4">
+                    <Mail className="size-6 text-[#6b2d94]" />
+                  </div>
+                  <h3 className="text-2xl font-medium text-[#101828] mb-3">
+                    Send Your Documents
+                  </h3>
+                  <p className="text-[#4a5565] mb-6">
+                    Send all other requested documents to our admissions team. Click the button below to open your email app with everything pre-filled — just attach your documents (Valid ID, Social Security Card, High School Diploma or GED, immunization records, etc.) and hit send.
+                  </p>
+                  <a
+                    href={buildDocumentEmailHref()}
+                    className="inline-flex items-center justify-center gap-2 bg-[#6b2d94] text-white px-6 py-3 rounded-full hover:bg-[#4a1a6d] transition-colors text-center font-medium"
+                  >
+                    <Mail className="size-5" />
+                    Email Your Documents
+                  </a>
+                  <p className="text-sm text-[#6a7282] mt-4 break-all">
+                    Or email us directly at{" "}
+                    <a href={buildDocumentEmailHref()} className="text-[#6b2d94] hover:underline">
+                      {ADMISSION_EMAIL}
+                    </a>
+                  </p>
                 </motion.div>
 
                 <motion.div 
@@ -487,7 +522,7 @@ export default function Contact() {
                   </div>
                   <div className="mt-6 flex gap-3">
                     <a
-                      href="https://www.facebook.com/InnovationHealthcareSolutions"
+                      href="https://www.facebook.com/share/1JZceNDsCH/"
                       target="_blank"
                       rel="noreferrer"
                       className="bg-white/20 p-3 rounded-lg hover:bg-white/30 transition-colors"
