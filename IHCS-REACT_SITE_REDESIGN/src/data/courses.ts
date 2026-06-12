@@ -59,7 +59,7 @@ export const courses: Course[] = [
     description:
       "Jumpstart your healthcare career with our state-approved Hybrid Nurse Aide I course. This 120-hour program combines flexible online learning with hands-on clinical experience, all completed in just 5½ weeks.",
     duration: "120 Hours (5½ Weeks)",
-    nextStart: "March 16, 2026",
+    nextStart: "May 11, 2026",
     image: "/Nurse-Aide.jpg",
     badge: "Most Popular",
     icon: "heart",
@@ -240,7 +240,7 @@ export const courses: Course[] = [
     title: "Nurse Aide Refresher / CNA Refresher Course",
     description: "Designed for individuals who want to return to the healthcare field and prepare to challenge or retake the state exam. Refresh your hands-on clinical skills and build confidence.",
     duration: "1 or 2 Weeks",
-    nextStart: "March 16, 2026",
+    nextStart: "May 11, 2026",
     image: "/Refresher.jpg",
     icon: "refresh-cw",
     payments: {
