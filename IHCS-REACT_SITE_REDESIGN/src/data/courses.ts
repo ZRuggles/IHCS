@@ -103,7 +103,8 @@ export const courses: Course[] = [
         "Valid ID",
         "Social Security Card",
         "Official High School Diploma or GED — OR pass our Placement Test",
-        "Immunizations Required"
+        "Immunizations Required",
+        "TB Skin Test or Quantiferon Test"
       ],
       tuitionIncludes: [
         "Criminal Background Check",
@@ -161,6 +162,7 @@ export const courses: Course[] = [
       requirements: [
         "Valid ID",
         "Social Security Card",
+        "Official High School Transcript — OR pass our Placement Test",
         "Immunizations",
         "TB Skin Test or Quantiferon Test",
         "Must be willing to perform and receive venipuncture from classmates"
@@ -214,7 +216,7 @@ export const courses: Course[] = [
     description: "Perfect for individuals interested in medication technician training. Course materials are included in tuition.",
     duration: "Self-Paced + 1-Day Skills Check-Off",
     nextStart: "Rolling Enrollment",
-    image: "/Medication.jpg",
+    image: "/Infusion.jpeg",
     icon: "pill",
     payments: {
       fullPaymentUrl: "https://buy.stripe.com/6oUcN45Xg0D1f4f1wz0oM0j"
@@ -284,7 +286,7 @@ export const courses: Course[] = [
     description: "Take the next step in your healthcare career by becoming an American Heart Association (AHA) CPR Instructor. Designed for individuals passionate about teaching life-saving skills to healthcare professionals, workplaces, community organizations, schools, churches, and the public.",
     duration: "Instructor Certification (valid 2 years)",
     nextStart: "Contact Admissions",
-    image: "/Nurse-Aide.jpg",
+    image: "/NurseAide.jpg",
     badge: "New",
     icon: "heart",
     payments: {
