@@ -4,8 +4,6 @@ import { motion } from "motion/react";
 import { Briefcase, DollarSign, GraduationCap, Heart, Users, TrendingUp, Award, Clock, Shield, Headphones } from "lucide-react";
 
 const JOB_APPLICATION_URL = "https://innjobs.sembra1.com/";
-const NURSING_APPLICATION_PDF_URL =
-  "https://innovationhealthcaresolutions.com/wp-content/uploads/2024/08/Innovation-Healthcare-Solutions-Nursing-Applic.pdf";
 const EMPLOYMENT_HERO_IMAGE = "/Supplemental Staffing.jpeg";
 const TEAM_BREAK_IMAGE = "/Home Care Services.jpeg";
 const HEALTHCARE_INSTRUCTOR_IMAGE =
@@ -16,7 +14,7 @@ export default function Employment() {
     "Registered Nurse (RN)": "/LPN and RN.jpg",
     "Licensed Practical Nurse (LPN)": "/PRN Home Visit.jpg",
     "Certified Nursing Assistant (CNA)": "/NurseAide.jpg",
-    "Medical Assistant": "/Home Care Services.jpeg",
+    "Foot Care Technician": "/FootCareNurse.jpeg",
     "Phlebotomy Technician": "/Infusion.jpeg",
     "Healthcare Instructor": HEALTHCARE_INSTRUCTOR_IMAGE
   };
@@ -41,10 +39,10 @@ export default function Employment() {
       requirements: ["Current CNA certification", "Clean background check", "Reliable transportation", "Caring and patient demeanor"]
     },
     {
-      title: "Medical Assistant",
-      type: "Full-time",
-      description: "Support clinical operations including patient intake, vital signs, EKG, phlebotomy, and administrative tasks.",
-      requirements: ["MA certification or equivalent", "Clinical experience", "Proficiency in EHR systems", "Strong organizational skills"]
+      title: "Foot Care Technician",
+      type: "Full-time / Part-time",
+      description: "Responsibilities include foot health, trimming toenails, educating patients on foot hygiene, and working with other healthcare professionals to manage complex conditions. Foot Care Technicians play a vital role in preventing complications such as infections or ulcers, which can lead to serious health issues if left untreated.",
+      requirements: ["On-the-job training provided", "No credentials needed", "Reliable transportation", "Caring and patient demeanor"]
     },
     {
       title: "Phlebotomy Technician",
@@ -453,16 +451,6 @@ export default function Employment() {
                 Explore our available positions and find the perfect role for your skills and experience
               </p>
             </motion.div>
-            <div className="flex justify-center mb-8">
-              <a
-                href={NURSING_APPLICATION_PDF_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="bg-white border-2 border-[#6b2d94] text-[#6b2d94] px-6 py-3 rounded-full hover:bg-[#eee5f5] transition-colors text-sm sm:text-base"
-              >
-                Nursing Application (PDF)
-              </a>
-            </div>
 
             <div className="space-y-6">
               {positions.map((position, index) => {
@@ -530,16 +518,6 @@ export default function Employment() {
                       >
                         Apply Now
                       </a>
-                      {position.title === "Registered Nurse (RN)" ? (
-                        <a
-                          href={NURSING_APPLICATION_PDF_URL}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="block bg-white border border-[#6b2d94] text-[#6b2d94] px-8 py-3 rounded-full hover:bg-[#eee5f5] transition-colors text-center whitespace-nowrap text-sm"
-                        >
-                          Nursing PDF
-                        </a>
-                      ) : null}
                     </div>
                   </div>
                 </motion.div>
