@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { courses } from "../data/courses";
-import { Clock, Calendar, DollarSign, Award, CheckCircle, ArrowLeft, Heart, Activity, Droplet, Ambulance, PillBottle, Stethoscope, Pill, RefreshCw, Mail } from "lucide-react";
+import { Clock, Calendar, DollarSign, Award, CheckCircle, ArrowLeft, Heart, Activity, Droplet, Ambulance, PillBottle, Stethoscope, Pill, RefreshCw, Mail, FileText, CreditCard } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { APPLICATION_LINKS, ADMISSION_EMAIL, buildDocumentEmailHref } from "../data/siteInfo";
 
@@ -387,7 +387,7 @@ export default function CourseDetail() {
                   <div className="mt-6 pt-6 border-t border-gray-200">
                     <h4 className="font-medium text-[#101828] mb-3">How to Enroll</h4>
                     <ul className="space-y-2 text-sm text-[#6a7282]">
-                      <li>- Complete the School Application Form (required for all programs)</li>
+                      <li>- Complete the School Application Form and Enrollment Agreement Forms (required for all programs)</li>
                       {hasFullPayment ? (
                         <li>- Pay in full or choose a plan — processed securely through Stripe</li>
                       ) : (
@@ -407,6 +407,144 @@ export default function CourseDetail() {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* How to Enroll */}
+        <section className="py-12 sm:py-16 lg:py-20 bg-[#f7f2fb] border-y border-[#eee5f5]">
+          <div className="max-w-[1600px] mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl font-medium text-[#101828] mb-4">
+                How to Enroll
+              </h2>
+              <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] max-w-2xl mx-auto">
+                Three simple steps to get started in the {course.title}.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+              {/* Step 1 */}
+              <div className="bg-white rounded-2xl border border-[#dfd1eb] p-8 flex flex-col shadow-sm">
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="bg-[#561D7E] text-white size-12 rounded-full flex items-center justify-center text-xl font-bold shrink-0">
+                    1
+                  </div>
+                  <FileText className="size-8 text-[#561D7E]" />
+                </div>
+                <h3 className="text-xl font-medium text-[#101828] mb-2">
+                  Complete the Forms
+                </h3>
+                <p className="text-[#4a5565] mb-6 flex-1">
+                  Fill out the <strong>School Application Form</strong> and the{" "}
+                  <strong>Enrollment Agreement Forms</strong>. Both are required for all programs.
+                </p>
+                <div className="flex flex-col gap-3">
+                  <a
+                    href={APPLICATION_LINKS.schoolApplication}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block w-full bg-[#561D7E] text-white text-center py-3 rounded-full hover:bg-[#461464] transition-colors font-medium"
+                  >
+                    School Application Form
+                  </a>
+                  <a
+                    href={APPLICATION_LINKS.enrollmentAgreement}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block w-full bg-white border-2 border-[#561D7E] text-[#561D7E] text-center py-3 rounded-full hover:bg-[#eee5f5] transition-colors font-medium"
+                  >
+                    Enrollment Agreement Forms
+                  </a>
+                </div>
+              </div>
+
+              {/* Step 2 */}
+              <div className="bg-white rounded-2xl border border-[#dfd1eb] p-8 flex flex-col shadow-sm">
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="bg-[#561D7E] text-white size-12 rounded-full flex items-center justify-center text-xl font-bold shrink-0">
+                    2
+                  </div>
+                  <CreditCard className="size-8 text-[#561D7E]" />
+                </div>
+                <h3 className="text-xl font-medium text-[#101828] mb-2">
+                  Pay Your Tuition
+                </h3>
+                {hasFullPayment ? (
+                  <>
+                    <p className="text-[#4a5565] mb-6 flex-1">
+                      Pay in full or choose a payment plan. All payments are processed
+                      securely through <strong>Stripe</strong>.
+                    </p>
+                    <div className="flex flex-col gap-3">
+                      <a
+                        href={course.payments.fullPaymentUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="block w-full bg-[#561D7E] text-white text-center py-3 rounded-full hover:bg-[#461464] transition-colors font-medium"
+                      >
+                        Pay In Full
+                      </a>
+                      {hasPaymentPlans ? (
+                        <button
+                          type="button"
+                          onClick={() => setIsPlanModalOpen(true)}
+                          className="block w-full bg-white border-2 border-[#561D7E] text-[#561D7E] text-center py-3 rounded-full hover:bg-[#eee5f5] transition-colors font-medium"
+                        >
+                          Choose Payment Plan
+                        </button>
+                      ) : null}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-[#4a5565] mb-6 flex-1">
+                      Contact our admissions team to arrange tuition payment for this program.
+                    </p>
+                    <a
+                      href="tel:+13369997123"
+                      className="block w-full bg-[#561D7E] text-white text-center py-3 rounded-full hover:bg-[#461464] transition-colors font-medium"
+                    >
+                      Call (336) 999-7123
+                    </a>
+                  </>
+                )}
+              </div>
+
+              {/* Step 3 */}
+              <div className="bg-white rounded-2xl border border-[#dfd1eb] p-8 flex flex-col shadow-sm">
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="bg-[#561D7E] text-white size-12 rounded-full flex items-center justify-center text-xl font-bold shrink-0">
+                    3
+                  </div>
+                  <Mail className="size-8 text-[#561D7E]" />
+                </div>
+                <h3 className="text-xl font-medium text-[#101828] mb-2">
+                  Send Your Documents
+                </h3>
+                <p className="text-[#4a5565] mb-6 flex-1">
+                  Email any other requested documents to{" "}
+                  <a href={documentEmailHref} className="text-[#561D7E] underline break-all font-medium">
+                    {ADMISSION_EMAIL}
+                  </a>
+                  . Click below and just attach your files.
+                </p>
+                <a
+                  href={documentEmailHref}
+                  className="flex w-full items-center justify-center gap-2 bg-[#561D7E] text-white text-center py-3 rounded-full hover:bg-[#461464] transition-colors font-medium"
+                >
+                  <Mail className="size-5" />
+                  Send Documents by Email
+                </a>
+              </div>
+            </div>
+
+            <p className="text-center text-[#6a7282]">
+              Questions about enrolling?{" "}
+              <a href="tel:+13369997123" className="text-[#561D7E] font-medium hover:underline">
+                Call (336) 999-7123
+              </a>{" "}
+              and our admissions team will help.
+            </p>
           </div>
         </section>
 
