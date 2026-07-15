@@ -64,29 +64,7 @@ export const courses: Course[] = [
     badge: "Most Popular",
     icon: "heart",
     payments: {
-      fullPaymentUrl: "https://buy.stripe.com/14A5kCdpI1H55tFcbd0oM01",
-      paymentPlans: [
-        {
-          label: "Hybrid Nurse Payment Link 1",
-          url: "https://buy.stripe.com/5kQaEW4Tc2L909l6QT0oM09"
-        },
-        {
-          label: "Hybrid Nurse Payment Link 2",
-          url: "https://buy.stripe.com/00w14mgBUbhFg8jcbd0oM0a"
-        },
-        {
-          label: "Hybrid Nurse Payment Link 3",
-          url: "https://buy.stripe.com/dRmcN44Tc99x5tF1wz0oM0b"
-        },
-        {
-          label: "Hybrid Nurse Payment Link 4",
-          url: "https://buy.stripe.com/4gM9ASfxQdpN5tF5MP0oM0c"
-        },
-        {
-          label: "Hybrid Nurse Payment Link 5",
-          url: "https://buy.stripe.com/14AbJ03P8bhFcW72AD0oM0d"
-        }
-      ]
+      fullPaymentUrl: "https://buy.stripe.com/14A5kCdpI1H55tFcbd0oM01"
     },
     scheduleDates: cnaAndRefresherSchedule,
     details: {
@@ -128,25 +106,7 @@ export const courses: Course[] = [
     badge: "Fast Track",
     icon: "droplet",
     payments: {
-      fullPaymentUrl: "https://buy.stripe.com/7sY28qadwbhFf4f7UX0oM02",
-      paymentPlans: [
-        {
-          label: "Hybrid Phlebotomy Payment Link 1",
-          url: "https://buy.stripe.com/4gMeVcbhA99x3lx8Z10oM05"
-        },
-        {
-          label: "Hybrid Phlebotomy Payment Link 2",
-          url: "https://buy.stripe.com/4gM3cudpI5Xl5tF4IL0oM06"
-        },
-        {
-          label: "Hybrid Phlebotomy Payment Link 3",
-          url: "https://buy.stripe.com/9B67sKadw99x4pB7UX0oM07"
-        },
-        {
-          label: "Hybrid Phlebotomy Payment Link 4",
-          url: "https://buy.stripe.com/8x29ASclE3Pd8FRgrt0oM08"
-        }
-      ]
+      fullPaymentUrl: "https://buy.stripe.com/7sY28qadwbhFf4f7UX0oM02"
     },
     scheduleDates: phlebotomySchedule,
     details: {
@@ -184,17 +144,18 @@ export const courses: Course[] = [
   {
     id: "medication-aide",
     title: "Medication Aide Class",
-    description: "This course is designed for individuals who are currently listed as Nursing Assistants. Course materials are included in tuition.",
+    description: "This course is designed for individuals who are currently listed as Nursing Assistants. Classes begin every Monday. Course materials are included in tuition.",
     duration: "Self-Paced + 1-Day Skills Check-Off",
-    nextStart: "Rolling Enrollment",
+    nextStart: "Every Monday",
     image: "/Medication.jpg",
     icon: "pill",
     payments: {
       fullPaymentUrl: "https://buy.stripe.com/28EaEW2L45Xl8FR5MP0oM04"
     },
     details: {
-      overview: "This Medication Aide Class is designed for individuals who are currently listed as Nursing Assistants. Complete the lessons online at your own pace, then attend a one-day in-person competency check-off. Approved for North Carolina state requirements. Course materials are included in tuition.",
+      overview: "This Medication Aide Class is designed for individuals who are currently listed as Nursing Assistants. Classes begin every Monday, so you can start the week you're ready. Complete the lessons online at your own pace, then attend a one-day in-person competency check-off. Approved for North Carolina state requirements. Course materials are included in tuition.",
       curriculum: [
+        "New classes begin every Monday",
         "Self-paced online instruction",
         "1-day in-person skills validation",
         "State-approved curriculum",
@@ -207,24 +168,27 @@ export const courses: Course[] = [
       ],
       certification: "State-approved Medication Aide certification",
       cost: "$360",
-      schedule: "Self-paced online + 1-day in-person skills check-off"
+      schedule: "Classes begin every Monday - self-paced online + 1-day in-person skills check-off"
     }
   },
   {
     id: "med-tech",
     title: "Med Tech Course",
-    description: "Perfect for individuals interested in medication technician training. Course materials are included in tuition.",
+    description: "Perfect for individuals interested in medication technician training. Classes begin every Monday. Course materials are included in tuition.",
     duration: "Self-Paced + 1-Day Skills Check-Off",
-    nextStart: "Rolling Enrollment",
+    nextStart: "Every Monday",
     image: "/Infusion.jpeg",
     icon: "pill",
     payments: {
       fullPaymentUrl: "https://buy.stripe.com/6oUcN45Xg0D1f4f1wz0oM0j"
     },
     details: {
-      overview: "The Med Tech Course is perfect for individuals interested in medication technician training. Course materials are included in tuition.",
+      overview: "The Med Tech Course is perfect for individuals interested in medication technician training. Classes begin every Monday, so you can start the week you're ready. Complete the lessons online at your own pace, then attend a one-day in-person skills check-off. Course materials are included in tuition.",
       curriculum: [
+        "New classes begin every Monday",
         "Medication technician training",
+        "Self-paced online instruction",
+        "1-day in-person skills validation",
         "Course materials included in tuition"
       ],
       requirements: [
@@ -234,7 +198,7 @@ export const courses: Course[] = [
       ],
       certification: "Medication Technician training certificate of completion",
       cost: "$360",
-      schedule: "Contact admissions for the current schedule"
+      schedule: "Classes begin every Monday - self-paced online + 1-day in-person skills check-off"
     }
   },
   {
