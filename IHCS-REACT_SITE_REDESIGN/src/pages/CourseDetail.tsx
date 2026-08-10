@@ -1,5 +1,5 @@
 import { useParams, Link, Navigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { courses } from "../data/courses";
@@ -32,22 +32,30 @@ export default function CourseDetail() {
   const { courseId } = useParams();
   const course = courses.find((c) => c.id === courseId);
 
-  if (!course) {
-    return <Navigate to="/courses" replace />;
-  }
-
-  const IconComponent = iconMap[course.icon] || Heart;
-  const paymentPlans = course.payments.paymentPlans ?? [];
+  // NOTE: every Hook below must run on every render (Rules of Hooks), so the
+  // "course not found" redirect is returned AFTER all Hooks, not before them.
+  // Derived values use optional chaining / fallbacks so they are safe when the
+  // course is missing.
+  const IconComponent = (course && iconMap[course.icon]) || Heart;
+  // Memoize so the array keeps a stable identity across renders. Without this,
+  // `?? []` produces a new array every render, which makes the effects below
+  // (that list it as a dependency) re-run on every render and loop infinitely
+  // — "Maximum update depth exceeded" — freezing the page for courses that have
+  // no payment plans.
+  const paymentPlans = useMemo(
+    () => course?.payments.paymentPlans ?? [],
+    [course]
+  );
   const hasPaymentPlans = paymentPlans.length > 0;
-  const hasFullPayment = Boolean(course.payments.fullPaymentUrl);
-  const documentEmailHref = buildDocumentEmailHref(course.title);
+  const hasFullPayment = Boolean(course?.payments.fullPaymentUrl);
+  const documentEmailHref = buildDocumentEmailHref(course?.title);
   const installmentCount = paymentPlans.length;
-  const totalCostAmount = parseCurrencyAmount(course.details.cost);
+  const totalCostAmount = course ? parseCurrencyAmount(course.details.cost) : null;
   const installmentAmount =
     totalCostAmount !== null && installmentCount > 0
       ? totalCostAmount / installmentCount
       : null;
-  const installmentsStorageKey = `ihcs-installment-clicks-${course.id}`;
+  const installmentsStorageKey = `ihcs-installment-clicks-${course?.id ?? "unknown"}`;
   const [isPlanModalOpen, setIsPlanModalOpen] = useState(false);
   const [selectedPlanUrl, setSelectedPlanUrl] = useState<string | null>(
     paymentPlans[0]?.url ?? null
@@ -69,7 +77,7 @@ export default function CourseDetail() {
         ? currentUrl
         : paymentPlans[0].url
     );
-  }, [course.id, hasPaymentPlans, paymentPlans]);
+  }, [course?.id, hasPaymentPlans, paymentPlans]);
 
   useEffect(() => {
     if (!hasPaymentPlans) {
@@ -120,6 +128,11 @@ export default function CourseDetail() {
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [isPlanModalOpen]);
+
+  // All Hooks have run — safe to bail out for an unknown course id.
+  if (!course) {
+    return <Navigate to="/courses" replace />;
+  }
 
   const markInstallmentAsOpened = (planUrl: string) => {
     setOpenedInstallmentUrls((currentUrls) => {
