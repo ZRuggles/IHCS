@@ -7,10 +7,14 @@ export const CONTACT_INFO = {
 export const ADMISSION_EMAIL = "admission@innovationhealthcaresolutions.com";
 
 export const APPLICATION_LINKS = {
-  // School Application Form — required for ALL programs.
+  // Online application — required for ALL programs. Points to the Populi
+  // admissions application. Every "Apply Online" / "Apply for This Course"
+  // button across the site uses this single value.
   schoolApplication:
-    "https://docs.google.com/forms/d/e/1FAIpQLSes_Fcnig9yHdRtDCAUgf8yPGLznEsRxlIwR3qJLbr2lHPRyw/viewform?usp=sharing&ouid=111345749796514694670",
-  // Enrollment Agreement Forms.
+    "https://iihs.populiweb.com/router/admissions/onlineapplications/index?application_form=2",
+  // Enrollment Agreement Forms (previous Google Form). Currently unused —
+  // the Enrollment Agreement buttons are commented out site-wide until the
+  // Populi flow / new destination is confirmed. Kept here for easy re-enable.
   enrollmentAgreement:
     "https://docs.google.com/forms/d/e/1FAIpQLSdDsxdGtPb1vdHTPeGAxmJjr_oLXLsGTfa9sljbpCxjIh3v6Q/viewform?usp=sharing&ouid=111345749796514694670"
 };
@@ -19,6 +23,16 @@ export const APPLICATION_LINK_LABELS = {
   schoolApplication: "School Application Form",
   enrollmentAgreement: "Enrollment Agreement Forms"
 };
+
+// URL the top-bar "Apply Online" button points to. Same Populi application as
+// the rest of the site's apply buttons; swap this single value if it diverges.
+export const APPLY_ONLINE_URL = APPLICATION_LINKS.schoolApplication;
+
+// Learning Management System login for current students. Leave as an empty
+// string until the real LMS link is available — while empty, the header renders
+// the "Current Student LMS" button in a disabled state. Paste the real URL here
+// (e.g. "https://your-lms.example.com/login") to activate it.
+export const LMS_URL = "";
 
 /**
  * Builds a mailto: link that opens the visitor's default email app with the

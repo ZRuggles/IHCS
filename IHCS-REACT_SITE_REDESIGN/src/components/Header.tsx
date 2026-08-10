@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone, Mail } from "lucide-react";
 import { motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { APPLICATION_LINKS } from "../data/siteInfo";
+import { APPLY_ONLINE_URL, LMS_URL } from "../data/siteInfo";
 
 type LogoMode = "company" | "course";
 const LOGO_INTRO_KEY = "ihcs-logo-intro-played";
@@ -115,14 +115,34 @@ export function Header() {
               <span>contact@innovationhealthcaresolutions.com</span>
             </a>
           </div>
-          <a
-            href={APPLICATION_LINKS.schoolApplication}
-            target="_blank"
-            rel="noreferrer"
-            className="bg-[#ffcc00] text-[#461464] px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm hover:opacity-90 transition-opacity whitespace-nowrap"
-          >
-            Apply Online
-          </a>
+          <div className="flex items-center gap-2 sm:gap-3">
+            {LMS_URL ? (
+              <a
+                href={LMS_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="bg-white/10 border border-white/40 text-white px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm hover:bg-white/20 transition-colors whitespace-nowrap"
+              >
+                Current Student LMS
+              </a>
+            ) : (
+              <span
+                aria-disabled="true"
+                title="Student LMS link coming soon"
+                className="bg-white/5 border border-white/20 text-white/50 px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm whitespace-nowrap cursor-not-allowed"
+              >
+                Current Student LMS
+              </span>
+            )}
+            <a
+              href={APPLY_ONLINE_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="bg-[#ffcc00] text-[#461464] px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm hover:opacity-90 transition-opacity whitespace-nowrap"
+            >
+              Apply Online
+            </a>
+          </div>
         </div>
       </div>
 

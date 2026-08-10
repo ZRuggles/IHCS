@@ -59,7 +59,7 @@ export const courses: Course[] = [
     description:
       "Jumpstart your healthcare career with our state-approved Hybrid Nurse Aide I course. This 120-hour program combines flexible online learning with hands-on clinical experience, all completed in just 5½ weeks.",
     duration: "120 Hours (5½ Weeks)",
-    nextStart: "May 11, 2026",
+    nextStart: "Start dates throughout 2026",
     image: "/Nurse-Aide.jpg",
     badge: "Most Popular",
     icon: "heart",
@@ -101,7 +101,7 @@ export const courses: Course[] = [
     title: "Phlebotomy Course",
     description: "Build core phlebotomy skills in our 8-week Hybrid Phlebotomy Technician course with weekly online assignments, in-person instruction, and clinical practice.",
     duration: "8 Weeks",
-    nextStart: "May 11, 2026",
+    nextStart: "Start dates throughout 2026",
     image: "/Phlebotomy.jpg",
     badge: "Fast Track",
     icon: "droplet",
@@ -206,7 +206,7 @@ export const courses: Course[] = [
     title: "Nurse Aide Refresher / CNA Refresher Course",
     description: "Designed for individuals who want to return to the healthcare field and prepare to challenge or retake the state exam. Refresh your hands-on clinical skills and build confidence.",
     duration: "1 or 2 Weeks",
-    nextStart: "May 11, 2026",
+    nextStart: "Start dates throughout 2026",
     image: "/Refresher.jpg",
     icon: "refresh-cw",
     payments: {

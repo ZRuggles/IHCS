@@ -338,6 +338,7 @@ export default function CourseDetail() {
                   >
                     Apply for This Course
                   </a>
+                  {/* Enrollment Agreement Forms — temporarily disabled while the Populi flow is confirmed.
                   <a
                     href={APPLICATION_LINKS.enrollmentAgreement}
                     target="_blank"
@@ -346,6 +347,7 @@ export default function CourseDetail() {
                   >
                     Enrollment Agreement Forms
                   </a>
+                  */}
                   {hasFullPayment ? (
                     <a
                       href={course.payments.fullPaymentUrl}
@@ -387,7 +389,7 @@ export default function CourseDetail() {
                   <div className="mt-6 pt-6 border-t border-gray-200">
                     <h4 className="font-medium text-[#101828] mb-3">How to Enroll</h4>
                     <ul className="space-y-2 text-sm text-[#6a7282]">
-                      <li>- Complete the School Application Form and Enrollment Agreement Forms (required for all programs)</li>
+                      <li>- Complete the School Application Form (required for all programs)</li>
                       {hasFullPayment ? (
                         <li>- Pay in full or choose a plan — processed securely through Stripe</li>
                       ) : (
@@ -435,8 +437,7 @@ export default function CourseDetail() {
                   Complete the Forms
                 </h3>
                 <p className="text-[#4a5565] mb-6 flex-1">
-                  Fill out the <strong>School Application Form</strong> and the{" "}
-                  <strong>Enrollment Agreement Forms</strong>. Both are required for all programs.
+                  Fill out the <strong>School Application Form</strong>. It is required for all programs.
                 </p>
                 <div className="flex flex-col gap-3">
                   <a
@@ -447,6 +448,7 @@ export default function CourseDetail() {
                   >
                     School Application Form
                   </a>
+                  {/* Enrollment Agreement Forms — temporarily disabled while the Populi flow is confirmed.
                   <a
                     href={APPLICATION_LINKS.enrollmentAgreement}
                     target="_blank"
@@ -455,6 +457,7 @@ export default function CourseDetail() {
                   >
                     Enrollment Agreement Forms
                   </a>
+                  */}
                 </div>
               </div>
 
