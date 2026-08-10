@@ -97,7 +97,7 @@ export default function Home() {
                     </div>
                     <div>
                       <div className="font-semibold text-[#101828]">Next Class</div>
-                      <div className="text-sm text-[#6a7282]">Starts May 11, 2026</div>
+                      <div className="text-sm text-[#6a7282]">Start dates throughout 2026</div>
                     </div>
                   </div>
                 </motion.div>

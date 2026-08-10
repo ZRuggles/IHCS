@@ -20,6 +20,17 @@ export const APPLICATION_LINK_LABELS = {
   enrollmentAgreement: "Enrollment Agreement Forms"
 };
 
+// URL the top-bar "Apply Online" button points to. Swap this single value when
+// a new apply destination exists.
+export const APPLY_ONLINE_URL =
+  "https://iihs.populiweb.com/router/admissions/onlineapplications/index?application_form=2";
+
+// Learning Management System login for current students. Leave as an empty
+// string until the real LMS link is available — while empty, the header renders
+// the "Current Student LMS" button in a disabled state. Paste the real URL here
+// (e.g. "https://your-lms.example.com/login") to activate it.
+export const LMS_URL = "";
+
 /**
  * Builds a mailto: link that opens the visitor's default email app with the
  * admission address, a subject, and a body pre-filled. The visitor only needs
