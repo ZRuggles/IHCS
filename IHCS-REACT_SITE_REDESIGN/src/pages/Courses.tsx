@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { GraduationCap, Clock, DollarSign, Calendar, ArrowRight } from "lucide-react";
-import { courses, cnaAndRefresherSchedule, phlebotomySchedule } from "../data/courses";
+import { courses, cnaAndRefresherSchedule, phlebotomySchedule, getNextStart } from "../data/courses";
 import { APPLICATION_LINKS } from "../data/siteInfo";
 
 export default function Courses() {
@@ -241,7 +241,7 @@ export default function Courses() {
                         </div>
                         <div className="flex items-center gap-1">
                           <Calendar className="size-4" />
-                          <span>{course.nextStart}</span>
+                          <span>{getNextStart(course)}</span>
                         </div>
                       </div>
                       <div className="inline-flex items-center gap-2 text-[#6b2d94] font-medium group-hover:gap-3 transition-all">

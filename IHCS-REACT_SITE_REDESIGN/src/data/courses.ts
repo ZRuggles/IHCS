@@ -31,6 +31,79 @@ export interface Course {
   };
 }
 
+// Shown for "Next Start" when a schedule-driven course has no computable
+// upcoming date (all cohorts are in the past, or a date fails to parse).
+export const NEXT_START_FALLBACK = "Check Upcoming Schedule section";
+
+const MONTHS: Record<string, number> = {
+  january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
+  july: 6, august: 7, september: 8, october: 9, november: 10, december: 11
+};
+
+// Pulls the START date out of one schedule entry. Entries look like:
+//   "March 16 - April 25, 2026"
+//   "Cohort 1 (Mon/Wed, 9:00 AM - 1:00 PM): May 11 - July 8, 2026"
+// The start piece ("March 16" / "May 11") often omits its year, so we borrow
+// the year from the end of the range. Returns null if it can't be parsed.
+function parseScheduleStartDate(entry: string): Date | null {
+  // Drop any "Cohort ... :" prefix so we're left with the date range.
+  const range = entry.includes(":") ? entry.slice(entry.lastIndexOf(":") + 1) : entry;
+  // The full range's year is the last 4-digit number in the string.
+  const yearMatch = range.match(/(\d{4})/g);
+  if (!yearMatch) return null;
+
+  const startPart = range.split("-")[0]?.trim();
+  if (!startPart) return null;
+
+  // startPart is like "March 16" or "November 30, 2026".
+  const m = startPart.match(/([A-Za-z]+)\s+(\d{1,2})(?:,\s*(\d{4}))?/);
+  if (!m) return null;
+
+  const month = MONTHS[m[1].toLowerCase()];
+  const day = Number(m[2]);
+  // Use the start's own year if it has one, otherwise the range's first year.
+  const year = m[3] ? Number(m[3]) : Number(yearMatch[0]);
+  if (month === undefined || Number.isNaN(day) || Number.isNaN(year)) return null;
+
+  return new Date(year, month, day);
+}
+
+/**
+ * The "Next Start" label to show for a course.
+ * - Courses with a schedule: the soonest cohort start on/after today,
+ *   formatted like "May 11, 2026". If none are upcoming or parsing fails,
+ *   falls back to NEXT_START_FALLBACK ("Check Upcoming Schedule section").
+ * - Courses without a schedule: their static nextStart string
+ *   (e.g. "Every Monday", "Contact Admissions").
+ */
+export function getNextStart(course: Course): string {
+  if (!course.scheduleDates || course.scheduleDates.length === 0) {
+    return course.nextStart;
+  }
+
+  try {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const upcoming = course.scheduleDates
+      .map(parseScheduleStartDate)
+      .filter((d): d is Date => d !== null && d.getTime() >= today.getTime())
+      .sort((a, b) => a.getTime() - b.getTime());
+
+    if (upcoming.length === 0) {
+      return NEXT_START_FALLBACK;
+    }
+
+    return upcoming[0].toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric"
+    });
+  } catch {
+    return NEXT_START_FALLBACK;
+  }
+}
+
 export const cnaAndRefresherSchedule = [
   "March 16 - April 25, 2026",
   "April 27 - June 6, 2026",
@@ -59,7 +132,7 @@ export const courses: Course[] = [
     description:
       "Jumpstart your healthcare career with our state-approved Hybrid Nurse Aide I course. This 120-hour program combines flexible online learning with hands-on clinical experience, all completed in just 5½ weeks.",
     duration: "120 Hours (5½ Weeks)",
-    nextStart: "Start dates throughout 2026",
+    nextStart: "Check Upcoming Schedule section",
     image: "/Nurse-Aide.jpg",
     badge: "Most Popular",
     icon: "heart",
@@ -101,7 +174,7 @@ export const courses: Course[] = [
     title: "Phlebotomy Course",
     description: "Build core phlebotomy skills in our 8-week Hybrid Phlebotomy Technician course with weekly online assignments, in-person instruction, and clinical practice.",
     duration: "8 Weeks",
-    nextStart: "Start dates throughout 2026",
+    nextStart: "Check Upcoming Schedule section",
     image: "/Phlebotomy.jpg",
     badge: "Fast Track",
     icon: "droplet",
@@ -206,7 +279,7 @@ export const courses: Course[] = [
     title: "Nurse Aide Refresher / CNA Refresher Course",
     description: "Designed for individuals who want to return to the healthcare field and prepare to challenge or retake the state exam. Refresh your hands-on clinical skills and build confidence.",
     duration: "1 or 2 Weeks",
-    nextStart: "Start dates throughout 2026",
+    nextStart: "Check Upcoming Schedule section",
     image: "/Refresher.jpg",
     icon: "refresh-cw",
     payments: {

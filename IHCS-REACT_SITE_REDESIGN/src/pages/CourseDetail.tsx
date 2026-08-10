@@ -2,7 +2,7 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
-import { courses } from "../data/courses";
+import { courses, getNextStart } from "../data/courses";
 import { Clock, Calendar, DollarSign, Award, CheckCircle, ArrowLeft, Heart, Activity, Droplet, Ambulance, PillBottle, Stethoscope, Pill, RefreshCw, Mail, FileText, CreditCard } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { APPLICATION_LINKS, ADMISSION_EMAIL, buildDocumentEmailHref } from "../data/siteInfo";
@@ -182,7 +182,7 @@ export default function CourseDetail() {
                   <div className="bg-gradient-to-br from-[#eee5f5] to-white border border-[#eee5f5] p-4 rounded-xl">
                     <Calendar className="size-6 text-[#561D7E] mb-2" />
                     <div className="text-sm text-[#6a7282]">Next Start</div>
-                    <div className="text-lg font-medium text-[#101828]">{course.nextStart}</div>
+                    <div className="text-lg font-medium text-[#101828]">{getNextStart(course)}</div>
                   </div>
                   <div className="bg-gradient-to-br from-[#eee5f5] to-white border border-[#eee5f5] p-4 rounded-xl">
                     <DollarSign className="size-6 text-[#561D7E] mb-2" />
@@ -335,7 +335,7 @@ export default function CourseDetail() {
                     </div>
                     <div className="flex justify-between items-center pb-4 border-b border-gray-200">
                       <span className="text-[#6a7282]">Next Start</span>
-                      <span className="font-medium text-[#101828]">{course.nextStart}</span>
+                      <span className="font-medium text-[#101828]">{getNextStart(course)}</span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-[#6a7282]">Total Cost</span>
@@ -591,7 +591,7 @@ export default function CourseDetail() {
                       {relatedCourse.title}
                     </h3>
                     <p className="text-[#6a7282] text-sm mb-4">
-                      {relatedCourse.duration} | {relatedCourse.nextStart}
+                      {relatedCourse.duration} | {getNextStart(relatedCourse)}
                     </p>
                     <div className="text-[#561D7E] text-sm font-medium">
                       Learn More {"->"}

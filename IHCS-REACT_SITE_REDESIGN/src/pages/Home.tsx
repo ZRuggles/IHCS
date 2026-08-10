@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { ArrowRight, GraduationCap, Users, Clock, CheckCircle, Award, Star } from "lucide-react";
-import { courses } from "../data/courses";
+import { courses, getNextStart } from "../data/courses";
 import { APPLICATION_LINKS } from "../data/siteInfo";
 
 export default function Home() {
@@ -129,7 +129,7 @@ export default function Home() {
                   title={course.title}
                   description={course.description}
                   duration={course.duration}
-                  nextStart={course.nextStart}
+                  nextStart={getNextStart(course)}
                   image={course.image}
                   badge={course.badge}
                 />
