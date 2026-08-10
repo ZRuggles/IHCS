@@ -217,9 +217,9 @@ export const courses: Course[] = [
   {
     id: "medication-aide",
     title: "Medication Aide Class",
-    description: "This course is designed for individuals who are currently listed as Nursing Assistants. Classes begin every Monday. Course materials are included in tuition.",
+    description: "This course is designed for individuals who are currently listed as Nursing Assistants. Classes begin every Monday, Skill check off following Friday. Course materials are included in tuition.",
     duration: "Self-Paced + 1-Day Skills Check-Off",
-    nextStart: "Every Monday",
+    nextStart: "Every Monday, Skill check off following Friday",
     image: "/Medication.jpg",
     icon: "pill",
     payments: {
@@ -229,6 +229,7 @@ export const courses: Course[] = [
       overview: "This Medication Aide Class is designed for individuals who are currently listed as Nursing Assistants. Classes begin every Monday, so you can start the week you're ready. Complete the lessons online at your own pace, then attend a one-day in-person competency check-off. Approved for North Carolina state requirements. Course materials are included in tuition.",
       curriculum: [
         "New classes begin every Monday",
+        "Skill check off following Friday",
         "Self-paced online instruction",
         "1-day in-person skills validation",
         "State-approved curriculum",
@@ -249,7 +250,7 @@ export const courses: Course[] = [
     title: "Med Tech Course",
     description: "Perfect for individuals interested in medication technician training. Classes begin every Monday. Course materials are included in tuition.",
     duration: "Self-Paced + 1-Day Skills Check-Off",
-    nextStart: "Every Monday",
+    nextStart: "Every Monday, Skill check off following Friday",
     image: "/Infusion.jpeg",
     icon: "pill",
     payments: {
