@@ -32,7 +32,7 @@ export const APPLY_ONLINE_URL = APPLICATION_LINKS.schoolApplication;
 // string until the real LMS link is available — while empty, the header renders
 // the "Current Student LMS" button in a disabled state. Paste the real URL here
 // (e.g. "https://your-lms.example.com/login") to activate it.
-export const LMS_URL = "";
+export const LMS_URL = "https://iihs.populiweb.com/";
 
 /**
  * Builds a mailto: link that opens the visitor's default email app with the
