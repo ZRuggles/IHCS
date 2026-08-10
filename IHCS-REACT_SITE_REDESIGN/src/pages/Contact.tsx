@@ -384,7 +384,7 @@ export default function Contact() {
                     Apply Online
                   </h3>
                   <p className="text-[#4a5565] mb-6">
-                    Complete the School Application Form first, then submit the Enrollment Agreement Forms and required documents for admissions review.
+                    Complete the School Application Form and submit any required documents for admissions review.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <a
@@ -395,6 +395,7 @@ export default function Contact() {
                     >
                       School Application Form
                     </a>
+                    {/* Enrollment Agreement Forms — temporarily disabled while the Populi flow is confirmed.
                     <a
                       href={APPLICATION_LINKS.enrollmentAgreement}
                       target="_blank"
@@ -403,6 +404,7 @@ export default function Contact() {
                     >
                       Enrollment Agreement Forms
                     </a>
+                    */}
                   </div>
                 </motion.div>
 

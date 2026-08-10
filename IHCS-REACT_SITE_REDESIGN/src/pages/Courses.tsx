@@ -312,7 +312,7 @@ export default function Courses() {
                 Apply Online
               </h3>
               <p className="text-[#4a5565] max-w-2xl mx-auto mb-6">
-                Start with the School Application Form, then complete the Enrollment Agreement Forms for admissions review.
+                Complete the School Application Form to begin admissions review.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <a
@@ -323,6 +323,7 @@ export default function Courses() {
                 >
                   School Application Form
                 </a>
+                {/* Enrollment Forms — temporarily disabled while the Populi flow is confirmed.
                 <a
                   href={APPLICATION_LINKS.enrollmentAgreement}
                   target="_blank"
@@ -331,6 +332,7 @@ export default function Courses() {
                 >
                   Enrollment Forms
                 </a>
+                */}
               </div>
             </div>
           </div>
@@ -354,6 +356,7 @@ export default function Courses() {
               >
                 Apply Online
               </a>
+              {/* Enrollment Forms — temporarily disabled while the Populi flow is confirmed.
               <a
                 href={APPLICATION_LINKS.enrollmentAgreement}
                 target="_blank"
@@ -362,6 +365,7 @@ export default function Courses() {
               >
                 Enrollment Forms
               </a>
+              */}
               <a
                 href="tel:+13369997123"
                 className="bg-white border-2 border-[#6b2d94] text-[#6b2d94] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#eee5f5] transition-colors"

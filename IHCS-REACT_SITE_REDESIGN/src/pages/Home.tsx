@@ -311,6 +311,7 @@ export default function Home() {
               >
                 Apply Online
               </a>
+              {/* Enrollment Forms — temporarily disabled while the Populi flow is confirmed.
               <a
                 href={APPLICATION_LINKS.enrollmentAgreement}
                 target="_blank"
@@ -319,6 +320,7 @@ export default function Home() {
               >
                 Enrollment Forms
               </a>
+              */}
               <Link
                 to="/courses"
                 className="bg-white/10 border-2 border-white/70 text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-white/15 transition-colors text-base sm:text-lg"
