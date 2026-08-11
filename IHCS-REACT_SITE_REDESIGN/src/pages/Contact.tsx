@@ -424,7 +424,7 @@ export default function Contact() {
                     Send Your Documents
                   </h3>
                   <p className="text-[#4a5565] mb-6">
-                    Send all other requested documents to our admissions team. Click the button below to open your email app with everything pre-filled — just attach your documents (Valid ID, Social Security Card, High School Diploma or GED, immunization records, etc.) and hit send.
+                    Send all other requested documents to our admissions team. Click the button below to open your email app with everything pre-filled — just attach your documents (Valid ID, Social Security Card, Official Transcript or GED, immunization records, etc.) and hit send.
                   </p>
                   <a
                     href={buildDocumentEmailHref()}

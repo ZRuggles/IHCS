@@ -52,7 +52,7 @@ export function buildDocumentEmailHref(courseTitle?: string): string {
       ? `I am submitting my requested documents for the ${courseTitle}.`
       : "I am submitting my requested documents.",
     "",
-    "Please attach your documents to this email before sending (for example: Valid ID, Social Security Card, High School Diploma or GED, immunization records, or proof of prior training).",
+    "Please attach your documents to this email before sending (for example: Valid ID, Social Security Card, Official Transcript or GED, immunization records, or proof of prior training).",
     "",
     "Name:",
     "Phone:",

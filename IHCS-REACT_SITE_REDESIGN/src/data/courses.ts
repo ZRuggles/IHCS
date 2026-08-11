@@ -153,7 +153,7 @@ export const courses: Course[] = [
       requirements: [
         "Valid ID",
         "Social Security Card",
-        "Official High School Diploma or GED — OR pass our Placement Test",
+        "Official Transcript or GED — OR pass our Placement Test",
         "Immunizations Required",
         "TB Skin Test or Quantiferon Test"
       ],
@@ -238,7 +238,7 @@ export const courses: Course[] = [
       requirements: [
         "Valid ID",
         "Social Security Card",
-        "Official High School Diploma or GED"
+        "Official Transcript or GED"
       ],
       certification: "State-approved Medication Aide certification",
       cost: "$360",
@@ -266,7 +266,7 @@ export const courses: Course[] = [
         "Course materials included in tuition"
       ],
       requirements: [
-        "Official High School Diploma or GED",
+        "Official Transcript or GED",
         "Valid ID",
         "Social Security Card"
       ],
