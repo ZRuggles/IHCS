@@ -16,51 +16,85 @@ import {
   Car,
   ShoppingCart,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { useBlock } from "../content/hooks";
+import { EditableCards } from "../editor/EditableCards";
+
+/**
+ * Icons are chosen in code, not by editors — the database stores a NAME
+ * and this maps it back to a component. An unrecognised name falls back
+ * to Heart rather than rendering nothing, so a typo degrades gracefully.
+ */
+const ICONS: Record<string, LucideIcon> = {
+  Heart, Home, Activity, Users, CheckCircle, Pill,
+  Utensils, Bath, Shield, Sparkles, Car, ShoppingCart
+};
+
+const iconFor = (name: unknown): LucideIcon =>
+  (typeof name === "string" ? ICONS[name] : undefined) ?? Heart;
+
+/** A simple service entry: an icon name, a title, and a description. */
+interface ServiceItem {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+/** A specialty service, which also carries a feature list and a photo. */
+interface SpecialtyItem extends ServiceItem {
+  features: string[];
+  backgroundImage: string;
+}
+
+/* Fallback copy, used only when the API cannot be reached. */
+const FALLBACK_homeAssistanceServices: ServiceItem[] = [
+  { icon: "Utensils", title: "Meal Planning & Preparation", description: "Nutritious meal planning and cooking assistance" },
+  { icon: "Sparkles", title: "Light Housekeeping", description: "Maintaining a clean and safe living environment" },
+  { icon: "ShoppingCart", title: "Grocery Shopping", description: "Shopping assistance and errand support" },
+  { icon: "Shield", title: "Laundry Assistance", description: "Washing, folding, and organizing clothing" },
+  { icon: "Car", title: "Errands", description: "Transportation and errand assistance" },
+  { icon: "Car", title: "Doctor Appointments", description: "Transportation and companion care for medical visits" },
+  { icon: "Pill", title: "Medication Reminders", description: "Ensuring medications are taken on schedule" },
+  { icon: "CheckCircle", title: "Family Respite", description: "Temporary relief for family caregivers" },
+];
+
+const FALLBACK_personalCareServices: ServiceItem[] = [
+  { icon: "Bath", title: "Bathing", description: "Safe bathing and showering assistance" },
+  { icon: "Shield", title: "Dressing", description: "Help with clothing and getting ready" },
+  { icon: "Sparkles", title: "Personal Hygiene", description: "Grooming and hygiene support" },
+  { icon: "Sparkles", title: "Grooming", description: "Hair care, shaving, and personal care" },
+  { icon: "Activity", title: "Mobility Assistance", description: "Safe movement and transfer support" },
+  { icon: "Heart", title: "Incontinence Care", description: "Dignified personal care assistance" },
+];
+
+const FALLBACK_specialtyServices: SpecialtyItem[] = [
+  {
+    icon: "Activity",
+    title: "Home Infusion",
+    description: "Comprehensive in-home infusion therapy services including nursing care, medication administration, and supplies for patients requiring IV treatments.",
+    features: ["24/7 nursing support", "Medication management", "Administrative supplies", "Patient education"],
+    backgroundImage: "/Home Infusion.jpeg"
+  },
+  {
+    icon: "Home",
+    title: "Supplemental Staffing",
+    description: "Professional healthcare staffing solutions for medical offices, facilities, and hospitals with qualified RNs, LPNs, CNAs, and patient sitters.",
+    features: ["Registered Nurses (RN)", "Licensed Practical Nurses (LPN)", "Certified Nursing Assistants (CNA)", "Patient sitters"],
+    backgroundImage: "/Supplemental Staffing.jpeg"
+  },
+  {
+    icon: "Activity",
+    title: "Foot Care Nurse",
+    description: "Specialized skilled nursing foot care services providing comprehensive treatment for nail care, calluses, corns, circulation support, and pain management.",
+    features: ["Professional nail care", "Callus and corn treatment", "Circulation assessment", "Pain reduction therapy"],
+    backgroundImage: "/FootCareNurse.jpeg"
+  }
+];
 
 export default function Services() {
-  const homeAssistanceServices = [
-    { icon: Utensils, title: "Meal Planning & Preparation", description: "Nutritious meal planning and cooking assistance" },
-    { icon: Sparkles, title: "Light Housekeeping", description: "Maintaining a clean and safe living environment" },
-    { icon: ShoppingCart, title: "Grocery Shopping", description: "Shopping assistance and errand support" },
-    { icon: Shield, title: "Laundry Assistance", description: "Washing, folding, and organizing clothing" },
-    { icon: Car, title: "Errands", description: "Transportation and errand assistance" },
-    { icon: Car, title: "Doctor Appointments", description: "Transportation and companion care for medical visits" },
-    { icon: Pill, title: "Medication Reminders", description: "Ensuring medications are taken on schedule" },
-    { icon: CheckCircle, title: "Family Respite", description: "Temporary relief for family caregivers" },
-  ];
-
-  const personalCareServices = [
-    { icon: Bath, title: "Bathing", description: "Safe bathing and showering assistance" },
-    { icon: Shield, title: "Dressing", description: "Help with clothing and getting ready" },
-    { icon: Sparkles, title: "Personal Hygiene", description: "Grooming and hygiene support" },
-    { icon: Sparkles, title: "Grooming", description: "Hair care, shaving, and personal care" },
-    { icon: Activity, title: "Mobility Assistance", description: "Safe movement and transfer support" },
-    { icon: Heart, title: "Incontinence Care", description: "Dignified personal care assistance" },
-  ];
-
-  const specialtyServices = [
-    {
-      icon: Activity,
-      title: "Home Infusion",
-      description: "Comprehensive in-home infusion therapy services including nursing care, medication administration, and supplies for patients requiring IV treatments.",
-      features: ["24/7 nursing support", "Medication management", "Administrative supplies", "Patient education"],
-      backgroundImage: "/Home Infusion.jpeg"
-    },
-    {
-      icon: Home,
-      title: "Supplemental Staffing",
-      description: "Professional healthcare staffing solutions for medical offices, facilities, and hospitals with qualified RNs, LPNs, CNAs, and patient sitters.",
-      features: ["Registered Nurses (RN)", "Licensed Practical Nurses (LPN)", "Certified Nursing Assistants (CNA)", "Patient sitters"],
-      backgroundImage: "/Supplemental Staffing.jpeg"
-    },
-    {
-      icon: Activity,
-      title: "Foot Care Nurse",
-      description: "Specialized skilled nursing foot care services providing comprehensive treatment for nail care, calluses, corns, circulation support, and pain management.",
-      features: ["Professional nail care", "Callus and corn treatment", "Circulation assessment", "Pain reduction therapy"],
-      backgroundImage: "/FootCareNurse.jpeg"
-    }
-  ];
+  const homeAssistanceServices = useBlock<ServiceItem[]>("services", "homeAssistance.items", FALLBACK_homeAssistanceServices);
+  const personalCareServices = useBlock<ServiceItem[]>("services", "personalCare.items", FALLBACK_personalCareServices);
+  const specialtyServices = useBlock<SpecialtyItem[]>("services", "specialty.items", FALLBACK_specialtyServices);
   const defaultSpecialtyImage = specialtyServices[0].backgroundImage;
   const [activeSpecialtyImage, setActiveSpecialtyImage] = useState(defaultSpecialtyImage);
 
@@ -176,8 +210,18 @@ export default function Services() {
 
             {/* Two-column service list with alternating highlights */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <EditableCards
+              page="services"
+              contentKey="homeAssistance.items"
+              value={homeAssistanceServices}
+              label="home assistance list"
+              fields={[
+                { key: "title", label: "Service name", type: "text" },
+                { key: "description", label: "Description", type: "text" }
+              ]}
+            >
               {homeAssistanceServices.map((service, index) => {
-                const Icon = service.icon;
+                const Icon = iconFor(service.icon);
                 return (
                   <motion.div 
                     key={index} 
@@ -206,6 +250,7 @@ export default function Services() {
                   </motion.div>
                 );
               })}
+            </EditableCards>
             </div>
           </div>
         </section>
@@ -261,8 +306,18 @@ export default function Services() {
             </motion.div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <EditableCards
+              page="services"
+              contentKey="personalCare.items"
+              value={personalCareServices}
+              label="personal care list"
+              fields={[
+                { key: "title", label: "Service name", type: "text" },
+                { key: "description", label: "Description", type: "text" }
+              ]}
+            >
               {personalCareServices.map((service, index) => {
-                const Icon = service.icon;
+                const Icon = iconFor(service.icon);
                 return (
                   <motion.div 
                     key={index} 
@@ -289,6 +344,7 @@ export default function Services() {
                   </motion.div>
                 );
               })}
+            </EditableCards>
             </div>
           </div>
         </section>
@@ -325,8 +381,19 @@ export default function Services() {
               className="grid grid-cols-1 lg:grid-cols-3 gap-8"
               onMouseLeave={() => setActiveSpecialtyImage(defaultSpecialtyImage)}
             >
+            <EditableCards
+              page="services"
+              contentKey="specialty.items"
+              value={specialtyServices}
+              label="specialty services"
+              fields={[
+                { key: "title", label: "Service name", type: "text" },
+                { key: "description", label: "Description", type: "textarea" },
+                { key: "features", label: "What is included", type: "list" }
+              ]}
+            >
               {specialtyServices.map((service, index) => {
-                const Icon = service.icon;
+                const Icon = iconFor(service.icon);
                 return (
                   <motion.div 
                     key={index} 
@@ -369,6 +436,7 @@ export default function Services() {
                   </motion.div>
                 );
               })}
+            </EditableCards>
             </div>
           </div>
         </section>

@@ -3,11 +3,49 @@ import { motion } from "motion/react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { ArrowRight, GraduationCap, Users, Clock, CheckCircle, Award, Star } from "lucide-react";
-import { courses, getNextStart } from "../data/courses";
+import { useCourses, useText } from "../content/hooks";
+import { EditableText } from "../editor/Editable";
 import { APPLICATION_LINKS } from "../data/siteInfo";
 
 export default function Home() {
+  const courses = useCourses();
   const featuredCourses = courses.slice(0, 6);
+
+  // Each fallback is the copy the site showed before the editor existed,
+  // so an unseeded key still renders the original text rather than a gap.
+  const heroEyebrow = useText("home", "hero.eyebrow", "Healthcare Programs");
+  const headlineLead = useText("home", "hero.headlineLead", "Your Path to a");
+  const headlineAccent = useText("home", "hero.headlineAccent", "Rewarding");
+  const headlineTail = useText("home", "hero.headlineTail", "Healthcare Career");
+  const heroSubheading = useText(
+    "home",
+    "hero.subheading",
+    "Transform your future with state-approved healthcare training programs. Get the skills, certification, and confidence to excel in your new career."
+  );
+  const stat2Value = useText("home", "hero.stat2.value", "120-Hour");
+  const stat2Label = useText("home", "hero.stat2.label", "CNA Training");
+  const stat3Value = useText("home", "hero.stat3.value", "State");
+  const stat3Label = useText("home", "hero.stat3.label", "Approved");
+
+  const programsHeading = useText("home", "programs.heading", "Find Your Perfect Program");
+  const programsSubheading = useText(
+    "home",
+    "programs.subheading",
+    "Choose from our range of comprehensive healthcare training programs, each designed to prepare you for a successful career."
+  );
+  const successHeading = useText("home", "success.heading", "We're Invested in Your Success");
+  const successSubheading = useText(
+    "home",
+    "success.subheading",
+    "Our commitment goes beyond education - we provide the resources and support you need to thrive in your healthcare career."
+  );
+  const testimonialsHeading = useText("home", "testimonials.heading", "Hear From Our Graduates");
+  const ctaHeading = useText("home", "cta.heading", "Ready to Begin?");
+  const ctaSubheading = useText(
+    "home",
+    "cta.subheading",
+    "Take the first step towards a fulfilling career in healthcare. Our admissions team is here to guide you through the enrollment process."
+  );
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -24,13 +62,28 @@ export default function Home() {
                 transition={{ duration: 0.6 }}
               >
                 <div className="inline-block bg-[#eee5f5] text-[#561D7E] px-4 py-2 rounded-full text-sm mb-4">
-                  Healthcare Programs
+                  <EditableText page="home" contentKey="hero.eyebrow" value={heroEyebrow} label="hero badge">
+                    {heroEyebrow}
+                  </EditableText>
                 </div>
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-[#101828] leading-tight mb-6">
-                  Your Path to a <span className="text-[#561D7E]">Rewarding</span><br />Healthcare Career
+                  <EditableText page="home" contentKey="hero.headlineLead" value={headlineLead} label="headline, first line">
+                    {headlineLead}
+                  </EditableText>{" "}
+                  <span className="text-[#561D7E]">
+                    <EditableText page="home" contentKey="hero.headlineAccent" value={headlineAccent} label="highlighted word">
+                      {headlineAccent}
+                    </EditableText>
+                  </span>
+                  <br />
+                  <EditableText page="home" contentKey="hero.headlineTail" value={headlineTail} label="headline, second line">
+                    {headlineTail}
+                  </EditableText>
                 </h1>
                 <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] leading-relaxed mb-8">
-                  Transform your future with state-approved healthcare training programs. Get the skills, certification, and confidence to excel in your new career.
+                  <EditableText page="home" contentKey="hero.subheading" value={heroSubheading} label="hero paragraph" multiline>
+                    {heroSubheading}
+                  </EditableText>
                 </p>
                 <div className="flex flex-wrap gap-4 mb-8">
                   <a
@@ -65,12 +118,28 @@ export default function Home() {
                     <div className="text-sm text-[#6a7282]">Programs</div>
                   </div>
                   <div>
-                    <div className="text-3xl font-bold text-[#561D7E]">120-Hour</div>
-                    <div className="text-sm text-[#6a7282]">CNA Training</div>
+                    <div className="text-3xl font-bold text-[#561D7E]">
+                      <EditableText page="home" contentKey="hero.stat2.value" value={stat2Value} label="second stat">
+                        {stat2Value}
+                      </EditableText>
+                    </div>
+                    <div className="text-sm text-[#6a7282]">
+                      <EditableText page="home" contentKey="hero.stat2.label" value={stat2Label} label="second stat label">
+                        {stat2Label}
+                      </EditableText>
+                    </div>
                   </div>
                   <div>
-                    <div className="text-3xl font-bold text-[#561D7E]">State</div>
-                    <div className="text-sm text-[#6a7282]">Approved</div>
+                    <div className="text-3xl font-bold text-[#561D7E]">
+                      <EditableText page="home" contentKey="hero.stat3.value" value={stat3Value} label="third stat">
+                        {stat3Value}
+                      </EditableText>
+                    </div>
+                    <div className="text-sm text-[#6a7282]">
+                      <EditableText page="home" contentKey="hero.stat3.label" value={stat3Label} label="third stat label">
+                        {stat3Label}
+                      </EditableText>
+                    </div>
                   </div>
                 </motion.div>
               </motion.div>
@@ -114,10 +183,14 @@ export default function Home() {
                 Healthcare Programs
               </div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-4">
-                Find Your Perfect Program
+                <EditableText page="home" contentKey="programs.heading" value={programsHeading} label="programs section heading">
+                {programsHeading}
+              </EditableText>
               </h2>
               <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] max-w-2xl mx-auto">
-                Choose from our range of comprehensive healthcare training programs, each designed to prepare you for a successful career.
+                <EditableText page="home" contentKey="programs.subheading" value={programsSubheading} label="programs paragraph" multiline>
+                {programsSubheading}
+              </EditableText>
               </p>
             </div>
 
@@ -129,7 +202,7 @@ export default function Home() {
                   title={course.title}
                   description={course.description}
                   duration={course.duration}
-                  nextStart={getNextStart(course)}
+                  nextStart={course.nextStart}
                   image={course.image}
                   badge={course.badge}
                 />
@@ -143,10 +216,14 @@ export default function Home() {
           <div className="max-w-[1600px] mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-4">
-                We're Invested in Your Success
+                <EditableText page="home" contentKey="success.heading" value={successHeading} label="success section heading">
+                {successHeading}
+              </EditableText>
               </h2>
               <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] max-w-2xl mx-auto">
-                Our commitment goes beyond education - we provide the resources and support you need to thrive in your healthcare career.
+                <EditableText page="home" contentKey="success.subheading" value={successSubheading} label="success paragraph" multiline>
+                {successSubheading}
+              </EditableText>
               </p>
             </div>
 
@@ -240,7 +317,9 @@ export default function Home() {
           <div className="max-w-[1600px] mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-4">
-                Hear From Our Graduates
+                <EditableText page="home" contentKey="testimonials.heading" value={testimonialsHeading} label="testimonials heading">
+                {testimonialsHeading}
+              </EditableText>
               </h2>
             </div>
 
@@ -297,10 +376,14 @@ export default function Home() {
         <section className="bg-[#561D7E] py-12 sm:py-16 lg:py-20">
           <div className="max-w-[1600px] mx-auto px-4 text-center">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-white mb-6">
-              Ready to Begin?
+              <EditableText page="home" contentKey="cta.heading" value={ctaHeading} label="closing heading">
+                {ctaHeading}
+              </EditableText>
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Take the first step towards a fulfilling career in healthcare. Our admissions team is here to guide you through the enrollment process.
+              <EditableText page="home" contentKey="cta.subheading" value={ctaSubheading} label="closing paragraph" multiline>
+                {ctaSubheading}
+              </EditableText>
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a

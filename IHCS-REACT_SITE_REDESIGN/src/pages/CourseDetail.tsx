@@ -2,7 +2,12 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
-import { courses, getNextStart } from "../data/courses";
+import { useCourses } from "../content/hooks";
+import {
+  EditableCourseText,
+  EditableCourseList,
+  EditableCourseImage
+} from "../editor/EditableField";
 import { Clock, Calendar, DollarSign, Award, CheckCircle, ArrowLeft, Heart, Activity, Droplet, Ambulance, PillBottle, Stethoscope, Pill, RefreshCw, Mail, FileText, CreditCard } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { APPLICATION_LINKS, ADMISSION_EMAIL, buildDocumentEmailHref } from "../data/siteInfo";
@@ -30,6 +35,7 @@ const iconMap: Record<string, LucideIcon> = {
 
 export default function CourseDetail() {
   const { courseId } = useParams();
+  const courses = useCourses();
   const course = courses.find((c) => c.id === courseId);
 
   // NOTE: every Hook below must run on every render (Rules of Hooks), so the
@@ -168,26 +174,59 @@ export default function CourseDetail() {
                   </div>
                 )}
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium mb-6 leading-tight text-[#101828]">
-                  {course.title}
+                  <EditableCourseText
+                    courseId={course.courseId}
+                    field="title"
+                    value={course.title}
+                    label="program name"
+                  >
+                    {course.title}
+                  </EditableCourseText>
                 </h1>
                 <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] leading-relaxed mb-8">
-                  {course.description}
+                  <EditableCourseText
+                    courseId={course.courseId}
+                    field="description"
+                    value={course.description}
+                    label="short description"
+                    multiline
+                  >
+                    {course.description}
+                  </EditableCourseText>
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="bg-gradient-to-br from-[#eee5f5] to-white border border-[#eee5f5] p-4 rounded-xl">
                     <Clock className="size-6 text-[#561D7E] mb-2" />
                     <div className="text-sm text-[#6a7282]">Duration</div>
-                    <div className="text-lg font-medium text-[#101828]">{course.duration}</div>
+                    <div className="text-lg font-medium text-[#101828]">
+                      <EditableCourseText
+                        courseId={course.courseId}
+                        field="duration"
+                        value={course.duration}
+                        label="duration"
+                      >
+                        {course.duration}
+                      </EditableCourseText>
+                    </div>
                   </div>
                   <div className="bg-gradient-to-br from-[#eee5f5] to-white border border-[#eee5f5] p-4 rounded-xl">
                     <Calendar className="size-6 text-[#561D7E] mb-2" />
                     <div className="text-sm text-[#6a7282]">Next Start</div>
-                    <div className="text-lg font-medium text-[#101828]">{getNextStart(course)}</div>
+                    <div className="text-lg font-medium text-[#101828]">{course.nextStart}</div>
                   </div>
                   <div className="bg-gradient-to-br from-[#eee5f5] to-white border border-[#eee5f5] p-4 rounded-xl">
                     <DollarSign className="size-6 text-[#561D7E] mb-2" />
                     <div className="text-sm text-[#6a7282]">Total Cost</div>
-                    <div className="text-lg font-medium text-[#101828]">{course.details.cost}</div>
+                    <div className="text-lg font-medium text-[#101828]">
+                      <EditableCourseText
+                        courseId={course.courseId}
+                        field="cost"
+                        value={course.details.cost}
+                        label="tuition price"
+                      >
+                        {course.details.cost}
+                      </EditableCourseText>
+                    </div>
                   </div>
                   <div className="bg-gradient-to-br from-[#eee5f5] to-white border border-[#eee5f5] p-4 rounded-xl">
                     <Award className="size-6 text-[#561D7E] mb-2" />
@@ -197,6 +236,7 @@ export default function CourseDetail() {
                 </div>
               </div>
               <div className="relative">
+                <EditableCourseImage courseId={course.courseId} alt={course.title}>
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
                   <img
                     src={course.image}
@@ -208,6 +248,7 @@ export default function CourseDetail() {
                     <IconComponent className="size-12 text-[#561D7E]" strokeWidth={2} />
                   </div>
                 </div>
+                </EditableCourseImage>
               </div>
             </div>
           </div>
@@ -223,20 +264,35 @@ export default function CourseDetail() {
                   Program Overview
                 </h2>
                 <p className="text-lg text-[#4a5565] leading-relaxed mb-8">
-                  {course.details.overview}
+                  <EditableCourseText
+                    courseId={course.courseId}
+                    field="overview"
+                    value={course.details.overview}
+                    label="program overview"
+                    multiline
+                  >
+                    {course.details.overview}
+                  </EditableCourseText>
                 </p>
 
                 <h3 className="text-2xl font-medium text-[#101828] mb-4 mt-12">
                   Curriculum
                 </h3>
-                <div className="space-y-3">
-                  {course.details.curriculum.map((item, index) => (
-                    <div key={index} className="flex gap-3 items-start">
-                      <CheckCircle className="size-6 text-[#561D7E] shrink-0 mt-0.5" />
-                      <span className="text-[#4a5565] text-lg">{item}</span>
-                    </div>
-                  ))}
-                </div>
+                <EditableCourseList
+                  courseId={course.courseId}
+                  field="curriculum"
+                  value={course.details.curriculum}
+                  label="Curriculum"
+                >
+                  <div className="space-y-3">
+                    {course.details.curriculum.map((item, index) => (
+                      <div key={index} className="flex gap-3 items-start">
+                        <CheckCircle className="size-6 text-[#561D7E] shrink-0 mt-0.5" />
+                        <span className="text-[#4a5565] text-lg">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </EditableCourseList>
 
                 {course.scheduleDates && course.scheduleDates.length > 0 ? (
                   <>
@@ -259,16 +315,23 @@ export default function CourseDetail() {
                 <h3 className="text-2xl font-medium text-[#101828] mb-4 mt-12">
                   Requirements
                 </h3>
-                <div className="bg-[#f7f2fb] border border-[#eee5f5] rounded-xl p-6">
-                  <ul className="space-y-3">
-                    {course.details.requirements.map((req, index) => (
-                      <li key={index} className="flex gap-3 items-start">
-                        <div className="bg-[#561D7E] rounded-full size-2 mt-2 shrink-0" />
-                        <span className="text-[#4a5565]">{req}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <EditableCourseList
+                  courseId={course.courseId}
+                  field="requirements"
+                  value={course.details.requirements}
+                  label="Requirements"
+                >
+                  <div className="bg-[#f7f2fb] border border-[#eee5f5] rounded-xl p-6">
+                    <ul className="space-y-3">
+                      {course.details.requirements.map((req, index) => (
+                        <li key={index} className="flex gap-3 items-start">
+                          <div className="bg-[#561D7E] rounded-full size-2 mt-2 shrink-0" />
+                          <span className="text-[#4a5565]">{req}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </EditableCourseList>
 
                 {course.details.tuitionIncludes && course.details.tuitionIncludes.length > 0 ? (
                   <>
@@ -335,7 +398,7 @@ export default function CourseDetail() {
                     </div>
                     <div className="flex justify-between items-center pb-4 border-b border-gray-200">
                       <span className="text-[#6a7282]">Next Start</span>
-                      <span className="font-medium text-[#101828]">{getNextStart(course)}</span>
+                      <span className="font-medium text-[#101828]">{course.nextStart}</span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-[#6a7282]">Total Cost</span>
@@ -591,7 +654,7 @@ export default function CourseDetail() {
                       {relatedCourse.title}
                     </h3>
                     <p className="text-[#6a7282] text-sm mb-4">
-                      {relatedCourse.duration} | {getNextStart(relatedCourse)}
+                      {relatedCourse.duration} | {relatedCourse.nextStart}
                     </p>
                     <div className="text-[#561D7E] text-sm font-medium">
                       Learn More {"->"}

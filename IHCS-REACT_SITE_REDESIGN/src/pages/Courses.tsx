@@ -3,10 +3,29 @@ import { motion } from "motion/react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { GraduationCap, Clock, DollarSign, Calendar, ArrowRight } from "lucide-react";
-import { courses, cnaAndRefresherSchedule, phlebotomySchedule, getNextStart } from "../data/courses";
+import { useCourses, useText } from "../content/hooks";
+import { EditableText } from "../editor/Editable";
 import { APPLICATION_LINKS } from "../data/siteInfo";
 
 export default function Courses() {
+  const courses = useCourses();
+
+  const heroHeading = useText("courses", "hero.heading", "Explore Our Healthcare Training Programs");
+  const heroSubheading = useText("courses", "hero.subheading", "State-approved certifications designed to launch your healthcare career. Flexible schedules, expert instruction, and hands-on training to help you succeed.");
+  const schedulesHeading = useText("courses", "schedules.heading", "Course Schedules");
+  const schedulesSubheading = useText("courses", "schedules.subheading", "Published schedules for 2026 and early 2027 cohorts.");
+  const programsHeading = useText("courses", "programs.heading", "Available Programs");
+  const programsSubheading = useText("courses", "programs.subheading", "Choose the program that fits your career goals and schedule. All courses include hands-on training and certification preparation.");
+  const enrollmentHeading = useText("courses", "enrollment.heading", "Simple Enrollment Process");
+  const enrollmentSubheading = useText("courses", "enrollment.subheading", "Get started in just four easy steps");
+
+  // The schedule lists come from the course records now, so adding a
+  // cohort date in the editor updates this section automatically.
+  const cnaAndRefresherSchedule =
+    courses.find((course) => course.id === "hybrid-nurse-aide")?.scheduleDates ?? [];
+  const phlebotomySchedule =
+    courses.find((course) => course.id === "hybrid-phlebotomy-technician")?.scheduleDates ?? [];
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -35,10 +54,14 @@ export default function Courses() {
                   Healthcare Training Programs
                 </div>
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium mb-6 leading-tight text-[#101828]">
-                  Explore Our Healthcare Training Programs
+                  <EditableText page="courses" contentKey="hero.heading" value={heroHeading} label="page heading">
+                {heroHeading}
+              </EditableText>
                 </h1>
                 <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] leading-relaxed">
-                  State-approved certifications designed to launch your healthcare career. Flexible schedules, expert instruction, and hands-on training to help you succeed.
+                  <EditableText page="courses" contentKey="hero.subheading" value={heroSubheading} label="page introduction" multiline>
+                {heroSubheading}
+              </EditableText>
                 </p>
               </motion.div>
               <motion.div 
@@ -89,10 +112,14 @@ export default function Courses() {
           <div className="max-w-[1600px] mx-auto px-4">
             <div className="text-center mb-10">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-4">
-                Course Schedules
+                <EditableText page="courses" contentKey="schedules.heading" value={schedulesHeading} label="schedules heading">
+                {schedulesHeading}
+              </EditableText>
               </h2>
               <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] max-w-3xl mx-auto">
-                Published schedules for 2026 and early 2027 cohorts.
+                <EditableText page="courses" contentKey="schedules.subheading" value={schedulesSubheading} label="schedules paragraph">
+                {schedulesSubheading}
+              </EditableText>
               </p>
             </div>
 
@@ -192,10 +219,14 @@ export default function Courses() {
           <div className="max-w-[1600px] mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-4">
-                Available Programs
+                <EditableText page="courses" contentKey="programs.heading" value={programsHeading} label="programs heading">
+                {programsHeading}
+              </EditableText>
               </h2>
               <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] max-w-2xl mx-auto">
-                Choose the program that fits your career goals and schedule. All courses include hands-on training and certification preparation.
+                <EditableText page="courses" contentKey="programs.subheading" value={programsSubheading} label="programs paragraph" multiline>
+                {programsSubheading}
+              </EditableText>
               </p>
             </div>
 
@@ -241,7 +272,7 @@ export default function Courses() {
                         </div>
                         <div className="flex items-center gap-1">
                           <Calendar className="size-4" />
-                          <span>{getNextStart(course)}</span>
+                          <span>{course.nextStart}</span>
                         </div>
                       </div>
                       <div className="inline-flex items-center gap-2 text-[#6b2d94] font-medium group-hover:gap-3 transition-all">
@@ -261,10 +292,14 @@ export default function Courses() {
           <div className="max-w-[1600px] mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#101828] mb-4">
-                Simple Enrollment Process
+                <EditableText page="courses" contentKey="enrollment.heading" value={enrollmentHeading} label="enrollment heading">
+                {enrollmentHeading}
+              </EditableText>
               </h2>
               <p className="text-base sm:text-lg lg:text-xl text-[#4a5565]">
-                Get started in just four easy steps
+                <EditableText page="courses" contentKey="enrollment.subheading" value={enrollmentSubheading} label="enrollment paragraph">
+                {enrollmentSubheading}
+              </EditableText>
               </p>
             </div>
 

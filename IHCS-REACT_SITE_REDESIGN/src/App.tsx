@@ -8,6 +8,9 @@ import Employment from "./pages/Employment";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import AxisChatWidget from "./components/AxisChatWidget";
+import { AdminRoute } from "./editor/AdminRoute";
+import { EditorToolbar } from "./editor/EditorToolbar";
+import { SetPassword } from "./editor/SetPassword";
 
 const pageTitles: Record<string, string> = {
   "/": "Innovation",
@@ -15,6 +18,7 @@ const pageTitles: Record<string, string> = {
   "/services": "Innovation - Services",
   "/employment": "Innovation - Employment",
   "/contact": "Innovation - Contact",
+  "/admin": "Website Editor",
 };
 
 function ScrollToTop() {
@@ -39,11 +43,17 @@ function PageTitle() {
 }
 
 function App() {
+  const { pathname } = useLocation();
+  // The chat widget is for visitors; it would only get in the way while
+  // editing, and the admin screen is not a public page.
+  const isAdminScreen = pathname.startsWith("/admin");
+
   return (
     <>
       <ScrollToTop />
       <PageTitle />
-      <AxisChatWidget />
+      <EditorToolbar />
+      {!isAdminScreen && <AxisChatWidget />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/courses" element={<Courses />} />
@@ -51,6 +61,10 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/employment" element={<Employment />} />
         <Route path="/contact" element={<Contact />} />
+        {/* Must precede the /admin/* catch-all so a recovery link is not
+            swallowed by the sign-in route. */}
+        <Route path="/admin/reset" element={<SetPassword />} />
+        <Route path="/admin/*" element={<AdminRoute />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

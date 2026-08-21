@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    // verify-parity.ts imports the frontend's courses.ts to compare
+    // against, so the project root has to span both directories.
+    "rootDir": "..",
+    // The frontend does not enable this flag, and its files are valid
+    // under its own config. Imposing it here would report errors in
+    // code this project does not own.
+    "noUncheckedIndexedAccess": false,
+    "types": ["node"]
+  },
+  "include": ["scripts/**/*.ts", "src/**/*.ts"],
+  "exclude": ["dist", "node_modules"]
+}

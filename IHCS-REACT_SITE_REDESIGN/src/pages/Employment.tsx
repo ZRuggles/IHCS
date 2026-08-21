@@ -2,12 +2,87 @@ import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { motion } from "motion/react";
 import { Briefcase, DollarSign, GraduationCap, Heart, Users, TrendingUp, Award, Clock, Shield, Headphones } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { useBlock } from "../content/hooks";
+import { EditableCards } from "../editor/EditableCards";
+
+/** One job listing, as stored in the employment/positions content block. */
+interface Position {
+  title: string;
+  type: string;
+  description: string;
+  requirements: string[];
+}
 
 const JOB_APPLICATION_URL = "https://innjobs.sembra1.com/";
 const EMPLOYMENT_HERO_IMAGE = "/Supplemental Staffing.jpeg";
 const TEAM_BREAK_IMAGE = "/Home Care Services.jpeg";
 const HEALTHCARE_INSTRUCTOR_IMAGE =
   "https://images.unsplash.com/photo-1589104759909-e355f8999f7e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwdHJhaW5pbmclMjBjbGFzc3Jvb20lMjBzdHVkZW50c3xlbnwxfHx8fDE3NzQxMTc3NzF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral";
+
+/**
+ * Icons are chosen in code, not by editors — the database stores a NAME
+ * and this maps it back to a component. An unrecognised name falls back
+ * to Award rather than rendering nothing.
+ */
+const ICONS: Record<string, LucideIcon> = {
+  Briefcase, DollarSign, GraduationCap, Heart, Users,
+  TrendingUp, Award, Clock, Shield, Headphones
+};
+
+const iconFor = (name: unknown): LucideIcon =>
+  (typeof name === "string" ? ICONS[name] : undefined) ?? Award;
+
+/** One employee benefit. `icon` is a lucide component NAME. */
+interface Benefit {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+/* Fallback copy, used only when the API cannot be reached. */
+const FALLBACK_BENEFITS: Benefit[] = [
+  {
+    icon: "DollarSign",
+    title: "Competitive Pay",
+    description: "Competitive wages with regular performance reviews and raises"
+  },
+  {
+    icon: "Shield",
+    title: "Retirement Plan",
+    description: "Simple IRA with 3% company match to secure your future"
+  },
+  {
+    icon: "GraduationCap",
+    title: "Paid Training",
+    description: "Comprehensive training from day one with ongoing education opportunities"
+  },
+  {
+    icon: "Heart",
+    title: "Free Supplies",
+    description: "Complimentary supplies for basic lab draws and antibiotic therapy"
+  },
+  {
+    icon: "Users",
+    title: "Simulation Labs",
+    description: "Access to state-of-the-art training facilities and equipment"
+  },
+  {
+    icon: "Headphones",
+    title: "24/7 Support",
+    description: "Around-the-clock clinical support and guidance"
+  },
+  {
+    icon: "Clock",
+    title: "Flexible Schedules",
+    description: "Full-time, part-time, and PRN positions available"
+  },
+  {
+    icon: "TrendingUp",
+    title: "Career Growth",
+    description: "Advancement opportunities and career development programs"
+  }
+];
 
 export default function Employment() {
   const positionBackgroundImageByTitle: Record<string, string> = {
@@ -19,7 +94,9 @@ export default function Employment() {
     "Healthcare Instructor": HEALTHCARE_INSTRUCTOR_IMAGE
   };
 
-  const positions = [
+
+  // Fallback copy, used only when the API cannot be reached.
+  const FALLBACK_POSITIONS: Position[] = [
     {
       title: "Registered Nurse (RN)",
       type: "Full-time / Part-time",
@@ -58,48 +135,21 @@ export default function Employment() {
     }
   ];
 
-  const benefits = [
-    {
-      icon: DollarSign,
-      title: "Competitive Pay",
-      description: "Competitive wages with regular performance reviews and raises"
-    },
-    {
-      icon: Shield,
-      title: "Retirement Plan",
-      description: "Simple IRA with 3% company match to secure your future"
-    },
-    {
-      icon: GraduationCap,
-      title: "Paid Training",
-      description: "Comprehensive training from day one with ongoing education opportunities"
-    },
-    {
-      icon: Heart,
-      title: "Free Supplies",
-      description: "Complimentary supplies for basic lab draws and antibiotic therapy"
-    },
-    {
-      icon: Users,
-      title: "Simulation Labs",
-      description: "Access to state-of-the-art training facilities and equipment"
-    },
-    {
-      icon: Headphones,
-      title: "24/7 Support",
-      description: "Around-the-clock clinical support and guidance"
-    },
-    {
-      icon: Clock,
-      title: "Flexible Schedules",
-      description: "Full-time, part-time, and PRN positions available"
-    },
-    {
-      icon: TrendingUp,
-      title: "Career Growth",
-      description: "Advancement opportunities and career development programs"
-    }
-  ];
+  // Job listings come from the database; the constant above is used only
+  // when the API is unreachable, so this section never renders empty.
+  const positions = useBlock<Position[]>("employment", "positions", FALLBACK_POSITIONS);
+
+  // Benefits come from the database; FALLBACK_BENEFITS (module scope) is
+  // used only when the API is unreachable.
+  const benefits = useBlock<Benefit[]>("employment", "benefits", FALLBACK_BENEFITS);
+
+  // The layout gives the first two entries their own feature cards and
+  // lays the rest out in rows of three. Reading by index would crash if
+  // an editor removed one, so each slot is derived defensively.
+  const [featuredPrimary, featuredSecondary] = benefits;
+  const compactBenefits = benefits.slice(2);
+  const compactRowOne = compactBenefits.slice(0, 3);
+  const compactRowTwo = compactBenefits.slice(3, 6);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -291,6 +341,16 @@ export default function Employment() {
             </motion.div>
 
             {/* Bento-box style layout with varying sizes */}
+            <EditableCards
+              page="employment"
+              contentKey="benefits"
+              value={benefits}
+              label="employee benefits"
+              fields={[
+                { key: "title", label: "Benefit", type: "text" },
+                { key: "description", label: "Description", type: "textarea" }
+              ]}
+            >
             <div className="grid grid-cols-1 md:grid-cols-6 gap-6">
               {/* Large feature card */}
               <motion.div 
@@ -309,10 +369,10 @@ export default function Employment() {
                   <DollarSign className="size-10 text-white" />
                 </motion.div>
                 <h3 className="text-2xl font-medium mb-3">
-                  {benefits[0].title}
+                  {featuredPrimary?.title}
                 </h3>
                 <p className="text-white/90 text-lg">
-                  {benefits[0].description}
+                  {featuredPrimary?.description}
                 </p>
               </motion.div>
 
@@ -333,16 +393,16 @@ export default function Employment() {
                   <Shield className="size-10 text-[#5b2484]" />
                 </motion.div>
                 <h3 className="text-2xl font-medium text-[#5b2484] mb-3">
-                  {benefits[1].title}
+                  {featuredSecondary?.title}
                 </h3>
                 <p className="text-[#5b2484]/80 text-lg">
-                  {benefits[1].description}
+                  {featuredSecondary?.description}
                 </p>
               </motion.div>
 
               {/* Compact cards row */}
-              {[benefits[2], benefits[3], benefits[4]].map((benefit, index) => {
-                const Icon = benefit.icon;
+              {compactRowOne.map((benefit, index) => {
+                const Icon = iconFor(benefit.icon);
                 return (
                   <motion.div 
                     key={index}
@@ -371,8 +431,8 @@ export default function Employment() {
               })}
 
               {/* Bottom row */}
-              {[benefits[5], benefits[6], benefits[7]].map((benefit, index) => {
-                const Icon = benefit.icon;
+              {compactRowTwo.map((benefit, index) => {
+                const Icon = iconFor(benefit.icon);
                 return (
                   <motion.div 
                     key={index}
@@ -400,6 +460,7 @@ export default function Employment() {
                 );
               })}
             </div>
+            </EditableCards>
           </div>
         </section>
 
@@ -452,6 +513,18 @@ export default function Employment() {
               </p>
             </motion.div>
 
+            <EditableCards
+              page="employment"
+              contentKey="positions"
+              value={positions}
+              label="open positions"
+              fields={[
+                { key: "title", label: "Job title", type: "text" },
+                { key: "type", label: "Employment type", type: "text" },
+                { key: "description", label: "Description", type: "textarea" },
+                { key: "requirements", label: "Requirements", type: "list" }
+              ]}
+            >
             <div className="space-y-6">
               {positions.map((position, index) => {
                 const cardBackgroundImage =
@@ -524,6 +597,7 @@ export default function Employment() {
                 );
               })}
             </div>
+            </EditableCards>
           </div>
         </section>
 

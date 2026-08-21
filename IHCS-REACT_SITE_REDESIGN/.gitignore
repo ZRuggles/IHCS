@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Generated at build time by scripts/fetch-content.mjs
+public/content.json
+
+# Compiled output from cross-project typechecking. The sources are .ts.
+src/**/*.js
