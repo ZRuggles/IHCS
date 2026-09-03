@@ -7,7 +7,9 @@ import Services from "./pages/Services";
 import Employment from "./pages/Employment";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-import AxisChatWidget from "./components/AxisChatWidget";
+// Axis chat widget disabled — uncomment this import, the isAdminScreen
+// const in App(), and the render line below to bring the widget back.
+// import AxisChatWidget from "./components/AxisChatWidget";
 import { AdminRoute } from "./editor/AdminRoute";
 import { EditorToolbar } from "./editor/EditorToolbar";
 import { SetPassword } from "./editor/SetPassword";
@@ -43,17 +45,17 @@ function PageTitle() {
 }
 
 function App() {
-  const { pathname } = useLocation();
   // The chat widget is for visitors; it would only get in the way while
   // editing, and the admin screen is not a public page.
-  const isAdminScreen = pathname.startsWith("/admin");
+  // const { pathname } = useLocation();
+  // const isAdminScreen = pathname.startsWith("/admin");
 
   return (
     <>
       <ScrollToTop />
       <PageTitle />
       <EditorToolbar />
-      {!isAdminScreen && <AxisChatWidget />}
+      {/* {!isAdminScreen && <AxisChatWidget />} */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/courses" element={<Courses />} />
