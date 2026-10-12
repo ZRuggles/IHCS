@@ -1,21 +1,45 @@
 import { useParams, Link, Navigate } from "react-router-dom";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "../components/Header";
+import { AdmissionsLink } from "../components/AdmissionsLink";
 import { Footer } from "../components/Footer";
 import { useCourses } from "../content/hooks";
+import type { PublicCourse } from "../content/types";
 import {
   EditableCourseText,
   EditableCourseList,
-  EditableCourseImage
+  EditableCourseImage,
 } from "../editor/EditableField";
-import { Clock, Calendar, DollarSign, Award, CheckCircle, ArrowLeft, Heart, Activity, Droplet, Ambulance, PillBottle, Stethoscope, Pill, RefreshCw, Mail, FileText, CreditCard } from "lucide-react";
+import {
+  Clock,
+  Calendar,
+  DollarSign,
+  Award,
+  CheckCircle,
+  ArrowLeft,
+  Heart,
+  Activity,
+  Droplet,
+  Ambulance,
+  PillBottle,
+  Stethoscope,
+  Pill,
+  RefreshCw,
+  Mail,
+  FileText,
+  CreditCard,
+} from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { APPLICATION_LINKS, ADMISSION_EMAIL, buildDocumentEmailHref } from "../data/siteInfo";
+import {
+  APPLICATION_LINKS,
+  ADMISSION_EMAIL,
+  buildDocumentEmailHref,
+} from "../data/siteInfo";
 
 const currencyFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
-  minimumFractionDigits: 2
+  minimumFractionDigits: 2,
 });
 
 const parseCurrencyAmount = (value: string) => {
@@ -37,82 +61,67 @@ export default function CourseDetail() {
   const { courseId } = useParams();
   const courses = useCourses();
   const course = courses.find((c) => c.id === courseId);
-
-  // NOTE: every Hook below must run on every render (Rules of Hooks), so the
-  // "course not found" redirect is returned AFTER all Hooks, not before them.
-  // Derived values use optional chaining / fallbacks so they are safe when the
-  // course is missing.
-  const IconComponent = (course && iconMap[course.icon]) || Heart;
-  // Memoize so the array keeps a stable identity across renders. Without this,
-  // `?? []` produces a new array every render, which makes the effects below
-  // (that list it as a dependency) re-run on every render and loop infinitely
-  // — "Maximum update depth exceeded" — freezing the page for courses that have
-  // no payment plans.
-  const paymentPlans = useMemo(
-    () => course?.payments.paymentPlans ?? [],
-    [course]
+  if (!course) return <Navigate to="/courses" replace />;
+  return (
+    <CourseDetailContent key={course.id} course={course} courses={courses} />
   );
+}
+
+function CourseIcon({ name }: { name: string }) {
+  const Icon = iconMap[name] ?? Heart;
+  return <Icon className="size-12 text-[#561D7E]" strokeWidth={2} />;
+}
+
+function CourseDetailContent({
+  course,
+  courses,
+}: {
+  course: PublicCourse;
+  courses: PublicCourse[];
+}) {
+  // The parent keys this component by course so each program gets its own
+  // modal, selection, and saved link history without effect-driven resets.
+  const paymentPlans = course.payments.paymentPlans ?? [];
   const hasPaymentPlans = paymentPlans.length > 0;
   const hasFullPayment = Boolean(course?.payments.fullPaymentUrl);
   const documentEmailHref = buildDocumentEmailHref(course?.title);
   const installmentCount = paymentPlans.length;
-  const totalCostAmount = course ? parseCurrencyAmount(course.details.cost) : null;
+  const totalCostAmount = course
+    ? parseCurrencyAmount(course.details.cost)
+    : null;
   const installmentAmount =
     totalCostAmount !== null && installmentCount > 0
       ? totalCostAmount / installmentCount
       : null;
   const installmentsStorageKey = `ihcs-installment-clicks-${course?.id ?? "unknown"}`;
-  const [isPlanModalOpen, setIsPlanModalOpen] = useState(false);
-  const [selectedPlanUrl, setSelectedPlanUrl] = useState<string | null>(
-    paymentPlans[0]?.url ?? null
+  const [planModalOpen, setIsPlanModalOpen] = useState(false);
+  const isPlanModalOpen = planModalOpen && hasPaymentPlans;
+  const [selectedPlanChoice, setSelectedPlanUrl] = useState<string | null>(
+    null,
   );
-  const [openedInstallmentUrls, setOpenedInstallmentUrls] = useState<string[]>([]);
+  const selectedPlanUrl = paymentPlans.some(
+    (plan) => plan.url === selectedPlanChoice,
+  )
+    ? selectedPlanChoice
+    : (paymentPlans[0]?.url ?? null);
+  const [openedInstallmentUrls, setOpenedInstallmentUrls] = useState<string[]>(
+    () => {
+      try {
+        const value: unknown = JSON.parse(
+          window.localStorage.getItem(installmentsStorageKey) ?? "[]",
+        );
+        return Array.isArray(value)
+          ? value.filter((url): url is string => typeof url === "string")
+          : [];
+      } catch {
+        return [];
+      }
+    },
+  );
 
   const openedInstallmentCount = paymentPlans.filter((plan) =>
-    openedInstallmentUrls.includes(plan.url)
+    openedInstallmentUrls.includes(plan.url),
   ).length;
-
-  useEffect(() => {
-    if (!hasPaymentPlans) {
-      setSelectedPlanUrl(null);
-      setIsPlanModalOpen(false);
-      return;
-    }
-    setSelectedPlanUrl((currentUrl) =>
-      paymentPlans.some((plan) => plan.url === currentUrl)
-        ? currentUrl
-        : paymentPlans[0].url
-    );
-  }, [course?.id, hasPaymentPlans, paymentPlans]);
-
-  useEffect(() => {
-    if (!hasPaymentPlans) {
-      setOpenedInstallmentUrls([]);
-      return;
-    }
-
-    try {
-      const rawValue = window.localStorage.getItem(installmentsStorageKey);
-      if (!rawValue) {
-        setOpenedInstallmentUrls([]);
-        return;
-      }
-      const parsedValue = JSON.parse(rawValue);
-      if (!Array.isArray(parsedValue)) {
-        setOpenedInstallmentUrls([]);
-        return;
-      }
-
-      const validUrls = parsedValue.filter(
-        (value): value is string =>
-          typeof value === "string" &&
-          paymentPlans.some((plan) => plan.url === value)
-      );
-      setOpenedInstallmentUrls(validUrls);
-    } catch {
-      setOpenedInstallmentUrls([]);
-    }
-  }, [hasPaymentPlans, installmentsStorageKey, paymentPlans]);
 
   useEffect(() => {
     if (!isPlanModalOpen) {
@@ -135,25 +144,24 @@ export default function CourseDetail() {
     };
   }, [isPlanModalOpen]);
 
-  // All Hooks have run — safe to bail out for an unknown course id.
-  if (!course) {
-    return <Navigate to="/courses" replace />;
-  }
-
   const markInstallmentAsOpened = (planUrl: string) => {
-    setOpenedInstallmentUrls((currentUrls) => {
-      if (currentUrls.includes(planUrl)) {
-        return currentUrls;
-      }
-      const nextUrls = [...currentUrls, planUrl];
-      window.localStorage.setItem(installmentsStorageKey, JSON.stringify(nextUrls));
-      return nextUrls;
-    });
+    if (openedInstallmentUrls.includes(planUrl)) return;
+    const nextUrls = [...openedInstallmentUrls, planUrl];
+    setOpenedInstallmentUrls(nextUrls);
+    try {
+      window.localStorage.setItem(
+        installmentsStorageKey,
+        JSON.stringify(nextUrls),
+      );
+    } catch {
+      /* Link tracking must not prevent checkout when storage is unavailable. */
+    }
   };
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
+      <AdmissionsLink />
 
       <main className="flex-1">
         {/* Hero Section */}
@@ -212,7 +220,9 @@ export default function CourseDetail() {
                   <div className="bg-gradient-to-br from-[#eee5f5] to-white border border-[#eee5f5] p-4 rounded-xl">
                     <Calendar className="size-6 text-[#561D7E] mb-2" />
                     <div className="text-sm text-[#6a7282]">Next Start</div>
-                    <div className="text-lg font-medium text-[#101828]">{course.nextStart}</div>
+                    <div className="text-lg font-medium text-[#101828]">
+                      {course.nextStart}
+                    </div>
                   </div>
                   <div className="bg-gradient-to-br from-[#eee5f5] to-white border border-[#eee5f5] p-4 rounded-xl">
                     <DollarSign className="size-6 text-[#561D7E] mb-2" />
@@ -231,23 +241,28 @@ export default function CourseDetail() {
                   <div className="bg-gradient-to-br from-[#eee5f5] to-white border border-[#eee5f5] p-4 rounded-xl">
                     <Award className="size-6 text-[#561D7E] mb-2" />
                     <div className="text-sm text-[#6a7282]">Certification</div>
-                    <div className="text-lg font-medium text-[#101828]">State Approved</div>
+                    <div className="text-lg font-medium text-[#101828]">
+                      State Approved
+                    </div>
                   </div>
                 </div>
               </div>
               <div className="relative">
-                <EditableCourseImage courseId={course.courseId} alt={course.title}>
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-                  <img
-                    src={course.image}
-                    alt={course.title}
-                    className="w-full h-full object-cover aspect-[4/3]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                  <div className="absolute bottom-6 right-6 bg-white/95 p-4 rounded-2xl shadow-lg">
-                    <IconComponent className="size-12 text-[#561D7E]" strokeWidth={2} />
+                <EditableCourseImage
+                  courseId={course.courseId}
+                  alt={course.title}
+                >
+                  <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                    <img
+                      src={course.image}
+                      alt={course.title}
+                      className="w-full h-full object-cover aspect-[4/3]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                    <div className="absolute bottom-6 right-6 bg-white/95 p-4 rounded-2xl shadow-lg">
+                      <CourseIcon name={course.icon} />
+                    </div>
                   </div>
-                </div>
                 </EditableCourseImage>
               </div>
             </div>
@@ -333,7 +348,8 @@ export default function CourseDetail() {
                   </div>
                 </EditableCourseList>
 
-                {course.details.tuitionIncludes && course.details.tuitionIncludes.length > 0 ? (
+                {course.details.tuitionIncludes &&
+                course.details.tuitionIncludes.length > 0 ? (
                   <>
                     <h3 className="text-2xl font-medium text-[#101828] mb-4 mt-12">
                       Tuition Includes
@@ -351,7 +367,8 @@ export default function CourseDetail() {
                   </>
                 ) : null}
 
-                {course.details.additionalNotes && course.details.additionalNotes.length > 0 ? (
+                {course.details.additionalNotes &&
+                course.details.additionalNotes.length > 0 ? (
                   <>
                     <h3 className="text-2xl font-medium text-[#101828] mb-4 mt-12">
                       Additional Information
@@ -386,23 +403,31 @@ export default function CourseDetail() {
                   <h3 className="text-2xl font-medium text-[#101828] mb-6">
                     Enroll Now
                   </h3>
-                  
+
                   <div className="space-y-4 mb-6">
                     <div className="flex justify-between items-center pb-4 border-b border-gray-200">
                       <span className="text-[#6a7282]">Duration</span>
-                      <span className="font-medium text-[#101828]">{course.duration}</span>
+                      <span className="font-medium text-[#101828]">
+                        {course.duration}
+                      </span>
                     </div>
                     <div className="flex justify-between items-center pb-4 border-b border-gray-200">
                       <span className="text-[#6a7282]">Schedule</span>
-                      <span className="font-medium text-[#101828] text-right max-w-[65%]">{course.details.schedule}</span>
+                      <span className="font-medium text-[#101828] text-right max-w-[65%]">
+                        {course.details.schedule}
+                      </span>
                     </div>
                     <div className="flex justify-between items-center pb-4 border-b border-gray-200">
                       <span className="text-[#6a7282]">Next Start</span>
-                      <span className="font-medium text-[#101828]">{course.nextStart}</span>
+                      <span className="font-medium text-[#101828]">
+                        {course.nextStart}
+                      </span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-[#6a7282]">Total Cost</span>
-                      <span className="text-2xl font-bold text-[#561D7E]">{course.details.cost}</span>
+                      <span className="text-2xl font-bold text-[#561D7E]">
+                        {course.details.cost}
+                      </span>
                     </div>
                   </div>
 
@@ -463,11 +488,19 @@ export default function CourseDetail() {
                   </a>
 
                   <div className="mt-6 pt-6 border-t border-gray-200">
-                    <h4 className="font-medium text-[#101828] mb-3">How to Enroll</h4>
+                    <h4 className="font-medium text-[#101828] mb-3">
+                      How to Enroll
+                    </h4>
                     <ul className="space-y-2 text-sm text-[#6a7282]">
-                      <li>- Complete the School Application Form (required for all programs)</li>
+                      <li>
+                        - Complete the School Application Form (required for all
+                        programs)
+                      </li>
                       {hasFullPayment ? (
-                        <li>- Pay in full or choose a plan — processed securely through Stripe</li>
+                        <li>
+                          - Pay in full or choose a plan — processed securely
+                          through Stripe
+                        </li>
                       ) : (
                         <li>- Contact admissions to arrange tuition payment</li>
                       )}
@@ -513,7 +546,8 @@ export default function CourseDetail() {
                   Complete the Forms
                 </h3>
                 <p className="text-[#4a5565] mb-6 flex-1">
-                  Fill out the <strong>School Application Form</strong>. It is required for all programs.
+                  Fill out the <strong>School Application Form</strong>. It is
+                  required for all programs.
                 </p>
                 <div className="flex flex-col gap-3">
                   <a
@@ -551,8 +585,8 @@ export default function CourseDetail() {
                 {hasFullPayment ? (
                   <>
                     <p className="text-[#4a5565] mb-6 flex-1">
-                      Pay in full or choose a payment plan. All payments are processed
-                      securely through <strong>Stripe</strong>.
+                      Pay in full or choose a payment plan. All payments are
+                      processed securely through <strong>Stripe</strong>.
                     </p>
                     <div className="flex flex-col gap-3">
                       <a
@@ -577,7 +611,8 @@ export default function CourseDetail() {
                 ) : (
                   <>
                     <p className="text-[#4a5565] mb-6 flex-1">
-                      Contact our admissions team to arrange tuition payment for this program.
+                      Contact our admissions team to arrange tuition payment for
+                      this program.
                     </p>
                     <a
                       href="tel:+13369997123"
@@ -602,7 +637,10 @@ export default function CourseDetail() {
                 </h3>
                 <p className="text-[#4a5565] mb-6 flex-1">
                   Email any other requested documents to{" "}
-                  <a href={documentEmailHref} className="text-[#561D7E] underline break-all font-medium">
+                  <a
+                    href={documentEmailHref}
+                    className="text-[#561D7E] underline break-all font-medium"
+                  >
                     {ADMISSION_EMAIL}
                   </a>
                   . Click below and just attach your files.
@@ -619,7 +657,10 @@ export default function CourseDetail() {
 
             <p className="text-center text-[#6a7282]">
               Questions about enrolling?{" "}
-              <a href="tel:+13369997123" className="text-[#561D7E] font-medium hover:underline">
+              <a
+                href="tel:+13369997123"
+                className="text-[#561D7E] font-medium hover:underline"
+              >
                 Call (336) 999-7123
               </a>{" "}
               and our admissions team will help.
@@ -635,7 +676,7 @@ export default function CourseDetail() {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {courses
-                .filter((c) => c.id !== courseId)
+                .filter((c) => c.id !== course.id)
                 .slice(0, 3)
                 .map((relatedCourse) => (
                   <Link
@@ -678,7 +719,9 @@ export default function CourseDetail() {
           <div className="relative w-full max-w-xl bg-white rounded-2xl shadow-2xl border border-gray-200 p-6 sm:p-8">
             <div className="flex items-start justify-between gap-6 mb-5">
               <div>
-                <h3 className="text-2xl font-medium text-[#101828]">Choose A Payment Plan</h3>
+                <h3 className="text-2xl font-medium text-[#101828]">
+                  Choose A Payment Plan
+                </h3>
                 <p className="text-[#6a7282] mt-1">
                   Select one plan, then continue to secure Stripe checkout.
                 </p>
@@ -728,7 +771,9 @@ export default function CourseDetail() {
                           </span>
                         ) : null}
                       </span>
-                      <span className="text-sm text-[#6a7282]">{plan.label}</span>
+                      <span className="text-sm text-[#6a7282]">
+                        {plan.label}
+                      </span>
                     </span>
                   </label>
                 );
@@ -761,8 +806,3 @@ export default function CourseDetail() {
     </div>
   );
 }
-
-
-
-
-

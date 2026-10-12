@@ -38,5 +38,6 @@ export const env = {
     .map((o) => o.trim())
     .filter(Boolean),
 
-  renderDeployHookUrl: process.env.RENDER_DEPLOY_HOOK_URL?.trim() || null
+  renderDeployHookUrl: process.env.RENDER_DEPLOY_HOOK_URL?.trim() || null,
+  renderSchoolDeployHookUrl: process.env.RENDER_SCHOOL_DEPLOY_HOOK_URL?.trim() || null
 };

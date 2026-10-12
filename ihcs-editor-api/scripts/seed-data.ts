@@ -465,13 +465,6 @@ export const contentBlocks: {
   },
   {
     page: "home",
-    key: "testimonials.heading",
-    kind: "text",
-    label: "Testimonials section — heading",
-    value: "Hear From Our Graduates"
-  },
-  {
-    page: "home",
     key: "cta.heading",
     kind: "text",
     label: "Closing call to action — heading",

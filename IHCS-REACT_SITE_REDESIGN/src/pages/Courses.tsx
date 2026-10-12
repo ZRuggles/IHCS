@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { Header } from "../components/Header";
+import { AdmissionsLink } from "../components/AdmissionsLink";
 import { Footer } from "../components/Footer";
 import { GraduationCap, Clock, DollarSign, Calendar, ArrowRight } from "lucide-react";
 import { useCourses, useText } from "../content/hooks";
@@ -29,6 +30,7 @@ export default function Courses() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
+      <AdmissionsLink />
 
       <main className="flex-1">
         {/* Hero Section */}

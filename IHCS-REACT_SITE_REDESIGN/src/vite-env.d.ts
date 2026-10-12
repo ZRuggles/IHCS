@@ -1,6 +1,9 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
+  readonly VITE_SITE_VARIANT?: "ihs" | "school";
+  readonly VITE_SCHOOL_SITE_URL?: string;
+  readonly VITE_IHS_SITE_URL?: string;
   /** Editor API base URL. Empty on the public build. */
   readonly VITE_EDITOR_API_URL?: string;
   readonly VITE_SUPABASE_URL?: string;

@@ -6,3 +6,7 @@
 node_modules
 dist
 *.log
+
+# Local review artifacts and downloaded correspondence.
+output/
+tmp/

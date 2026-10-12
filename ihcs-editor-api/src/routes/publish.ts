@@ -3,6 +3,7 @@ import { json } from "../lib/json.js";
 import { param } from "../lib/params.js";
 import { sql } from "../lib/db.js";
 import { env } from "../lib/env.js";
+import { deploySites } from "../lib/deploySites.js";
 import { requireEditor, audit } from "../lib/auth.js";
 import { buildContent, countPendingChanges } from "../lib/content.js";
 
@@ -113,31 +114,26 @@ app.post("/", requireEditor, async (c) => {
   // Kick the static site rebuild. A failure here does not undo the
   // publish — the content IS published; only the rebuild lagged, and
   // it can be retried from the editor.
-  let deployTriggered = false;
-  let deployError: string | null = null;
-
-  if (env.renderDeployHookUrl) {
-    try {
-      const response = await fetch(env.renderDeployHookUrl, { method: "POST" });
-      deployTriggered = response.ok;
-      if (!response.ok) deployError = `Deploy hook returned ${response.status}.`;
-    } catch {
-      deployError = "Could not reach the deploy service.";
-    }
-  } else {
-    deployError = "No deploy hook is configured.";
-  }
+  const deployResults = await deploySites([
+    ...(env.renderDeployHookUrl ? [{ name: "IHS", url: env.renderDeployHookUrl }] : []),
+    ...(env.renderSchoolDeployHookUrl ? [{ name: "IIHS", url: env.renderSchoolDeployHookUrl }] : []),
+  ]);
+  const deployTriggered = deployResults.length > 0 && deployResults.every(result => result.triggered);
+  const deployError = deployResults.length === 0
+    ? "No deploy hook is configured."
+    : deployResults.filter(result => !result.triggered).map(result => `${result.name}: ${result.error}`).join(" ");
 
   return c.json({
     ok: true,
     publishId: inserted[0]?.id ?? null,
     courses: payload.courses.length,
     deployTriggered,
+    deployResults,
     // Publishing succeeded even if the rebuild did not start; the UI
     // shows this as a warning rather than a failure.
     warning: deployTriggered
       ? null
-      : `Your changes were saved and published, but the website rebuild did not start. ${deployError ?? ""} Changes will appear after the next rebuild.`.trim()
+      : `Your changes were saved and published, but some website rebuilds did not start. ${deployError} Changes appear on each site after its next rebuild.`.trim()
   });
 });
 

@@ -1,6 +1,6 @@
 # Render service definitions.
 #
-# Two services: the static site (free) and the editor API ($7 Starter).
+# Three services: IHS, IIHS, and the shared editor API.
 # The database, auth, and image storage are on Supabase's free tier.
 #
 # The API is on a paid instance deliberately. The free tier sleeps after
@@ -38,6 +38,8 @@ services:
         sync: false        # e.g. https://innovationhealthcaresolutions.com
       - key: RENDER_DEPLOY_HOOK_URL
         sync: false        # deploy hook for the static site below
+      - key: RENDER_SCHOOL_DEPLOY_HOOK_URL
+        sync: false        # deploy hook for the IIHS static site
 
   # ---------------------------------------------------------------
   # Public website (unchanged apart from the content fetch at build)
@@ -45,11 +47,12 @@ services:
   - type: web
     name: ihcs-site
     runtime: static
-    plan: free
     rootDir: IHCS-REACT_SITE_REDESIGN
-    buildCommand: npm ci && npm run build
+    buildCommand: npm ci && npm run build:ihs
     staticPublishPath: ./dist
     envVars:
+      - key: VITE_SCHOOL_SITE_URL
+        sync: false        # actual IIHS Render URL, then purchased domain
       - key: VITE_EDITOR_API_URL
         sync: false        # https://ihcs-editor-api.onrender.com
       - key: VITE_SUPABASE_URL
@@ -73,6 +76,40 @@ services:
         value: strict-origin-when-cross-origin
       # content.json must never be cached hard, or a publish would not
       # appear until the CDN entry expired.
+      - path: /content.json
+        name: Cache-Control
+        value: no-cache, must-revalidate
+
+  # School preview works with its Render URL before a domain is purchased.
+  - type: web
+    name: iihs-school
+    runtime: static
+    rootDir: IHCS-REACT_SITE_REDESIGN
+    buildCommand: npm ci && npm run build:school
+    staticPublishPath: ./dist-school
+    envVars:
+      - key: VITE_IHS_SITE_URL
+        value: https://innovationhealthcaresolutions.com
+      - key: VITE_EDITOR_API_URL
+        sync: false
+      - key: VITE_SUPABASE_URL
+        sync: false
+      - key: VITE_SUPABASE_ANON_KEY
+        sync: false
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
       - path: /content.json
         name: Cache-Control
         value: no-cache, must-revalidate

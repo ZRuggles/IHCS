@@ -1,147 +1,100 @@
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone, Mail } from "lucide-react";
-import { motion } from "motion/react";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { APPLY_ONLINE_URL, LMS_URL } from "../data/siteInfo";
+import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useState } from "react";
+import { ADMISSION_EMAIL, APPLY_ONLINE_URL, LMS_URL } from "../data/siteInfo";
 
-type LogoMode = "company" | "course";
-const LOGO_INTRO_KEY = "ihcs-logo-intro-played";
-const LOGO_LAST_MODE_KEY = "ihcs-logo-last-mode";
-const LOGO_FLIP_DELAY_MS = 140;
-const LOGO_FLIP_RETURN_MS = 1140;
+import { isSchoolSite, siteBrand, siteNavigation } from "../data/siteVariant";
+
+// Headers remount between routes. Keep the intro's lifetime tied to this
+// browser document, so navigation never replays it and a full reload can.
+let logoIntroHasMounted = false;
 
 export function Header() {
+  const [shouldAnimateLogo] = useState(() => !logoIntroHasMounted);
+  useEffect(() => { logoIntroHasMounted = true; }, []);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const isCoursePage =
-    location.pathname === "/courses" || location.pathname.startsWith("/courses/");
-  const targetLogoMode: LogoMode = isCoursePage ? "course" : "company";
-  const [activeLogoMode, setActiveLogoMode] = useState<LogoMode>(() => {
-    const storedMode = window.sessionStorage.getItem(LOGO_LAST_MODE_KEY);
-    if (storedMode === "company" || storedMode === "course") {
-      return storedMode;
-    }
-    return targetLogoMode;
-  });
-  const [shouldAnimateLogo, setShouldAnimateLogo] = useState(false);
-  const activeLogoModeRef = useRef<LogoMode>(activeLogoMode);
-  const startupTimersRef = useRef<number[]>([]);
-
-  const clearStartupTimers = useCallback(() => {
-    startupTimersRef.current.forEach((timerId) => window.clearTimeout(timerId));
-    startupTimersRef.current = [];
-  }, []);
-
-  useEffect(() => {
-    activeLogoModeRef.current = activeLogoMode;
-    window.sessionStorage.setItem(LOGO_LAST_MODE_KEY, activeLogoMode);
-  }, [activeLogoMode]);
-
-  useEffect(() => {
-    clearStartupTimers();
-    const hasPlayedIntro = window.sessionStorage.getItem(LOGO_INTRO_KEY) === "true";
-
-    if (!hasPlayedIntro) {
-      window.sessionStorage.setItem(LOGO_INTRO_KEY, "true");
-      setShouldAnimateLogo(true);
-      const alternateLogoMode: LogoMode =
-        targetLogoMode === "company" ? "course" : "company";
-      const showOtherLogo = window.setTimeout(() => {
-        setActiveLogoMode(alternateLogoMode);
-      }, LOGO_FLIP_DELAY_MS);
-      const settleOnTarget = window.setTimeout(() => {
-        setActiveLogoMode(targetLogoMode);
-      }, LOGO_FLIP_RETURN_MS);
-      startupTimersRef.current = [showOtherLogo, settleOnTarget];
-      return () => {
-        clearStartupTimers();
-      };
-    }
-
-    if (activeLogoModeRef.current !== targetLogoMode) {
-      setShouldAnimateLogo(true);
-      const switchToTarget = window.setTimeout(() => {
-        setActiveLogoMode(targetLogoMode);
-      }, LOGO_FLIP_DELAY_MS);
-      startupTimersRef.current = [switchToTarget];
-    } else {
-      setShouldAnimateLogo(false);
-    }
-
-    return () => {
-      clearStartupTimers();
-    };
-  }, [targetLogoMode, clearStartupTimers]);
-
-  const isActive = (path: string) => {
-    return location.pathname === path;
-  };
-
-  const logoConfig =
-    activeLogoMode === "course"
-      ? {
-          src: "/courselogo.png",
-          alt: "Healthcare Training logo"
-        }
-      : {
-          src: "/LOGO.png",
-          alt: "Innovation Healthcare Solutions logo"
-        };
-
-  const navLinks = [
-    { path: "/", label: "Home" },
-    { path: "/courses", label: "Courses" },
-    { path: "/services", label: "Our Services" },
-    { path: "/employment", label: "Employment" },
-    { path: "/contact", label: "Contact" },
-  ];
-
+  const isActive = (path: string) =>
+    location.pathname === path ||
+    (path !== "/" && location.pathname.startsWith(path + "/"));
+  const navLinks = siteNavigation;
+  const logoConfig = { src: siteBrand.logo, alt: siteBrand.name };
+  const contactEmail = isSchoolSite
+    ? ADMISSION_EMAIL
+    : "contact@innovationhealthcaresolutions.com";
   return (
     <>
       {/* Top Bar */}
       <div className="bg-[#561D7E] text-white py-2">
         <div className="max-w-[1600px] mx-auto px-4 flex items-center justify-between gap-3">
           <div className="flex items-center gap-3 sm:gap-6">
-            <a href="tel:+13369997123" className="flex items-center gap-2 text-xs sm:text-sm hover:opacity-80 transition-opacity">
-              <Phone className="size-4" />
-              <span>(336) 999-7123</span>
-            </a>
-            <a href="tel:+13369345354" className="hidden md:flex items-center gap-2 text-sm hover:opacity-80 transition-opacity">
-              <Phone className="size-4" />
-              <span>After Hours: (336) 934-5354</span>
-            </a>
-            <a href="mailto:contact@innovationhealthcaresolutions.com" className="hidden lg:flex items-center gap-2 text-sm hover:opacity-80 transition-opacity">
+            {!isSchoolSite && (
+              <a
+                href="tel:+13369997123"
+                className="flex items-center gap-2 text-xs sm:text-sm hover:opacity-80 transition-opacity"
+              >
+                <Phone className="size-4" />
+                <span>(336) 999-7123</span>
+              </a>
+            )}
+            {!isSchoolSite && (
+              <a
+                href="tel:+13369345354"
+                className="hidden md:flex items-center gap-2 text-sm hover:opacity-80 transition-opacity"
+              >
+                <Phone className="size-4" />
+                <span>After Hours: (336) 934-5354</span>
+              </a>
+            )}
+            <a
+              href={`mailto:${contactEmail}`}
+              className={`${isSchoolSite ? "flex" : "hidden lg:flex"} items-center gap-2 text-xs sm:text-sm hover:opacity-80 transition-opacity`}
+            >
               <Mail className="size-4" />
-              <span>contact@innovationhealthcaresolutions.com</span>
+              <span className="max-w-[150px] truncate sm:max-w-none">
+                {isSchoolSite ? "Contact Admissions" : contactEmail}
+              </span>
             </a>
           </div>
           <div className="flex items-center gap-2 sm:gap-3">
-            {LMS_URL ? (
+            {isSchoolSite &&
+              (LMS_URL ? (
+                <a
+                  href={LMS_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="bg-white/10 border border-white/40 text-white px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm hover:bg-white/20 transition-colors whitespace-nowrap"
+                >
+                  <span className="sm:hidden">Student LMS</span>
+                  <span className="hidden sm:inline">Current Student LMS</span>
+                </a>
+              ) : (
+                <span
+                  aria-disabled="true"
+                  title="Student LMS link coming soon"
+                  className="bg-white/5 border border-white/20 text-white/50 px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm whitespace-nowrap cursor-not-allowed"
+                >
+                  Current Student LMS
+                </span>
+              ))}
+            {isSchoolSite ? (
               <a
-                href={LMS_URL}
+                href={APPLY_ONLINE_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="bg-white/10 border border-white/40 text-white px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm hover:bg-white/20 transition-colors whitespace-nowrap"
+                className="bg-[#ffcc00] text-[#461464] px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm hover:opacity-90 transition-opacity whitespace-nowrap"
               >
-                Current Student LMS
+                Apply Online
               </a>
             ) : (
-              <span
-                aria-disabled="true"
-                title="Student LMS link coming soon"
-                className="bg-white/5 border border-white/20 text-white/50 px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm whitespace-nowrap cursor-not-allowed"
+              <Link
+                to="/contact"
+                className="bg-[#ffcc00] text-[#461464] px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm hover:opacity-90 transition-opacity whitespace-nowrap"
               >
-                Current Student LMS
-              </span>
+                Contact Us
+              </Link>
             )}
-            <a
-              href={APPLY_ONLINE_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="bg-[#ffcc00] text-[#461464] px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm hover:opacity-90 transition-opacity whitespace-nowrap"
-            >
-              Apply Online
-            </a>
           </div>
         </div>
       </div>
@@ -153,7 +106,7 @@ export function Header() {
             {/* Logo */}
             <Link to="/" className="flex items-center">
               <motion.div
-                key={activeLogoMode}
+                key={siteBrand.shortName}
                 className="h-[88px] sm:h-[100px] w-[200px] sm:w-[240px] md:w-[280px] overflow-hidden shrink-0 bg-white"
                 initial={shouldAnimateLogo ? { rotateY: -95, opacity: 0.35 } : false}
                 animate={{ rotateY: 0, opacity: 1 }}
@@ -161,7 +114,7 @@ export function Header() {
                 style={{ transformStyle: "preserve-3d" }}
               >
                 <motion.img
-                  key={activeLogoMode}
+                  key={siteBrand.shortName}
                   src={logoConfig.src}
                   alt={logoConfig.alt}
                   className="size-full object-contain"
@@ -173,7 +126,10 @@ export function Header() {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-8">
+            <nav
+              aria-label="Main navigation"
+              className="hidden lg:flex items-center gap-6 xl:gap-8"
+            >
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
@@ -192,32 +148,50 @@ export function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-[#4a5565]"
-              aria-label="Toggle menu"
+              className="lg:hidden p-2 text-[#4a5565]"
+              aria-label={
+                mobileMenuOpen ? "Close navigation" : "Open navigation"
+              }
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
-              {mobileMenuOpen ? <X className="size-6" /> : <Menu className="size-6" />}
+              {mobileMenuOpen ? (
+                <X className="size-6" />
+              ) : (
+                <Menu className="size-6" />
+              )}
             </button>
           </div>
 
           {/* Mobile Navigation */}
-          {mobileMenuOpen && (
-            <nav className="md:hidden py-4 border-t">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`block py-3 px-4 transition-colors ${
-                    isActive(link.path)
-                      ? "text-[#561D7E] font-medium bg-[#eee5f5]"
-                      : "text-[#4a5565] hover:bg-gray-50"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-          )}
+          <AnimatePresence>
+            {mobileMenuOpen && (
+              <motion.nav
+                id="mobile-navigation"
+                aria-label="Mobile navigation"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.22, ease: "easeInOut" }}
+                className="lg:hidden border-t overflow-hidden"
+              >
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`block py-3 px-4 transition-colors ${
+                      isActive(link.path)
+                        ? "text-[#561D7E] font-medium bg-[#eee5f5]"
+                        : "text-[#4a5565] hover:bg-gray-50"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </motion.nav>
+            )}
+          </AnimatePresence>
         </div>
       </header>
     </>

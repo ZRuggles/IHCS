@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useContent } from "./context";
 import type { PublicCourse } from "./types";
+import { getNextStart } from "../data/courses";
 
 /**
  * Content accessors.
@@ -12,7 +13,10 @@ import type { PublicCourse } from "./types";
 
 /** All visible courses, in display order. */
 export function useCourses(): PublicCourse[] {
-  return useContent().content.courses;
+  const courses = useContent().content.courses;
+  // A published snapshot can outlive a cohort date. Reuse the schedule
+  // calculator so visitors see the next scheduled start after that date passes.
+  return useMemo(() => courses.map(course => ({ ...course, nextStart: getNextStart(course) })), [courses]);
 }
 
 export function useCourse(slug: string | undefined): PublicCourse | undefined {
