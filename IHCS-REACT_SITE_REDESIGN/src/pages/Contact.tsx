@@ -1,7 +1,7 @@
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { motion } from "motion/react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import {
   MapPin,
   Phone,
@@ -37,6 +37,7 @@ function ContactEmailText({ email }: { email: string }) {
 }
 
 export default function Contact() {
+  const [searchParams] = useSearchParams();
   const courses = useCourses();
   const { isSignedIn } = useEditor();
   const page = isSchoolSite ? "schoolContact" : "ihsContact";
@@ -58,6 +59,8 @@ export default function Contact() {
     : [
         { value: "home-care", label: "Home Care Services" },
         { value: "staffing", label: "Healthcare Staffing" },
+        { value: "partnership", label: "Partner With IHS" },
+        { value: "education-workforce", label: "Education & Workforce Partnerships" },
         { value: "employment", label: "Employment Opportunities" },
         { value: "other", label: "Other" },
       ];
@@ -87,7 +90,7 @@ export default function Contact() {
         },
         {
           q: "Where can I find healthcare training?",
-          a: "Healthcare education and admissions are available through Innovation Institute of Healthcare Solutions. Use the Education link to explore the school.",
+          a: "Use Education to discuss IHS education and workforce partnerships. For school programs and admissions, Innovation Institute of Healthcare Solutions (IIHS) is a separate educational institution with its own application and student portal.",
         },
       ];
   const [formData, setFormData] = useState({
@@ -95,7 +98,9 @@ export default function Contact() {
     lastName: "",
     email: "",
     phone: "",
-    interest: "",
+    organization: "",
+    interest: interestOptions.some((option) => option.value === searchParams.get("interest"))
+      ? searchParams.get("interest")! : "",
     message: "",
   });
 
@@ -110,6 +115,7 @@ export default function Contact() {
       `Name: ${formData.firstName} ${formData.lastName}`,
       `Email: ${formData.email}`,
       `Phone: ${formData.phone || "Not provided"}`,
+      ...(!isSchoolSite && formData.organization ? [`Organization: ${formData.organization}`] : []),
       `Interested in: ${interest}`,
       "",
       formData.message,
@@ -475,6 +481,13 @@ export default function Contact() {
                     </select>
                   </div>
 
+                  {!isSchoolSite && (
+                    <div>
+                      <label htmlFor="organization" className="block text-sm font-medium text-[#101828] mb-2">Organization (optional)</label>
+                      <input id="organization" name="organization" type="text" autoComplete="organization" value={formData.organization} onChange={handleChange} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6b2d94] focus:border-transparent transition-all" />
+                    </div>
+                  )}
+
                   <div>
                     <label
                       htmlFor="message"
@@ -490,7 +503,7 @@ export default function Contact() {
                       onChange={handleChange}
                       rows={6}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6b2d94] focus:border-transparent resize-none transition-all"
-                      placeholder="Tell us how we can help you..."
+                      placeholder={formData.interest === "partnership" ? "Tell us about your organization, the roles or services you need, and your partnership goals..." : "Tell us how we can help you..."}
                     />
                   </div>
 
