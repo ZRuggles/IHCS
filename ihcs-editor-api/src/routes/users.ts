@@ -1,8 +1,9 @@
 import { Hono } from "hono";
 import { param } from "../lib/params.js";
 import { sql } from "../lib/db.js";
-import { requireEditor, requireAdmin, adminClient, audit } from "../lib/auth.js";
+import { requireEditor, requireActiveProfile, requireAdmin, adminClient, audit } from "../lib/auth.js";
 import { inviteSchema, formatValidationError } from "../lib/validation.js";
+import { env } from "../lib/env.js";
 
 /**
  * Editor account management.
@@ -13,13 +14,14 @@ import { inviteSchema, formatValidationError } from "../lib/validation.js";
  */
 
 const app = new Hono();
-app.use("*", requireEditor);
 
 /** Who am I — drives the editor toolbar and permission checks in the UI. */
-app.get("/me", async (c) => {
+app.get("/me", requireActiveProfile, async (c) => {
   const editor = c.get("editor");
   return c.json({ editor });
 });
+
+app.use("*", requireEditor);
 
 app.get("/", requireAdmin, async (c) => {
   const users = await sql`
@@ -42,8 +44,11 @@ app.post("/invite", requireAdmin, async (c) => {
     return c.json({ error: "An account with that email already exists." }, 409);
   }
 
+  const origin = c.req.header("Origin");
+  const redirectTo = origin && env.allowedOrigins.includes(origin) ? `${origin}/admin/reset` : undefined;
   const { data, error } = await adminClient.auth.admin.inviteUserByEmail(email, {
-    data: { full_name }
+    data: { full_name },
+    ...(redirectTo ? { redirectTo } : {})
   });
 
   if (error || !data.user) {

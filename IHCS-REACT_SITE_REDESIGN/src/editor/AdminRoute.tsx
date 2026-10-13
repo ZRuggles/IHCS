@@ -4,6 +4,7 @@ import { useEditor } from "./useEditor";
 import { AdminLogin } from "./AdminLogin";
 import { AdminDashboard } from "./AdminDashboard";
 import { getToken, TOKEN_CHANGE_EVENT } from "./session";
+import { Link } from "react-router-dom";
 
 /**
  * The /admin route.
@@ -33,7 +34,7 @@ function hasStoredToken() {
 }
 
 export function AdminRoute() {
-  const { isSignedIn } = useEditor();
+  const { isSignedIn, editor } = useEditor();
 
   // True when a token exists but the provider has not yet confirmed it.
   const tokenPresent = useSyncExternalStore(
@@ -42,6 +43,7 @@ export function AdminRoute() {
     () => false // server/prerender: assume signed out
   );
 
+  if (editor?.role === "viewer") return <div className="mx-auto max-w-xl px-6 py-16"><h1 className="text-2xl font-medium">Design review access</h1><p className="my-4">Your account can view shared design previews.</p><Link to="/review" className="text-[#561D7E] underline">Open design previews</Link></div>;
   if (isSignedIn) return <AdminDashboard />;
 
   if (tokenPresent) {

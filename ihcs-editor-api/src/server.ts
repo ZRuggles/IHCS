@@ -11,6 +11,7 @@ import contentRoutes from "./routes/content.js";
 import imagesRoutes from "./routes/images.js";
 import publishRoutes from "./routes/publish.js";
 import usersRoutes from "./routes/users.js";
+import previewsRoutes from "./routes/previews.js";
 
 const app = new Hono();
 
@@ -95,6 +96,7 @@ app.route("/api/content", contentRoutes);
 app.route("/api/images", imagesRoutes);
 app.route("/api/publish", publishRoutes);
 app.route("/api/users", usersRoutes);
+app.route("/api/previews", previewsRoutes);
 
 app.notFound((c) => c.json({ error: "Not found." }, 404));
 

@@ -15,6 +15,7 @@ import { api, ApiError, type EditorCourse } from "./api";
 import { useEditor } from "./useEditor";
 import { ScheduleEditor } from "./ScheduleEditor";
 import { NewProgramForm } from "./NewProgramForm";
+import { DesignPreviews } from "./DesignPreviews";
 
 /**
  * The editor dashboard at /admin.
@@ -24,7 +25,7 @@ import { NewProgramForm } from "./NewProgramForm";
  * Everyday text and photo edits happen on the pages themselves.
  */
 
-type Tab = "programs" | "dates" | "people";
+type Tab = "programs" | "dates" | "people" | "previews";
 
 export function AdminDashboard() {
   const { editor, pendingChanges } = useEditor();
@@ -55,6 +56,7 @@ export function AdminDashboard() {
           {([
             ["programs", "Programs"],
             ["dates", "Class dates"],
+            ["previews", "Design previews"],
             ...(isAdmin ? ([["people", "People"]] as const) : [])
           ] as [Tab, string][]).map(([key, label]) => (
             <button
@@ -75,6 +77,7 @@ export function AdminDashboard() {
         <div className="rounded-lg border border-gray-200 bg-white p-6">
           {tab === "programs" && <ProgramsTab isAdmin={isAdmin} />}
           {tab === "dates" && <ScheduleEditor />}
+          {tab === "previews" && <DesignPreviews />}
           {tab === "people" && isAdmin && <PeopleTab />}
         </div>
       </div>

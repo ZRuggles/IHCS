@@ -38,6 +38,10 @@ export function EditorProvider({ children }: { children: ReactNode }) {
     try {
       const { editor: me } = await api.me();
       setEditor(me as EditorIdentity);
+      if (me.role === "viewer") {
+        await refreshContent(true);
+        return;
+      }
       await refreshContent();
       await refreshStatus();
     } catch {
@@ -50,7 +54,10 @@ export function EditorProvider({ children }: { children: ReactNode }) {
     void loadIdentity();
     return watchSession((signedIn) => {
       if (signedIn) void loadIdentity();
-      else setEditor(null);
+      else {
+        setEditor(null);
+        void refreshContent(true);
+      }
     });
     // loadIdentity is stable via useCallback; listing it would re-subscribe
     // on every content refresh.
@@ -96,7 +103,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
   const value = useMemo<EditorState>(
     () => ({
       editor,
-      isSignedIn: editor !== null,
+      isSignedIn: editor !== null && editor.role !== "viewer",
       pendingChanges,
       isPublishing,
       lastSavedAt,

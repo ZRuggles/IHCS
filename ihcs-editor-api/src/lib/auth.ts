@@ -57,7 +57,7 @@ function bearerToken(c: Context): string | null {
  * Requires a signed-in, active editor. Attaches the profile to the
  * request context for downstream handlers and the audit log.
  */
-export async function requireEditor(c: Context, next: Next) {
+export async function requireActiveProfile(c: Context, next: Next) {
   const token = bearerToken(c);
   if (!token) {
     return c.json({ error: "Not signed in." }, 401);
@@ -86,10 +86,6 @@ export async function requireEditor(c: Context, next: Next) {
       403
     );
   }
-  if (profile.role === "viewer") {
-    return c.json({ error: "This account has read-only access." }, 403);
-  }
-
   c.set("editor", {
     id: profile.id,
     email: profile.email,
@@ -102,6 +98,16 @@ export async function requireEditor(c: Context, next: Next) {
     () => {}
   );
 
+  await next();
+}
+
+/** Viewer accounts can authenticate without gaining editing privileges. */
+export async function requireEditor(c: Context, next: Next) {
+  const response = await requireActiveProfile(c, async () => {});
+  if (response) return response;
+  if (c.get("editor").role === "viewer") {
+    return c.json({ error: "This account has read-only access." }, 403);
+  }
   await next();
 }
 

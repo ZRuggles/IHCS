@@ -49,6 +49,7 @@ export function ContentProvider({ children }: { children: ReactNode }) {
 
   // Guards against a resolved fetch writing state after unmount.
   const mountedRef = useRef(true);
+  const refreshVersion = useRef(0);
   useEffect(() => {
     mountedRef.current = true;
     return () => {
@@ -57,8 +58,9 @@ export function ContentProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
+    const version = refreshVersion.current;
     loadStaticContent().then((data) => {
-      if (mountedRef.current) setContent(data);
+      if (mountedRef.current && version === refreshVersion.current) setContent(data);
     });
   }, []);
 
@@ -69,14 +71,16 @@ export function ContentProvider({ children }: { children: ReactNode }) {
    * the public site makes zero API calls. The editor toolbar calls it
    * after a successful sign-in.
    */
-  const refresh = useCallback(async () => {
+  const refresh = useCallback(async (publishedOnly = false) => {
+    const version = ++refreshVersion.current;
     const token = window.localStorage.getItem("ihcs_editor_token");
-    if (!token) {
+    if (!token || publishedOnly) {
       // Signed out: fall back to the published static content.
       const published = await loadStaticContent();
-      if (mountedRef.current) {
+      if (mountedRef.current && version === refreshVersion.current) {
         setContent(published);
         setIsDraftMode(false);
+        setIsLoadingDrafts(false);
       }
       return;
     }
@@ -91,16 +95,16 @@ export function ContentProvider({ children }: { children: ReactNode }) {
       if (!response.ok) throw new Error(`draft fetch returned ${response.status}`);
 
       const data = (await response.json()) as { content: SiteContent };
-      if (mountedRef.current && data.content) {
+      if (mountedRef.current && version === refreshVersion.current && data.content) {
         setContent(data.content);
         setIsDraftMode(true);
       }
     } catch {
       // Draft fetch failing is not fatal — keep showing published
       // content rather than breaking the page the editor is on.
-      if (mountedRef.current) setIsDraftMode(false);
+      if (mountedRef.current && version === refreshVersion.current) setIsDraftMode(false);
     } finally {
-      if (mountedRef.current) setIsLoadingDrafts(false);
+      if (mountedRef.current && version === refreshVersion.current) setIsLoadingDrafts(false);
     }
   }, []);
 

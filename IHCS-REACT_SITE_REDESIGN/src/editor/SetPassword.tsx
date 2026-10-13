@@ -85,7 +85,7 @@ export function SetPassword() {
           <img src="/LOGO.png" alt="" className="mx-auto mb-4 h-14 w-auto" />
           <h1 className="text-xl font-semibold text-[#101828]">Choose your password</h1>
           <p className="mt-1 text-sm text-[#6a7282]">
-            This will be the password you use to edit your website.
+            Use this password to sign in to your account.
           </p>
         </div>
 
@@ -117,7 +117,7 @@ export function SetPassword() {
 
           {phase === "done" && (
             <p className="flex items-center justify-center gap-2 py-6 text-sm font-medium text-green-800">
-              <CheckCircle2 className="h-5 w-5" /> Password set. Taking you to the editor…
+              <CheckCircle2 className="h-5 w-5" /> Password set. Taking you to your account…
             </p>
           )}
 

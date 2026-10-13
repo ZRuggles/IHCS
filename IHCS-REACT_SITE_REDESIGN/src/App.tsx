@@ -18,6 +18,7 @@ import NotFound from "./pages/NotFound";
 import { AdminRoute } from "./editor/AdminRoute";
 import { EditorToolbar } from "./editor/EditorToolbar";
 import { SetPassword } from "./editor/SetPassword";
+import DesignReview from "./pages/DesignReview";
 
 const pageTitles: Record<string, string> = {
   "/": "Innovation",
@@ -45,7 +46,9 @@ function PageTitle() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const base = pathname.startsWith("/courses/")
+    const base = pathname === "/review" || pathname.startsWith("/review/")
+      ? "Design Review"
+      : pathname.startsWith("/courses/")
       ? "Innovation - Courses"
       : pageTitles[pathname];
     document.title = `${base === "Innovation" ? "Home" : (base?.replace("Innovation - ", "") ?? "Explore")} | ${siteBrand.name}`;
@@ -55,6 +58,7 @@ function PageTitle() {
 }
 
 function App() {
+  const { pathname } = useLocation();
   // The chat widget is for visitors; it would only get in the way while
   // editing, and the admin screen is not a public page.
   // const { pathname } = useLocation();
@@ -64,9 +68,11 @@ function App() {
     <>
       <ScrollToTop />
       <PageTitle />
-      <EditorToolbar />
+      {!(pathname === "/review" || pathname.startsWith("/review/")) && <EditorToolbar />}
       {/* {!isAdminScreen && <AxisChatWidget />} */}
       <Routes>
+        <Route path="/review" element={<DesignReview />} />
+        <Route path="/review/:previewId" element={<DesignReview />} />
         <Route path="/" element={isSchoolSite ? <Home /> : <HealthcareHome />} />
         <Route
           path="/courses"

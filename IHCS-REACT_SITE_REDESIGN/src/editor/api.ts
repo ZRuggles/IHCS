@@ -232,3 +232,23 @@ export const api = {
     request<{ user: unknown }>(`/api/users/${id}`, { method: "PATCH", body }),
   deleteUser: (id: string) => request<{ ok: true }>(`/api/users/${id}`, { method: "DELETE" })
 };
+
+export interface DesignPreview {
+  id: string;
+  title: string;
+  description: string;
+  is_shared: boolean;
+  reviewer_emails?: string[];
+  updated_at: string;
+  html?: string;
+}
+
+export const previewApi = {
+  list: () => request<{ previews: DesignPreview[] }>("/api/previews"),
+  get: (id: string) => request<{ preview: DesignPreview & { html: string } }>(`/api/previews/${encodeURIComponent(id)}`),
+  template: () => request<{ html: string }>("/api/previews/template"),
+  create: (body: { title: string; description: string; html: string; reviewerEmails: string[]; isShared: boolean }) =>
+    request<{ preview: DesignPreview }>("/api/previews", { method: "POST", body }),
+  update: (id: string, body: { title: string; description: string; reviewerEmails: string[]; isShared: boolean }) =>
+    request<{ preview: DesignPreview }>(`/api/previews/${id}`, { method: "PATCH", body }),
+};

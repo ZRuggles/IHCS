@@ -14,7 +14,7 @@ export interface ContentState {
   isLoadingDrafts: boolean;
   /** True when showing unpublished drafts rather than live content. */
   isDraftMode: boolean;
-  refresh: () => Promise<void>;
+  refresh: (publishedOnly?: boolean) => Promise<void>;
   applyLocalEdit: (mutate: (draft: SiteContent) => SiteContent) => void;
 }
 
