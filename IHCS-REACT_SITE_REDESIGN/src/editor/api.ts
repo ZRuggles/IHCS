@@ -244,6 +244,7 @@ export interface DesignPreview {
 }
 
 export const previewApi = {
+  replaceWithTemplate: (id: string) => request<{ preview: DesignPreview }>(`/api/previews/${id}/template`, { method: "POST" }),
   list: () => request<{ previews: DesignPreview[] }>("/api/previews"),
   get: (id: string) => request<{ preview: DesignPreview & { html: string } }>(`/api/previews/${encodeURIComponent(id)}`),
   template: () => request<{ html: string }>("/api/previews/template"),

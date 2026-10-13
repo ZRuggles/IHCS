@@ -50,6 +50,19 @@ app.get("/", async (c) => {
 
 app.get("/template", editingProfile, (c) => c.json({ html: ihsProposal }));
 
+// Replace only a private design's HTML, preserving its review URL and access.
+app.post("/:id/template", editingProfile, async (c) => {
+  const id = idSchema.safeParse(c.req.param("id"));
+  if (!id.success) return c.json({ error: "Preview not found." }, 404);
+  const [preview] = await database`
+    update design_previews set html = ${ihsProposal}, updated_at = now()
+    where id = ${id.data}::uuid returning id::text, title, description, is_shared, reviewer_emails, updated_at
+  `;
+  if (!preview) return c.json({ error: "Preview not found." }, 404);
+  await writeAudit(c, "preview.replace-template", id.data, {});
+  return c.json({ preview });
+});
+
 app.get("/:id", async (c) => {
   const id = idSchema.safeParse(c.req.param("id"));
   if (!id.success) return c.json({ error: "Preview not found." }, 404);

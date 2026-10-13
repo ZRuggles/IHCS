@@ -50,7 +50,7 @@ test("other clients and revoked shares cannot read the design", async () => {
 
 test("a reviewer cannot create previews, change access, or read editor templates", async () => {
   const f = fixture("viewer", "client@example.com");
-  for (const [path, method] of [["/", "POST"], [`/${id}`, "PATCH"], ["/template", "GET"]]) {
+  for (const [path, method] of [["/", "POST"], [`/${id}`, "PATCH"], ["/template", "GET"], [`/${id}/template`, "POST"]]) {
     assert.equal((await f.app.request(path!, { method, headers: { Authorization: "Bearer fixture" } })).status, 403);
   }
   assert.equal(f.reads(), 0);

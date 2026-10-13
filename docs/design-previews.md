@@ -27,3 +27,9 @@ To revoke access, disable sharing, remove the client's email, or disable their a
 ## Validation
 
 Both frontend variants build. API type checks, permission tests, and frontend lint pass. Local browser fixtures cover client login, design navigation, phone preview, private draft creation, and sharing controls. Live Supabase invitation delivery and database migration execution require the activation steps above.
+# Maintaining the IHS proposal
+
+Run `node scripts/build-ihs-proposal.mjs` from `IHCS-REACT_SITE_REDESIGN` to regenerate the standalone proposal stored in the editor API. It copies the current site into an isolated build folder, preserves the published content and visual components, and applies proposal changes there. It does not edit public page source files. Forms and external links are inactive in the sandbox.
+
+To refresh a saved proposal without changing its link or reviewers, use **Replace design with latest IHS proposal** in Design previews. This replaces that preview's HTML only.
+

@@ -83,6 +83,12 @@ function PreviewSharing({ preview: p, refresh }: { preview: DesignPreview; refre
     <div className="flex flex-wrap items-center justify-between gap-3"><h3 className="font-medium">{p.title}</h3><span className="text-xs text-gray-500">{p.is_shared ? "Shared for review" : "Private draft"}</span></div>
     <p className="text-sm text-gray-600">{p.description}</p>
     <a href={url} target="_blank" rel="noreferrer" className="inline-block text-sm font-medium text-[#561D7E] underline">Open design preview</a>
+    <button type="button" disabled={busy} className="block text-sm font-medium text-[#561D7E] underline" onClick={async () => {
+      setBusy(true);
+      try { await previewApi.replaceWithTemplate(p.id); await refresh(); }
+      catch (e) { setMessage(e instanceof Error ? e.message : "Could not update the design."); }
+      finally { setBusy(false); }
+    }}>Replace design with latest IHS proposal</button>
     <div className="flex gap-2"><input aria-label={`Review link for ${p.title}`} className={field} readOnly value={url} /><button type="button" className="shrink-0 rounded border px-3 text-sm" onClick={() => void navigator.clipboard.writeText(url).then(() => setMessage("Link copied.")).catch(() => setMessage("Select the link above and copy it."))}>Copy link</button></div>
     <label className="block text-sm">Allowed reviewer emails<textarea className={field} value={reviewers} onChange={e => setReviewers(e.target.value)} /></label>
     <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={shared} onChange={e => setShared(e.target.checked)} /> Allow these reviewers to view this design</label>
