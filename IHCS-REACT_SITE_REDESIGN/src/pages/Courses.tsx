@@ -22,8 +22,16 @@ export default function Courses() {
 
   // The schedule lists come from the course records now, so adding a
   // cohort date in the editor updates this section automatically.
-  const cnaAndRefresherSchedule =
-    courses.find((course) => course.id === "hybrid-nurse-aide")?.scheduleDates ?? [];
+  const cnaCourse = courses.find((course) => course.id === "hybrid-nurse-aide");
+  const refresherCourse = courses.find((course) => course.id === "hybrid-refresher-course");
+  // These courses share a schedule group. A course can be unpublished while
+  // the other remains visible, so read dates from either published member.
+  const cnaAndRefresherSchedule = cnaCourse?.scheduleDates?.length
+    ? cnaCourse.scheduleDates
+    : refresherCourse?.scheduleDates ?? [];
+  const cnaScheduleTitle = cnaCourse && refresherCourse
+    ? "CNA and CNA Refresher Schedule"
+    : cnaCourse ? "CNA Schedule" : "CNA Refresher Schedule";
   const phlebotomySchedule =
     courses.find((course) => course.id === "hybrid-phlebotomy-technician")?.scheduleDates ?? [];
 
@@ -134,8 +142,11 @@ export default function Courses() {
                 transition={{ duration: 0.5 }}
               >
                 <h3 className="text-2xl font-medium text-[#101828] mb-4">
-                  CNA and CNA Refresher Schedule
+                  {cnaScheduleTitle}
                 </h3>
+                {cnaAndRefresherSchedule.length === 0 && (
+                  <p className="text-[#4a5565]">No dates are currently published. <Link to="/contact" className="text-[#6b2d94] underline underline-offset-4">Contact Admissions for the current schedule.</Link></p>
+                )}
                 <ul className="space-y-3 text-[#4a5565]">
                   {cnaAndRefresherSchedule.map((date) => (
                     <li key={date} className="flex items-start gap-3">
