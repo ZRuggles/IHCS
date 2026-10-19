@@ -72,7 +72,7 @@ export default function Contact() {
         },
         {
           q: "What payment options are available?",
-          a: "Review the program page for current tuition and any listed payment options. Admissions can confirm the details for your selected program.",
+          a: "All payment options are in the Populi application. Click Apply Online and you'll choose how to pay as part of applying. Admissions can answer questions about your selected program.",
         },
         {
           q: "Can I schedule a campus tour?",

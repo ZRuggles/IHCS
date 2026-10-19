@@ -23,7 +23,7 @@ const steps = [
   ],
   [
     "Pay the application fee",
-    "Follow the payment instructions for your selected program, if a fee applies.",
+    "Payment options are in the Populi application. If a fee applies, you'll pay it there.",
   ],
   [
     "Document verification",

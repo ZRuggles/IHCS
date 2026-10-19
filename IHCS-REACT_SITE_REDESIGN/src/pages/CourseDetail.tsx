@@ -1,5 +1,4 @@
 import { useParams, Link, Navigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { Header } from "../components/Header";
 import { AdmissionsLink } from "../components/AdmissionsLink";
 import { Footer } from "../components/Footer";
@@ -36,16 +35,6 @@ import {
   buildDocumentEmailHref,
 } from "../data/siteInfo";
 
-const currencyFormatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  minimumFractionDigits: 2,
-});
-
-const parseCurrencyAmount = (value: string) => {
-  const numericValue = Number.parseFloat(value.replace(/[^0-9.]/g, ""));
-  return Number.isFinite(numericValue) ? numericValue : null;
-};
 const iconMap: Record<string, LucideIcon> = {
   heart: Heart,
   medical: Activity,
@@ -79,84 +68,7 @@ function CourseDetailContent({
   course: PublicCourse;
   courses: PublicCourse[];
 }) {
-  // The parent keys this component by course so each program gets its own
-  // modal, selection, and saved link history without effect-driven resets.
-  const paymentPlans = course.payments.paymentPlans ?? [];
-  const hasPaymentPlans = paymentPlans.length > 0;
-  const hasFullPayment = Boolean(course?.payments.fullPaymentUrl);
-  const documentEmailHref = buildDocumentEmailHref(course?.title);
-  const installmentCount = paymentPlans.length;
-  const totalCostAmount = course
-    ? parseCurrencyAmount(course.details.cost)
-    : null;
-  const installmentAmount =
-    totalCostAmount !== null && installmentCount > 0
-      ? totalCostAmount / installmentCount
-      : null;
-  const installmentsStorageKey = `ihcs-installment-clicks-${course?.id ?? "unknown"}`;
-  const [planModalOpen, setIsPlanModalOpen] = useState(false);
-  const isPlanModalOpen = planModalOpen && hasPaymentPlans;
-  const [selectedPlanChoice, setSelectedPlanUrl] = useState<string | null>(
-    null,
-  );
-  const selectedPlanUrl = paymentPlans.some(
-    (plan) => plan.url === selectedPlanChoice,
-  )
-    ? selectedPlanChoice
-    : (paymentPlans[0]?.url ?? null);
-  const [openedInstallmentUrls, setOpenedInstallmentUrls] = useState<string[]>(
-    () => {
-      try {
-        const value: unknown = JSON.parse(
-          window.localStorage.getItem(installmentsStorageKey) ?? "[]",
-        );
-        return Array.isArray(value)
-          ? value.filter((url): url is string => typeof url === "string")
-          : [];
-      } catch {
-        return [];
-      }
-    },
-  );
-
-  const openedInstallmentCount = paymentPlans.filter((plan) =>
-    openedInstallmentUrls.includes(plan.url),
-  ).length;
-
-  useEffect(() => {
-    if (!isPlanModalOpen) {
-      return;
-    }
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsPlanModalOpen(false);
-      }
-    };
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKeyDown);
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [isPlanModalOpen]);
-
-  const markInstallmentAsOpened = (planUrl: string) => {
-    if (openedInstallmentUrls.includes(planUrl)) return;
-    const nextUrls = [...openedInstallmentUrls, planUrl];
-    setOpenedInstallmentUrls(nextUrls);
-    try {
-      window.localStorage.setItem(
-        installmentsStorageKey,
-        JSON.stringify(nextUrls),
-      );
-    } catch {
-      /* Link tracking must not prevent checkout when storage is unavailable. */
-    }
-  };
+  const documentEmailHref = buildDocumentEmailHref(course.title);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -449,30 +361,6 @@ function CourseDetailContent({
                     Enrollment Agreement Forms
                   </a>
                   */}
-                  {hasFullPayment ? (
-                    <a
-                      href={course.payments.fullPaymentUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="block w-full bg-[#561D7E] text-white text-center py-4 rounded-full hover:bg-[#461464] transition-colors mb-3"
-                    >
-                      Pay In Full
-                    </a>
-                  ) : null}
-                  {hasPaymentPlans ? (
-                    <button
-                      type="button"
-                      onClick={() => setIsPlanModalOpen(true)}
-                      className="block w-full bg-[#eee5f5] text-[#561D7E] text-center py-3 rounded-full hover:bg-[#dfd1eb] transition-colors mb-3"
-                    >
-                      Choose Payment Plan
-                    </button>
-                  ) : null}
-                  {hasPaymentPlans && installmentAmount !== null ? (
-                    <p className="text-xs text-[#6a7282] text-center mb-3">
-                      {`Or split into ${installmentCount} payments of ${currencyFormatter.format(installmentAmount)}.`}
-                    </p>
-                  ) : null}
                   <a
                     href={documentEmailHref}
                     className="flex w-full items-center justify-center gap-2 bg-white border-2 border-[#561D7E] text-[#561D7E] text-center py-3 rounded-full hover:bg-[#eee5f5] transition-colors mb-3"
@@ -496,14 +384,9 @@ function CourseDetailContent({
                         - Complete the School Application Form (required for all
                         programs)
                       </li>
-                      {hasFullPayment ? (
-                        <li>
-                          - Pay in full or choose a plan — processed securely
-                          through Stripe
-                        </li>
-                      ) : (
-                        <li>- Contact admissions to arrange tuition payment</li>
-                      )}
+                      <li>
+                        - Choose your payment option in the Populi application
+                      </li>
                       <li>
                         - Send any other requested documents to{" "}
                         <a
@@ -580,48 +463,21 @@ function CourseDetailContent({
                   <CreditCard className="size-8 text-[#561D7E]" />
                 </div>
                 <h3 className="text-xl font-medium text-[#101828] mb-2">
-                  Pay Your Tuition
+                  Choose Your Payment Option
                 </h3>
-                {hasFullPayment ? (
-                  <>
-                    <p className="text-[#4a5565] mb-6 flex-1">
-                      Pay in full or choose a payment plan. All payments are
-                      processed securely through <strong>Stripe</strong>.
-                    </p>
-                    <div className="flex flex-col gap-3">
-                      <a
-                        href={course.payments.fullPaymentUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="block w-full bg-[#561D7E] text-white text-center py-3 rounded-full hover:bg-[#461464] transition-colors font-medium"
-                      >
-                        Pay In Full
-                      </a>
-                      {hasPaymentPlans ? (
-                        <button
-                          type="button"
-                          onClick={() => setIsPlanModalOpen(true)}
-                          className="block w-full bg-white border-2 border-[#561D7E] text-[#561D7E] text-center py-3 rounded-full hover:bg-[#eee5f5] transition-colors font-medium"
-                        >
-                          Choose Payment Plan
-                        </button>
-                      ) : null}
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <p className="text-[#4a5565] mb-6 flex-1">
-                      Contact our admissions team to arrange tuition payment for
-                      this program.
-                    </p>
-                    <a
-                      href="tel:+13369997123"
-                      className="block w-full bg-[#561D7E] text-white text-center py-3 rounded-full hover:bg-[#461464] transition-colors font-medium"
-                    >
-                      Call (336) 999-7123
-                    </a>
-                  </>
-                )}
+                <p className="text-[#4a5565] mb-6 flex-1">
+                  All payment options are in the{" "}
+                  <strong>Populi</strong> application. Choose how you want to
+                  pay as part of applying.
+                </p>
+                <a
+                  href={APPLICATION_LINKS.schoolApplication}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block w-full bg-[#561D7E] text-white text-center py-3 rounded-full hover:bg-[#461464] transition-colors font-medium"
+                >
+                  Apply &amp; View Payment Options
+                </a>
               </div>
 
               {/* Step 3 */}
@@ -706,101 +562,6 @@ function CourseDetailContent({
           </div>
         </section>
       </main>
-
-      {isPlanModalOpen && hasPaymentPlans ? (
-        <div className="fixed inset-0 z-[80] flex items-center justify-center p-4">
-          <button
-            type="button"
-            aria-label="Close payment plan selector"
-            onClick={() => setIsPlanModalOpen(false)}
-            className="absolute inset-0 bg-black/55"
-          />
-
-          <div className="relative w-full max-w-xl bg-white rounded-2xl shadow-2xl border border-gray-200 p-6 sm:p-8">
-            <div className="flex items-start justify-between gap-6 mb-5">
-              <div>
-                <h3 className="text-2xl font-medium text-[#101828]">
-                  Choose A Payment Plan
-                </h3>
-                <p className="text-[#6a7282] mt-1">
-                  Select one plan, then continue to secure Stripe checkout.
-                </p>
-                {installmentAmount !== null ? (
-                  <p className="text-sm text-[#561D7E] mt-2">
-                    {`${installmentCount} equal payments of ${currencyFormatter.format(installmentAmount)} (${currencyFormatter.format(totalCostAmount ?? installmentAmount * installmentCount)} total)`}
-                  </p>
-                ) : null}
-              </div>
-              <button
-                type="button"
-                onClick={() => setIsPlanModalOpen(false)}
-                className="text-sm text-[#561D7E] hover:text-[#461464] font-medium"
-              >
-                Close
-              </button>
-            </div>
-
-            <div className="space-y-3 max-h-[50vh] overflow-y-auto pr-1 mb-6">
-              {paymentPlans.map((plan, index) => {
-                const planOptionLabel = `Installment ${index + 1} of ${installmentCount}`;
-                const isSelected = selectedPlanUrl === plan.url;
-                const isOpened = openedInstallmentUrls.includes(plan.url);
-
-                return (
-                  <label
-                    key={plan.url}
-                    className={`flex gap-3 p-4 rounded-xl border cursor-pointer transition-colors ${
-                      isSelected
-                        ? "border-[#561D7E] bg-[#eee5f5]"
-                        : "border-gray-200 hover:border-[#c6b0d8] hover:bg-[#f7f2fb]"
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="selected-payment-plan"
-                      className="mt-1 accent-[#561D7E]"
-                      checked={isSelected}
-                      onChange={() => setSelectedPlanUrl(plan.url)}
-                    />
-                    <span className="flex flex-col">
-                      <span className="font-medium text-[#101828] flex flex-wrap items-center gap-2">
-                        <span>{planOptionLabel}</span>
-                        {isOpened ? (
-                          <span className="text-xs bg-[#daf5e8] text-[#156545] px-2 py-0.5 rounded-full">
-                            Opened
-                          </span>
-                        ) : null}
-                      </span>
-                      <span className="text-sm text-[#6a7282]">
-                        {plan.label}
-                      </span>
-                    </span>
-                  </label>
-                );
-              })}
-            </div>
-
-            <p className="text-xs text-[#6a7282] mb-4">
-              {`Opened installments in this browser: ${openedInstallmentCount}/${installmentCount}. This tracks link opens only, not completed Stripe payments.`}
-            </p>
-
-            <a
-              href={selectedPlanUrl ?? paymentPlans[0].url}
-              target="_blank"
-              rel="noreferrer"
-              onClick={() => {
-                if (selectedPlanUrl) {
-                  markInstallmentAsOpened(selectedPlanUrl);
-                }
-                setIsPlanModalOpen(false);
-              }}
-              className="block w-full bg-[#561D7E] text-white text-center py-4 rounded-full hover:bg-[#461464] transition-colors"
-            >
-              Continue to Stripe
-            </a>
-          </div>
-        </div>
-      ) : null}
 
       <Footer />
     </div>
