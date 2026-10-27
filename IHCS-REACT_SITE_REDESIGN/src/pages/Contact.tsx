@@ -20,7 +20,6 @@ import { useCourses, useText } from "../content/hooks";
 import { EditableText } from "../editor/Editable";
 import { useEditor } from "../editor/useEditor";
 import {
-  APPLICATION_LINKS,
   CONTACT_INFO,
   ADMISSION_EMAIL,
   buildDocumentEmailHref,
@@ -569,14 +568,12 @@ export default function Contact() {
                         required documents for admissions review.
                       </p>
                       <div className="flex flex-col sm:flex-row gap-3">
-                        <a
-                          href={APPLICATION_LINKS.schoolApplication}
-                          target="_blank"
-                          rel="noreferrer"
+                        <Link
+                          to="/apply"
                           className="bg-[#6b2d94] text-white px-6 py-3 rounded-full hover:bg-[#4a1a6d] transition-colors text-center font-medium"
                         >
                           School Application Form
-                        </a>
+                        </Link>
                         {/* Enrollment Agreement Forms — temporarily disabled while the Populi flow is confirmed.
                     <a
                       href={APPLICATION_LINKS.enrollmentAgreement}

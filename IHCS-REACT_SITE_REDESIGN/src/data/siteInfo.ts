@@ -12,6 +12,10 @@ export const APPLICATION_LINKS = {
   // button across the site uses this single value.
   schoolApplication:
     "https://iihs.populiweb.com/router/admissions/onlineapplications/index?application_form=2",
+  // Add the distinct Populi LPN application here once Admissions provides it.
+  // Until then, the application-choice page safely sends both choices to the
+  // current general application.
+  lpnApplication: "",
   // Enrollment Agreement Forms (previous Google Form). Currently unused —
   // the Enrollment Agreement buttons are commented out site-wide until the
   // Populi flow / new destination is confirmed. Kept here for easy re-enable.
@@ -23,10 +27,6 @@ export const APPLICATION_LINK_LABELS = {
   schoolApplication: "School Application Form",
   enrollmentAgreement: "Enrollment Agreement Forms"
 };
-
-// URL the top-bar "Apply Online" button points to. Same Populi application as
-// the rest of the site's apply buttons; swap this single value if it diverges.
-export const APPLY_ONLINE_URL = APPLICATION_LINKS.schoolApplication;
 
 // Learning Management System login for current students. Leave as an empty
 // string until the real LMS link is available — while empty, the header renders

@@ -30,7 +30,6 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import {
-  APPLICATION_LINKS,
   ADMISSION_EMAIL,
   buildDocumentEmailHref,
 } from "../data/siteInfo";
@@ -343,14 +342,12 @@ function CourseDetailContent({
                     </div>
                   </div>
 
-                  <a
-                    href={APPLICATION_LINKS.schoolApplication}
-                    target="_blank"
-                    rel="noreferrer"
+                  <Link
+                    to="/apply"
                     className="block w-full bg-[#6b2d94] text-white text-center py-4 rounded-full hover:bg-[#4a1a6d] transition-colors mb-3"
                   >
                     Apply for This Course
-                  </a>
+                  </Link>
                   {/* Enrollment Agreement Forms — temporarily disabled while the Populi flow is confirmed.
                   <a
                     href={APPLICATION_LINKS.enrollmentAgreement}
@@ -433,14 +430,12 @@ function CourseDetailContent({
                   required for all programs.
                 </p>
                 <div className="flex flex-col gap-3">
-                  <a
-                    href={APPLICATION_LINKS.schoolApplication}
-                    target="_blank"
-                    rel="noreferrer"
+                  <Link
+                    to="/apply"
                     className="block w-full bg-[#561D7E] text-white text-center py-3 rounded-full hover:bg-[#461464] transition-colors font-medium"
                   >
                     School Application Form
-                  </a>
+                  </Link>
                   {/* Enrollment Agreement Forms — temporarily disabled while the Populi flow is confirmed.
                   <a
                     href={APPLICATION_LINKS.enrollmentAgreement}
@@ -470,14 +465,12 @@ function CourseDetailContent({
                   <strong>Populi</strong> application. Choose how you want to
                   pay as part of applying.
                 </p>
-                <a
-                  href={APPLICATION_LINKS.schoolApplication}
-                  target="_blank"
-                  rel="noreferrer"
+                <Link
+                  to="/apply"
                   className="block w-full bg-[#561D7E] text-white text-center py-3 rounded-full hover:bg-[#461464] transition-colors font-medium"
                 >
                   Apply &amp; View Payment Options
-                </a>
+                </Link>
               </div>
 
               {/* Step 3 */}

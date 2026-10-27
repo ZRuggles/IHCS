@@ -102,7 +102,7 @@ export default function EducationGateway() {
                 <p className="mt-3 leading-7 text-[#665d70]">Explore the school's healthcare training, begin an application, or sign in to your existing student account.</p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   {schoolOrigin && <a href={`${schoolOrigin}/courses`} className="inline-flex items-center gap-2 rounded-full bg-[#6b2d94] px-5 py-3 font-medium text-white">IIHS programs <ArrowRight className="size-4" /></a>}
-                  <a href={APPLICATION_LINKS.schoolApplication} className="inline-flex items-center gap-2 rounded-full border border-[#6b2d94]/30 px-5 py-3 font-medium text-[#6b2d94]"><FileText className="size-4" /> IIHS application</a>
+                  <a href={schoolSiteUrl ? `${schoolSiteUrl}/apply` : APPLICATION_LINKS.schoolApplication} className="inline-flex items-center gap-2 rounded-full border border-[#6b2d94]/30 px-5 py-3 font-medium text-[#6b2d94]"><FileText className="size-4" /> IIHS application</a>
                   <a href={LMS_URL} className="inline-flex items-center gap-2 rounded-full border border-[#6b2d94]/30 px-5 py-3 font-medium text-[#6b2d94]"><GraduationCap className="size-4" /> IIHS student portal</a>
                 </div>
                 <a href={`mailto:${ADMISSION_EMAIL}`} className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-[#6b2d94] hover:underline">Contact IIHS Admissions <ArrowRight className="size-4" /></a>

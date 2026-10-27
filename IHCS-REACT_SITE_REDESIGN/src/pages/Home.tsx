@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 import { useCourses, useText } from "../content/hooks";
 import { EditableText } from "../editor/Editable";
-import { APPLICATION_LINKS } from "../data/siteInfo";
 import { isSchoolSite } from "../data/siteVariant";
 
 const careServices: HomeCourseCardProps[] = [
@@ -223,14 +222,12 @@ export default function Home() {
                 </p>
                 <div className="flex flex-wrap gap-4 mb-8">
                   {isSchoolSite ? (
-                    <a
-                      href={APPLICATION_LINKS.schoolApplication}
-                      target="_blank"
-                      rel="noreferrer"
+                    <Link
+                      to="/apply"
                       className="bg-[#561D7E] text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#461464] transition-all hover:scale-105 text-base sm:text-lg"
                     >
                       Apply Online
-                    </a>
+                    </Link>
                   ) : (
                     <Link
                       to="/contact"
@@ -557,14 +554,12 @@ export default function Home() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               {isSchoolSite ? (
-                <a
-                  href={APPLICATION_LINKS.schoolApplication}
-                  target="_blank"
-                  rel="noreferrer"
+                <Link
+                  to="/apply"
                   className="bg-white text-[#561D7E] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-gray-100 transition-colors text-base sm:text-lg"
                 >
                   Apply Online
-                </a>
+                </Link>
               ) : (
                 <Link
                   to="/contact"

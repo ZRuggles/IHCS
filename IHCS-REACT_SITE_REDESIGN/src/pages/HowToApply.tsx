@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
-import { ADMISSION_EMAIL, APPLICATION_LINKS } from "../data/siteInfo";
+import { ADMISSION_EMAIL } from "../data/siteInfo";
 
 const steps = [
   [
@@ -88,14 +88,12 @@ export default function HowToApply() {
             Ready to take the next step?
           </h2>
           <div className="mt-6 flex flex-wrap gap-4">
-            <a
-              href={APPLICATION_LINKS.schoolApplication}
-              target="_blank"
-              rel="noreferrer"
+            <Link
+              to="/apply"
               className="rounded-full bg-[#561D7E] px-6 py-3 text-white"
             >
               Open school application
-            </a>
+            </Link>
             <a
               href={`mailto:${ADMISSION_EMAIL}`}
               className="rounded-full border border-[#561D7E]/30 px-6 py-3 text-[#561D7E]"

@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone, Mail } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
-import { ADMISSION_EMAIL, APPLY_ONLINE_URL, LMS_URL } from "../data/siteInfo";
+import { ADMISSION_EMAIL, LMS_URL } from "../data/siteInfo";
 
 import { isSchoolSite, siteBrand, siteNavigation } from "../data/siteVariant";
 
@@ -79,14 +79,12 @@ export function Header() {
                 </span>
               ))}
             {isSchoolSite ? (
-              <a
-                href={APPLY_ONLINE_URL}
-                target="_blank"
-                rel="noreferrer"
+              <Link
+                to="/apply"
                 className="bg-[#ffcc00] text-[#461464] px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm hover:opacity-90 transition-opacity whitespace-nowrap"
               >
                 Apply Online
-              </a>
+              </Link>
             ) : (
               <Link
                 to="/contact"
