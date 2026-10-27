@@ -363,7 +363,7 @@ export default function Courses() {
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Link
-                  to="/apply"
+                  to="?apply=1"
                   className="bg-[#6b2d94] text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#4a1a6d] transition-colors"
                 >
                   School Application Form
@@ -394,7 +394,7 @@ export default function Courses() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
-                to="/apply"
+                to="?apply=1"
                 className="bg-[#6b2d94] text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#4a1a6d] transition-colors"
               >
                 Apply Online

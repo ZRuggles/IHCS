@@ -569,7 +569,7 @@ export default function Contact() {
                       </p>
                       <div className="flex flex-col sm:flex-row gap-3">
                         <Link
-                          to="/apply"
+                          to="?apply=1"
                           className="bg-[#6b2d94] text-white px-6 py-3 rounded-full hover:bg-[#4a1a6d] transition-colors text-center font-medium"
                         >
                           School Application Form

@@ -80,7 +80,7 @@ export function Header() {
               ))}
             {isSchoolSite ? (
               <Link
-                to="/apply"
+                to="?apply=1"
                 className="bg-[#ffcc00] text-[#461464] px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm hover:opacity-90 transition-opacity whitespace-nowrap"
               >
                 Apply Online

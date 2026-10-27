@@ -89,7 +89,7 @@ export default function HowToApply() {
           </h2>
           <div className="mt-6 flex flex-wrap gap-4">
             <Link
-              to="/apply"
+              to="?apply=1"
               className="rounded-full bg-[#561D7E] px-6 py-3 text-white"
             >
               Open school application

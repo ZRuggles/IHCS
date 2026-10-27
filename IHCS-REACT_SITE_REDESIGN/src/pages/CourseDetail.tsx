@@ -343,7 +343,7 @@ function CourseDetailContent({
                   </div>
 
                   <Link
-                    to="/apply"
+                    to="?apply=1"
                     className="block w-full bg-[#6b2d94] text-white text-center py-4 rounded-full hover:bg-[#4a1a6d] transition-colors mb-3"
                   >
                     Apply for This Course
@@ -431,7 +431,7 @@ function CourseDetailContent({
                 </p>
                 <div className="flex flex-col gap-3">
                   <Link
-                    to="/apply"
+                    to="?apply=1"
                     className="block w-full bg-[#561D7E] text-white text-center py-3 rounded-full hover:bg-[#461464] transition-colors font-medium"
                   >
                     School Application Form
@@ -466,7 +466,7 @@ function CourseDetailContent({
                   pay as part of applying.
                 </p>
                 <Link
-                  to="/apply"
+                  to="?apply=1"
                   className="block w-full bg-[#561D7E] text-white text-center py-3 rounded-full hover:bg-[#461464] transition-colors font-medium"
                 >
                   Apply &amp; View Payment Options
