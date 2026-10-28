@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { Briefcase, DollarSign, GraduationCap, Heart, Users, TrendingUp, Award, Clock, Shield, Headphones } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useBlock } from "../content/hooks";
+import { isHiddenLpn } from "../data/siteInfo";
 import { EditableCards } from "../editor/EditableCards";
 
 /** One job listing, as stored in the employment/positions content block. */
@@ -138,6 +139,9 @@ export default function Employment() {
   // Job listings come from the database; the constant above is used only
   // when the API is unreachable, so this section never renders empty.
   const positions = useBlock<Position[]>("employment", "positions", FALLBACK_POSITIONS);
+  // LPN openings stay hidden until the LPN launch; the editor still gets the
+  // full list so saving never drops them.
+  const visiblePositions = positions.filter((p) => !isHiddenLpn(p.title));
 
   // Benefits come from the database; FALLBACK_BENEFITS (module scope) is
   // used only when the API is unreachable.
@@ -526,7 +530,7 @@ export default function Employment() {
               ]}
             >
             <div className="space-y-6">
-              {positions.map((position, index) => {
+              {visiblePositions.map((position, index) => {
                 const cardBackgroundImage =
                   positionBackgroundImageByTitle[position.title] ?? "/NurseAide.jpg";
 

@@ -6,6 +6,7 @@ import { Footer } from "../components/Footer";
 import { BrandShine } from "../components/BrandShine";
 import { EditableText } from "../editor/Editable";
 import { useText } from "../content/hooks";
+import { withoutLpn } from "../data/siteInfo";
 
 const reveal = {
   initial: { opacity: 0, y: 24 },
@@ -98,7 +99,7 @@ export default function HealthcareHome() {
               <p className="max-w-xl leading-7 text-[#665d70]"><Copy contentKey="programs.subheading" fallback="Explore home care and workforce services designed around individuals, families, and healthcare organizations." /></p>
             </motion.div>
             <div className="grid auto-rows-fr gap-5 sm:grid-cols-2 xl:grid-cols-4">
-              {services.map(({ icon: Icon, title, text, label }, index) => <motion.div key={title} {...reveal} transition={{ duration: 0.5, delay: index * 0.08 }} whileHover={{ y: -6 }} className="h-full"><Link to="/services" className="group flex h-full flex-col rounded-2xl border border-[#e8dfd1] bg-white p-7 shadow-sm transition-shadow hover:shadow-lg"><div className="mb-7 w-fit rounded-full bg-[#f4edf8] p-4"><Icon className="size-7 text-[#6b2d94]" /></div><p className="mb-3 text-xs font-medium uppercase tracking-wider text-[#8a652d]">{label}</p><h3 className="text-xl font-medium text-[#28133e]">{title}</h3><p className="mb-8 mt-3 leading-7 text-[#665d70]">{text}</p><span className="mt-auto flex items-center gap-2 font-medium text-[#6b2d94]">Explore services <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" /></span></Link></motion.div>)}
+              {services.map(({ icon: Icon, title, text, label }, index) => <motion.div key={title} {...reveal} transition={{ duration: 0.5, delay: index * 0.08 }} whileHover={{ y: -6 }} className="h-full"><Link to="/services" className="group flex h-full flex-col rounded-2xl border border-[#e8dfd1] bg-white p-7 shadow-sm transition-shadow hover:shadow-lg"><div className="mb-7 w-fit rounded-full bg-[#f4edf8] p-4"><Icon className="size-7 text-[#6b2d94]" /></div><p className="mb-3 text-xs font-medium uppercase tracking-wider text-[#8a652d]">{label}</p><h3 className="text-xl font-medium text-[#28133e]">{title}</h3><p className="mb-8 mt-3 leading-7 text-[#665d70]">{withoutLpn(text)}</p><span className="mt-auto flex items-center gap-2 font-medium text-[#6b2d94]">Explore services <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" /></span></Link></motion.div>)}
             </div>
           </div>
         </section>
@@ -107,7 +108,7 @@ export default function HealthcareHome() {
           <div className="mx-auto max-w-[1500px] px-5 sm:px-8">
             <div className="grid overflow-hidden rounded-3xl bg-[#eee5f5] lg:grid-cols-2">
               <motion.img {...reveal} src="/Supplemental Staffing.jpeg" alt="Healthcare staffing team" loading="lazy" className="h-72 w-full object-cover lg:h-full lg:min-h-[420px]" />
-              <motion.div {...reveal} className="flex flex-col justify-center p-7 sm:p-12 lg:p-14"><p className="mb-4 text-sm font-medium text-[#6b2d94]">FOR HEALTHCARE FACILITIES & ORGANIZATIONS</p><h2 className="text-3xl font-medium text-[#28133e] sm:text-4xl"><Copy contentKey="staffing.heading" fallback="Workforce support for your healthcare team" /></h2><p className="mt-5 leading-8 text-[#665d70]"><Copy contentKey="staffing.description" fallback="From medical offices to healthcare facilities, IHS works with organizations seeking staffing support. Tell us about your setting, the roles you need, and your staffing priorities so we can discuss how to support your team." /></p><p className="mt-4 text-sm leading-7 text-[#665d70]">Registered nurses, licensed practical nurses, certified nursing assistants, and patient sitters.</p><Link to="/contact?interest=partnership" className="mt-7 inline-flex items-center gap-2 font-medium text-[#6b2d94]">Partner With IHS <ArrowRight className="size-5" /></Link></motion.div>
+              <motion.div {...reveal} className="flex flex-col justify-center p-7 sm:p-12 lg:p-14"><p className="mb-4 text-sm font-medium text-[#6b2d94]">FOR HEALTHCARE FACILITIES & ORGANIZATIONS</p><h2 className="text-3xl font-medium text-[#28133e] sm:text-4xl"><Copy contentKey="staffing.heading" fallback="Workforce support for your healthcare team" /></h2><p className="mt-5 leading-8 text-[#665d70]"><Copy contentKey="staffing.description" fallback="From medical offices to healthcare facilities, IHS works with organizations seeking staffing support. Tell us about your setting, the roles you need, and your staffing priorities so we can discuss how to support your team." /></p><p className="mt-4 text-sm leading-7 text-[#665d70]">{withoutLpn("Registered nurses, licensed practical nurses, certified nursing assistants, and patient sitters.")}</p><Link to="/contact?interest=partnership" className="mt-7 inline-flex items-center gap-2 font-medium text-[#6b2d94]">Partner With IHS <ArrowRight className="size-5" /></Link></motion.div>
             </div>
           </div>
         </section>

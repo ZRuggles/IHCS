@@ -32,6 +32,26 @@ export function isLpnLaunched(): boolean {
   return Date.now() >= LPN_LAUNCH_AT.getTime();
 }
 
+const LPN_MENTION = /\bLPNs?\b|Licensed Practical Nurs/i;
+
+/** True for text (a job title, a feature bullet) to hide before the launch. */
+export function isHiddenLpn(text: string): boolean {
+  return !isLpnLaunched() && LPN_MENTION.test(text);
+}
+
+/**
+ * Drops "LPNs" from a list in running copy before the launch, e.g.
+ * "RNs, LPNs, CNAs, and patient sitters" -> "RNs, CNAs, and patient sitters".
+ * Display-only: editors still see and save the original text.
+ */
+export function withoutLpn(text: string): string {
+  if (isLpnLaunched()) return text;
+  return text
+    .replace(/\blicensed practical nurses?,\s*/gi, "")
+    .replace(/\bLPNs?,\s*/g, "")
+    .replace(/,?\s*(?:and\s+)?\bLPNs?\b/g, "");
+}
+
 export const APPLICATION_LINK_LABELS = {
   schoolApplication: "School Application Form",
   enrollmentAgreement: "Enrollment Agreement Forms"

@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useBlock } from "../content/hooks";
+import { isHiddenLpn, withoutLpn } from "../data/siteInfo";
 import { EditableCards } from "../editor/EditableCards";
 
 /**
@@ -416,10 +417,10 @@ export default function Services() {
                       {service.title}
                     </h3>
                     <p className="text-[#4a5565] leading-relaxed mb-6">
-                      {service.description}
+                      {withoutLpn(service.description)}
                     </p>
                     <ul className="space-y-2">
-                      {service.features.map((feature, idx) => (
+                      {service.features.filter((feature) => !isHiddenLpn(feature)).map((feature, idx) => (
                         <motion.li 
                           key={idx} 
                           className="flex gap-3 items-start text-[#6a7282]"
