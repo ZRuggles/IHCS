@@ -15,6 +15,7 @@ import {
 import { useCourses, useText } from "../content/hooks";
 import { EditableText } from "../editor/Editable";
 import { isSchoolSite } from "../data/siteVariant";
+import { ApplyLink } from "../components/ApplyLink";
 
 const careServices: HomeCourseCardProps[] = [
   {
@@ -222,12 +223,11 @@ export default function Home() {
                 </p>
                 <div className="flex flex-wrap gap-4 mb-8">
                   {isSchoolSite ? (
-                    <Link
-                      to="?apply=1"
+                    <ApplyLink
                       className="bg-[#561D7E] text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#461464] transition-all hover:scale-105 text-base sm:text-lg"
                     >
                       Apply Online
-                    </Link>
+                    </ApplyLink>
                   ) : (
                     <Link
                       to="/contact"
@@ -554,12 +554,11 @@ export default function Home() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               {isSchoolSite ? (
-                <Link
-                  to="?apply=1"
+                <ApplyLink
                   className="bg-white text-[#561D7E] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-gray-100 transition-colors text-base sm:text-lg"
                 >
                   Apply Online
-                </Link>
+                </ApplyLink>
               ) : (
                 <Link
                   to="/contact"

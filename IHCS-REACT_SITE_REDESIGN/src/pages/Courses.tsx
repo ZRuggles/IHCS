@@ -6,6 +6,7 @@ import { Footer } from "../components/Footer";
 import { GraduationCap, Clock, DollarSign, Calendar, ArrowRight } from "lucide-react";
 import { useCourses, useText } from "../content/hooks";
 import { EditableText } from "../editor/Editable";
+import { ApplyLink } from "../components/ApplyLink";
 
 export default function Courses() {
   const courses = useCourses();
@@ -362,12 +363,11 @@ export default function Courses() {
                 Complete the School Application Form to begin admissions review.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <Link
-                  to="?apply=1"
+                <ApplyLink
                   className="bg-[#6b2d94] text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#4a1a6d] transition-colors"
                 >
                   School Application Form
-                </Link>
+                </ApplyLink>
                 {/* Enrollment Forms — temporarily disabled while the Populi flow is confirmed.
                 <a
                   href={APPLICATION_LINKS.enrollmentAgreement}
@@ -393,12 +393,11 @@ export default function Courses() {
               Have questions about our programs? Our admissions team is here to help you find the perfect training program.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                to="?apply=1"
+              <ApplyLink
                 className="bg-[#6b2d94] text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#4a1a6d] transition-colors"
               >
                 Apply Online
-              </Link>
+              </ApplyLink>
               {/* Enrollment Forms — temporarily disabled while the Populi flow is confirmed.
               <a
                 href={APPLICATION_LINKS.enrollmentAgreement}

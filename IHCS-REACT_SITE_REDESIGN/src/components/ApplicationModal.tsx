@@ -1,12 +1,22 @@
 import { useEffect } from "react";
 import { X } from "lucide-react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { APPLICATION_LINKS } from "../data/siteInfo";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { APPLICATION_LINKS, isLpnLaunched } from "../data/siteInfo";
+
+// /apply: the LPN choice modal once launched, otherwise the general application.
+export function ApplyRedirect() {
+  const launched = isLpnLaunched();
+  useEffect(() => {
+    if (!launched) window.location.replace(APPLICATION_LINKS.schoolApplication);
+  }, [launched]);
+  return launched ? <Navigate to="/?apply=1" replace /> : null;
+}
 
 export function ApplicationModal() {
   const location = useLocation();
   const navigate = useNavigate();
-  const isOpen = new URLSearchParams(location.search).get("apply") === "1";
+  const isOpen =
+    isLpnLaunched() && new URLSearchParams(location.search).get("apply") === "1";
 
   const close = () => {
     const params = new URLSearchParams(location.search);

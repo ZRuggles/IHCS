@@ -23,6 +23,15 @@ export const APPLICATION_LINKS = {
     "https://docs.google.com/forms/d/e/1FAIpQLSdDsxdGtPb1vdHTPeGAxmJjr_oLXLsGTfa9sljbpCxjIh3v6Q/viewform?usp=sharing&ouid=111345749796514694670"
 };
 
+// The LPN program and its application-choice modal stay hidden until this
+// moment (midnight Eastern, Nov 2 2026). Checked in the visitor's browser, so
+// the switch happens on its own without a rebuild.
+export const LPN_LAUNCH_AT = new Date("2026-11-02T00:00:00-05:00");
+
+export function isLpnLaunched(): boolean {
+  return Date.now() >= LPN_LAUNCH_AT.getTime();
+}
+
 export const APPLICATION_LINK_LABELS = {
   schoolApplication: "School Application Form",
   enrollmentAgreement: "Enrollment Agreement Forms"

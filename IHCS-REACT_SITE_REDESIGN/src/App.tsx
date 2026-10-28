@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import HealthcareHome from "./pages/HealthcareHome";
 import HowToApply from "./pages/HowToApply";
@@ -20,7 +20,7 @@ import { EditorToolbar } from "./editor/EditorToolbar";
 import { SetPassword } from "./editor/SetPassword";
 import DesignReview from "./pages/DesignReview";
 import { SiteMetadata } from "./components/SiteMetadata";
-import { ApplicationModal } from "./components/ApplicationModal";
+import { ApplicationModal, ApplyRedirect } from "./components/ApplicationModal";
 
 const pageTitles: Record<string, string> = {
   "/": "Innovation",
@@ -91,7 +91,7 @@ function App() {
           path="/how-to-apply"
           element={isSchoolSite ? <HowToApply /> : <EducationGateway />}
         />
-        <Route path="/apply" element={isSchoolSite ? <Navigate to="/?apply=1" replace /> : <EducationGateway />} />
+        <Route path="/apply" element={isSchoolSite ? <ApplyRedirect /> : <EducationGateway />} />
         <Route
           path="/student-resources"
           element={

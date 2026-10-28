@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { ADMISSION_EMAIL, LMS_URL } from "../data/siteInfo";
 
 import { isSchoolSite, siteBrand, siteNavigation } from "../data/siteVariant";
+import { ApplyLink } from "./ApplyLink";
 
 // Headers remount between routes. Keep the intro's lifetime tied to this
 // browser document, so navigation never replays it and a full reload can.
@@ -79,12 +80,11 @@ export function Header() {
                 </span>
               ))}
             {isSchoolSite ? (
-              <Link
-                to="?apply=1"
+              <ApplyLink
                 className="bg-[#ffcc00] text-[#461464] px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm hover:opacity-90 transition-opacity whitespace-nowrap"
               >
                 Apply Online
-              </Link>
+              </ApplyLink>
             ) : (
               <Link
                 to="/contact"

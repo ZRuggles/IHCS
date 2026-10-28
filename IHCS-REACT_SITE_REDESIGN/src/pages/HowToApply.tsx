@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { ADMISSION_EMAIL } from "../data/siteInfo";
+import { ApplyLink } from "../components/ApplyLink";
 
 const steps = [
   [
@@ -88,12 +89,11 @@ export default function HowToApply() {
             Ready to take the next step?
           </h2>
           <div className="mt-6 flex flex-wrap gap-4">
-            <Link
-              to="?apply=1"
+            <ApplyLink
               className="rounded-full bg-[#561D7E] px-6 py-3 text-white"
             >
               Open school application
-            </Link>
+            </ApplyLink>
             <a
               href={`mailto:${ADMISSION_EMAIL}`}
               className="rounded-full border border-[#561D7E]/30 px-6 py-3 text-[#561D7E]"
