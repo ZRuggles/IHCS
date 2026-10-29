@@ -11,6 +11,8 @@ import type { EditorIdentity } from "./session";
 export interface EditorState {
   editor: EditorIdentity | null;
   isSignedIn: boolean;
+  /** Why the last sign-in was rejected after the password was accepted. */
+  authError: string | null;
   pendingChanges: number;
   isPublishing: boolean;
   lastSavedAt: Date | null;

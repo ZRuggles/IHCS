@@ -14,6 +14,7 @@ import { useContent } from "../content/context";
 
 export function EditorProvider({ children }: { children: ReactNode }) {
   const [editor, setEditor] = useState<EditorIdentity | null>(null);
+  const [authError, setAuthError] = useState<string | null>(null);
   const [pendingChanges, setPendingChanges] = useState(0);
   const [isPublishing, setIsPublishing] = useState(false);
   const [lastSavedAt, setLastSavedAt] = useState<Date | null>(null);
@@ -37,6 +38,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
     }
     try {
       const { editor: me } = await api.me();
+      setAuthError(null);
       setEditor(me as EditorIdentity);
       if (me.role === "viewer") {
         await refreshContent(true);
@@ -44,9 +46,16 @@ export function EditorProvider({ children }: { children: ReactNode }) {
       }
       await refreshContent();
       await refreshStatus();
-    } catch {
-      // An expired or rejected token means "not signed in".
+    } catch (error) {
+      // Supabase accepted the password but the API rejected the account
+      // (no profile, inactive, expired) or could not be reached. Drop the
+      // token so /admin returns to the form and says why, instead of
+      // waiting forever on a token that will never be confirmed.
       setEditor(null);
+      setAuthError(
+        error instanceof Error ? error.message : "Sign-in could not be completed."
+      );
+      await doSignOut();
     }
   }, [refreshContent, refreshStatus]);
 
@@ -104,6 +113,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
     () => ({
       editor,
       isSignedIn: editor !== null && editor.role !== "viewer",
+      authError,
       pendingChanges,
       isPublishing,
       lastSavedAt,
@@ -112,7 +122,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
       publish,
       signOut
     }),
-    [editor, pendingChanges, isPublishing, lastSavedAt, refreshStatus, noteSaved, publish, signOut]
+    [editor, authError, pendingChanges, isPublishing, lastSavedAt, refreshStatus, noteSaved, publish, signOut]
   );
 
   return <EditorContext.Provider value={value}>{children}</EditorContext.Provider>;

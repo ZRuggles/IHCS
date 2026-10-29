@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Loader2, Lock } from "lucide-react";
 import { signIn, sendPasswordReset } from "./session";
+import { useEditor } from "./useEditor";
 
 /**
  * The private sign-in page at /admin.
@@ -9,12 +10,16 @@ import { signIn, sendPasswordReset } from "./session";
  * reveals whether an email address has an account.
  */
 export function AdminLogin() {
+  const { authError } = useEditor();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
   const [showReset, setShowReset] = useState(false);
+  // A local error belongs to the latest attempt; otherwise show why the
+  // API turned away an account whose password Supabase accepted.
+  const shownError = error ?? (showReset ? null : authError);
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -86,9 +91,9 @@ export function AdminLogin() {
             </>
           )}
 
-          {error && (
+          {shownError && (
             <p className="mb-3 rounded bg-red-50 px-3 py-2 text-sm text-red-700" role="alert">
-              {error}
+              {shownError}
             </p>
           )}
           {notice && (
