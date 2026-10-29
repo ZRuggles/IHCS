@@ -4,6 +4,7 @@ import type { PublicCourse } from "./types";
 import { getNextStart } from "../data/courses";
 import { isLaunchReleased } from "../data/launch";
 import { launchPrograms } from "../data/launchPrograms";
+import { withoutEndedCohorts } from "../data/scheduleDisplay";
 
 /**
  * Content accessors.
@@ -24,11 +25,17 @@ export function useCourses(): PublicCourse[] {
     // Launch programs lead the list once released. A program the editor has
     // added under the same slug wins over the built-in entry.
     const launched = isLaunchReleased
-      ? launchPrograms.filter((program) => !courses.some((course) => course.id === program.id))
+      ? launchPrograms().filter((program) => !courses.some((course) => course.id === program.id))
       : [];
-    // A published snapshot can outlive a cohort date. Reuse the schedule
-    // calculator so visitors see the next scheduled start after that date passes.
-    return [...launched, ...courses].map(course => ({ ...course, nextStart: getNextStart(course) }));
+    // A published snapshot can outlive a cohort date. Finished cohorts are
+    // dropped and Next Start recalculated, so schedules stay current
+    // without a republish.
+    return [...launched, ...courses].map((course) => {
+      const current = course.scheduleDates
+        ? { ...course, scheduleDates: withoutEndedCohorts(course.scheduleDates) }
+        : course;
+      return { ...current, nextStart: getNextStart(current) };
+    });
   }, [courses]);
 }
 

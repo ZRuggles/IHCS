@@ -22,7 +22,6 @@ import { useEditor } from "../editor/useEditor";
 import {
   CONTACT_INFO,
   ADMISSION_EMAIL,
-  buildDocumentEmailHref,
 } from "../data/siteInfo";
 import { ApplyLink } from "../components/ApplyLink";
 
@@ -587,47 +586,6 @@ export default function Contact() {
                       </div>
                     </motion.div>
 
-                    {/* Send Documents by Email */}
-                    <motion.div
-                      className="bg-white border border-gray-200 rounded-2xl p-8"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.28 }}
-                      whileHover={{
-                        boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
-                      }}
-                    >
-                      <div className="bg-[#eee5f5] p-3 rounded-xl w-fit mb-4">
-                        <Mail className="size-6 text-[#6b2d94]" />
-                      </div>
-                      <h3 className="text-2xl font-medium text-[#101828] mb-3">
-                        Send Your Documents
-                      </h3>
-                      <p className="text-[#4a5565] mb-6">
-                        Send all other requested documents to our admissions
-                        team. Click the button below to open your email app with
-                        everything pre-filled — just attach your documents
-                        (Valid ID, Social Security Card, Official Transcript or
-                        GED, immunization records, etc.) and hit send.
-                      </p>
-                      <a
-                        href={buildDocumentEmailHref()}
-                        className="inline-flex items-center justify-center gap-2 bg-[#6b2d94] text-white px-6 py-3 rounded-full hover:bg-[#4a1a6d] transition-colors text-center font-medium"
-                      >
-                        <Mail className="size-5" />
-                        Email Your Documents
-                      </a>
-                      <p className="text-sm text-[#6a7282] mt-4 break-all">
-                        Or email us directly at{" "}
-                        <a
-                          href={buildDocumentEmailHref()}
-                          className="text-[#6b2d94] hover:underline"
-                        >
-                          <ContactEmailText email={ADMISSION_EMAIL} />
-                        </a>
-                      </p>
-                    </motion.div>
                   </>
                 ) : (
                   <CareSupportCards />

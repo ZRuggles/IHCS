@@ -75,6 +75,24 @@ export function TuitionDetails({ course }: { course: PublicCourse }) {
           </div>
         )}
 
+        {(course.details.paymentSchedule?.length ?? 0) > 0 && (
+          <div>
+            <h3 className="mb-2 font-medium text-[#101828]">Payment schedule</h3>
+            <ul className="list-disc space-y-1 pl-5">
+              {course.details.paymentSchedule?.map((line) => <li key={line}>{line}</li>)}
+            </ul>
+          </div>
+        )}
+
+        {(course.details.fees?.length ?? 0) > 0 && (
+          <div>
+            <h3 className="mb-2 font-medium text-[#101828]">Other fees</h3>
+            <ul className="list-disc space-y-1 pl-5">
+              {course.details.fees?.map((fee) => <li key={fee}>{fee}</li>)}
+            </ul>
+          </div>
+        )}
+
         {notIncluded.length > 0 && (
           <div>
             <h3 className="mb-2 font-medium text-[#101828]">Not included in tuition</h3>

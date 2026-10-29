@@ -1,6 +1,5 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Header } from "../components/Header";
-import { AdmissionsLink } from "../components/AdmissionsLink";
 import { Footer } from "../components/Footer";
 import { useCourses } from "../content/hooks";
 import type { PublicCourse } from "../content/types";
@@ -24,15 +23,11 @@ import {
   Stethoscope,
   Pill,
   RefreshCw,
-  Mail,
   FileText,
   CreditCard,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import {
-  ADMISSION_EMAIL,
-  buildDocumentEmailHref,
-} from "../data/siteInfo";
+import { ADMISSION_EMAIL } from "../data/siteInfo";
 import { ApplyLink } from "../components/ApplyLink";
 import { TuitionDetails } from "../components/TuitionDetails";
 
@@ -91,12 +86,9 @@ function CourseDetailContent({
   course: PublicCourse;
   courses: PublicCourse[];
 }) {
-  const documentEmailHref = buildDocumentEmailHref(course.title);
-
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <AdmissionsLink />
 
       <main className="flex-1">
         {/* Hero Section */}
@@ -393,13 +385,6 @@ function CourseDetailContent({
                   </a>
                   */}
                   <a
-                    href={documentEmailHref}
-                    className="flex w-full items-center justify-center gap-2 bg-white border-2 border-[#561D7E] text-[#561D7E] text-center py-3 rounded-full hover:bg-[#eee5f5] transition-colors mb-3"
-                  >
-                    <Mail className="size-5" />
-                    Send Documents by Email
-                  </a>
-                  <a
                     href="tel:+13369997123"
                     className="block w-full bg-white border-2 border-[#561D7E] text-[#561D7E] text-center py-4 rounded-full hover:bg-[#eee5f5] transition-colors"
                   >
@@ -418,15 +403,6 @@ function CourseDetailContent({
                       <li>
                         - Choose your payment option in the Populi application
                       </li>
-                      <li>
-                        - Send any other requested documents to{" "}
-                        <a
-                          href={documentEmailHref}
-                          className="text-[#561D7E] underline break-all"
-                        >
-                          {ADMISSION_EMAIL}
-                        </a>
-                      </li>
                     </ul>
                   </div>
                 </div>
@@ -443,11 +419,11 @@ function CourseDetailContent({
                 How to Enroll
               </h2>
               <p className="text-base sm:text-lg lg:text-xl text-[#4a5565] max-w-2xl mx-auto">
-                Three simple steps to get started in the {course.title}.
+                Two steps to get started in the {course.title}.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 max-w-5xl mx-auto">
               {/* Step 1 */}
               <div className="bg-white rounded-2xl border border-[#dfd1eb] p-8 flex flex-col shadow-sm">
                 <div className="flex items-center gap-4 mb-5">
@@ -503,36 +479,6 @@ function CourseDetailContent({
                 >
                   Apply &amp; View Payment Options
                 </ApplyLink>
-              </div>
-
-              {/* Step 3 */}
-              <div className="bg-white rounded-2xl border border-[#dfd1eb] p-8 flex flex-col shadow-sm">
-                <div className="flex items-center gap-4 mb-5">
-                  <div className="bg-[#561D7E] text-white size-12 rounded-full flex items-center justify-center text-xl font-bold shrink-0">
-                    3
-                  </div>
-                  <Mail className="size-8 text-[#561D7E]" />
-                </div>
-                <h3 className="text-xl font-medium text-[#101828] mb-2">
-                  Send Your Documents
-                </h3>
-                <p className="text-[#4a5565] mb-6 flex-1">
-                  Email any other requested documents to{" "}
-                  <a
-                    href={documentEmailHref}
-                    className="text-[#561D7E] underline break-all font-medium"
-                  >
-                    {ADMISSION_EMAIL}
-                  </a>
-                  . Click below and just attach your files.
-                </p>
-                <a
-                  href={documentEmailHref}
-                  className="flex w-full items-center justify-center gap-2 bg-[#561D7E] text-white text-center py-3 rounded-full hover:bg-[#461464] transition-colors font-medium"
-                >
-                  <Mail className="size-5" />
-                  Send Documents by Email
-                </a>
               </div>
             </div>
 

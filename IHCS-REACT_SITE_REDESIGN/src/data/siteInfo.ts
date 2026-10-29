@@ -1,4 +1,4 @@
-import { isLaunchReleased } from "./launch";
+import { LAUNCH_AT, isLaunchReleased } from "./launch";
 
 export const CONTACT_INFO = {
   faxNumber: "7047692049",
@@ -14,10 +14,12 @@ export const APPLICATION_LINKS = {
   // button across the site uses this single value.
   schoolApplication:
     "https://iihs.populiweb.com/router/admissions/onlineapplications/index?application_form=2",
-  // Add the distinct Populi LPN application here once Admissions provides it.
-  // Until then, the application-choice page safely sends both choices to the
-  // current general application.
-  lpnApplication: "",
+  // Populi LPN application. Part of the November 2 launch, so it is only
+  // compiled into launch builds (see src/data/launch.ts). Populi itself
+  // controls whether the form accepts submissions.
+  lpnApplication: isLaunchReleased
+    ? "https://iihs.populiweb.com/router/admissions/onlineapplications/index?application_form=3"
+    : "",
   // Enrollment Agreement Forms (previous Google Form). Currently unused —
   // the Enrollment Agreement buttons are commented out site-wide until the
   // Populi flow / new destination is confirmed. Kept here for easy re-enable.
@@ -25,12 +27,12 @@ export const APPLICATION_LINKS = {
     "https://docs.google.com/forms/d/e/1FAIpQLSdDsxdGtPb1vdHTPeGAxmJjr_oLXLsGTfa9sljbpCxjIh3v6Q/viewform?usp=sharing&ouid=111345749796514694670"
 };
 
-// The LPN program and its application-choice modal stay hidden until the
-// November 2 launch. This follows the build-time launch setting so the
-// application choice and the program pages always appear together; it
-// takes a rebuild on or after launch (see src/data/launch.ts).
+// Care site only: its LPN job opening and LPN staffing mentions reappear at
+// the launch moment, checked in the visitor's browser so the care site
+// needs no rebuild. The school site's launch content uses the build-time
+// setting instead (src/data/launch.ts).
 export function isLpnLaunched(): boolean {
-  return isLaunchReleased;
+  return Date.now() >= LAUNCH_AT.getTime();
 }
 
 const LPN_MENTION = /\bLPNs?\b|Licensed Practical Nurs/i;
@@ -63,40 +65,3 @@ export const APPLICATION_LINK_LABELS = {
 // the "Current Student LMS" button in a disabled state. Paste the real URL here
 // (e.g. "https://your-lms.example.com/login") to activate it.
 export const LMS_URL = "https://iihs.populiweb.com/";
-
-/**
- * Builds a mailto: link that opens the visitor's default email app with the
- * admission address, a subject, and a body pre-filled. The visitor only needs
- * to attach their documents and hit send. (Browsers cannot auto-attach files
- * to a mailto link, so the body instructs the visitor to attach them.)
- */
-export function buildDocumentEmailHref(courseTitle?: string): string {
-  const subject = courseTitle
-    ? `Document Submission - ${courseTitle}`
-    : "Document Submission - Innovation Healthcare Solutions";
-
-  const bodyLines = [
-    "Hello Admissions Team,",
-    "",
-    courseTitle
-      ? `I am submitting my requested documents for the ${courseTitle}.`
-      : "I am submitting my requested documents.",
-    "",
-    "Please attach your documents to this email before sending (for example: Valid ID, Social Security Card, Official Transcript or GED, immunization records, or proof of prior training).",
-    "",
-    "Name:",
-    "Phone:",
-    "Program of interest:",
-    "",
-    "Thank you,"
-  ];
-
-  const params = new URLSearchParams({
-    subject,
-    body: bodyLines.join("\r\n")
-  });
-
-  // URLSearchParams encodes spaces as "+"; mailto clients expect %20.
-  const query = params.toString().replace(/\+/g, "%20");
-  return `mailto:${ADMISSION_EMAIL}?${query}`;
-}

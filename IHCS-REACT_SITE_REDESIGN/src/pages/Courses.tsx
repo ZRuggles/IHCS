@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { Header } from "../components/Header";
-import { AdmissionsLink } from "../components/AdmissionsLink";
 import { Footer } from "../components/Footer";
 import { GraduationCap, Clock, DollarSign, Calendar, ArrowRight } from "lucide-react";
 import { useCourses, useText } from "../content/hooks";
@@ -22,21 +21,10 @@ export default function Courses() {
   const enrollmentHeading = useText("courses", "enrollment.heading", "Simple Enrollment Process");
   const enrollmentSubheading = useText("courses", "enrollment.subheading", "Get started in just four easy steps");
 
-  // The schedule lists come from the course records now, so adding a
-  // cohort date in the editor updates this section automatically.
-  const cnaCourse = courses.find((course) => course.id === "hybrid-nurse-aide");
-  const refresherCourse = courses.find((course) => course.id === "hybrid-refresher-course");
-  // These courses share a schedule group. A course can be unpublished while
-  // the other remains visible, so read dates from either published member.
-  const cnaAndRefresherSchedule = cnaCourse?.scheduleDates?.length
-    ? cnaCourse.scheduleDates
-    : refresherCourse?.scheduleDates ?? [];
-  const cnaScheduleTitle = cnaCourse && refresherCourse
-    ? "CNA and CNA Refresher Schedule"
-    : cnaCourse ? "CNA Schedule" : "CNA Refresher Schedule";
-  // Hidden from the listing (editor "Hide") means no dates card either.
-  const phlebotomyCourse = courses.find((course) => course.id === "hybrid-phlebotomy-technician");
-  const phlebotomySchedule = phlebotomyCourse?.scheduleDates ?? [];
+  // One card per program with upcoming dates. Dates come from the course
+  // records (and Nurse Aide II's generated calendar), so editing a cohort
+  // in the editor, hiding a program, or a launch adds or removes its card.
+  const scheduledCourses = courses.filter((course) => course.scheduleDates?.length);
 
   const applyOnlineBox = (
     <div className="mt-12 bg-[#f7f2fb] border border-[#dfd1eb] rounded-2xl p-6 sm:p-8 text-center">
@@ -77,7 +65,6 @@ export default function Courses() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <AdmissionsLink />
 
       <main className="flex-1">
         {/* Hero Section */}
@@ -172,52 +159,36 @@ export default function Courses() {
               </p>
             </div>
 
-            <div className={`grid grid-cols-1 gap-8 ${phlebotomyCourse ? "lg:grid-cols-2" : "max-w-3xl mx-auto"}`}>
-              <motion.div
-                className="bg-white border border-[#dfd1eb] rounded-2xl p-8 shadow-sm"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-              >
-                <h3 className="text-2xl font-medium text-[#101828] mb-4">
-                  {cnaScheduleTitle}
-                </h3>
-                {cnaAndRefresherSchedule.length === 0 && (
-                  <p className="text-[#4a5565]">No dates are currently published. <Link to="/contact" className="text-[#6b2d94] underline underline-offset-4">Contact Admissions for the current schedule.</Link></p>
-                )}
-                <ul className="space-y-3 text-[#4a5565]">
-                  {cnaAndRefresherSchedule.map((date) => (
-                    <li key={date} className="flex items-start gap-3">
-                      <div className="bg-[#6b2d94] rounded-full size-2 mt-2 shrink-0" />
-                      <span>{date}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-
-              {phlebotomyCourse && (
-              <motion.div
-                className="bg-white border border-[#dfd1eb] rounded-2xl p-8 shadow-sm"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-              >
-                <h3 className="text-2xl font-medium text-[#101828] mb-4">
-                  Phlebotomy Dates
-                </h3>
-                <ul className="space-y-3 text-[#4a5565]">
-                  {phlebotomySchedule.map((date) => (
-                    <li key={date} className="flex items-start gap-3">
-                      <div className="bg-[#6b2d94] rounded-full size-2 mt-2 shrink-0" />
-                      <span>{date}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-              )}
-            </div>
+            {scheduledCourses.length === 0 ? (
+              <p className="text-center text-[#4a5565]">No dates are currently published. <Link to="/contact" className="text-[#6b2d94] underline underline-offset-4">Contact Admissions for the current schedule.</Link></p>
+            ) : (
+              <div className={`grid grid-cols-1 gap-8 ${scheduledCourses.length === 1 ? "max-w-3xl mx-auto" : "lg:grid-cols-2"} ${scheduledCourses.length >= 3 ? "xl:grid-cols-3" : ""}`}>
+                {scheduledCourses.map((course, index) => (
+                  <motion.div
+                    key={course.id}
+                    className="bg-white border border-[#dfd1eb] rounded-2xl p-8 shadow-sm"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
+                    <h3 className="text-2xl font-medium text-[#101828] mb-4">
+                      <Link to={`/courses/${course.id}`} className="hover:text-[#6b2d94] transition-colors">
+                        {course.title} Schedule
+                      </Link>
+                    </h3>
+                    <ul className="space-y-3 text-[#4a5565]">
+                      {course.scheduleDates?.map((date) => (
+                        <li key={date} className="flex items-start gap-3">
+                          <div className="bg-[#6b2d94] rounded-full size-2 mt-2 shrink-0" />
+                          <span>{date}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                ))}
+              </div>
+            )}
           </div>
         </section>
 

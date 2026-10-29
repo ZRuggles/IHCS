@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import {
   ArrowRight, BookOpen, CheckCircle2, ChevronDown, ExternalLink,
-  FileText, GraduationCap, Heart, LifeBuoy, LogIn, Mail,
+  GraduationCap, Heart, LifeBuoy, LogIn, Mail,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Header } from "../components/Header";
@@ -10,7 +10,7 @@ import { Footer } from "../components/Footer";
 import { BrandShine } from "../components/BrandShine";
 import { EditableText } from "../editor/Editable";
 import { useText } from "../content/hooks";
-import { ADMISSION_EMAIL, LMS_URL, buildDocumentEmailHref } from "../data/siteInfo";
+import { ADMISSION_EMAIL, LMS_URL } from "../data/siteInfo";
 import { ihsSiteUrl } from "../data/siteVariant";
 
 const reveal = {
@@ -26,14 +26,13 @@ const resources: { icon: LucideIcon; title: string; text: string; label: string;
   { icon: LogIn, title: "Student portal", text: "Sign in to Populi with your existing student account to reach your course information.", label: "Open student portal", href: LMS_URL },
   { icon: BookOpen, title: "Programs & course details", text: "Review program information, schedules, and course requirements.", label: "Explore programs", to: "/courses" },
   { icon: LifeBuoy, title: "A little help along the way", text: "Have a question about your program or your next step? Connect with our team.", label: "Contact the school", to: "/contact" },
-  { icon: GraduationCap, title: "Still applying?", text: "Find the application steps and see how to submit requested documents.", label: "View application steps", to: "/how-to-apply" },
+  { icon: GraduationCap, title: "Still applying?", text: "Review the application steps for new students.", label: "View application steps", to: "/how-to-apply" },
 ];
 
 const questions = [
   { title: "Where do I sign in as a current student?", answer: "Use the student portal link on this page to open Populi and sign in with your existing student account." },
   { title: "What if I need help accessing my account?", answer: "Start with the account recovery options on the Populi sign-in page. If you still need help, contact the school and describe the issue. Please do not send your password." },
   { title: "Where can I find program requirements and start dates?", answer: "Visit Programs and open the course you are interested in. Admissions can help clarify any requirements or questions about your enrollment." },
-  { title: "How do I submit documents requested by Admissions?", answer: "Use Send requested documents below to prepare an email, attach the documents the team requested, and send it from your email app. The application steps page also explains the process." },
 ];
 
 export default function StudentResources() {
@@ -110,7 +109,7 @@ export default function StudentResources() {
             <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#4a1a6d] to-[#6b2d94] p-7 sm:p-10 lg:p-12">
               <div className="relative grid items-center gap-8 lg:grid-cols-[1fr_auto]">
                 <div><Mail className="mb-5 size-8 text-[#ffb900]" /><h2 className="text-3xl font-medium text-white">Need a hand?</h2><p className="mt-4 max-w-xl leading-7 text-white/85">Whether you're applying or already enrolled, our team can help you find your next step.</p><a href={`mailto:${ADMISSION_EMAIL}`} className="mt-4 inline-block break-all text-sm text-[#ffb900] hover:underline">{ADMISSION_EMAIL.slice(0, ADMISSION_EMAIL.lastIndexOf("."))}<span className="whitespace-nowrap">{ADMISSION_EMAIL.slice(ADMISSION_EMAIL.lastIndexOf("."))}</span></a></div>
-                <div className="flex flex-col gap-3 sm:flex-row lg:flex-col"><motion.a href={buildDocumentEmailHref()} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className="inline-flex items-center justify-center gap-2 rounded-full bg-[#ffb900] px-6 py-3 font-medium text-[#28133e] hover:bg-[#ffd05b] transition-colors"><FileText className="size-5" /> Send requested documents</motion.a><Link to="/contact" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/50 px-6 py-3 font-medium text-white hover:bg-white/10 transition-colors">Contact the school <ArrowRight className="size-4" /></Link></div>
+                <div className="flex flex-col gap-3 sm:flex-row lg:flex-col"><Link to="/contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#ffb900] px-6 py-3 font-medium text-[#28133e] hover:bg-[#ffd05b] transition-colors">Contact the school <ArrowRight className="size-4" /></Link></div>
               </div>
             </div>
           </motion.div>

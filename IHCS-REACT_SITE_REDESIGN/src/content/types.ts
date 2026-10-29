@@ -34,6 +34,10 @@ export interface PublicCourse {
     schedule: string;
     /** Value of the program page's Certification tile. Defaults to "State Approved". */
     credentialLabel?: string;
+    /** Payment plan lines for the tuition panel, e.g. "Down payment: $4,000.00". */
+    paymentSchedule?: string[];
+    /** Other program fees for the tuition panel, e.g. "Application fee: $100". */
+    fees?: string[];
   };
 }
 

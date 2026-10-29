@@ -104,7 +104,7 @@ export default function Home() {
   const stat2Label = useText(
     page,
     "hero.stat2.label",
-    isSchoolSite ? "CNA Training" : "Support",
+    isSchoolSite ? "Nurse Aide I Training" : "Support",
   );
   const stat3Value = useText(
     page,
