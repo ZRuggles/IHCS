@@ -34,6 +34,11 @@ import {
   buildDocumentEmailHref,
 } from "../data/siteInfo";
 import { ApplyLink } from "../components/ApplyLink";
+import { TuitionDetails } from "../components/TuitionDetails";
+
+// Tuition accordion under the hero tiles. Set to false to restore the
+// original "Total Cost" tile with no breakdown.
+const SHOW_TUITION_ACCORDION = true;
 
 const iconMap: Record<string, LucideIcon> = {
   heart: Heart,
@@ -53,6 +58,24 @@ export default function CourseDetail() {
   if (!course) return <Navigate to="/courses" replace />;
   return (
     <CourseDetailContent key={course.id} course={course} courses={courses} />
+  );
+}
+
+/** Shown in place of a list a program has not published yet. */
+function PendingDetails({ subject }: { subject: string }) {
+  return (
+    <div className="bg-[#f7f2fb] border border-[#eee5f5] rounded-xl p-6 text-[#4a5565]">
+      {subject} for this program {subject.endsWith("s") ? "are" : "is"} being finalized. Contact
+      Admissions at{" "}
+      <a href={`mailto:${ADMISSION_EMAIL}`} className="text-[#561D7E] underline break-all">
+        {ADMISSION_EMAIL}
+      </a>{" "}
+      or{" "}
+      <a href="tel:+13369997123" className="text-[#561D7E] underline whitespace-nowrap">
+        (336) 999-7123
+      </a>{" "}
+      for current information.
+    </div>
   );
 }
 
@@ -138,7 +161,9 @@ function CourseDetailContent({
                   </div>
                   <div className="bg-gradient-to-br from-[#eee5f5] to-white border border-[#eee5f5] p-4 rounded-xl">
                     <DollarSign className="size-6 text-[#561D7E] mb-2" />
-                    <div className="text-sm text-[#6a7282]">Total Cost</div>
+                    <div className="text-sm text-[#6a7282]">
+                      {SHOW_TUITION_ACCORDION ? "Tuition" : "Total Cost"}
+                    </div>
                     <div className="text-lg font-medium text-[#101828]">
                       <EditableCourseText
                         courseId={course.courseId}
@@ -154,10 +179,11 @@ function CourseDetailContent({
                     <Award className="size-6 text-[#561D7E] mb-2" />
                     <div className="text-sm text-[#6a7282]">Certification</div>
                     <div className="text-lg font-medium text-[#101828]">
-                      State Approved
+                      {course.details.credentialLabel ?? "State Approved"}
                     </div>
                   </div>
                 </div>
+                {SHOW_TUITION_ACCORDION && <TuitionDetails course={course} />}
               </div>
               <div className="relative">
                 <EditableCourseImage
@@ -211,6 +237,9 @@ function CourseDetailContent({
                   value={course.details.curriculum}
                   label="Curriculum"
                 >
+                  {course.details.curriculum.length === 0 ? (
+                    <PendingDetails subject="Curriculum details" />
+                  ) : (
                   <div className="space-y-3">
                     {course.details.curriculum.map((item, index) => (
                       <div key={index} className="flex gap-3 items-start">
@@ -219,6 +248,7 @@ function CourseDetailContent({
                       </div>
                     ))}
                   </div>
+                  )}
                 </EditableCourseList>
 
                 {course.scheduleDates && course.scheduleDates.length > 0 ? (
@@ -248,6 +278,9 @@ function CourseDetailContent({
                   value={course.details.requirements}
                   label="Requirements"
                 >
+                  {course.details.requirements.length === 0 ? (
+                    <PendingDetails subject="Admission requirements" />
+                  ) : (
                   <div className="bg-[#f7f2fb] border border-[#eee5f5] rounded-xl p-6">
                     <ul className="space-y-3">
                       {course.details.requirements.map((req, index) => (
@@ -258,6 +291,7 @@ function CourseDetailContent({
                       ))}
                     </ul>
                   </div>
+                  )}
                 </EditableCourseList>
 
                 {course.details.tuitionIncludes &&

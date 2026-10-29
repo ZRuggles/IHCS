@@ -32,6 +32,8 @@ export interface PublicCourse {
     certification: string;
     cost: string;
     schedule: string;
+    /** Value of the program page's Certification tile. Defaults to "State Approved". */
+    credentialLabel?: string;
   };
 }
 

@@ -16,6 +16,7 @@ import { useCourses, useText } from "../content/hooks";
 import { EditableText } from "../editor/Editable";
 import { isSchoolSite } from "../data/siteVariant";
 import { ApplyLink } from "../components/ApplyLink";
+import { WelcomeVideo } from "../components/WelcomeVideo";
 
 const careServices: HomeCourseCardProps[] = [
   {
@@ -353,6 +354,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Welcome video — renders only once a video is configured. */}
+        {isSchoolSite && <WelcomeVideo />}
 
         {/* Programs Section */}
         <section className="py-12 sm:py-16 lg:py-20 bg-white">

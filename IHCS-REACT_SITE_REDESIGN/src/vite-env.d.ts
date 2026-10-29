@@ -11,7 +11,13 @@ interface ImportMetaEnv {
   readonly VITE_AXISAI_API_KEY?: string;
   readonly VITE_AXISAI_API_URL?: string;
   readonly VITE_AXISAI_WIDGET_URL?: string;
+  /** November 2 launch: "auto" (default), "on", or "off". See vite.config.ts. */
+  readonly VITE_NOV2_RELEASE?: string;
 }
+
+/** Build-time constants from vite.config.ts. Use src/data/launch.ts instead. */
+declare const __NOV2_RELEASED__: boolean;
+declare const __NOV2_LAUNCH_AT__: string;
 
 interface ImportMeta {
   readonly env: ImportMetaEnv;

@@ -2,6 +2,8 @@ import { useMemo } from "react";
 import { useContent } from "./context";
 import type { PublicCourse } from "./types";
 import { getNextStart } from "../data/courses";
+import { isLaunchReleased } from "../data/launch";
+import { launchPrograms } from "../data/launchPrograms";
 
 /**
  * Content accessors.
@@ -11,12 +13,23 @@ import { getNextStart } from "../data/courses";
  * Fast Refresh during development.
  */
 
-/** All visible courses, in display order. */
+/**
+ * All visible courses, in display order. Every program listing, card,
+ * footer link, and /courses/:id page reads this, so the November 2
+ * programs appear (and stay absent) everywhere at once.
+ */
 export function useCourses(): PublicCourse[] {
   const courses = useContent().content.courses;
-  // A published snapshot can outlive a cohort date. Reuse the schedule
-  // calculator so visitors see the next scheduled start after that date passes.
-  return useMemo(() => courses.map(course => ({ ...course, nextStart: getNextStart(course) })), [courses]);
+  return useMemo(() => {
+    // Launch programs lead the list once released. A program the editor has
+    // added under the same slug wins over the built-in entry.
+    const launched = isLaunchReleased
+      ? launchPrograms.filter((program) => !courses.some((course) => course.id === program.id))
+      : [];
+    // A published snapshot can outlive a cohort date. Reuse the schedule
+    // calculator so visitors see the next scheduled start after that date passes.
+    return [...launched, ...courses].map(course => ({ ...course, nextStart: getNextStart(course) }));
+  }, [courses]);
 }
 
 export function useCourse(slug: string | undefined): PublicCourse | undefined {

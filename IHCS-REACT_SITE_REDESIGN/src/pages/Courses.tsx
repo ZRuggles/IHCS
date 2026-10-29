@@ -7,6 +7,8 @@ import { GraduationCap, Clock, DollarSign, Calendar, ArrowRight } from "lucide-r
 import { useCourses, useText } from "../content/hooks";
 import { EditableText } from "../editor/Editable";
 import { ApplyLink } from "../components/ApplyLink";
+import { WelcomeVideo } from "../components/WelcomeVideo";
+import { isWelcomeVideoAvailable } from "../data/welcomeVideo";
 
 export default function Courses() {
   const courses = useCourses();
@@ -32,8 +34,45 @@ export default function Courses() {
   const cnaScheduleTitle = cnaCourse && refresherCourse
     ? "CNA and CNA Refresher Schedule"
     : cnaCourse ? "CNA Schedule" : "CNA Refresher Schedule";
-  const phlebotomySchedule =
-    courses.find((course) => course.id === "hybrid-phlebotomy-technician")?.scheduleDates ?? [];
+  // Hidden from the listing (editor "Hide") means no dates card either.
+  const phlebotomyCourse = courses.find((course) => course.id === "hybrid-phlebotomy-technician");
+  const phlebotomySchedule = phlebotomyCourse?.scheduleDates ?? [];
+
+  const applyOnlineBox = (
+    <div className="mt-12 bg-[#f7f2fb] border border-[#dfd1eb] rounded-2xl p-6 sm:p-8 text-center">
+      <h3 className="text-2xl font-medium text-[#101828] mb-3">
+        Apply Online
+      </h3>
+      <p className="text-[#4a5565] max-w-2xl mx-auto mb-6">
+        Complete the School Application Form to begin admissions review.
+      </p>
+      <div className="flex flex-wrap justify-center gap-4">
+        <ApplyLink
+          className="bg-[#6b2d94] text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#4a1a6d] transition-colors"
+        >
+          School Application Form
+        </ApplyLink>
+        {/* Enrollment Forms — temporarily disabled while the Populi flow is confirmed.
+        <a
+          href={APPLICATION_LINKS.enrollmentAgreement}
+          target="_blank"
+          rel="noreferrer"
+          className="bg-white border-2 border-[#6b2d94] text-[#6b2d94] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#eee5f5] transition-colors"
+        >
+          Enrollment Forms
+        </a>
+        */}
+        {isWelcomeVideoAvailable && (
+          <Link
+            to="/how-to-apply"
+            className="bg-white border-2 border-[#6b2d94] text-[#6b2d94] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#eee5f5] transition-colors"
+          >
+            See How to Apply
+          </Link>
+        )}
+      </div>
+    </div>
+  );
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -133,7 +172,7 @@ export default function Courses() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className={`grid grid-cols-1 gap-8 ${phlebotomyCourse ? "lg:grid-cols-2" : "max-w-3xl mx-auto"}`}>
               <motion.div
                 className="bg-white border border-[#dfd1eb] rounded-2xl p-8 shadow-sm"
                 initial={{ opacity: 0, y: 20 }}
@@ -157,6 +196,7 @@ export default function Courses() {
                 </ul>
               </motion.div>
 
+              {phlebotomyCourse && (
               <motion.div
                 className="bg-white border border-[#dfd1eb] rounded-2xl p-8 shadow-sm"
                 initial={{ opacity: 0, y: 20 }}
@@ -176,6 +216,7 @@ export default function Courses() {
                   ))}
                 </ul>
               </motion.div>
+              )}
             </div>
           </div>
         </section>
@@ -300,7 +341,11 @@ export default function Courses() {
           </div>
         </section>
 
-        {/* Enrollment Process */}
+        {/* Enrollment Process — replaced by the welcome video once one is
+            available; the Apply Online box stays either way. */}
+        {isWelcomeVideoAvailable ? (
+          <WelcomeVideo>{applyOnlineBox}</WelcomeVideo>
+        ) : (
         <section className="py-12 sm:py-16 lg:py-20 bg-white">
           <div className="max-w-[1600px] mx-auto px-4">
             <div className="text-center mb-12">
@@ -355,33 +400,10 @@ export default function Courses() {
               </div>
             </div>
 
-            <div className="mt-12 bg-[#f7f2fb] border border-[#dfd1eb] rounded-2xl p-6 sm:p-8 text-center">
-              <h3 className="text-2xl font-medium text-[#101828] mb-3">
-                Apply Online
-              </h3>
-              <p className="text-[#4a5565] max-w-2xl mx-auto mb-6">
-                Complete the School Application Form to begin admissions review.
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <ApplyLink
-                  className="bg-[#6b2d94] text-white px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#4a1a6d] transition-colors"
-                >
-                  School Application Form
-                </ApplyLink>
-                {/* Enrollment Forms — temporarily disabled while the Populi flow is confirmed.
-                <a
-                  href={APPLICATION_LINKS.enrollmentAgreement}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="bg-white border-2 border-[#6b2d94] text-[#6b2d94] px-5 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#eee5f5] transition-colors"
-                >
-                  Enrollment Forms
-                </a>
-                */}
-              </div>
-            </div>
+            {applyOnlineBox}
           </div>
         </section>
+        )}
 
         {/* CTA Section */}
         <section className="bg-gradient-to-br from-[#eee5f5] to-[#f7f2fb] py-10 sm:py-14 lg:py-16">

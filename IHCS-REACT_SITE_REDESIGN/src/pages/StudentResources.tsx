@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import {
   ArrowRight, BookOpen, CheckCircle2, ChevronDown, ExternalLink,
-  FileText, GraduationCap, Heart, LifeBuoy, Mail,
+  FileText, GraduationCap, Heart, LifeBuoy, LogIn, Mail,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { BrandShine } from "../components/BrandShine";
@@ -19,10 +20,13 @@ const reveal = {
   transition: { duration: 0.55 },
 };
 
-const resources = [
-  { icon: GraduationCap, title: "Application & enrollment", text: "Find the application steps and see how to submit requested documents.", label: "View application steps", to: "/how-to-apply" },
-  { icon: BookOpen, title: "Programs & course details", text: "Explore program information, upcoming start dates, and course requirements.", label: "Explore programs", to: "/courses" },
-  { icon: LifeBuoy, title: "A little help along the way", text: "Have a question about enrollment or your next step? Connect with our team.", label: "Contact the school", to: "/contact" },
+// Current-student links first. Application steps stay available for
+// anyone still applying.
+const resources: { icon: LucideIcon; title: string; text: string; label: string; to?: string; href?: string }[] = [
+  { icon: LogIn, title: "Student portal", text: "Sign in to Populi with your existing student account to reach your course information.", label: "Open student portal", href: LMS_URL },
+  { icon: BookOpen, title: "Programs & course details", text: "Review program information, schedules, and course requirements.", label: "Explore programs", to: "/courses" },
+  { icon: LifeBuoy, title: "A little help along the way", text: "Have a question about your program or your next step? Connect with our team.", label: "Contact the school", to: "/contact" },
+  { icon: GraduationCap, title: "Still applying?", text: "Find the application steps and see how to submit requested documents.", label: "View application steps", to: "/how-to-apply" },
 ];
 
 const questions = [
@@ -33,7 +37,7 @@ const questions = [
 ];
 
 export default function StudentResources() {
-  const intro = useText("studentResources", "hero.description", "Your next step, all in one place. Sign in to your student portal, find program information, or connect with the school for support.");
+  const intro = useText("studentResources", "hero.description", "Everything current students need in one place. Sign in to your student portal, review your program information, or connect with the school for support.");
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -43,7 +47,7 @@ export default function StudentResources() {
           <div aria-hidden="true" className="pointer-events-none absolute -bottom-32 left-1/3 size-96 rounded-full bg-purple-300/20 blur-3xl" />
           <div className="relative mx-auto grid max-w-[1400px] items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
             <motion.div {...reveal}>
-              <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-white"><GraduationCap className="size-4 text-[#ffb900]" /> Here for your next step</p>
+              <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-white"><GraduationCap className="size-4 text-[#ffb900]" /> For current students</p>
               <h1 className="text-4xl font-medium leading-tight text-white sm:text-5xl lg:text-6xl">Student <span className="text-[#ffb900]">Resources</span></h1>
               <EditableText page="studentResources" contentKey="hero.description" value={intro} multiline>
                 <p className="mt-6 max-w-xl text-lg leading-8 text-white/85">{intro}</p>
@@ -65,12 +69,16 @@ export default function StudentResources() {
         <section id="resources" className="scroll-mt-40 py-14 sm:py-20">
           <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
             <motion.div {...reveal} className="mb-9"><p className="mb-3 text-sm font-medium text-[#6b2d94]">QUICK LINKS</p><h2 className="text-3xl font-medium text-[#28133e] sm:text-4xl">Find your next step</h2></motion.div>
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
               {resources.map(({ icon: Icon, ...resource }, index) => (
-                <motion.div key={resource.to} {...reveal} transition={{ duration: 0.5, delay: index * 0.08 }} whileHover={{ y: -6 }} className="flex flex-col rounded-2xl border border-[#eee5f5] bg-gradient-to-br from-[#f7f2fb] to-white p-7 shadow-sm">
+                <motion.div key={resource.title} {...reveal} transition={{ duration: 0.5, delay: index * 0.08 }} whileHover={{ y: -6 }} className="flex flex-col rounded-2xl border border-[#eee5f5] bg-gradient-to-br from-[#f7f2fb] to-white p-7 shadow-sm">
                   <div className="mb-6 w-fit rounded-xl bg-[#6b2d94] p-3 text-white"><Icon className="size-6" /></div>
                   <h3 className="text-xl font-medium text-[#28133e]">{resource.title}</h3><p className="mb-7 mt-3 leading-7 text-[#6a7282]">{resource.text}</p>
-                  <Link to={resource.to} className="mt-auto inline-flex items-center gap-2 font-medium text-[#6b2d94] hover:underline">{resource.label}<ArrowRight className="size-4 shrink-0" /></Link>
+                  {resource.href ? (
+                    <a href={resource.href} target="_blank" rel="noreferrer" className="mt-auto inline-flex items-center gap-2 font-medium text-[#6b2d94] hover:underline">{resource.label}<ExternalLink className="size-4 shrink-0" /><span className="sr-only"> (opens in a new tab)</span></a>
+                  ) : (
+                    <Link to={resource.to ?? "/"} className="mt-auto inline-flex items-center gap-2 font-medium text-[#6b2d94] hover:underline">{resource.label}<ArrowRight className="size-4 shrink-0" /></Link>
+                  )}
                 </motion.div>
               ))}
             </div>

@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { APPLICATION_LINKS, isLpnLaunched } from "../data/siteInfo";
+import { APPLICATION_LINKS } from "../data/siteInfo";
+import { isLaunchReleased } from "../data/launch";
 
 // Every school "Apply" button. Before the LPN launch it opens the general
 // Populi application directly; afterwards it opens the LPN application-choice
@@ -12,7 +13,7 @@ export function ApplyLink({
   className?: string;
   children: ReactNode;
 }) {
-  if (isLpnLaunched()) {
+  if (isLaunchReleased) {
     return (
       <Link to="?apply=1" className={className}>
         {children}

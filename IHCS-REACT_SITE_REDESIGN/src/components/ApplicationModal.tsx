@@ -1,22 +1,29 @@
 import { useEffect } from "react";
 import { X } from "lucide-react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import { APPLICATION_LINKS, isLpnLaunched } from "../data/siteInfo";
+import { APPLICATION_LINKS } from "../data/siteInfo";
+import { isLaunchReleased } from "../data/launch";
 
 // /apply: the LPN choice modal once launched, otherwise the general application.
 export function ApplyRedirect() {
-  const launched = isLpnLaunched();
+  const launched = isLaunchReleased;
   useEffect(() => {
     if (!launched) window.location.replace(APPLICATION_LINKS.schoolApplication);
   }, [launched]);
   return launched ? <Navigate to="/?apply=1" replace /> : null;
 }
 
+// Before the launch the choice dialog is not just closed but absent: the
+// build-time constant lets the bundler drop it, so its LPN wording is not
+// in a pre-launch bundle at all.
 export function ApplicationModal() {
+  return isLaunchReleased ? <ApplicationChoiceModal /> : null;
+}
+
+function ApplicationChoiceModal() {
   const location = useLocation();
   const navigate = useNavigate();
-  const isOpen =
-    isLpnLaunched() && new URLSearchParams(location.search).get("apply") === "1";
+  const isOpen = new URLSearchParams(location.search).get("apply") === "1";
 
   const close = () => {
     const params = new URLSearchParams(location.search);
