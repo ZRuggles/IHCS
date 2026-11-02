@@ -27,6 +27,7 @@ Each build logs its decision, for example `[launch] November 2 programs held bac
 The sites are static. **Nothing rebuilds automatically on November 2.** Perform one of these steps at or after midnight Denver time:
 
 - Sign in to the editor and press **Publish**. Publishing triggers both Render deploy hooks.
+  Publish rebuilds the school site only if the editor API has `RENDER_SCHOOL_DEPLOY_HOOK_URL` set in Render. As of November 2, 2026 it was not set, so Publish rebuilt only the care site. The editor now warns when a site's hook is missing.
 - In Render, open the school static site (IIHS) and select **Manual Deploy > Deploy latest commit**.
 
 Only the school site needs the rebuild. The care site's existing LPN job opening and staffing mentions switch on by themselves at the launch time, checked in the visitor's browser.
