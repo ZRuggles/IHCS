@@ -10,9 +10,11 @@
  * content out of the JavaScript entirely, so it cannot be opened by direct
  * URL or read from the page source.
  *
- * Activation: rebuild the school site at or after LAUNCH_AT. Pressing
- * Publish in the editor triggers the Render deploy hooks; Render's Manual Deploy
- * also works. Nothing rebuilds on its own. See docs/november-2-launch.md.
+ * Activation: rebuild the school site at or after LAUNCH_AT. Publish in the
+ * editor does this only when the API has RENDER_SCHOOL_DEPLOY_HOOK_URL set;
+ * otherwise use Render's Manual Deploy, or push a change inside this
+ * folder (Render skips pushes that only touch other folders). Nothing
+ * rebuilds on its own. See docs/november-2-launch.md.
  */
 
 /** Midnight, November 2, 2026, America/Denver (MST, UTC-7). */
