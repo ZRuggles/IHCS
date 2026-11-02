@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { ADMISSION_EMAIL } from "../data/siteInfo";
+import { imageFocusStyle } from "../data/imageFocus";
 import { ApplyLink } from "../components/ApplyLink";
 import { TuitionDetails } from "../components/TuitionDetails";
 
@@ -187,6 +188,7 @@ function CourseDetailContent({
                       src={course.image}
                       alt={course.title}
                       className="w-full h-full object-cover aspect-[4/3]"
+                      style={imageFocusStyle(course.image)}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                     <div className="absolute bottom-6 right-6 bg-white/95 p-4 rounded-2xl shadow-lg">
@@ -516,6 +518,7 @@ function CourseDetailContent({
                         src={relatedCourse.image}
                         alt={relatedCourse.title}
                         className="w-full h-full object-cover"
+                        style={imageFocusStyle(relatedCourse.image)}
                       />
                     </div>
                     <h3 className="font-medium text-lg text-[#101828] mb-2">

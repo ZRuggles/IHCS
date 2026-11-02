@@ -40,7 +40,7 @@ export default function HealthcareHome() {
       <Header />
       <main>
         <section className="relative isolate overflow-hidden bg-[#251334]">
-          <img src="/PRN Home Visit.jpg" alt="Home care support" className="absolute inset-0 -z-20 h-full w-full object-cover object-[65%_center]" />
+          <img src="/images/care/prn-home-visit.jpg" alt="Home care support" className="absolute inset-0 -z-20 h-full w-full object-cover object-[65%_center]" />
           <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#251334] via-[#251334]/90 to-[#251334]/25" />
           <div className="mx-auto max-w-[1500px] px-5 py-16 sm:px-8 sm:py-24 lg:py-28">
             <motion.div {...reveal} className="max-w-2xl">
@@ -107,7 +107,7 @@ export default function HealthcareHome() {
         <section className="pb-14 sm:pb-20">
           <div className="mx-auto max-w-[1500px] px-5 sm:px-8">
             <div className="grid overflow-hidden rounded-3xl bg-[#eee5f5] lg:grid-cols-2">
-              <motion.img {...reveal} src="/Supplemental Staffing.jpeg" alt="Healthcare staffing team" loading="lazy" className="h-72 w-full object-cover lg:h-full lg:min-h-[420px]" />
+              <motion.img {...reveal} src="/images/care/supplemental-staffing.jpeg" alt="Healthcare staffing team" loading="lazy" className="h-72 w-full object-cover lg:h-full lg:min-h-[420px]" />
               <motion.div {...reveal} className="flex flex-col justify-center p-7 sm:p-12 lg:p-14"><p className="mb-4 text-sm font-medium text-[#6b2d94]">FOR HEALTHCARE FACILITIES & ORGANIZATIONS</p><h2 className="text-3xl font-medium text-[#28133e] sm:text-4xl"><Copy contentKey="staffing.heading" fallback="Workforce support for your healthcare team" /></h2><p className="mt-5 leading-8 text-[#665d70]"><Copy contentKey="staffing.description" fallback="From medical offices to healthcare facilities, IHS works with organizations seeking staffing support. Tell us about your setting, the roles you need, and your staffing priorities so we can discuss how to support your team." /></p><p className="mt-4 text-sm leading-7 text-[#665d70]">{withoutLpn("Registered nurses, licensed practical nurses, certified nursing assistants, and patient sitters.")}</p><Link to="/contact?interest=partnership" className="mt-7 inline-flex items-center gap-2 font-medium text-[#6b2d94]">Partner With IHS <ArrowRight className="size-5" /></Link></motion.div>
             </div>
           </div>

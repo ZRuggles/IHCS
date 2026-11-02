@@ -18,14 +18,14 @@ export const siteBrand = isSchoolSite
   ? {
       name: "Innovation Institute of Healthcare Solutions",
       shortName: "IIHS",
-      logo: "/brands/iihs-logo.png",
+      logo: "/images/brand/iihs-logo.png",
       description:
         "Healthcare education, training, and career development in Winston-Salem, North Carolina.",
     }
   : {
       name: "Innovation Healthcare Solutions",
       shortName: "IHS",
-      logo: "/brands/ihs-logo.png",
+      logo: "/images/brand/ihs-logo.png",
       description:
         "Home care services and healthcare staffing in Winston-Salem, North Carolina.",
     };

@@ -537,8 +537,8 @@ export default function Contact() {
                   <img
                     src={
                       isSchoolSite
-                        ? "/Supplemental Staffing.jpeg"
-                        : "/PRN Home Visit.jpg"
+                        ? "/images/care/supplemental-staffing.jpeg"
+                        : "/images/care/prn-home-visit.jpg"
                     }
                     alt="Contact Us"
                     className="w-full h-full object-cover"

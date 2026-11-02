@@ -15,6 +15,7 @@ import {
 import { useCourses, useText } from "../content/hooks";
 import { EditableText } from "../editor/Editable";
 import { isSchoolSite } from "../data/siteVariant";
+import { imageFocusStyle } from "../data/imageFocus";
 import { ApplyLink } from "../components/ApplyLink";
 import { WelcomeVideo } from "../components/WelcomeVideo";
 
@@ -27,7 +28,7 @@ const careServices: HomeCourseCardProps[] = [
       "Support with meal preparation, errands, housekeeping, and everyday routines in the comfort of home.",
     duration: "Everyday support",
     nextStart: "Home care",
-    image: "/Home Care Services.jpeg",
+    image: "/images/care/home-care-services.jpeg",
   },
   {
     id: "personal-care",
@@ -37,7 +38,7 @@ const careServices: HomeCourseCardProps[] = [
       "Compassionate assistance with personal care and mobility to help people maintain independence.",
     duration: "Personal support",
     nextStart: "Home care",
-    image: "/PRN Home Visit.jpg",
+    image: "/images/care/prn-home-visit.jpg",
   },
   {
     id: "staffing",
@@ -47,7 +48,7 @@ const careServices: HomeCourseCardProps[] = [
       "Staffing support for healthcare facilities, medical offices, and organizations.",
     duration: "Workforce support",
     nextStart: "For employers",
-    image: "/Supplemental Staffing.jpeg",
+    image: "/images/care/supplemental-staffing.jpeg",
   },
   {
     id: "specialty-care",
@@ -57,7 +58,7 @@ const careServices: HomeCourseCardProps[] = [
       "Explore home infusion and specialized foot care services with our team.",
     duration: "Specialty services",
     nextStart: "Contact our team",
-    image: "/Home Infusion.jpeg",
+    image: "/images/care/home-infusion.jpeg",
   },
 ];
 
@@ -319,8 +320,8 @@ export default function Home() {
                 <img
                   src={
                     isSchoolSite
-                      ? "/NursesHoldingDiplomas.jpg"
-                      : "/PRN Home Visit.jpg"
+                      ? "/images/school/graduates.jpg"
+                      : "/images/care/prn-home-visit.jpg"
                   }
                   alt={
                     isSchoolSite ? "Healthcare Training" : "Home care support"
@@ -636,6 +637,7 @@ function CourseCard({
             src={image}
             alt={title}
             className="w-full h-full object-cover"
+            style={imageFocusStyle(image)}
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.4 }}
           />

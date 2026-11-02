@@ -133,7 +133,7 @@ export const courses: Course[] = [
       "Jumpstart your healthcare career with our state-approved Hybrid Nurse Aide I course. This 120-hour program combines flexible online learning with hands-on clinical experience, all completed in just 5½ weeks.",
     duration: "120 Hours (5½ Weeks)",
     nextStart: "Check Upcoming Schedule section",
-    image: "/Nurse-Aide.jpg",
+    image: "/images/programs/nurse-aide-i.jpg",
     badge: "Most Popular",
     icon: "heart",
     payments: {
@@ -175,7 +175,7 @@ export const courses: Course[] = [
     description: "Build core phlebotomy skills in our 8-week Hybrid Phlebotomy Technician course with weekly online assignments, in-person instruction, and clinical practice.",
     duration: "8 Weeks",
     nextStart: "Check Upcoming Schedule section",
-    image: "/Phlebotomy.jpg",
+    image: "/images/programs/phlebotomy.jpg",
     badge: "Fast Track",
     icon: "droplet",
     payments: {
@@ -220,7 +220,7 @@ export const courses: Course[] = [
     description: "This course is designed for individuals who are currently listed as Nursing Assistants. Classes begin every Monday, Skill check off following Friday. Course materials are included in tuition.",
     duration: "Self-Paced + 1-Day Skills Check-Off",
     nextStart: "Every Monday, Skill check off following Friday",
-    image: "/Medication.jpg",
+    image: "/images/programs/medication-aide.jpg",
     icon: "pill",
     payments: {
       fullPaymentUrl: "https://buy.stripe.com/28EaEW2L45Xl8FR5MP0oM04"
@@ -251,7 +251,7 @@ export const courses: Course[] = [
     description: "Perfect for individuals interested in medication technician training. Classes begin every Monday. Course materials are included in tuition.",
     duration: "Self-Paced + 1-Day Skills Check-Off",
     nextStart: "Every Monday, Skill check off following Friday",
-    image: "/Infusion.jpeg",
+    image: "/images/programs/med-tech.jpeg",
     icon: "pill",
     payments: {
       fullPaymentUrl: "https://buy.stripe.com/6oUcN45Xg0D1f4f1wz0oM0j"
@@ -281,7 +281,7 @@ export const courses: Course[] = [
     description: "Designed for individuals who want to return to the healthcare field and prepare to challenge or retake the state exam. Refresh your hands-on clinical skills and build confidence.",
     duration: "1 or 2 Weeks",
     nextStart: "Check Upcoming Schedule section",
-    image: "/Refresher.jpg",
+    image: "/images/programs/nurse-aide-refresher.jpg",
     icon: "refresh-cw",
     payments: {
       fullPaymentUrl: "https://buy.stripe.com/dRm28qbhAetRaNZ0sv0oM03",
@@ -324,7 +324,7 @@ export const courses: Course[] = [
     description: "Take the next step in your healthcare career by becoming an American Heart Association (AHA) CPR Instructor. Designed for individuals passionate about teaching life-saving skills to healthcare professionals, workplaces, community organizations, schools, churches, and the public.",
     duration: "Instructor Certification (valid 2 years)",
     nextStart: "Contact Admissions",
-    image: "/NurseAide.jpg",
+    image: "/images/programs/nurse-aide-ii.jpg",
     badge: "New",
     icon: "heart",
     payments: {

@@ -8,6 +8,7 @@ import { EditableText } from "../editor/Editable";
 import { ApplyLink } from "../components/ApplyLink";
 import { WelcomeVideo } from "../components/WelcomeVideo";
 import { isWelcomeVideoAvailable } from "../data/welcomeVideo";
+import { imageFocusStyle } from "../data/imageFocus";
 
 export default function Courses() {
   const courses = useCourses();
@@ -73,7 +74,7 @@ export default function Courses() {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: `url('/NursesHoldingDiplomas.jpg')`
+              backgroundImage: `url('/images/school/graduates.jpg')`
             }}
           />
           {/* Overlay for readability */}
@@ -274,6 +275,7 @@ export default function Courses() {
                         src={course.image}
                         alt={course.title}
                         className="w-full h-full object-cover object-center xl:object-[center_56%]"
+                        style={imageFocusStyle(course.image)}
                         whileHover={{ scale: 1.05 }}
                         transition={{ duration: 0.4 }}
                       />

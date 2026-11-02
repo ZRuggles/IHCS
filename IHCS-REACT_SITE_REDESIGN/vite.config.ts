@@ -52,10 +52,10 @@ export default defineConfig(({ mode }) => {
           return html
             .replace("<title>Innovation</title>", `<title>${name}</title>`)
             .replace(
-              "/ThumbnailLogo.png",
+              "/images/brand/thumbnail-logo.png",
               school
-                ? "/Glossy%20Purple%20Gold%20Graduation%20Emblem.png"
-                : "/Glossy%20Golden%20I%20Lightbulb%20Emblem.png",
+                ? "/images/brand/graduation-emblem-glossy.png"
+                : "/images/brand/lightbulb-emblem.png",
             )
             .replace(
               "</head>",

@@ -82,7 +82,7 @@ export function SetPassword() {
     <div className="flex min-h-screen items-center justify-center bg-[#F7F5F9] px-4">
       <div className="w-full max-w-sm">
         <div className="mb-6 text-center">
-          <img src="/LOGO.png" alt="" className="mx-auto mb-4 h-14 w-auto" />
+          <img src="/images/brand/logo.png" alt="" className="mx-auto mb-4 h-14 w-auto" />
           <h1 className="text-xl font-semibold text-[#101828]">Choose your password</h1>
           <p className="mt-1 text-sm text-[#6a7282]">
             Use this password to sign in to your account.

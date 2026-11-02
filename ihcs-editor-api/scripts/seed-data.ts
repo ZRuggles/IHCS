@@ -54,23 +54,23 @@ export const scheduleGroups: {
 
 /** Files already in /public. Registered as legacy so URLs keep working. */
 export const legacyImages = [
-  "/Nurse-Aide.jpg",
-  "/Phlebotomy.jpg",
-  "/Medication.jpg",
-  "/Infusion.jpeg",
-  "/Refresher.jpg",
-  "/NurseAide.jpg",
-  "/Home Infusion.jpeg",
-  "/Supplemental Staffing.jpeg",
-  "/FootCareNurse.jpeg",
-  "/Home Care Services.jpeg",
-  "/LPN and RN.jpg",
-  "/PRN Home Visit.jpg",
-  "/NursesHoldingDiplomas.jpg",
-  "/LOGO.png",
-  "/ThumbnailLogo.png",
-  "/courselogo.png",
-  "/CW-Logo.bmp"
+  "/images/programs/nurse-aide-i.jpg",
+  "/images/programs/phlebotomy.jpg",
+  "/images/programs/medication-aide.jpg",
+  "/images/programs/med-tech.jpeg",
+  "/images/programs/nurse-aide-refresher.jpg",
+  "/images/programs/nurse-aide-ii.jpg",
+  "/images/care/home-infusion.jpeg",
+  "/images/care/supplemental-staffing.jpeg",
+  "/images/care/foot-care-nurse.jpeg",
+  "/images/care/home-care-services.jpeg",
+  "/images/programs/practical-nursing.jpg",
+  "/images/care/prn-home-visit.jpg",
+  "/images/school/graduates.jpg",
+  "/images/brand/logo.png",
+  "/images/brand/thumbnail-logo.png",
+  "/images/brand/course-logo.png",
+  "/images/brand/cw-logo.bmp"
 ];
 
 export interface SeedCourse {
@@ -104,7 +104,7 @@ export const courses: SeedCourse[] = [
       "Jumpstart your healthcare career with our state-approved Hybrid Nurse Aide I course. This 120-hour program combines flexible online learning with hands-on clinical experience, all completed in just 5½ weeks.",
     duration: "120 Hours (5½ Weeks)",
     next_start: "Check Upcoming Schedule section",
-    image: "/Nurse-Aide.jpg",
+    image: "/images/programs/nurse-aide-i.jpg",
     badge: "Most Popular",
     icon: "heart",
     cost: "$1,205",
@@ -145,7 +145,7 @@ export const courses: SeedCourse[] = [
       "Build core phlebotomy skills in our 8-week Hybrid Phlebotomy Technician course with weekly online assignments, in-person instruction, and clinical practice.",
     duration: "8 Weeks",
     next_start: "Check Upcoming Schedule section",
-    image: "/Phlebotomy.jpg",
+    image: "/images/programs/phlebotomy.jpg",
     badge: "Fast Track",
     icon: "droplet",
     cost: "$1,205",
@@ -188,7 +188,7 @@ export const courses: SeedCourse[] = [
       "This course is designed for individuals who are currently listed as Nursing Assistants. Classes begin every Monday, Skill check off following Friday. Course materials are included in tuition.",
     duration: "Self-Paced + 1-Day Skills Check-Off",
     next_start: "Every Monday, Skill check off following Friday",
-    image: "/Medication.jpg",
+    image: "/images/programs/medication-aide.jpg",
     badge: null,
     icon: "pill",
     cost: "$360",
@@ -220,7 +220,7 @@ export const courses: SeedCourse[] = [
       "Perfect for individuals interested in medication technician training. Classes begin every Monday. Course materials are included in tuition.",
     duration: "Self-Paced + 1-Day Skills Check-Off",
     next_start: "Every Monday, Skill check off following Friday",
-    image: "/Infusion.jpeg",
+    image: "/images/programs/med-tech.jpeg",
     badge: null,
     icon: "pill",
     cost: "$360",
@@ -251,7 +251,7 @@ export const courses: SeedCourse[] = [
       "Designed for individuals who want to return to the healthcare field and prepare to challenge or retake the state exam. Refresh your hands-on clinical skills and build confidence.",
     duration: "1 or 2 Weeks",
     next_start: "Check Upcoming Schedule section",
-    image: "/Refresher.jpg",
+    image: "/images/programs/nurse-aide-refresher.jpg",
     badge: null,
     icon: "refresh-cw",
     cost: "$570",
@@ -297,7 +297,7 @@ export const courses: SeedCourse[] = [
       "Take the next step in your healthcare career by becoming an American Heart Association (AHA) CPR Instructor. Designed for individuals passionate about teaching life-saving skills to healthcare professionals, workplaces, community organizations, schools, churches, and the public.",
     duration: "Instructor Certification (valid 2 years)",
     next_start: "Contact Admissions",
-    image: "/NurseAide.jpg",
+    image: "/images/programs/nurse-aide-ii.jpg",
     badge: "New",
     icon: "heart",
     cost: "$700",
@@ -582,7 +582,7 @@ export const contentBlocks: {
         description:
           "Comprehensive in-home infusion therapy services including nursing care, medication administration, and supplies for patients requiring IV treatments.",
         features: ["24/7 nursing support", "Medication management", "Administrative supplies", "Patient education"],
-        backgroundImage: "/Home Infusion.jpeg"
+        backgroundImage: "/images/care/home-infusion.jpeg"
       },
       {
         icon: "Home",
@@ -590,7 +590,7 @@ export const contentBlocks: {
         description:
           "Professional healthcare staffing solutions for medical offices, facilities, and hospitals with qualified RNs, LPNs, CNAs, and patient sitters.",
         features: ["Registered Nurses (RN)", "Licensed Practical Nurses (LPN)", "Certified Nursing Assistants (CNA)", "Patient sitters"],
-        backgroundImage: "/Supplemental Staffing.jpeg"
+        backgroundImage: "/images/care/supplemental-staffing.jpeg"
       },
       {
         icon: "Activity",
@@ -598,7 +598,7 @@ export const contentBlocks: {
         description:
           "Specialized skilled nursing foot care services providing comprehensive treatment for nail care, calluses, corns, circulation support, and pain management.",
         features: ["Professional nail care", "Callus and corn treatment", "Circulation assessment", "Pain reduction therapy"],
-        backgroundImage: "/FootCareNurse.jpeg"
+        backgroundImage: "/images/care/foot-care-nurse.jpeg"
       }
     ]
   },

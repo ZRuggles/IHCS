@@ -96,7 +96,7 @@ export default function EducationGateway() {
               <p className="mt-5 leading-8 text-[#665d70]">Innovation Institute of Healthcare Solutions (IIHS) has its own identity, branding, admissions, and student portal. The school links below lead to IIHS resources; inquiries about IHS services and organizational partnerships go to the IHS team.</p>
             </motion.div>
             <motion.div {...reveal} className="grid gap-8 rounded-3xl border border-[#eee5f5] bg-white p-7 sm:p-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-              <img src="/brands/iihs-logo.png" alt="Innovation Institute of Healthcare Solutions — IIHS" className="mx-auto w-full max-w-sm" />
+              <img src="/images/brand/iihs-logo.png" alt="Innovation Institute of Healthcare Solutions — IIHS" className="mx-auto w-full max-w-sm" />
               <div>
                 <h3 className="text-xl font-medium text-[#28133e]">IIHS admissions & student access</h3>
                 <p className="mt-3 leading-7 text-[#665d70]">Explore the school's healthcare training, begin an application, or sign in to your existing student account.</p>

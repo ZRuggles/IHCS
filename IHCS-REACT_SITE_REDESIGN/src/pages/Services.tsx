@@ -74,21 +74,21 @@ const FALLBACK_specialtyServices: SpecialtyItem[] = [
     title: "Home Infusion",
     description: "Comprehensive in-home infusion therapy services including nursing care, medication administration, and supplies for patients requiring IV treatments.",
     features: ["24/7 nursing support", "Medication management", "Administrative supplies", "Patient education"],
-    backgroundImage: "/Home Infusion.jpeg"
+    backgroundImage: "/images/care/home-infusion.jpeg"
   },
   {
     icon: "Home",
     title: "Supplemental Staffing",
     description: "Professional healthcare staffing solutions for medical offices, facilities, and hospitals with qualified RNs, LPNs, CNAs, and patient sitters.",
     features: ["Registered Nurses (RN)", "Licensed Practical Nurses (LPN)", "Certified Nursing Assistants (CNA)", "Patient sitters"],
-    backgroundImage: "/Supplemental Staffing.jpeg"
+    backgroundImage: "/images/care/supplemental-staffing.jpeg"
   },
   {
     icon: "Activity",
     title: "Foot Care Nurse",
     description: "Specialized skilled nursing foot care services providing comprehensive treatment for nail care, calluses, corns, circulation support, and pain management.",
     features: ["Professional nail care", "Callus and corn treatment", "Circulation assessment", "Pain reduction therapy"],
-    backgroundImage: "/FootCareNurse.jpeg"
+    backgroundImage: "/images/care/foot-care-nurse.jpeg"
   }
 ];
 
@@ -110,7 +110,7 @@ export default function Services() {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: `url('/Home Care Services.jpeg')`
+              backgroundImage: `url('/images/care/home-care-services.jpeg')`
             }}
           />
           {/* Overlay for readability */}
@@ -125,7 +125,7 @@ export default function Services() {
                 transition={{ duration: 0.6 }}
               >
                 <img
-                  src="/PRN Home Visit.jpg"
+                  src="/images/care/prn-home-visit.jpg"
                   alt="Home Care Services"
                   className="rounded-3xl shadow-2xl w-full"
                 />
@@ -261,7 +261,7 @@ export default function Services() {
           <motion.div
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: `url('/LPN and RN.jpg')`,
+              backgroundImage: `url('/images/programs/practical-nursing.jpg')`,
               backgroundPosition: "center 20%"
             }}
             initial={{ scale: 1.1 }}

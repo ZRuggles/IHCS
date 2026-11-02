@@ -107,7 +107,7 @@ export default function HowToApply() {
             View the application guide infographic
           </summary>
           <img
-            src="/admissions/application-guide.png"
+            src="/images/school/application-guide.png"
             alt="Seven-step application guide; an accessible text version appears on this page."
             loading="lazy"
             className="mx-auto mt-6 max-w-full rounded-xl"

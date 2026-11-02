@@ -16,8 +16,8 @@ interface Position {
 }
 
 const JOB_APPLICATION_URL = "https://innjobs.sembra1.com/";
-const EMPLOYMENT_HERO_IMAGE = "/Supplemental Staffing.jpeg";
-const TEAM_BREAK_IMAGE = "/Home Care Services.jpeg";
+const EMPLOYMENT_HERO_IMAGE = "/images/care/supplemental-staffing.jpeg";
+const TEAM_BREAK_IMAGE = "/images/care/home-care-services.jpeg";
 const HEALTHCARE_INSTRUCTOR_IMAGE =
   "https://images.unsplash.com/photo-1589104759909-e355f8999f7e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwdHJhaW5pbmclMjBjbGFzc3Jvb20lMjBzdHVkZW50c3xlbnwxfHx8fDE3NzQxMTc3NzF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral";
 
@@ -87,11 +87,11 @@ const FALLBACK_BENEFITS: Benefit[] = [
 
 export default function Employment() {
   const positionBackgroundImageByTitle: Record<string, string> = {
-    "Registered Nurse (RN)": "/LPN and RN.jpg",
-    "Licensed Practical Nurse (LPN)": "/PRN Home Visit.jpg",
-    "Certified Nursing Assistant (CNA)": "/NurseAide.jpg",
-    "Foot Care Technician": "/FootCareNurse.jpeg",
-    "Phlebotomy Technician": "/Infusion.jpeg",
+    "Registered Nurse (RN)": "/images/programs/practical-nursing.jpg",
+    "Licensed Practical Nurse (LPN)": "/images/care/prn-home-visit.jpg",
+    "Certified Nursing Assistant (CNA)": "/images/programs/nurse-aide-ii.jpg",
+    "Foot Care Technician": "/images/care/foot-care-nurse.jpeg",
+    "Phlebotomy Technician": "/images/programs/med-tech.jpeg",
     "Healthcare Instructor": HEALTHCARE_INSTRUCTOR_IMAGE
   };
 
@@ -532,7 +532,7 @@ export default function Employment() {
             <div className="space-y-6">
               {visiblePositions.map((position, index) => {
                 const cardBackgroundImage =
-                  positionBackgroundImageByTitle[position.title] ?? "/NurseAide.jpg";
+                  positionBackgroundImageByTitle[position.title] ?? "/images/programs/nurse-aide-ii.jpg";
 
                 return (
                 <motion.div 
